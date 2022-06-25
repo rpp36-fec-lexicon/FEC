@@ -1,0 +1,29 @@
+{
+  "name": "fec",
+  "version": "1.0.0",
+  "description": "Project Atelier (Front-End Capstone)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdilovM/FEC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdilovM/FEC/issues"
+  },
+  "homepage": "https://github.com/AdilovM/FEC#readme",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "express": "^4.18.1",
+    "jquery": "^3.6.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
