@@ -6,42 +6,35 @@ class SearchQuestion extends React.Component {
     this.state = {
       searchedTerm: ''
     }
+    this.inputHandler = this.inputHandler.bind(this);
   }
 
-  inputHandler = (e) => {
+  inputHandler = (term) => {
     this.setState({
-      searchedTerm: e.target.value
+      searchedTerm: term
     })
   }
 
   render() {
     return (
       <div>
-        <div className='search-question-bar'>
-          <h1 className="qa-title">QUESTIONS AND ANSWERS</h1>
+        <div>
+          <h1>QUESTIONS AND ANSWERS</h1>
           <form>
             <input
-            onChange={ e => this.inputHandler(e)}
+            onChange={ (e) => {this.inputHandler(e.target.value)}}
             type="text"
-            onClick={()=>{console.log('test')}}
-            label="HAVE A QUESTION? SEARCH FOR ANSWERS"
+            placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS"
             />
           </form>
           <div>
-            {this.state.searchedTerm}
             {/* <QAList question={this.state.searchedTerm}/> */}
           </div>
         </div>
       </div>
     )
   }
-  // return (
-  //   <div>
-  //     <div>
-  //       <input onChange={e => setSearch(e.target.value)} type="text" placeholder="Search..." value={search} />
-  //     </div>
-  //   </div>
-  // )
+
 }
 
 export default SearchQuestion;
