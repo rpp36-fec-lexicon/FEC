@@ -7,7 +7,7 @@ import QuestionEntry from './QuestionEntry.jsx'
 const QuestionAnswerApp = (props) => (
   <div>
     <div>
-      {console.log(`passed productID : ${props.productId}`)}
+      passed productID : {props.productId}
     </div>
     <div>
     <QuestionsAnswersList productID={props.productId}/>
