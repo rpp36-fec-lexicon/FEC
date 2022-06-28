@@ -1,9 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import Related from "./Related.jsx";
-import Outfit from "./Outfit.jsx";
+import Related from "./components/Related.jsx";
+import Outfit from "./components/Outfit.jsx";
 
-class App_RelatedAndOutfit extends React.Component {
+class RelatedAndOutfit extends React.Component {
   constructor() {
     super();
     this.state = {};
@@ -19,4 +18,4 @@ class App_RelatedAndOutfit extends React.Component {
   }
 }
 
-export default App_RelatedAndOutfit;
+export default RelatedAndOutfit;
