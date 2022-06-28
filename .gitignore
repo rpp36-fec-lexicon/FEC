@@ -2,3 +2,5 @@ config.js
 node_modules
 bundle.js
 node_modules/
+tests
+babel.config.js
