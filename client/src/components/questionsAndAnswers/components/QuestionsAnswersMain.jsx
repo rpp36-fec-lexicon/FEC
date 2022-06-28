@@ -4,7 +4,7 @@ import SearchQuestion from './SearchQuestion.jsx'
 import QuestionEntry from './QuestionEntry.jsx'
 
 
-const QuestionAnswerApp = (props) => (
+const QuestionAnswerMain = (props) => (
   <div>
     <div>
       passed productID : {props.productId}
@@ -22,4 +22,4 @@ const QuestionAnswerApp = (props) => (
   </div>
 )
 
-export default QuestionAnswerApp;
+export default QuestionAnswerMain;
