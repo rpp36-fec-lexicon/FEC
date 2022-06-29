@@ -8,7 +8,7 @@ const ReviewList = (props) => {
     <div>
       <div>
         {reviews.length} reviews, sorted by
-        <select onClick={() => { props.sortReviews() }}>
+        <select onClick={() => { props.sortReviewsFunc() }}>
           <option id="helpful">Helpful</option>
           <option id="newest">Newest</option>
           <option id="relevance">Relevance</option>
