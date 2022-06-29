@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PrimaryImage from './imageGallery/PrimaryImage.jsx';
 
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -10,6 +10,15 @@ class ProductOverview extends React.Component {
       selectedStyle: '',
       selectedPhoto: ''
     };
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Product Overview!</h1>
+        <PrimaryImage />
+      </div>
+    )
   }
 }
 
