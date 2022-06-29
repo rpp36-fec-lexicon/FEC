@@ -1,6 +1,10 @@
+require('dotenv').config();
 const express = require('express');
-const key = require('../config.js')
 const app = express();
+const key = require('../config.js');
+const myAPIKey = process.env.myAPIKey || key;
+const axios = require('axios');
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 

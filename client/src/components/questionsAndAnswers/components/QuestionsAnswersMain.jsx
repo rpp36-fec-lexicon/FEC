@@ -1,25 +1,30 @@
 import React from 'react';
 import QuestionsAnswersList from './QuestionsAnswersList.jsx'
 import SearchQuestion from './SearchQuestion.jsx'
-import QuestionEntry from './QuestionEntry.jsx'
+// import QuestionEntry from './QuestionEntry.jsx'
+// import sampleQuestionsAnswers from '../sampledata/QuestionsAnswersAPI.js'
 
-
-const QuestionAnswerMain = (props) => (
+const QuestionsAnswersMain = (props) => (
   <div>
     <div>
-      passed productID : {props.productId}
     </div>
     <div>
-    <QuestionsAnswersList productID={props.productId}/>
+    <QuestionsAnswersList productId={props.productId}/>
     </div>
     <div>
       <SearchQuestion/>
     </div>
     <br/>
-    <div>
+    {/* <div>
       <QuestionEntry/>
+    </div> */}
+    <div>
+      <button style={{width: "150px", height: "39px"}}>
+        ADD A QUESTION  +
+      </button>
     </div>
   </div>
+
 )
 
-export default QuestionAnswerMain;
+export default QuestionsAnswersMain;
