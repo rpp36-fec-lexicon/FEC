@@ -9,19 +9,38 @@ class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      productId: 71697,
       reviewData: {},
-      reviews: []
+      reviews: [],
+      metaData: {}
     }
-    this.sortReviews = this.sortReviews.bind(this);
+    this.sortReviewsFunc = this.sortReviewsFunc.bind(this);
+    this.getAllReviewsFunc = this.getAllReviewsFunc.bind(this);
+    this.ratingSummaryFunc = this.ratingSummaryFunc.bind(this);
+  }
+
+  componentDidMount() {
+    this.getAllReviewsFunc();
+    this.getAllMetaFunc();
   }
 
   getAllReviewsFunc() {
-    axios.get('/reviews')
+    axios.get('/reviews', {params: {productId: this.state.productId} })
       .then(response => {
-        console.log('response', response);
+        this.setState({reviewData: response.data, reviews: response.data.results});
       })
       .catch(err => {
-        console.log('err', err);
+        console.log('error getting reviews', err);
+      })
+  }
+
+  getAllMetaFunc() {
+    axios.get('/reviews/meta', {params: {productId: this.state.productId} })
+      .then(response => {
+        this.setState({metaData: response.data});
+      })
+      .catch(err => {
+        console.log('error getting meta', err);
       })
   }
 
@@ -40,6 +59,8 @@ class RatingsAndReviews extends React.Component {
         <RatingBreakdown />
         <ProductBreakdown />
         <ReviewList reviews={this.state.reviews} sortReviewsFunc={this.sortReviewsFunc}/>
+        <button onClick={() => { this.getAllReviewsFunc() }}>get reviews</button>
+        <button onClick={() => { this.getAllMetaFunc() }}>get meta</button>
       </div>
     );
   }
