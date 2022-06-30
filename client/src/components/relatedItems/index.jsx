@@ -12,6 +12,11 @@ class RelatedAndOutfit extends React.Component {
     return (
       <div>
         <Related />
+
+        <br></br>
+        <br></br>
+        <br></br>
+
         <Outfit />
       </div>
     );

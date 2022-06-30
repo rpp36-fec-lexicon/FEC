@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "webpack": "webpack --mode development --watch"
+    "webpack": "webpack --mode development --watch",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,12 +24,15 @@
     "body-parser": "^1.20.0",
     "chai": "^4.3.6",
     "express": "^4.18.1",
+    "flickity": "^2.3.0",
+    "jest": "^28.1.2",
     "jquery": "^3.6.0",
     "mocha": "^10.0.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.18",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-flickity-component": "^3.6.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",

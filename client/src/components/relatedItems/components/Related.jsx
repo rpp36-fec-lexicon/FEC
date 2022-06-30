@@ -1,24 +1,26 @@
 import React from "react";
 import $ from "jquery";
 import RelatedCard from "./RelatedCard.jsx";
+import Flickity from "react-flickity-component";
+
+const flickityOptions = {
+  initialIndex: 0,
+};
 
 class Related extends React.Component {
   constructor() {
     super();
     this.state = {
-      prodID: 71697, // temp. Will get this thourgh props from Overivew component
+      prodID: 71698, // temp. Will get this thourgh props from Overivew component
       relatedProdIDs: [],
     };
   }
 
   // componentDidMount () {}
   relatedProductIDFetcher() {
-    // will be invoked upon component mount instead of via button (button used here for test)
-    // ajax get request /related ->server -> api .../products/${this.state.prodID}/related
-    // ajax success populates relatedProdIDs array with an array of ID numbers
     $.ajax({
       type: "GET",
-      url: "/related",
+      url: `/products/${this.state.prodID}/related`,
       success: (arrayOfProdIDs) => {
         this.setState({
           relatedProdIDs: arrayOfProdIDs,
@@ -33,14 +35,22 @@ class Related extends React.Component {
   render() {
     return (
       <div>
-        Related Products
+        Related Products: <br></br>Temp prodID: 71698
+        <br></br>
+        <br></br>
         <button onClick={this.relatedProductIDFetcher.bind(this)}>
-          get Related Products
+          get Related Products (temp button)
         </button>
-        {" TEST BUTTON "}
-        {this.state.relatedProdIDs.map((itemID, index) => (
-          <RelatedCard relatedItemID={itemID} key={index} />
-        ))}
+        <br></br>
+        <br></br>
+        <br></br>
+        <div>
+          <Flickity options={flickityOptions}>
+            {this.state.relatedProdIDs.map((itemID, index) => (
+              <RelatedCard relatedItemID={itemID} key={index} />
+            ))}
+          </Flickity>
+        </div>
       </div>
     );
   }
