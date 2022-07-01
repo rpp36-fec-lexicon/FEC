@@ -8,9 +8,17 @@ class ReviewItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      helpfulClick: 0,
+      helpfulness: this.props.review.helpfulness
     };
 
+  }
+
+  increaseHelpfulnessFunc() {
+    if (!this.state.helpfulClick) {
+      this.setState({helpfulness: this.state.helpfulness + 1});
+      this.state.helpfulClick += 1;
+    }
   }
 
   render () {
@@ -40,7 +48,7 @@ class ReviewItem extends React.Component {
         <div id="reviewSummary">{review.summary}</div>
         {reviewBody}
         {recommend}
-        <div onClick={() => { this.increaseHelpfulnessFunc() }}>Helpful? Yes ({review.helpfulness})</div>
+        <div onClick={() => { this.increaseHelpfulnessFunc() }}>Helpful? Yes ({this.state.helpfulness})</div>
       </div>
     );
   }
