@@ -1,8 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const key = require('../config.js');
-const myAPIKey = process.env.myAPIKey || key;
+const myAPIKey = process.env.myAPIKey;
 const axios = require('axios');
 const QA = require('./QuestionsAnswers.js')
 app.use(express.json());
@@ -10,7 +9,6 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(express.static(__dirname + '/../client/public'));
 const port = 3000;
-const axios = require('axios');
 
 // API CALLS FOR RATINGS AND REVIEWS
 app.get('/reviews', (req, res) => {
