@@ -33,6 +33,7 @@
     "nodemon": "^2.0.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.4.0",
     "react-stars-display": "^0.1.24"
   },
   "devDependencies": {

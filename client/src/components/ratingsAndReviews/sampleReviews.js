@@ -7,7 +7,7 @@ const sampleReviews = {
           "review_id": 1275188,
           "rating": 5,
           "summary": "love it",
-          "recommend": true,
+          "recommend": false,
           "response": null,
           "body": "- If the reviewer recommends buying the product, the text “I recommend this product” and a checkmark icon will display below the review. This is going to be the review that is longer than 250 characters just to see if the conditional rendering functionality works",
           "date": "2022-06-07T00:00:00.000Z",
