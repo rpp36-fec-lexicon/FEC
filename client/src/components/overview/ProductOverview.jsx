@@ -4,6 +4,7 @@ import Checkout from './checkout/Checkout.jsx';
 import ProductDescription from './information/ProductDescription.jsx';
 import ProductInformation from './information/ProductInformation.jsx';
 import SelectStyle from './information/SelectStyle.jsx';
+import $ from 'jquery';
 
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -14,6 +15,22 @@ class ProductOverview extends React.Component {
       selectedStyle: '',
       selectedPhoto: ''
     };
+  }
+  componentDidMount() {
+    this.getProducts();
+  }
+
+  getProducts() {
+    $.ajax({
+      url: '/products',
+      type: 'GET',
+      success: (data) => {
+        console.log(data);
+      },
+      error: (error) => {
+        console.log (`Error Message: ${error}`);
+      }
+    })
   }
 
   render() {
