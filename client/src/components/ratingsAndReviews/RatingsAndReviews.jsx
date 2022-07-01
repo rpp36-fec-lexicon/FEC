@@ -3,6 +3,7 @@ import ReviewList from './Reviews/ReviewList.jsx';
 import RatingSummary from './Ratings/RatingSummary.jsx';
 import RatingBreakdown from './Ratings/RatingBreakdown.jsx';
 import ProductBreakdown from './Ratings/ProductBreakdown.jsx';
+const sampleReviews = require('./sampleReviews.js').sampleReviews;
 const axios = require('axios');
 
 class RatingsAndReviews extends React.Component {
@@ -52,13 +53,16 @@ class RatingsAndReviews extends React.Component {
 
   }
 
+
+
   render() {
     return (
       <div>
         <RatingSummary />
         <RatingBreakdown />
         <ProductBreakdown />
-        <ReviewList reviews={this.state.reviews} sortReviewsFunc={this.sortReviewsFunc}/>
+        {/* <ReviewList reviews={this.state.reviews} sortReviewsFunc={this.sortReviewsFunc}/> */}
+        <ReviewList reviews={sampleReviews.results} sortReviewsFunc={this.sortReviewsFunc}/>
         <button onClick={() => { this.getAllReviewsFunc() }}>get reviews</button>
         <button onClick={() => { this.getAllMetaFunc() }}>get meta</button>
       </div>
