@@ -33,7 +33,7 @@ const sampleReviews = {
           "summary": "",
           "recommend": true,
           "response": null,
-          "body": "sad;flkjsad;lfkjas;dlkfja;slkdjf;aslkdjf;lkasjdf;lkajsdff;lk",
+          "body": "Here is another review that is longer than 250 characters. I love this product, I totally would recommend this product to all of my friends and family and in-laws and I would even buy it in all of the other colors and wear it on every day of the week. I would also buy it as gifts for my mom and aunties and sisters and I will buy it for my girlfriends' birthdays as well.",
           "date": "2022-06-10T00:00:00.000Z",
           "reviewer_name": "asdf",
           "helpfulness": 9,
