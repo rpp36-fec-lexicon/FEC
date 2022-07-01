@@ -4,6 +4,7 @@ import RatingSummary from './Ratings/RatingSummary.jsx';
 import RatingBreakdown from './Ratings/RatingBreakdown.jsx';
 import ProductBreakdown from './Ratings/ProductBreakdown.jsx';
 const sampleReviews = require('./sampleReviews.js').sampleReviews;
+const sampleMeta = require('./sampleMeta.js').sampleMeta;
 const axios = require('axios');
 
 class RatingsAndReviews extends React.Component {
@@ -21,28 +22,27 @@ class RatingsAndReviews extends React.Component {
   }
 
   componentDidMount() {
-    this.getAllReviewsFunc();
-    this.getAllMetaFunc();
+    this.getAllReviewsFunc()
+      .then(response => {
+        const reviewData = response.data;
+        const reviews = response.data.results;
+        this.getAllMetaFunc()
+          .then(response => {
+            const metaData = response.data;
+            this.setState({reviewData: reviewData, reviews: reviews, metaData: metaData});
+          })
+      })
+      .catch(err => {
+        console.log('error getting reviews and metaData', err);
+      })
   }
 
   getAllReviewsFunc() {
-    axios.get('/reviews', {params: {productId: this.state.productId} })
-      .then(response => {
-        this.setState({reviewData: response.data, reviews: response.data.results});
-      })
-      .catch(err => {
-        console.log('error getting reviews', err);
-      })
+    return axios.get('/reviews', {params: {productId: this.state.productId} });
   }
 
   getAllMetaFunc() {
-    axios.get('/reviews/meta', {params: {productId: this.state.productId} })
-      .then(response => {
-        this.setState({metaData: response.data});
-      })
-      .catch(err => {
-        console.log('error getting meta', err);
-      })
+    return axios.get('/reviews/meta', {params: {productId: this.state.productId} });
   }
 
   sortReviewsFunc(term) {
@@ -58,7 +58,8 @@ class RatingsAndReviews extends React.Component {
   render() {
     return (
       <div>
-        <RatingSummary />
+        <RatingSummary metaData={this.state.metaData}/>
+        {/* <RatingSummary metaData={sampleMeta}/> */}
         <RatingBreakdown />
         <ProductBreakdown />
         {/* <ReviewList reviews={this.state.reviews} sortReviewsFunc={this.sortReviewsFunc}/> */}
