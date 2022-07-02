@@ -5,12 +5,13 @@ const QuestionsAnswersList = (props) => {
   return (
     <div>
       {
-        props.questionResults.map(question => {
+        props.questions.map(question => {
           return (
             <QuestionsListEntry
                 question={question.question_body}
                 askedBy={question.asker_name}
                 askedDate={question.question_date}
+
               />
 
           )

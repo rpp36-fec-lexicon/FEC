@@ -4,33 +4,34 @@ import SearchQuestion from './SearchQuestion.jsx'
 // import QuestionEntry from './QuestionEntry.jsx'
 // import sampleQuestionsAnswers from '../sampledata/QuestionsAnswersAPI.js'
 
-const QuestionsAnswersMain = (props) => (
-
-  <div>
+const QuestionsAnswersMain = ({productId}) => {
+  const getQuestionsByProductID = ({productId}) => {
+    fetch(`/questions?product_id=${productId}`)
+      .then(data => {
+        console.log(data.results);
+        return data.results;
+      })
+  }
+  return (
     <div>
+      <div>
+      <QuestionsAnswersList questions = {questions}/>
+      </div>
+      <div>
+        <SearchQuestion/>
+      </div>
+      <br/>
+      <div>
+        <button style={{width: "150px", height: "39px"}}>
+          ADD A QUESTION  +
+        </button>
+      </div>
     </div>
-    <div>
-    <QuestionsAnswersList questionResults = {()=> {getQuestionsByProductID(props.productId)}}/>
-    </div>
-    <div>
-      <SearchQuestion/>
-    </div>
-    <br/>
-    <div>
-      <button style={{width: "150px", height: "39px"}}>
-        ADD A QUESTION  +
-      </button>
-    </div>
-  </div>
-)
-
-const getQuestionsByProductID = (productId) => {
-  fetch(`/questions?product_id=${productId}`)
-    .then(res => res.json())
-    .then(questions => {
-      return questions.results;
-    })
+  )
 }
+
+
+
 
 const sendProductIdToServer = (productId) => {
   const productID = { id: productID };
