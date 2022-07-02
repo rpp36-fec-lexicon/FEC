@@ -11,13 +11,15 @@ class App extends React.Component {
       productId: 71697
     }
   }
+
+
   render () {
     return (
       <div>
         <h1>Atelier</h1>
-        {/* <RatingsAndReviews /> */}
-        <App_RelatedAndOutfit />
-        <QuestionsAnswersMain productId={this.state.productId}/>
+        <RatingsAndReviews />
+        {/* <QuestionsAnswersMain productId={this.state.productId}/>
+        <App_RelatedAndOutfit /> */}
       </div>
     );
   }
