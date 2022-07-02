@@ -4,15 +4,17 @@ import RelatedCard from "./RelatedCard.jsx";
 import Flickity from "react-flickity-component";
 
 const flickityOptions = {
-  initialIndex: 0,
+  cellAlign: "left",
+  contain: true,
 };
 
 class Related extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      prodID: 71698, // temp. Will get this thourgh props from Overivew component
+      prodID: this.props.prodID,
       relatedProdIDs: [],
+      seen: false,
     };
   }
 
@@ -32,6 +34,13 @@ class Related extends React.Component {
     });
   }
 
+  comparison() {
+    console.log("feat");
+    this.setState({
+      seen: !this.state.seen,
+    });
+  }
+
   render() {
     return (
       <div>
@@ -43,13 +52,46 @@ class Related extends React.Component {
         </button>
         <br></br>
         <br></br>
-        <br></br>
         <div>
+          {" "}
+          {this.state.seen ? (
+            <PopUp toggle={this.comparison.bind(this)} />
+          ) : null}{" "}
+        </div>
+        <div
+          style={{
+            padding: "15px 15px 15px 15px",
+            marginRight: "50px",
+            marginLeft: "50px",
+          }}
+        >
           <Flickity options={flickityOptions}>
             {this.state.relatedProdIDs.map((itemID, index) => (
-              <RelatedCard relatedItemID={itemID} key={index} />
+              <RelatedCard
+                relatedItemID={itemID}
+                comparison={this.comparison.bind(this)}
+                key={index}
+              />
             ))}
           </Flickity>
+        </div>
+      </div>
+    );
+  }
+}
+
+class PopUp extends React.Component {
+  handleClick = () => {
+    this.props.toggle();
+  };
+  render() {
+    return (
+      <div className="modal">
+        <div className="modal_content">
+          <span className="close" onClick={this.handleClick}>
+            &times;{" "}
+          </span>
+          <p>comparison</p>
         </div>
       </div>
     );

@@ -40,41 +40,62 @@ class RelatedCard extends React.Component {
     });
   }
 
+  // this.state.itemInfo.features // an araay of objs {feature:.. , value: ...}
+  // }
+
   render() {
     if (this.state.itemStyles.length !== 0) {
+      // console.log("feat", this.state.itemInfo.features);
       return (
-        <ol>
-          <img
-            style={{ height: "100px", width: "100px" }}
-            src={`${this.state.itemStyles.photos[0].url}`}
-          ></img>
-          <li>{this.state.itemInfo.name}</li>
-          <li>{this.state.itemInfo.category}</li>
-          <li>{this.state.itemInfo.default_price}</li>
+        <div
+          style={{
+            border: "1px solid grey",
+            padding: "15px 15px 15px 15px",
+            margin: "15px 15px 15px 15px",
+          }}
+        >
+          <div
+            style={{
+              height: "200px",
+              width: "200px",
+              marginBottom: "10px",
+              backgroundImage: `url(${this.state.itemStyles.photos[0].url})`,
+              backgroundSize: "200px 200px",
+            }}
+          >
+            <button onClick={this.props.comparison}>&#11088;</button>
+          </div>
+
+          <div>
+            <li>{this.state.itemInfo.name}</li>
+            <li>{this.state.itemInfo.category}</li>
+            <li>{this.state.itemInfo.default_price}</li>
+          </div>
+
           {/* {this.state.itemStyles.map((style, index) => (
-            <RelatedCardStyle style={style} key={index} />
-          ))} */}
-        </ol>
+                  <RelatedCardStyle style={style} key={index} />
+                ))} */}
+        </div>
       );
     }
   }
 }
 
-const RelatedCardStyle = (props) => {
-  if (props.style.photos[0].url !== null) {
-    return (
-      <div
-      // style={{
-      //   backgroundImage: `url(${props.style.photos[0].url})`,
-      // }}
-      >
-        <img
-          style={{ height: "100px", width: "100px" }}
-          src={`${props.style.photos[0].url}`}
-        ></img>
-      </div>
-    );
-  }
-};
+// const RelatedCardStyle = (props) => {
+//   if (props.style.photos[0].url !== null) {
+//     return (
+//       <div
+//       // style={{
+//       //   backgroundImage: `url(${props.style.photos[0].url})`,
+//       // }}
+//       >
+//         <img
+//           style={{ height: "100px", width: "100px" }}
+//           src={`${props.style.photos[0].url}`}
+//         ></img>
+//       </div>
+//     );
+//   }
+// };
 
 export default RelatedCard;
