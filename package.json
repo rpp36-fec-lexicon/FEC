@@ -34,7 +34,10 @@
     "nodemon": "^2.0.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "react-icons": "^4.4.0",
+    "react-native-star-rating-bar-graph": "^1.0.0",
+    "react-stars-display": "^0.1.24"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
@@ -43,6 +46,7 @@
     "@babel/preset-react": "^7.17.12",
     "@testing-library/jest-dom": "^5.16.4",
     "babel-loader": "^8.2.5",
+    "style-loader": "^3.3.1",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0"
   }

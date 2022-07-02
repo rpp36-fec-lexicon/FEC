@@ -14,7 +14,10 @@ const ReviewList = (props) => {
           <option id="relevance">Relevance</option>
         </select>
       </div>
-      <ReviewItem />
+      {reviews.map(review => {
+        return <ReviewItem review={review} key={review['review_id']}/>
+      })}
+
       <button id="moreReviews">MORE REVIEWS</button>
       <button id="addReview">ADD A REVIEW  +</button>
     </div>

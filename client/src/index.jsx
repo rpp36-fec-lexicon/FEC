@@ -12,14 +12,22 @@ class App extends React.Component {
       productId: 71697
     }
   }
+
+
   render () {
     return (
       <div>
         <h1>Atelier</h1>
+<<<<<<< HEAD
         <ProductOverview />
         {/* <RatingsAndReviews /> */}
         {/* <QuestionsAnswersMain productId={this.state.productId}/> */}
         {/* <App_RelatedAndOutfit /> */}
+=======
+        <RatingsAndReviews />
+        {/* <QuestionsAnswersMain productId={this.state.productId}/>
+        <App_RelatedAndOutfit /> */}
+>>>>>>> 3efd5afc252044e6490de81fb25b93f23e0312fc
       </div>
     );
   }
