@@ -1,5 +1,7 @@
 import React from 'react';
 import Stars from 'react-stars-display';
+import RatingBreakdown from './RatingBreakdown.jsx';
+import ProductBreakdown from './ProductBreakdown.jsx';
 
 const RatingSummary = (props) => {
   const data = props.metaData;
@@ -39,6 +41,8 @@ const RatingSummary = (props) => {
       <h1>{averageRating}</h1>
       <Stars stars={averageRating}/>
       <div>{recommendedPercent}% of reviews recommend this product</div>
+      <RatingBreakdown ratings={ratings} totalNumberOfRatings={totalNumberOfRatings}/>
+      <ProductBreakdown />
     </div>
   );
 }

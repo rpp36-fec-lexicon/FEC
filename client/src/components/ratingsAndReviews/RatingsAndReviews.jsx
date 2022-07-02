@@ -1,8 +1,6 @@
 import React from 'react';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RatingSummary from './Ratings/RatingSummary.jsx';
-import RatingBreakdown from './Ratings/RatingBreakdown.jsx';
-import ProductBreakdown from './Ratings/ProductBreakdown.jsx';
 const sampleReviews = require('./sampleReviews.js').sampleReviews;
 const sampleMeta = require('./sampleMeta.js').sampleMeta;
 const axios = require('axios');
@@ -21,21 +19,21 @@ class RatingsAndReviews extends React.Component {
     this.ratingSummaryFunc = this.ratingSummaryFunc.bind(this);
   }
 
-  componentDidMount() {
-    this.getAllReviewsFunc()
-      .then(response => {
-        const reviewData = response.data;
-        const reviews = response.data.results;
-        this.getAllMetaFunc()
-          .then(response => {
-            const metaData = response.data;
-            this.setState({reviewData: reviewData, reviews: reviews, metaData: metaData});
-          })
-      })
-      .catch(err => {
-        console.log('error getting reviews and metaData', err);
-      })
-  }
+  // componentDidMount() {
+  //   this.getAllReviewsFunc()
+  //     .then(response => {
+  //       const reviewData = response.data;
+  //       const reviews = response.data.results;
+  //       this.getAllMetaFunc()
+  //         .then(response => {
+  //           const metaData = response.data;
+  //           this.setState({reviewData: reviewData, reviews: reviews, metaData: metaData});
+  //         })
+  //     })
+  //     .catch(err => {
+  //       console.log('error getting reviews and metaData', err);
+  //     })
+  // }
 
   getAllReviewsFunc() {
     return axios.get('/reviews', {params: {productId: this.state.productId} });
@@ -58,14 +56,10 @@ class RatingsAndReviews extends React.Component {
   render() {
     return (
       <div>
-        <RatingSummary metaData={this.state.metaData}/>
-        {/* <RatingSummary metaData={sampleMeta}/> */}
-        <RatingBreakdown />
-        <ProductBreakdown />
+        {/* <RatingSummary metaData={this.state.metaData}/> */}
+        <RatingSummary metaData={sampleMeta}/>
         {/* <ReviewList reviews={this.state.reviews} sortReviewsFunc={this.sortReviewsFunc}/> */}
         <ReviewList reviews={sampleReviews.results} sortReviewsFunc={this.sortReviewsFunc}/>
-        <button onClick={() => { this.getAllReviewsFunc() }}>get reviews</button>
-        <button onClick={() => { this.getAllMetaFunc() }}>get meta</button>
       </div>
     );
   }
