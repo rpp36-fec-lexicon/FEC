@@ -17,9 +17,9 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-        <RatingsAndReviews />
-        {/* <QuestionsAnswersMain productId={this.state.productId}/>
-        <App_RelatedAndOutfit /> */}
+        {/* <RatingsAndReviews /> */}
+        <QuestionsAnswersMain productId={this.state.productId}/>
+        {/* <App_RelatedAndOutfit /> */}
       </div>
     );
   }

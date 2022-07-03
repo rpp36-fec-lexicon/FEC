@@ -4,14 +4,15 @@ import SearchQuestion from './SearchQuestion.jsx'
 // import QuestionEntry from './QuestionEntry.jsx'
 // import sampleQuestionsAnswers from '../sampledata/QuestionsAnswersAPI.js'
 
-const QuestionsAnswersMain = ({productId}) => {
-  const getQuestionsByProductID = ({productId}) => {
+const QuestionsAnswersMain = (productId) => {
+
+  const getQuestionsByProductID = (productId) => {
     fetch(`/questions?product_id=${productId}`)
-      .then(data => {
-        console.log(data.results);
-        return data.results;
+      .then(questions => {
+        return questions.results;
       })
-  }
+  };
+  let questions = getQuestionsByProductID({productId});
   return (
     <div>
       <div>
