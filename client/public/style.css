@@ -27,3 +27,7 @@
   color: cyan;
   cursor: pointer;
 }
+
+progress {
+  background-color: green;
+}

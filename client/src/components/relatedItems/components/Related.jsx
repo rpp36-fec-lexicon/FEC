@@ -13,12 +13,29 @@ class Related extends React.Component {
     super(props);
     this.state = {
       prodID: this.props.prodID,
+      prodInfo: [],
       relatedProdIDs: [],
       seen: false,
     };
   }
 
   // componentDidMount () {}
+  componentDidMount() {
+    $.ajax({
+      type: "GET",
+      url: `/products/${this.props.prodID}`,
+      success: (prodInfo) => {
+        console.log("pro", prodInfo);
+        this.setState({
+          prodInfo: prodInfo,
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
   relatedProductIDFetcher() {
     $.ajax({
       type: "GET",
@@ -35,7 +52,6 @@ class Related extends React.Component {
   }
 
   comparison() {
-    console.log("feat");
     this.setState({
       seen: !this.state.seen,
     });
@@ -46,6 +62,7 @@ class Related extends React.Component {
       <div>
         Related Products: <br></br>Temp prodID: 71698
         <br></br>
+        {this.state.prodInfo.name}, {this.state.prodInfo.category}
         <br></br>
         <button onClick={this.relatedProductIDFetcher.bind(this)}>
           get Related Products (temp button)
@@ -55,7 +72,10 @@ class Related extends React.Component {
         <div>
           {" "}
           {this.state.seen ? (
-            <PopUp toggle={this.comparison.bind(this)} />
+            <PopUp
+              toggle={this.comparison.bind(this)}
+              mainProdFeat={this.state.prodInfo.features}
+            />
           ) : null}{" "}
         </div>
         <div
@@ -81,17 +101,24 @@ class Related extends React.Component {
 }
 
 class PopUp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   handleClick = () => {
     this.props.toggle();
   };
   render() {
+    console.log("ff", this.props.mainProdFeat);
     return (
       <div className="modal">
         <div className="modal_content">
           <span className="close" onClick={this.handleClick}>
             &times;{" "}
           </span>
-          <p>comparison</p>
+          <table>
+            <tbody></tbody>
+          </table>
         </div>
       </div>
     );
