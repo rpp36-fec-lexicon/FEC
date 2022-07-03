@@ -12,7 +12,7 @@ const QuestionsAnswersMain = (productId) => {
         return questions.results;
       })
   };
-  let questions = getQuestionsByProductID({productId});
+
   return (
     <div>
       <div>
