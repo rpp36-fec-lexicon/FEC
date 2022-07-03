@@ -11,9 +11,12 @@ class App extends React.Component {
       productId: 71896,
     };
   }
+  componentDidMount() {
+    // alert("Hi Dina this is the sum of 5+5", 5 + 5);
+  }
 
   prodIDChanger(relatedID) {
-    console.log("id", relatedID);
+    // console.log("id", relatedID);
     this.setState({
       productId: relatedID,
     });

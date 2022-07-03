@@ -14,14 +14,7 @@ class RelatedCard extends React.Component {
 
   // }
 
-  // this.state.itemInfo.features // an araay of objs {feature:.. , value: ...}
-  // }
-
   render() {
-    // console.log("itemInfo", this.props.itemData.itemInfo);
-    // console.log("itemStyles", this.props.itemData.itemStyles);
-    // console.log("=============================================  ");
-
     return (
       <div
         style={{
@@ -29,7 +22,9 @@ class RelatedCard extends React.Component {
           padding: "15px 15px 15px 15px",
           margin: "15px 15px 15px 15px",
         }}
-        onClick={() => this.props.prodIDChanger(this.props.relatedItemID)}
+        onClick={() =>
+          this.props.prodIDChanger(this.props.itemData.itemInfo.id)
+        }
       >
         <div
           style={{
@@ -40,7 +35,13 @@ class RelatedCard extends React.Component {
             backgroundSize: "200px 200px",
           }}
         >
-          <button onClick={this.props.comparison}>&#11088;</button>
+          <button
+            onClick={() => {
+              this.props.comparison(this.props.itemData.itemInfo.features);
+            }}
+          >
+            &#11088;
+          </button>
         </div>
 
         <div>

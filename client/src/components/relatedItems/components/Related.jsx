@@ -8,10 +8,9 @@ class Related extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // relatedProdsInfo: [],
-      // relatedItemStyles: [],
       itemInfoAndStyle: [],
       modalSeen: false,
+      relatedProdFeat: [],
     };
   }
 
@@ -58,9 +57,10 @@ class Related extends React.Component {
     });
   }
 
-  comparison() {
+  comparison(relatedProdFeat) {
     this.setState({
       modalSeen: !this.state.modalSeen,
+      relatedProdFeat: relatedProdFeat,
     });
   }
 
@@ -80,6 +80,7 @@ class Related extends React.Component {
             <Comparison
               toggle={this.comparison.bind(this)}
               mainProdFeat={this.props.prodInfo.features}
+              relatedProdFeat={this.state.relatedProdFeat}
             />
           ) : null}{" "}
         </div>
@@ -90,11 +91,6 @@ class Related extends React.Component {
             marginLeft: "50px",
           }}
         >
-          {/* <RelatedCard
-            x={this.state.relatedProdsInfo}
-            y={this.state.relatedItemStyles}
-          /> */}
-
           <Flickity
             options={{
               cellAlign: "left",
@@ -110,22 +106,6 @@ class Related extends React.Component {
               />
             ))}
           </Flickity>
-
-          {/* <Flickity
-            options={{
-              cellAlign: "left",
-              contain: true,
-            }}
-          >
-            {this.state.relatedProdIDs.map((itemID, index) => (
-              <RelatedCard
-                relatedItemID={itemID}
-                comparison={this.comparison.bind(this)}
-                prodIDChanger={this.props.prodIDChanger}
-                key={index}
-              />
-            ))}
-          </Flickity> */}
         </div>
       </div>
     );

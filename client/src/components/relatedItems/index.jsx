@@ -11,7 +11,7 @@ class RelatedAndOutfit extends React.Component {
     };
   }
   componentDidMount() {
-    // console.log("RelatedAndOutfit");
+    // console.log("RelatedAndOutfit", this.props.prodID);
 
     $.ajax({
       type: "GET",
@@ -29,6 +29,7 @@ class RelatedAndOutfit extends React.Component {
   }
 
   render() {
+    // console.log("cons", this.props.prodID);
     return (
       <div>
         {/* {this.state.prodID.map((itemID, index) => ( */}
