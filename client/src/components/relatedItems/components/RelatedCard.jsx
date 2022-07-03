@@ -4,80 +4,57 @@ import $ from "jquery";
 class RelatedCard extends React.Component {
   constructor(props) {
     super(props);
-    // parent 'Related' passes relatedItemID to this child (i.e. RelatedCard)
     this.state = {
       itemInfo: [],
       itemStyles: [],
     };
   }
 
-  componentDidMount() {
-    $.ajax({
-      type: "GET",
-      url: `/products/${this.props.relatedItemID}`,
-      success: (relatedItemInfo) => {
-        this.setState({
-          itemInfo: relatedItemInfo,
-        });
+  // componentDidMount() {
 
-        $.ajax({
-          type: "GET",
-          url: `/products/${this.props.relatedItemID}/styles`,
-          success: (relatedItemStyles) => {
-            // console.log("loggin", relatedItemStyles.results[0]);
-            this.setState({
-              itemStyles: relatedItemStyles.results[0],
-            });
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  // }
 
   // this.state.itemInfo.features // an araay of objs {feature:.. , value: ...}
   // }
 
   render() {
-    if (this.state.itemStyles.length !== 0) {
-      // console.log("feat", this.state.itemInfo.features);
-      return (
+    // console.log("itemInfo", this.props.itemData.itemInfo);
+    // console.log("itemStyles", this.props.itemData.itemStyles);
+    // console.log("=============================================  ");
+
+    return (
+      <div
+        style={{
+          border: "1px solid grey",
+          padding: "15px 15px 15px 15px",
+          margin: "15px 15px 15px 15px",
+        }}
+        onClick={() => this.props.prodIDChanger(this.props.relatedItemID)}
+      >
         <div
           style={{
-            border: "1px solid grey",
-            padding: "15px 15px 15px 15px",
-            margin: "15px 15px 15px 15px",
+            height: "200px",
+            width: "200px",
+            marginBottom: "10px",
+            backgroundImage: `url(${this.props.itemData.itemStyles.results[0].photos[0].url})`,
+            backgroundSize: "200px 200px",
           }}
         >
-          <div
-            style={{
-              height: "200px",
-              width: "200px",
-              marginBottom: "10px",
-              backgroundImage: `url(${this.state.itemStyles.photos[0].url})`,
-              backgroundSize: "200px 200px",
-            }}
-          >
-            <button onClick={this.props.comparison}>&#11088;</button>
-          </div>
-
-          <div>
-            <li>{this.state.itemInfo.name}</li>
-            <li>{this.state.itemInfo.category}</li>
-            <li>{this.state.itemInfo.default_price}</li>
-          </div>
-
-          {/* {this.state.itemStyles.map((style, index) => (
-                  <RelatedCardStyle style={style} key={index} />
-                ))} */}
+          <button onClick={this.props.comparison}>&#11088;</button>
         </div>
-      );
-    }
+
+        <div>
+          <li>{this.props.itemData.itemInfo.name}</li>
+          <li>{this.props.itemData.itemInfo.category}</li>
+          <li>{this.props.itemData.itemInfo.default_price}</li>
+        </div>
+      </div>
+
+      //   {/* {this.state.itemStyles.map((style, index) => (
+      //           <RelatedCardStyle style={style} key={index} />
+      //         ))} */}
+      // </div>
+    );
   }
 }
 
