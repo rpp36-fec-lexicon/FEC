@@ -37,7 +37,10 @@ class RelatedCard extends React.Component {
         >
           <button
             onClick={() => {
-              this.props.comparison(this.props.itemData.itemInfo.features);
+              this.props.comparison(
+                this.props.itemData.itemInfo.features,
+                this.props.itemData.itemInfo.name
+              );
             }}
           >
             &#11088;

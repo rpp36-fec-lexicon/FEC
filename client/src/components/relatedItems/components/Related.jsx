@@ -11,6 +11,7 @@ class Related extends React.Component {
       itemInfoAndStyle: [],
       modalSeen: false,
       relatedProdFeat: [],
+      relatedProdName: "",
     };
   }
 
@@ -57,10 +58,11 @@ class Related extends React.Component {
     });
   }
 
-  comparison(relatedProdFeat) {
+  comparison(relatedProdFeat, relatedProdName) {
     this.setState({
       modalSeen: !this.state.modalSeen,
       relatedProdFeat: relatedProdFeat,
+      relatedProdName: relatedProdName,
     });
   }
 
@@ -78,6 +80,8 @@ class Related extends React.Component {
           {" "}
           {this.state.modalSeen ? (
             <Comparison
+              mainProdName={this.props.prodInfo.name}
+              relatedProdName={this.state.relatedProdName}
               toggle={this.comparison.bind(this)}
               mainProdFeat={this.props.prodInfo.features}
               relatedProdFeat={this.state.relatedProdFeat}

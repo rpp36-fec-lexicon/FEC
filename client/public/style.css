@@ -31,3 +31,7 @@
 progress {
   background-color: green;
 }
+
+td {
+  text-align: center;
+}
