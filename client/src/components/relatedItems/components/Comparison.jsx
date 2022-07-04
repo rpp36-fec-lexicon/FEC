@@ -75,7 +75,7 @@ class Comparison extends React.Component {
     this.props.toggle();
   };
   render() {
-    console.log("props in comp", this.props);
+    // console.log("props in comp", this.props);
     return (
       <div className="modal">
         <div className="modal_content">

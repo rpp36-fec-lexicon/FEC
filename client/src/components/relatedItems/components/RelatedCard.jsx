@@ -5,8 +5,8 @@ class RelatedCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemInfo: [],
-      itemStyles: [],
+      // itemInfo: [],
+      // itemStyles: [],
     };
   }
 
@@ -36,6 +36,7 @@ class RelatedCard extends React.Component {
           }}
         >
           <button
+            style={{ float: "right" }}
             onClick={() => {
               this.props.comparison(
                 this.props.itemData.itemInfo.features,
@@ -50,7 +51,22 @@ class RelatedCard extends React.Component {
         <div>
           <li>{this.props.itemData.itemInfo.name}</li>
           <li>{this.props.itemData.itemInfo.category}</li>
-          <li>{this.props.itemData.itemInfo.default_price}</li>
+          <li>
+            {this.props.itemData.itemStyles.results[0].sale_price === null ? (
+              this.props.itemData.itemInfo.default_price
+            ) : (
+              <span>
+                <del style={{ color: "red" }}>
+                  {" "}
+                  {this.props.itemData.itemInfo.default_price}
+                </del>
+                <span>
+                  {this.props.itemData.itemStyles.results[0].sale_price}
+                </span>
+              </span>
+            )}
+          </li>
+          <li>start rating</li>
         </div>
       </div>
 

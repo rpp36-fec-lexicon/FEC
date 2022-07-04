@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 71902,
+      productId: 71708, // 72151 style photo shows pants, but category is shorts
+      // 71954 name backpack, photos show shoes
     };
   }
   componentDidMount() {
