@@ -25,7 +25,7 @@ class App extends React.Component {
       type: 'POST',
       data: query,
       success: (data) => {
-        console.log(data);
+        // console.log(data);
       },
       error: (err) => {
         console.log(err);
@@ -38,14 +38,14 @@ class App extends React.Component {
       <div>
         <h1>Atelier</h1>
         <ProductOverview />
-        {/* <RatingsAndReviews /> */}
-        {/* <QuestionsAnswersMain productId={this.state.productId}/> */}
-        {/* <RelatedAndOutfit prodID={this.state.productId} /> */}
+        <RatingsAndReviews />
+        <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} />
+        <RelatedAndOutfit prodID={this.state.productId} />
       </div>
     );
   }
 }
 
-ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+ReactDOM.createRoot(document.getElementById('app')).render(<App />);
 
 export default App;

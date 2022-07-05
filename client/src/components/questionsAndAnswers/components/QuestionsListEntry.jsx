@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const QuestionsListEntry = ({
   question,
@@ -17,6 +17,7 @@ const QuestionsListEntry = ({
         <br />
         asked date: {askedDate}
       </div>
+      <div>A: {answer}</div>
     </div>
   );
 };

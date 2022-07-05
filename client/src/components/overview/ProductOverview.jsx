@@ -25,7 +25,7 @@ class ProductOverview extends React.Component {
       url: '/products',
       type: 'GET',
       success: (data) => {
-        console.log(data);
+        // console.log(data);
       },
       error: (error) => {
         console.log (`Error Message: ${error}`);

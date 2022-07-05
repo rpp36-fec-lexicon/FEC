@@ -25,7 +25,7 @@ class Related extends React.Component {
       type: "GET",
       url: `/products/${this.props.prodID}`,
       success: (prodInfo) => {
-        console.log("pro", prodInfo);
+        // console.log("pro", prodInfo);
         this.setState({
           prodInfo: prodInfo,
         });
