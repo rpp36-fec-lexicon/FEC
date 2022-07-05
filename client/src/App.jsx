@@ -6,21 +6,21 @@ import QuestionsAnswersMain from "./components/questionsAndAnswers/components/Qu
 
 class App extends React.Component {
   constructor(props) {
+    console.log("pp", props);
     super(props);
     this.state = {
-      productId: 71708, // 72151 style photo shows pants, but category is shorts
-      // 71954 name backpack, photos show shoes
+      productId: 72022,
     };
   }
   componentDidMount() {
-    // alert("Hi Dina this is the sum of 5+5", 5 + 5);
+    // how about making another ajax req to get prodID info
   }
 
   prodIDChanger(relatedID) {
-    // console.log("id", relatedID);
-    this.setState({
-      productId: relatedID,
-    });
+    console.log("relatedID ", relatedID);
+    // this.setState({
+    //   productId: relatedID,
+    // });
   }
 
   render() {

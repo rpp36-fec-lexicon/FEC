@@ -35,3 +35,26 @@ progress {
 td {
   text-align: center;
 }
+
+/* Hide carousel arrows when reaching end */
+.flickity-prev-next-button:disabled { display: none; }
+
+
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+  /* border: 2px solid rgb(99, 99, 14); */
+}
+
+.flex-child:first-child {
+  margin-right: 20px;
+  /* flex-grow: 2; */
+}
+.flex-child:nth-child(2) {
+  margin-right: 20px;
+  flex-grow: 9;
+}

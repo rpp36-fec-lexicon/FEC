@@ -67,16 +67,17 @@ class Related extends React.Component {
   }
 
   render() {
-    console.log("infoAndstyle", this.state.itemInfoAndStyle);
+    // console.log("infoAndstyle", this.state.itemInfoAndStyle);
     return (
       <div>
-        Related Products: <br></br>Temp prodID: {this.props.prodID}
+        <br></br>Temp prodID: {this.props.prodID}
         <br></br>
         Main prod in Overview: {this.props.prodInfo.name}, category:{" "}
         {this.props.prodInfo.category}
         <br></br>
         <br></br>
         <br></br>
+        Related Products:
         <div>
           {" "}
           {this.state.modalSeen ? (

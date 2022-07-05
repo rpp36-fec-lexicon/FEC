@@ -10,9 +10,10 @@ class Comparison extends React.Component {
     };
   }
   componentDidMount() {
-    // commonFeat
-    // mainProdUnqFeat
-    // relatedProdUnqFeat
+    this.handleComparison();
+  }
+
+  handleComparison() {
     const mainProdFeatObj = [];
     this.props.mainProdFeat.forEach((featureObj) => {
       mainProdFeatObj.push(Object.entries(featureObj));
@@ -26,9 +27,11 @@ class Comparison extends React.Component {
       } else {
         mainProdFeatTuple = `${featTuple[0][1]}`;
       }
-      mainProdFeatCollection.push(mainProdFeatTuple);
+
+      if (!mainProdFeatCollection.includes(mainProdFeatTuple)) {
+        mainProdFeatCollection.push(mainProdFeatTuple);
+      }
     });
-    // console.log("main", mainProdFeatCollection);
 
     const relatedProdFeatObj = [];
     this.props.relatedProdFeat.forEach((featureObj) => {
@@ -43,34 +46,41 @@ class Comparison extends React.Component {
       } else {
         relatedProdFeatTuple = `${featTuple[0][1]}`;
       }
-      relatedProdFeatCollection.push(relatedProdFeatTuple);
+      if (!relatedProdFeatCollection.includes(relatedProdFeatTuple)) {
+        relatedProdFeatCollection.push(relatedProdFeatTuple);
+      }
     });
-    // console.log("related", relatedProdFeatCollection);
 
     let commonFeat = [];
     let mainProdUnqFeat = [];
-    // loop over main, find if exists in rela, add to common
+    let relatedProdUnqFeat = [];
     mainProdFeatCollection.forEach((featureDescrp) => {
-      if (relatedProdFeatCollection.includes(featureDescrp)) {
+      if (
+        relatedProdFeatCollection.includes(featureDescrp) &&
+        !commonFeat.includes(featureDescrp)
+      ) {
         commonFeat.push(featureDescrp);
-      } else {
+      }
+    });
+
+    mainProdFeatCollection.forEach((featureDescrp) => {
+      if (!relatedProdFeatCollection.includes(featureDescrp)) {
         mainProdUnqFeat.push(featureDescrp);
       }
     });
 
-    let relatedProdUnqFeat = [];
     relatedProdFeatCollection.forEach((featureDescrp) => {
       if (!mainProdFeatCollection.includes(featureDescrp)) {
         relatedProdUnqFeat.push(featureDescrp);
       }
     });
-
     this.setState({
       commonFeat: commonFeat,
       mainProdUnqFeat: mainProdUnqFeat,
       relatedProdUnqFeat: relatedProdUnqFeat,
     });
   }
+
   handleCloseButton = () => {
     this.props.toggle();
   };
@@ -85,12 +95,23 @@ class Comparison extends React.Component {
           <table>
             <tbody>
               <tr>
-                <td colSpan="3">Comparison</td>
+                <td colSpan="3">
+                  <b>
+                    <em>Comparison</em>
+                    <hr></hr>
+                  </b>
+                </td>
               </tr>
               <tr>
-                <td>{this.props.mainProdName}</td>
-                <td>Feature</td>
-                <td>{this.props.relatedProdName}</td>
+                <td>
+                  <b>{this.props.mainProdName}</b>
+                </td>
+                <td>
+                  <b>Feature</b>
+                </td>
+                <td>
+                  <b>{this.props.relatedProdName}</b>
+                </td>
               </tr>
               {this.state.commonFeat.length !== 0
                 ? this.state.commonFeat.map((feature, index) => (
@@ -120,7 +141,7 @@ class Comparison extends React.Component {
 const CommonFeatureMapper = (props) => {
   // console.log("ff", props);
   return (
-    <tr>
+    <tr style={{ overflowY: "auto" }}>
       <td>&#10003;</td>
       <td>{props.feature}</td>
       <td>&#10003;</td>
@@ -131,7 +152,7 @@ const CommonFeatureMapper = (props) => {
 const MainFeatureMapper = (props) => {
   // console.log("MainFeatureMapper", props);
   return (
-    <tr>
+    <tr style={{ overflowY: "auto" }}>
       <td>&#10003;</td>
       <td>{props.feature}</td>
       <td></td>
@@ -142,7 +163,7 @@ const MainFeatureMapper = (props) => {
 const RelatedFeatureMapper = (props) => {
   // console.log("ff", props);
   return (
-    <tr>
+    <tr style={{ overflowY: "auto" }}>
       <td></td>
       <td>{props.feature}</td>
       <td>&#10003;</td>

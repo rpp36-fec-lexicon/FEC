@@ -32,20 +32,22 @@ class RelatedAndOutfit extends React.Component {
     // console.log("cons", this.props.prodID);
     return (
       <div>
-        {/* {this.state.prodID.map((itemID, index) => ( */}
         <Related
           prodID={this.props.prodID}
           prodInfo={this.state.prodInfo}
           prodIDChanger={this.props.prodIDChanger}
-          // key={index}
         />
-        {/* ))} */}
-
         <br></br>
         <br></br>
         <br></br>
-
-        <Outfit />
+        <Outfit
+          prodID={this.props.prodID}
+          prodInfo={this.state.prodInfo}
+          // prodIDChanger={this.props.prodIDChanger}
+        />
+        <br></br>
+        <br></br>
+        <br></br>
       </div>
     );
   }
