@@ -8,15 +8,16 @@ class ProductDescription extends React.Component {
   }
 
   render() {
-    return(
+    // console.log(this.props.features[0].value);
+    return (
       <div>
-        <h4>Slogan here</h4>
-        <p>Description from api</p>
+        <h4>{this.props.slogan}</h4>
+        <p>{this.props.description}</p>
         <div>
-          <p>Feature information from api</p>
+          {this.props.features.map((element) => <h4 key={element.feature}>{element.feature} : {element.value}</h4>)}
         </div>
       </div>
-    )
+    );
   }
 }
 

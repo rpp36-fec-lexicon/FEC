@@ -13,37 +13,40 @@ class ProductOverview extends React.Component {
       chosenProduct: {},
       style: [],
       selectedStyle: '',
-      selectedPhoto: ''
+      selectedPhoto: '',
     };
   }
   componentDidMount() {
-    this.getProducts();
+    // this.getProducts();
   }
 
-  getProducts() {
-    $.ajax({
-      url: '/products',
-      type: 'GET',
-      success: (data) => {
-        // console.log(data);
-      },
-      error: (error) => {
-        console.log (`Error Message: ${error}`);
-      }
-    })
-  }
+  // getProducts() {
+  //   $.ajax({
+  //     url: '/products',
+  //     type: 'GET',
+  //     success: (data) => {
+  //       console.log(data);
+  //     },
+  //     error: (error) => {
+  //       console.log (`Error Message: ${error}`);
+  //     }
+  //   });
+  // }
 
   render() {
-    return (
-      <div>
-        <h1>Product Overview!</h1>
-        {/* <PrimaryImage /> */}
-        {/* <Checkout /> */}
-        {/* <ProductDescription /> */}
-        <ProductInformation />
-        <SelectStyle />
-      </div>
-    )
+    console.log(this.props.productInfo);
+    if (this.props.productInfo) {
+      return (
+        <div>
+          <h1>Product Overview!</h1>
+          {/* <PrimaryImage /> */}
+          {/* <Checkout /> */}
+          <ProductDescription slogan={this.props.productInfo.slogan} description={this.props.productInfo.description} features={this.props.productInfo.features}/>
+          {/* <ProductInformation /> */}
+          {/* <SelectStyle /> */}
+        </div>
+      );
+    }
   }
 }
 

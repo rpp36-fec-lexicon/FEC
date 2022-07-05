@@ -15,7 +15,7 @@ class ProductInformation extends React.Component {
         <h2> Product Name </h2>
         <h4> Price </h4>
       </div>
-    )
+    );
   }
 }
 
