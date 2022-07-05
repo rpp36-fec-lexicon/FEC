@@ -136,6 +136,20 @@ app.post('/products/:product_id', (req, res) => {
   });
 });
 
+app.post('/products/:product_id/styles', (req, res) => {
+  data.getProductStyles(req.body.productId, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(400);
+      res.send(err);
+    } else {
+      console.log(data);
+      res.status(200);
+      res.send(data);
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log(`listening on ${port}`);
   // console.log('git', key.FEC_Token)

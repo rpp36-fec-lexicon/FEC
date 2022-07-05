@@ -11,7 +11,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 71697,
-      productInfo: null
+      productInfo: undefined,
+      styleInfo: [],
+      defaultStyle: undefined
     };
   }
 
@@ -35,6 +37,22 @@ class App extends React.Component {
       error: (err) => {
         console.log(err);
       }
+    }).then(() => {
+      $.ajax({
+        url: '/products/:product_id/styles',
+        type: 'POST',
+        data: query,
+        success: (styles) => {
+          console.log('THIS IS STYLE DATA', styles);
+          this.setState({
+            styleInfo: styles.results,
+            defaultStyle: styles.results.find((product) => product['default?'] === true || styles.results[0])
+          });
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
     });
   }
 
