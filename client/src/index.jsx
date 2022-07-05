@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import ProductOverview from './components/overview/ProductOverview.jsx';
 import RatingsAndReviews from './components/ratingsAndReviews/RatingsAndReviews.jsx';
-import App_RelatedAndOutfit from "./components/relatedItems/index.jsx";
+import RelatedAndOutfit from "./components/relatedItems/index.jsx";
 import QuestionsAnswersMain from "./components/questionsAndAnswers/components/QuestionsAnswersMain.jsx";
 import $ from 'jquery';
 
@@ -10,8 +10,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 71697
-    }
+      productId: 71697,
+    };
   }
 
   componentDidMount() {
@@ -40,15 +40,12 @@ class App extends React.Component {
         <ProductOverview />
         {/* <RatingsAndReviews /> */}
         {/* <QuestionsAnswersMain productId={this.state.productId}/> */}
-        {/* <App_RelatedAndOutfit /> */}
+        {/* <RelatedAndOutfit prodID={this.state.productId} /> */}
       </div>
     );
   }
 }
 
+ReactDOM.createRoot(document.getElementById("app")).render(<App />);
 
 export default App;
-
-ReactDOM.createRoot(document.getElementById('app')).render(<App />);
-
-
