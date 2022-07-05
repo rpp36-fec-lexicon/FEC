@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import RatingsAndReviews from './components/RatingsAndReviews/RatingsAndReviews.jsx';
-import RelatedAndOutfit from './components/relatedItems/index.jsx';
-import QuestionsAnswersMain from './components/questionsAndAnswers/components/QuestionsAnswersMain.jsx';
+import ProductOverview from './components/overview/ProductOverview.jsx';
+import RatingsAndReviews from './components/ratingsAndReviews/RatingsAndReviews.jsx';
+import RelatedAndOutfit from "./components/relatedItems/index.jsx";
+import QuestionsAnswersMain from "./components/questionsAndAnswers/components/QuestionsAnswersMain.jsx";
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,10 +13,31 @@ class App extends React.Component {
       productId: 71697,
     };
   }
-  render() {
+
+  componentDidMount() {
+    this.updateProduct(this.state.productId);
+  }
+
+  updateProduct(productId) {
+    var query = {productId: productId};
+    $.ajax({
+      url: '/products/:product_id',
+      type: 'POST',
+      data: query,
+      success: (data) => {
+        // console.log(data);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  render () {
     return (
       <div>
         <h1>Atelier</h1>
+        <ProductOverview />
         <RatingsAndReviews />
         <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} />
         <RelatedAndOutfit prodID={this.state.productId} />

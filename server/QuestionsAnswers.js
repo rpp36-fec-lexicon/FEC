@@ -31,10 +31,10 @@ const addQuestion = (question) => {
     },
   })
     .then(() => {
-      console.log('Question was posted');
+      // console.log('Question was posted');
     })
     .catch(() => {
-      console.log('error');
+      // console.log('error');
     });
 };
 
