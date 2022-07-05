@@ -20,6 +20,23 @@ const getProducts = (cb) => {
   });
 }
 
+const getProductInfo = (productId, cb) => {
+  const config ={
+    method: 'GET',
+    url: url + `/products/${productId}`,
+    headers: { 'Authorization': myAPIKey}
+  };
+  axios(config)
+  .then((res) => {
+     cb(null, res.data);
+  })
+  .catch((error) => {
+    console.log('problem with POST product information request');
+    cb(error);
+  });
+}
+
 module.exports= {
-  getProducts
+  getProducts,
+  getProductInfo
 }

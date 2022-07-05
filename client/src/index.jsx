@@ -4,6 +4,7 @@ import ProductOverview from './components/overview/ProductOverview.jsx';
 import RatingsAndReviews from './components/ratingsAndReviews/RatingsAndReviews.jsx';
 import App_RelatedAndOutfit from "./components/relatedItems/index.jsx";
 import QuestionsAnswersMain from "./components/questionsAndAnswers/components/QuestionsAnswersMain.jsx";
+import $ from 'jquery';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,21 +14,33 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.updateProduct(this.state.productId);
+  }
+
+  updateProduct(productId) {
+    var query = {productId: productId};
+    $.ajax({
+      url: '/products/:product_id',
+      type: 'POST',
+      data: query,
+      success: (data) => {
+        console.log(data);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 
   render () {
     return (
       <div>
         <h1>Atelier</h1>
-<<<<<<< HEAD
         <ProductOverview />
         {/* <RatingsAndReviews /> */}
         {/* <QuestionsAnswersMain productId={this.state.productId}/> */}
         {/* <App_RelatedAndOutfit /> */}
-=======
-        <RatingsAndReviews />
-        {/* <QuestionsAnswersMain productId={this.state.productId}/>
-        <App_RelatedAndOutfit /> */}
->>>>>>> 3efd5afc252044e6490de81fb25b93f23e0312fc
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {GrCheckmark} from 'react-icons/gr'
+import {GrCheckmark} from 'react-icons/gr';
 
 const Recommend = () => {
   return (
