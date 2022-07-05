@@ -46,7 +46,7 @@ class App extends React.Component {
           console.log('THIS IS STYLE DATA', styles);
           this.setState({
             styleInfo: styles.results,
-            defaultStyle: styles.results.find((product) => product['default?'] === true || styles.results[0])
+            defaultStyle: styles.results.find((product) => product['default?'] === true)
           });
         },
         error: (err) => {
