@@ -27,7 +27,7 @@ class Checkout extends React.Component {
           <button type="fav" value="fav">Add to Outfits</button>
         </div>
       </div>
-    )
+    );
   }
 }
 

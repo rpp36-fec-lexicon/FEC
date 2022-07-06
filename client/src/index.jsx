@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import ProductOverview from './components/overview/ProductOverview.jsx';
 import RatingsAndReviews from './components/ratingsAndReviews/RatingsAndReviews.jsx';
-import RelatedAndOutfit from "./components/relatedItems/index.jsx";
-import QuestionsAnswersMain from "./components/questionsAndAnswers/components/QuestionsAnswersMain.jsx";
+import RelatedAndOutfit from './components/relatedItems/index.jsx';
+import QuestionsAnswersMain from './components/questionsAndAnswers/components/QuestionsAnswersMain.jsx';
 import $ from 'jquery';
 
 class App extends React.Component {
@@ -11,6 +11,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       productId: 71697,
+      productInfo: undefined,
+      styleInfo: [],
+      defaultStyle: undefined
     };
   }
 
@@ -25,11 +28,31 @@ class App extends React.Component {
       type: 'POST',
       data: query,
       success: (data) => {
-        // console.log(data);
+        console.log('THIS IS MY DATA!', data);
+        this.setState({
+          productId: productId,
+          productInfo: data
+        });
       },
       error: (err) => {
         console.log(err);
       }
+    }).then(() => {
+      $.ajax({
+        url: '/products/:product_id/styles',
+        type: 'POST',
+        data: query,
+        success: (styles) => {
+          console.log('THIS IS STYLE DATA', styles);
+          this.setState({
+            styleInfo: styles.results,
+            defaultStyle: styles.results.find((product) => product['default?'] === true)
+          });
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
     });
   }
 
@@ -37,10 +60,10 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-        <ProductOverview />
-        <RatingsAndReviews />
-        <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} />
-        <RelatedAndOutfit prodID={this.state.productId} />
+        <ProductOverview productInfo={this.state.productInfo}/>
+        {/* <RatingsAndReviews /> */}
+        {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */}
+        {/* <RelatedAndOutfit prodID={this.state.productId} /> */}
       </div>
     );
   }

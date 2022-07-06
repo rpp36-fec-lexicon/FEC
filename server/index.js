@@ -7,7 +7,7 @@ const app = express();
 const myAPIKey = process.env.myAPIKey;
 const data = require('./product.js');
 const port = 3000;
-const baseAPI = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp`;
+const baseAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client/public'));
@@ -61,7 +61,7 @@ app.get('/reviews', (req, res) => {
     })
     .catch(err => {
       res.status(404).send('error fetching reviews');
-    })
+    });
 });
 
 app.get('/reviews/meta', (req, res) => {
@@ -75,7 +75,7 @@ app.get('/reviews/meta', (req, res) => {
     })
     .catch(err => {
       res.status(404).send('error getting meta');
-    })
+    });
 });
 
 /*
@@ -85,11 +85,11 @@ Routes for Questions API
 app.get('/questions', (req, res) => {
   QA.qetQuestionsByProductID(req.query.product_id, cb => {
     res.send(cb);
-  })
-})
+  });
+});
 
 app.post('/questions', (req, res) => {
-  QA.addQuestion(req.body)
+  QA.addQuestion(req.body);
   res.send('question was posted');
 });
 
@@ -98,8 +98,8 @@ app.get('/interaction', (req, res) => {
 });
 
 app.post('/interaction', (req, res) => {
-  const data = req.body
-  QA.interact(data)
+  const data = req.body;
+  QA.interact(data);
   res.send('good');
 });
 /*
@@ -118,7 +118,7 @@ app.get('/products', (req, res) => {
       res.send(data);
     }
   });
-})
+});
 
 app.post('/products/:product_id', (req, res) => {
   // console.log(req.body.productId);
@@ -129,14 +129,28 @@ app.post('/products/:product_id', (req, res) => {
       res.status(400);
       res.send(err);
     } else {
-      // console.log(data);
+      console.log(data);
       res.status(200);
       res.send(data);
     }
   });
-})
+});
+
+app.post('/products/:product_id/styles', (req, res) => {
+  data.getProductStyles(req.body.productId, (err, data) => {
+    if (err) {
+      console.log(err);
+      res.status(400);
+      res.send(err);
+    } else {
+      console.log(data);
+      res.status(200);
+      res.send(data);
+    }
+  });
+});
 
 app.listen(port, () => {
-  console.log(`listening on ${port}`)
+  console.log(`listening on ${port}`);
   // console.log('git', key.FEC_Token)
 });
