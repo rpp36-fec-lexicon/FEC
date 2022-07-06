@@ -21,20 +21,20 @@ const RatingSummary = (props) => {
     recommendedPercent = Math.floor((recommendedTrue/total) * 100);
   }
 
-  const ratings = data.ratings;
-  let totalNumberOfRatings = 0;
-  let totalRatings = 0;
-  let averageRating;
+  // const ratings = data.ratings;
+  // let totalNumberOfRatings = 0;
+  // let totalRatings = 0;
+  // let averageRating;
 
-  if (data.ratings) {
-    for (var key in ratings) {
-      totalNumberOfRatings += parseInt(ratings[key]);
-      totalRatings += (parseInt(key)*parseInt(ratings[key]));
-    }
+  // if (data.ratings) {
+  //   for (var key in ratings) {
+  //     totalNumberOfRatings += parseInt(ratings[key]);
+  //     totalRatings += (parseInt(key)*parseInt(ratings[key]));
+  //   }
 
-    averageRating = totalRatings/totalNumberOfRatings;
-    averageRating = Math.round(10*averageRating)/10;
-  }
+  //   averageRating = totalRatings/totalNumberOfRatings;
+  //   averageRating = Math.round(10*averageRating)/10;
+  // }
 
   return (
     <div>

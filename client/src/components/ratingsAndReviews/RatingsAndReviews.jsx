@@ -10,56 +10,42 @@ class RatingsAndReviews extends React.Component {
     super(props);
     this.state = {
       productId: 71697,
-      reviewData: {},
-      reviews: [],
-      metaData: {}
+      reviewData: null,
+      reviews: null,
+      metaData: null
     };
-    this.sortReviewsFunc = this.sortReviewsFunc.bind(this);
-    this.getAllReviewsFunc = this.getAllReviewsFunc.bind(this);
-    this.ratingSummaryFunc = this.ratingSummaryFunc.bind(this);
+    // this.sortReviewsFunc = this.sortReviewsFunc.bind(this);
+    // this.ratingSummaryFunc = this.ratingSummaryFunc.bind(this);
   }
 
-  componentDidMount() {
-    this.getAllReviewsFunc()
-      .then(response => {
-        const reviewData = response.data;
-        const reviews = response.data.results;
-        this.getAllMetaFunc()
-          .then(response => {
-            const metaData = response.data;
-            this.setState({reviewData: reviewData, reviews: reviews, metaData: metaData});
-          })
-      })
-      .catch(err => {
-        console.log('error getting reviews and metaData', err);
-      })
-  }
+  // componentDidMount() {
+  //   console.log('props', this.props);
+  //   const reviewData = this.props.reviewData;
+  //   const reviews = this.props.reviews;
+  //   const metaData = this.props.metaData;
+  //   const productId = this.props.productId;
+  //   this.setState({productId, reviewData, reviews, metaData});
+  // }
 
-  getAllReviewsFunc() {
-    return axios.get('/reviews', {params: {productId: this.state.productId} });
-  }
 
-  getAllMetaFunc() {
-    return axios.get('/reviews/meta', {params: {productId: this.state.productId} });
-  }
+  // sortReviewsFunc(term) {
 
-  sortReviewsFunc(term) {
+  // }
 
-  }
+  // ratingSummaryFunc() {
 
-  ratingSummaryFunc() {
-
-  }
+  // }
 
 
 
   render() {
+    console.log('props', this.props);
     return (
       <div>
         {/* <RatingSummary metaData={this.state.metaData} reviews={this.state.reviews}/> */}
-        <RatingSummary metaData={sampleMeta} reviews={sampleReviews.results}/>
+        {/* <RatingSummary metaData={sampleMeta} reviews={sampleReviews.results}/> */}
         {/* <ReviewList reviews={this.state.reviews} sortReviewsFunc={this.sortReviewsFunc}/> */}
-        <ReviewList reviews={sampleReviews.results} sortReviewsFunc={this.sortReviewsFunc}/>
+        {/* <ReviewList reviews={sampleReviews.results} sortReviewsFunc={this.sortReviewsFunc}/> */}
       </div>
     );
   }
