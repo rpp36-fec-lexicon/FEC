@@ -1,5 +1,6 @@
 import React from "react";
 import $ from "jquery";
+import Stars from "react-stars-display";
 
 class RelatedCard extends React.Component {
   constructor(props) {
@@ -82,7 +83,10 @@ class RelatedCard extends React.Component {
               </span>
             )}
           </div>
-          <div>start rating</div>
+          <div>
+            {" "}
+            <Stars stars={3.5} />
+          </div>
         </div>
       </div>
     );

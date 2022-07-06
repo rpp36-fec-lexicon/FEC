@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Stars from "react-stars-display";
 
 class OutfitCard extends React.Component {
   constructor(props) {
@@ -84,7 +85,9 @@ class OutfitCard extends React.Component {
             )}
           </div>
 
-          <div>start rating</div>
+          <div>
+            <Stars stars={2} />
+          </div>
         </div>
       </div>
     );
