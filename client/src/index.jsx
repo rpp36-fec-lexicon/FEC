@@ -15,10 +15,10 @@ class App extends React.Component {
       productInfo: undefined,
       styleInfo: [],
       defaultStyle: undefined,
-      reviewData: null,
-      reviews: null,
-      metaData: null,
-      rating: null
+      reviewData: {},
+      reviews: [],
+      metaData: {},
+      rating: 0
     };
   }
 
@@ -39,26 +39,21 @@ class App extends React.Component {
         this.getAllMetaFunc()
           .then(response => {
             const metaData = response.data;
-            // console.log('reviewdata', reviewData);
-            // console.log('reviews', reviews);
-            // console.log('metadata', metaData);
-            this.setState({reviews, reviewData, metaData}, () => {
-              console.log('this.state', this.state);
-              const ratings = this.state.metaData.ratings;
-              let totalNumberOfRatings = 0;
-              let totalRatings = 0;
-              let averageRating;
-              for (var key in ratings) {
-                totalNumberOfRatings += parseInt(ratings[key]);
-                totalRatings += (parseInt(key) * parseInt(ratings[key]));
-              }
+            const ratings = metaData.ratings;
+            let totalNumberOfRatings = 0;
+            let totalRatings = 0;
+            let rating;
+            for (var key in ratings) {
+              totalNumberOfRatings += parseInt(ratings[key]);
+              totalRatings += (parseInt(key) * parseInt(ratings[key]));
+            }
 
-              averageRating = totalRatings / totalNumberOfRatings;
-              averageRating = Math.round(10 * averageRating) / 10;
-              this.setState({rating: averageRating}, () => {
-                console.log('this.state for rating', this.state);
-              });
+            rating = totalRatings / totalNumberOfRatings;
+            rating = Math.round(10 * rating) / 10;
+            this.setState({reviews, reviewData, metaData, rating}, () => {
+              console.log('this.state for rating', this.state);
             });
+
           });
       }).catch(err => {
         console.log('error getting reviews and metaData', err);
@@ -119,10 +114,10 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-        {/* <ProductOverview productInfo={this.state.productInfo} rating={this.state.rating}/>
+        <ProductOverview productInfo={this.state.productInfo} rating={this.state.rating}/>
         <RelatedAndOutfit prodID={this.state.productId} rating={this.state.rating}/>
-        <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */}
-        <RatingsAndReviews productId={this.state.productId} reviewData={this.state.reviewData} reviews={this.state.reviews} metaData={this.state.metaData}/>
+        {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */} */}
+        <RatingsAndReviews productId={this.state.productId} reviewData={this.state.reviewData} reviews={this.state.reviews} metaData={this.state.metaData} rating={this.state.rating}/>
       </div>
     );
   }

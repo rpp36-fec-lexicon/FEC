@@ -9,6 +9,7 @@ class RelatedAndOutfit extends React.Component {
   }
 
   render() {
+    console.log('props in related', this.props);
     return (
       <div>
         <Related prodID={this.props.prodID} />

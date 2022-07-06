@@ -18,7 +18,7 @@ const RatingSummary = (props) => {
     recommendedTrue = parseInt(data.recommended.true);
     recommendedFalse = parseInt(data.recommended.false);
     total = recommendedTrue + recommendedFalse;
-    recommendedPercent = Math.floor((recommendedTrue/total) * 100);
+    recommendedPercent = Math.floor((recommendedTrue / total) * 100);
   }
 
   // const ratings = data.ratings;
@@ -46,7 +46,7 @@ const RatingSummary = (props) => {
       <ProductBreakdown />
     </div>
   );
-}
+};
 
 export default RatingSummary;
 

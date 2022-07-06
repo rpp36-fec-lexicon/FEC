@@ -10,9 +10,9 @@ class RatingsAndReviews extends React.Component {
     super(props);
     this.state = {
       productId: 71697,
-      reviewData: null,
-      reviews: null,
-      metaData: null
+      reviewData: {},
+      reviews: [],
+      metaData: {}
     };
     // this.sortReviewsFunc = this.sortReviewsFunc.bind(this);
     // this.ratingSummaryFunc = this.ratingSummaryFunc.bind(this);
@@ -39,7 +39,7 @@ class RatingsAndReviews extends React.Component {
 
 
   render() {
-    console.log('props', this.props);
+    console.log('props in reviews', this.props);
     return (
       <div>
         {/* <RatingSummary metaData={this.state.metaData} reviews={this.state.reviews}/> */}
