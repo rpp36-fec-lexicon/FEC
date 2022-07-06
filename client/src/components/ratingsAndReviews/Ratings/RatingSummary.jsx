@@ -5,7 +5,9 @@ import ProductBreakdown from './ProductBreakdown.jsx';
 
 const RatingSummary = (props) => {
   const data = props.metaData;
+  const reviews = props.reviews;
   console.log('data', props.metaData);
+  console.log('reviews', props.reviews);
   const recommended = data.recommended;
   let recommendedPercent;
   let recommendedTrue;
@@ -32,7 +34,6 @@ const RatingSummary = (props) => {
 
     averageRating = totalRatings/totalNumberOfRatings;
     averageRating = Math.round(10*averageRating)/10;
-    console.log('averating', averageRating);
   }
 
   return (

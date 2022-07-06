@@ -56,8 +56,8 @@ class RatingsAndReviews extends React.Component {
   render() {
     return (
       <div>
-        {/* <RatingSummary metaData={this.state.metaData}/> */}
-        <RatingSummary metaData={sampleMeta}/>
+        {/* <RatingSummary metaData={this.state.metaData} reviews={this.state.reviews}/> */}
+        <RatingSummary metaData={sampleMeta} reviews={sampleReviews.results}/>
         {/* <ReviewList reviews={this.state.reviews} sortReviewsFunc={this.sortReviewsFunc}/> */}
         <ReviewList reviews={sampleReviews.results} sortReviewsFunc={this.sortReviewsFunc}/>
       </div>
