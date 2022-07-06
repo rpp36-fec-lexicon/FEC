@@ -69,6 +69,7 @@ class OutfitCard extends React.Component {
             {" "}
             <b>{this.props.itemData.itemInfo.name}</b>
           </div>
+
           <div>
             {this.state.defaultSalePrice === null ? (
               `$${this.state.defaultOriginalPrice}`
@@ -82,6 +83,7 @@ class OutfitCard extends React.Component {
               </span>
             )}
           </div>
+
           <div>start rating</div>
         </div>
       </div>
