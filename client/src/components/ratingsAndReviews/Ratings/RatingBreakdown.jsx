@@ -5,7 +5,7 @@ const RatingBreakdown = (props) => {
 
   return (
     <div>
-      <div id="5" onClick={() => { props.filterRatingFunc(document.getElementById('5')) }}>
+      <div>
         <label htmlFor="file">5 stars</label>
         <progress value={props.ratings['5']} max={props.totalNumberOfRatings}></progress>
         ({props.ratings['5']})

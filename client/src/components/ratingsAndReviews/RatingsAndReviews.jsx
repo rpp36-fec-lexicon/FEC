@@ -19,21 +19,21 @@ class RatingsAndReviews extends React.Component {
     this.ratingSummaryFunc = this.ratingSummaryFunc.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.getAllReviewsFunc()
-  //     .then(response => {
-  //       const reviewData = response.data;
-  //       const reviews = response.data.results;
-  //       this.getAllMetaFunc()
-  //         .then(response => {
-  //           const metaData = response.data;
-  //           this.setState({reviewData: reviewData, reviews: reviews, metaData: metaData});
-  //         })
-  //     })
-  //     .catch(err => {
-  //       console.log('error getting reviews and metaData', err);
-  //     })
-  // }
+  componentDidMount() {
+    this.getAllReviewsFunc()
+      .then(response => {
+        const reviewData = response.data;
+        const reviews = response.data.results;
+        this.getAllMetaFunc()
+          .then(response => {
+            const metaData = response.data;
+            this.setState({reviewData: reviewData, reviews: reviews, metaData: metaData});
+          })
+      })
+      .catch(err => {
+        console.log('error getting reviews and metaData', err);
+      })
+  }
 
   getAllReviewsFunc() {
     return axios.get('/reviews', {params: {productId: this.state.productId} });

@@ -61,9 +61,9 @@ class App extends React.Component {
       <div>
         <h1>Atelier</h1>
         <ProductOverview productInfo={this.state.productInfo}/>
-        {/* <RatingsAndReviews /> */}
-        {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */}
-        {/* <RelatedAndOutfit prodID={this.state.productId} /> */}
+        <RelatedAndOutfit prodID={this.state.productId} />
+        <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} />
+        <RatingsAndReviews />
       </div>
     );
   }

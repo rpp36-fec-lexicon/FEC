@@ -5,13 +5,9 @@ import ProductBreakdown from './ProductBreakdown.jsx';
 
 const RatingSummary = (props) => {
   const data = props.metaData;
-<<<<<<< HEAD
   const reviews = props.reviews;
   console.log('data', props.metaData);
   console.log('reviews', props.reviews);
-=======
-  // console.log('data', props.metaData);
->>>>>>> 8878da327f51302620a463ffbcde31a436ace661
   const recommended = data.recommended;
   let recommendedPercent;
   let recommendedTrue;
@@ -38,10 +34,6 @@ const RatingSummary = (props) => {
 
     averageRating = totalRatings/totalNumberOfRatings;
     averageRating = Math.round(10*averageRating)/10;
-<<<<<<< HEAD
-=======
-    // console.log('averating', averageRating);
->>>>>>> 8878da327f51302620a463ffbcde31a436ace661
   }
 
   return (
