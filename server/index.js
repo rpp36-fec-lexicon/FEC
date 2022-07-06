@@ -129,7 +129,7 @@ app.post('/products/:product_id', (req, res) => {
       res.status(400);
       res.send(err);
     } else {
-      console.log(data);
+      // console.log(data);
       res.status(200);
       res.send(data);
     }
@@ -143,7 +143,7 @@ app.post('/products/:product_id/styles', (req, res) => {
       res.status(400);
       res.send(err);
     } else {
-      console.log(data);
+      // console.log(data);
       res.status(200);
       res.send(data);
     }
