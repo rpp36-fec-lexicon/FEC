@@ -1,101 +1,96 @@
 import React from "react";
 import $ from "jquery";
+import Stars from "react-stars-display";
 
 class RelatedCard extends React.Component {
   constructor(props) {
     super(props);
-    // parent 'Related' passes relatedItemID to this child (i.e. RelatedCard)
     this.state = {
-      itemInfo: [],
-      itemStyles: [],
+      defaultOriginalPrice: 0,
+      defaultSalePrice: 0,
+      defaultPhoto: "",
     };
   }
 
   componentDidMount() {
-    $.ajax({
-      type: "GET",
-      url: `/products/${this.props.relatedItemID}`,
-      success: (relatedItemInfo) => {
+    this.props.itemData.itemStyles.results.forEach((styleInfoObj) => {
+      if (styleInfoObj["default?"]) {
         this.setState({
-          itemInfo: relatedItemInfo,
+          defaultOriginalPrice: styleInfoObj.original_price,
+          defaultSalePrice: styleInfoObj.sale_price,
+          defaultPhoto: styleInfoObj.photos[0].url,
         });
-
-        $.ajax({
-          type: "GET",
-          url: `/products/${this.props.relatedItemID}/styles`,
-          success: (relatedItemStyles) => {
-            // console.log("loggin", relatedItemStyles.results[0]);
-            this.setState({
-              itemStyles: relatedItemStyles.results[0],
-            });
-          },
-          error: (err) => {
-            console.log(err);
-          },
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      },
+      }
     });
   }
 
-  // this.state.itemInfo.features // an araay of objs {feature:.. , value: ...}
-  // }
-
   render() {
-    if (this.state.itemStyles.length !== 0) {
-      // console.log("feat", this.state.itemInfo.features);
-      return (
+    return (
+      <div
+        style={{
+          border: "1px solid grey",
+          padding: "15px 15px 15px 15px",
+          margin: "15px 15px 15px 15px",
+        }}
+        onClick={() =>
+          this.props.prodIDChanger(this.props.itemData.itemInfo.id)
+        }
+      >
         <div
           style={{
-            border: "1px solid grey",
-            padding: "15px 15px 15px 15px",
-            margin: "15px 15px 15px 15px",
+            height: "200px",
+            width: "200px",
+            marginBottom: "10px",
+            backgroundImage: `url(${this.state.defaultPhoto})`,
+            // The images which appear on the product card should be the same that appear in the Overview module on the item detail page for that product.
+
+            backgroundSize: "200px 200px",
           }}
         >
-          <div
+          <button
             style={{
-              height: "200px",
-              width: "200px",
-              marginBottom: "10px",
-              backgroundImage: `url(${this.state.itemStyles.photos[0].url})`,
-              backgroundSize: "200px 200px",
+              float: "right",
+              background: "transparent",
+              borderColor: "transparent",
+            }}
+            onClick={() => {
+              this.props.comparison(
+                this.props.itemData.itemInfo.features,
+                this.props.itemData.itemInfo.name
+              );
             }}
           >
-            <button onClick={this.props.comparison}>&#11088;</button>
-          </div>
-
-          <div>
-            <li>{this.state.itemInfo.name}</li>
-            <li>{this.state.itemInfo.category}</li>
-            <li>{this.state.itemInfo.default_price}</li>
-          </div>
-
-          {/* {this.state.itemStyles.map((style, index) => (
-                  <RelatedCardStyle style={style} key={index} />
-                ))} */}
+            &#11088;
+          </button>
         </div>
-      );
-    }
+
+        <div>
+          <div>{this.props.itemData.itemInfo.category}</div>
+          <div>
+            {" "}
+            <b>{this.props.itemData.itemInfo.name}</b>
+          </div>
+          <div>
+            {this.state.defaultSalePrice === null ? (
+              `$${this.state.defaultOriginalPrice}`
+            ) : (
+              <span>
+                <span style={{ color: "red" }}>
+                  {" "}
+                  ${this.state.defaultSalePrice}
+                </span>{" "}
+                <del> ${this.state.defaultOriginalPrice}</del>
+              </span>
+            )}
+          </div>
+          <div>
+            {" "}
+            <Stars stars={3.5} />
+          </div>
+        </div>
+      </div>
+    );
   }
 }
-
-// const RelatedCardStyle = (props) => {
-//   if (props.style.photos[0].url !== null) {
-//     return (
-//       <div
-//       // style={{
-//       //   backgroundImage: `url(${props.style.photos[0].url})`,
-//       // }}
-//       >
-//         <img
-//           style={{ height: "100px", width: "100px" }}
-//           src={`${props.style.photos[0].url}`}
-//         ></img>
-//       </div>
-//     );
-//   }
-// };
 
 export default RelatedCard;
