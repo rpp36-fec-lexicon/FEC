@@ -10,7 +10,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 71697,
+      productId: 71699,
       productInfo: undefined,
       styleInfo: [],
       defaultStyle: undefined
