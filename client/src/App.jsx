@@ -11,7 +11,7 @@ class App extends React.Component {
     // console.log("pp", props);
     super(props);
     this.state = {
-      productId: 72022,
+      productId: 71697,
       productInfo: undefined,
       styleInfo: [],
       defaultStyle: undefined,
@@ -35,7 +35,7 @@ class App extends React.Component {
       type: 'POST',
       data: query,
       success: (data) => {
-        // console.log('THIS IS MY DATA!', data);
+        console.log('THIS IS MY DATA!', data);
         this.setState({
           productId: productId,
           productInfo: data,
@@ -50,13 +50,14 @@ class App extends React.Component {
         type: 'POST',
         data: query,
         success: (styles) => {
-          // console.log('THIS IS STYLE DATA', styles);
+          console.log('THIS IS STYLE DATA', styles);
           this.setState({
             styleInfo: styles.results,
             defaultStyle: styles.results.find(
               (product) => product['default?'] === true
             ),
           });
+          if (this.defaultStyle === undefined) { this.setState({defaultStyle: styles.results[0]}); }
         },
         error: (err) => {
           console.log(err);
@@ -69,7 +70,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-        <ProductOverview productInfo={this.state.productInfo}/>
+        <ProductOverview productInfo={this.state.productInfo} defaultStyle={this.state.defaultStyle}/>
         {/* <RatingsAndReviews /> */}
         {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */}
         {/* <RelatedAndOutfit prodID={this.state.productId} /> */}
