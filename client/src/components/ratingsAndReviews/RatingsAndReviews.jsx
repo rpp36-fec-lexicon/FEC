@@ -13,7 +13,7 @@ class RatingsAndReviews extends React.Component {
       reviewData: {},
       reviews: [],
       metaData: {}
-    }
+    };
     this.sortReviewsFunc = this.sortReviewsFunc.bind(this);
     this.getAllReviewsFunc = this.getAllReviewsFunc.bind(this);
     this.ratingSummaryFunc = this.ratingSummaryFunc.bind(this);
