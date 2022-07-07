@@ -7,38 +7,46 @@ class RelatedAndOutfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      prodInfo: {},
+      // prodId: "",
     };
+    //
+    // console.log("RelatedAndOutfit ID", this.props);
   }
   componentDidMount() {
+    // this.setState({
+    //   prodId: this.props.prodID,
+    // });
     // console.log("RelatedAndOutfit", this.props.prodID);
-
-    $.ajax({
-      type: "GET",
-      url: `/products/${this.props.prodID}`,
-      success: (prodInfo) => {
-        // console.log("main prod", prodInfo.id); // {id, name, category, features...}
-        this.setState({
-          prodInfo: prodInfo,
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    // $.ajax({
+    //   type: "GET",
+    //   url: `/products/${this.props.prodID}`,
+    //   success: (prodInfo) => {
+    //     // console.log("main prod", prodInfo.id); // {id, name, category, features...}
+    //     this.setState({
+    //       prodInfo: prodInfo,
+    //     });
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   },
+    // });
   }
 
   render() {
-<<<<<<< HEAD
+
     console.log('props in related', this.props);
-=======
+
     // console.log("cons", this.props.prodID);
->>>>>>> 6eb2051e2f8a73f668c63237d4b00314c902b278
+
+
+    // console.log("RelatedAndOutfit ID", this.props.prodID);
+
     return (
       <div>
         <Related
           prodID={this.props.prodID}
-          prodInfo={this.state.prodInfo}
+          // prodInfo={this.state.prodInfo}
+          prodInfo={this.props.prodInfo}
           prodIDChanger={this.props.prodIDChanger}
         />
         <br></br>
@@ -46,7 +54,7 @@ class RelatedAndOutfit extends React.Component {
         <br></br>
         <Outfit
           prodID={this.props.prodID}
-          prodInfo={this.state.prodInfo}
+          prodInfo={this.props.prodInfo}
           // prodIDChanger={this.props.prodIDChanger}
         />
         <br></br>
