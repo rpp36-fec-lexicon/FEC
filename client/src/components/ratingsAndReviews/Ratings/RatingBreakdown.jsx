@@ -1,7 +1,8 @@
 import React from 'react';
 
 const RatingBreakdown = (props) => {
-  console.log('props.ratings', props.ratings);
+  console.log('props.ratings in rating breakdown', props.ratings);
+  console.log('props.totalNumOfratings in breakdown', props.totalNumberOfRatings);
 
   return (
     <div>
@@ -37,6 +38,6 @@ const RatingBreakdown = (props) => {
 
     </div>
   );
-}
+};
 
 export default RatingBreakdown;

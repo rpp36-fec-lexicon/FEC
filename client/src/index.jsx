@@ -15,10 +15,11 @@ class App extends React.Component {
       productInfo: undefined,
       styleInfo: [],
       defaultStyle: undefined,
-      reviewData: {},
-      reviews: [],
-      metaData: {},
-      rating: 0
+      reviewData: null,
+      reviews: null,
+      metaData: null,
+      rating: null,
+      totalNumberOfRatings: null
     };
   }
 
@@ -50,8 +51,8 @@ class App extends React.Component {
 
             rating = totalRatings / totalNumberOfRatings;
             rating = Math.round(10 * rating) / 10;
-            this.setState({reviews, reviewData, metaData, rating}, () => {
-              console.log('this.state for rating', this.state);
+            this.setState({reviews, reviewData, metaData, rating, totalNumberOfRatings}, () => {
+              console.log('this.state', this.state);
             });
 
           });
@@ -114,10 +115,10 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-        <ProductOverview productInfo={this.state.productInfo} rating={this.state.rating}/>
-        <RelatedAndOutfit prodID={this.state.productId} rating={this.state.rating}/>
-        {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */} */}
-        <RatingsAndReviews productId={this.state.productId} reviewData={this.state.reviewData} reviews={this.state.reviews} metaData={this.state.metaData} rating={this.state.rating}/>
+        {/* <ProductOverview productInfo={this.state.productInfo} rating={this.state.rating}/> */}
+        {/* <RelatedAndOutfit prodID={this.state.productId} rating={this.state.rating}/> */}
+        {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */}
+        <RatingsAndReviews productId={this.state.productId} reviewData={this.state.reviewData} reviews={this.state.reviews} metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings}/>
       </div>
     );
   }

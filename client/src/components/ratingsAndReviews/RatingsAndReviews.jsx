@@ -3,16 +3,15 @@ import ReviewList from './Reviews/ReviewList.jsx';
 import RatingSummary from './Ratings/RatingSummary.jsx';
 const sampleReviews = require('./sampleReviews.js').sampleReviews;
 const sampleMeta = require('./sampleMeta.js').sampleMeta;
+const samepleRating = require('./sampleMeta.js').rating;
+const sampleTotalNumberOfRatings = require('./sampleMeta.js').totalNumberOfRatings;
 const axios = require('axios');
 
 class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 71697,
-      reviewData: {},
-      reviews: [],
-      metaData: {}
+      productId: 71697
     };
     // this.sortReviewsFunc = this.sortReviewsFunc.bind(this);
     // this.ratingSummaryFunc = this.ratingSummaryFunc.bind(this);
@@ -40,14 +39,17 @@ class RatingsAndReviews extends React.Component {
 
   render() {
     console.log('props in reviews', this.props);
-    return (
-      <div>
-        {/* <RatingSummary metaData={this.state.metaData} reviews={this.state.reviews}/> */}
-        {/* <RatingSummary metaData={sampleMeta} reviews={sampleReviews.results}/> */}
-        {/* <ReviewList reviews={this.state.reviews} sortReviewsFunc={this.sortReviewsFunc}/> */}
-        {/* <ReviewList reviews={sampleReviews.results} sortReviewsFunc={this.sortReviewsFunc}/> */}
-      </div>
-    );
+    if (this.props.reviewData !== null) {
+      return (
+        <div>
+          <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings}/>
+          {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings}/> */}
+          <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} sortReviewsFunc={this.sortReviewsFunc}/>
+          {/* <ReviewList reviewData={sampleReviews} reviews={sampleReviews.results} sortReviewsFunc={this.sortReviewsFunc}/> */}
+        </div>
+      );
+    }
+
   }
 }
 
