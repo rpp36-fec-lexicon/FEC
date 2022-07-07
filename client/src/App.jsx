@@ -11,7 +11,7 @@ class App extends React.Component {
     // console.log("pp", props);
     super(props);
     this.state = {
-      productId: 72022,
+      productId: 72021, // NEW PROD ID FOR TEST WED IN CLASS
       productInfo: undefined,
       styleInfo: [],
       defaultStyle: undefined,
@@ -22,10 +22,7 @@ class App extends React.Component {
   }
 
   prodIDChanger(relatedID) {
-    // console.log("relatedID ", relatedID);
-    // this.setState({
-    //   productId: relatedID,
-    // });
+    this.updateProduct(relatedID);
   }
 
   updateProduct(productId) {
@@ -35,7 +32,7 @@ class App extends React.Component {
       type: "POST",
       data: query,
       success: (data) => {
-        // console.log('THIS IS MY DATA!', data);
+        // console.log("THIS IS MY DATA!", data);
         this.setState({
           productId: productId,
           productInfo: data,
@@ -50,7 +47,7 @@ class App extends React.Component {
         type: "POST",
         data: query,
         success: (styles) => {
-          // console.log('THIS IS STYLE DATA', styles);
+          // console.log("THIS IS STYLE DATA", styles);
           this.setState({
             styleInfo: styles.results,
             defaultStyle: styles.results.find(
@@ -66,6 +63,7 @@ class App extends React.Component {
   }
 
   render() {
+    // console.log("app rend", this.state.productId);
     return (
       <div>
         <h1>Atelier</h1>
@@ -75,6 +73,7 @@ class App extends React.Component {
         {/* <RelatedAndOutfit prodID={this.state.productId} /> */}
         <RelatedAndOutfit
           prodID={this.state.productId}
+          prodInfo={this.state.productInfo}
           prodIDChanger={this.prodIDChanger.bind(this)}
         />
       </div>
