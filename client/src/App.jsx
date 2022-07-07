@@ -11,7 +11,7 @@ class App extends React.Component {
     // console.log("pp", props);
     super(props);
     this.state = {
-      productId: 72022,
+      productId: 71697,
       productInfo: undefined,
       styleInfo: [],
       defaultStyle: undefined,
@@ -69,10 +69,9 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-        {/* <ProductOverview productInfo={this.state.productInfo}/> */}
-        {/* <RatingsAndReviews /> */}
-        {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */}
-        {/* <RelatedAndOutfit prodID={this.state.productId} /> */}
+        <ProductOverview productInfo={this.state.productInfo}/>
+        <RatingsAndReviews />
+        <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} />
         <RelatedAndOutfit
           prodID={this.state.productId}
           prodIDChanger={this.prodIDChanger.bind(this)}
