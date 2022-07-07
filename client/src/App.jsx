@@ -22,10 +22,7 @@ class App extends React.Component {
   }
 
   prodIDChanger(relatedID) {
-    // console.log("relatedID ", relatedID);
-    // this.setState({
-    //   productId: relatedID,
-    // });
+    this.updateProduct(relatedID);
   }
 
   updateProduct(productId) {
@@ -67,6 +64,7 @@ class App extends React.Component {
   }
 
   render() {
+    // console.log("app rend", this.state.productId);
     return (
       <div>
         <h1>Atelier</h1>
@@ -76,6 +74,7 @@ class App extends React.Component {
         {/* <RelatedAndOutfit prodID={this.state.productId} /> */}
         {/* <RelatedAndOutfit
           prodID={this.state.productId}
+          prodInfo={this.state.productInfo}
           prodIDChanger={this.prodIDChanger.bind(this)}
         /> */}
       </div>
