@@ -70,7 +70,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-        <ProductOverview productInfo={this.state.productInfo} defaultStyle={this.state.defaultStyle}/>
+        <ProductOverview productInfo={this.state.productInfo} defaultStyle={this.state.defaultStyle} styleList={this.state.styleInfo}/>
         {/* <RatingsAndReviews /> */}
         {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */}
         {/* <RelatedAndOutfit prodID={this.state.productId} /> */}

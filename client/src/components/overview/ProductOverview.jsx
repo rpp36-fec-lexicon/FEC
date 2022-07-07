@@ -29,9 +29,9 @@ class ProductOverview extends React.Component {
           {/* <PrimaryImage /> */}
           {/* <Checkout /> */}
           {/* <ProductDescription slogan={this.props.productInfo.slogan} description={this.props.productInfo.description} features={this.props.productInfo.features}/> */}
-          <ProductInformation category={this.props.productInfo.category} name={this.props.productInfo.name}
-            price={this.props.defaultStyle.original_price} salePrice={this.props.defaultStyle.sale_price}/>
-          {/* <SelectStyle /> */}
+          {/* <ProductInformation category={this.props.productInfo.category} name={this.props.productInfo.name}
+            price={this.props.defaultStyle.original_price} salePrice={this.props.defaultStyle.sale_price}/> */}
+          <SelectStyle />
         </div>
       );
     }
