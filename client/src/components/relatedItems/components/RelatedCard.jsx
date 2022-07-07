@@ -42,8 +42,6 @@ class RelatedCard extends React.Component {
             width: "200px",
             marginBottom: "10px",
             backgroundImage: `url(${this.state.defaultPhoto})`,
-            // The images which appear on the product card should be the same that appear in the Overview module on the item detail page for that product.
-
             backgroundSize: "200px 200px",
           }}
         >
