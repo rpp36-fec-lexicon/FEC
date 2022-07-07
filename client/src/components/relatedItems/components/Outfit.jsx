@@ -8,48 +8,22 @@ class Outfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemInfoAndStyle: [],
-      modalSeen: false,
-      relatedProdFeat: [],
-      relatedProdName: "",
+      outfitItems: [],
+      prodInfo: "",
+      // modalSeen: false,
+      // relatedProdFeat: [],
+      // relatedProdName: "",
     };
   }
 
   componentDidMount() {
     $.ajax({
       type: "GET",
-      url: `/products/${this.props.prodID}/related`,
-
-      success: (arrayOfProdIDs) => {
-        var relatedItemData = [];
-
-        arrayOfProdIDs.forEach((itemID) => {
-          $.ajax({
-            type: "GET",
-            url: `/products/${itemID}`,
-            success: (relatedItemInfo) => {
-              $.ajax({
-                type: "GET",
-                url: `/products/${itemID}/styles`,
-                success: (relatedItemStyles) => {
-                  relatedItemData.push({
-                    itemInfo: relatedItemInfo,
-                    itemStyles: relatedItemStyles,
-                  });
-
-                  this.setState({
-                    itemInfoAndStyle: relatedItemData,
-                  });
-                },
-                error: (err) => {
-                  console.log(err);
-                },
-              });
-            },
-            error: (err) => {
-              console.log(err);
-            },
-          });
+      url: `/products/${this.props.prodID}`,
+      success: (prodInfo) => {
+        // console.log("main prod", prodInfo.id); // {id, name, category, features...}
+        this.setState({
+          prodInfo: prodInfo,
         });
       },
       error: (err) => {
@@ -57,7 +31,15 @@ class Outfit extends React.Component {
       },
     });
   }
+  outfitAdder() {
+    // console.log("h", this.props.prodInfo);
 
+    // if (this.state.outfitItems) { // if doesn't contain prodInfo, add, else dont
+    // }
+    this.setState({
+      outfitItems: this.state.prodInfo,
+    });
+  }
   // comparison(relatedProdFeat, relatedProdName) {
   //   this.setState({
   //     modalSeen: !this.state.modalSeen,
@@ -67,7 +49,7 @@ class Outfit extends React.Component {
   // }
 
   render() {
-    // console.log("infoAndstyle", this.state.itemInfoAndStyle);
+    // console.log("outfitItems", this.state.outfitItems);
     return (
       <div>
         {" "}
@@ -92,6 +74,10 @@ class Outfit extends React.Component {
                 width: "100%",
                 fontSize: "15px",
               }}
+              // should only add a prod once to list.
+              onClick={() => {
+                this.outfitAdder();
+              }}
             >
               <span>
                 [&#x2B;] <br></br>
@@ -101,7 +87,7 @@ class Outfit extends React.Component {
           </div>
 
           <div className="flex-child">
-            <Flickity
+            {/* <Flickity
               options={{
                 cellAlign: "left",
                 contain: true,
@@ -115,7 +101,7 @@ class Outfit extends React.Component {
                   key={index}
                 />
               ))}
-            </Flickity>
+            </Flickity> */}
           </div>
         </div>
       </div>
