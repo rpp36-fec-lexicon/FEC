@@ -1,51 +1,57 @@
 import React from 'react';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RatingSummary from './Ratings/RatingSummary.jsx';
-const sampleReviews = require('./sampleReviews.js').sampleReviews;
-const sampleMeta = require('./sampleMeta.js').sampleMeta;
-const samepleRating = require('./sampleMeta.js').rating;
-const sampleTotalNumberOfRatings = require('./sampleMeta.js').totalNumberOfRatings;
+const sampleReviews = require('./sampleData/sampleReviews.js').sampleReviews;
+const sampleMeta = require('./sampleData/sampleMeta.js').sampleMeta;
+const samepleRating = require('./sampleData/sampleMeta.js').rating;
+const sampleTotalNumberOfRatings = require('./sampleData/sampleMeta.js').totalNumberOfRatings;
 const axios = require('axios');
 
 class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 71697
+      productId: 71697,
+      reviews: [],
+      filterRatingClickCount: 0,
+      star5: false,
+      star4: false,
+      star3: false,
+      star2: false,
+      star1: false
     };
-    // this.sortReviewsFunc = this.sortReviewsFunc.bind(this);
-    // this.ratingSummaryFunc = this.ratingSummaryFunc.bind(this);
+    this.filterRating = this.filterRating.bind(this);
   }
 
-  // componentDidMount() {
-  //   console.log('props', this.props);
-  //   const reviewData = this.props.reviewData;
-  //   const reviews = this.props.reviews;
-  //   const metaData = this.props.metaData;
-  //   const productId = this.props.productId;
-  //   this.setState({productId, reviewData, reviews, metaData});
-  // }
+  filterRating(starRating) {
+    const reviews = this.props.reviews;
+    if (this.state['star' + starRating]) {
 
+    }
 
-  // sortReviewsFunc(term) {
+    // if (!this.state.filterRatingClickCount) {
+    //   reviews.forEach(review => {
+    //     if (review.rating === starRating) {
+    //       this.state.filteredReviews.push(review);
+    //     }
+    //   });
+    // }
+  }
 
-  // }
-
-  // ratingSummaryFunc() {
-
-  // }
-
-
+  componentDidMount() {
+    const reviews = this.props.reviews;
+    this.setState({reviews});
+  }
 
   render() {
     console.log('props in reviews', this.props);
     if (this.props.reviewData !== null) {
       return (
         <div>
-          <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings}/>
+          <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/>
           {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings}/> */}
-          <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} sortReviewsFunc={this.sortReviewsFunc}/>
-          {/* <ReviewList reviewData={sampleReviews} reviews={sampleReviews.results} sortReviewsFunc={this.sortReviewsFunc}/> */}
+          <ReviewList reviewData={this.props.reviewData} reviews={this.state.reviews} />
+          {/* <ReviewList reviewData={sampleReviews} reviews={sampleReviews.results} /> */}
         </div>
       );
     }

@@ -25,7 +25,7 @@ const RatingSummary = (props) => {
       <h1>{props.rating}</h1>
       <Stars stars={props.rating}/>
       <div>{recommendedPercent}% of reviews recommend this product</div>
-      <RatingBreakdown ratings={props.metaData.ratings} totalNumberOfRatings={props.totalNumberOfRatings}/>
+      <RatingBreakdown ratings={props.metaData.ratings} totalNumberOfRatings={props.totalNumberOfRatings} filterRating={props.filterRating}/>
       <ProductBreakdown />
     </div>
   );
