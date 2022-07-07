@@ -125,8 +125,8 @@ class QuestionsAnswersMain extends React.Component {
         </div>
         <div>
           <QuestionsAnswersList
-          questions = {this.state.questions}
-          key={this.state.questions.question_id}
+            questions = {this.state.questions}
+            key={this.state.questions.question_id}
           />
         </div>
         <br/>
