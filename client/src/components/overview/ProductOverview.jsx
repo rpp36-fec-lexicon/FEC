@@ -15,6 +15,7 @@ class ProductOverview extends React.Component {
       styles: [],
       selectedStyle: undefined,
       selectedPhoto: '',
+      rating: 0
     };
     this.selectedStyle = this.selectedStyle.bind(this);
     this.changeStyle = this.changeStyle.bind(this);
