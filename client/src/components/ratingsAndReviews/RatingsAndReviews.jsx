@@ -1,8 +1,10 @@
 import React from 'react';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RatingSummary from './Ratings/RatingSummary.jsx';
-const sampleReviews = require('./sampleReviews.js').sampleReviews;
-const sampleMeta = require('./sampleMeta.js').sampleMeta;
+const sampleReviews = require('./sampleData/sampleReviews.js').sampleReviews;
+const sampleMeta = require('./sampleData/sampleMeta.js').sampleMeta;
+const samepleRating = require('./sampleData/sampleMeta.js').rating;
+const sampleTotalNumberOfRatings = require('./sampleData/sampleMeta.js').totalNumberOfRatings;
 const axios = require('axios');
 
 class RatingsAndReviews extends React.Component {
@@ -10,58 +12,61 @@ class RatingsAndReviews extends React.Component {
     super(props);
     this.state = {
       productId: 71697,
-      reviewData: {},
       reviews: [],
-      metaData: {}
+      filterRatingClickCount: 0,
+      star5: false,
+      star4: false,
+      star3: false,
+      star2: false,
+      star1: false
+    };
+    this.filterRating = this.filterRating.bind(this);
+  }
+
+  filterRating(starRating) {
+    const reviews = this.props.reviews;
+    if (this.state['star' + starRating]) {
+
     }
-    this.sortReviewsFunc = this.sortReviewsFunc.bind(this);
-    this.getAllReviewsFunc = this.getAllReviewsFunc.bind(this);
-    this.ratingSummaryFunc = this.ratingSummaryFunc.bind(this);
+
+    // if (!this.state.filterRatingClickCount) {
+    //   reviews.forEach(review => {
+    //     if (review.rating === starRating) {
+    //       this.state.filteredReviews.push(review);
+    //     }
+    //   });
+    // }
   }
 
   // componentDidMount() {
-  //   this.getAllReviewsFunc()
-  //     .then(response => {
-  //       const reviewData = response.data;
-  //       const reviews = response.data.results;
-  //       this.getAllMetaFunc()
-  //         .then(response => {
-  //           const metaData = response.data;
-  //           this.setState({reviewData: reviewData, reviews: reviews, metaData: metaData});
-  //         })
-  //     })
-  //     .catch(err => {
-  //       console.log('error getting reviews and metaData', err);
-  //     })
+  //   const reviews = this.props.reviews;
+  //   this.setState({reviews});
   // }
 
-  getAllReviewsFunc() {
-    return axios.get('/reviews', {params: {productId: this.state.productId} });
-  }
-
-  getAllMetaFunc() {
-    return axios.get('/reviews/meta', {params: {productId: this.state.productId} });
-  }
-
-  sortReviewsFunc(term) {
-
-  }
-
-  ratingSummaryFunc() {
-
-  }
-
-
-
   render() {
-    return (
-      <div>
-        {/* <RatingSummary metaData={this.state.metaData}/> */}
-        <RatingSummary metaData={sampleMeta}/>
-        {/* <ReviewList reviews={this.state.reviews} sortReviewsFunc={this.sortReviewsFunc}/> */}
-        <ReviewList reviews={sampleReviews.results} sortReviewsFunc={this.sortReviewsFunc}/>
-      </div>
-    );
+    console.log('props in ratingsreviews', this.props);
+    if (this.props.reviews !== null) {
+      return (
+        <div className="content-container">
+          <div className="row">
+            <div className="left-panel box">
+              <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/>
+            </div>
+            <div className="right-panel box">
+              <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} />
+            </div>
+          </div>
+        </div>
+
+        // <div>
+        //   <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/>
+        //   {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings}/> */}
+        //   <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} />
+        //   {/* <ReviewList reviewData={sampleReviews} reviews={sampleReviews.results} /> */}
+        // </div>
+      );
+    }
+
   }
 }
 

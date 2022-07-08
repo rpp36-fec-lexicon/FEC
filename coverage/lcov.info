@@ -1,4 +1,5 @@
 TN:
+<<<<<<< HEAD
 SF:client/src/App.jsx
 FN:10,(anonymous_0)
 FN:65,(anonymous_1)
@@ -120,6 +121,8 @@ BRF:0
 BRH:0
 end_of_record
 TN:
+=======
+>>>>>>> 2e4a7f682b5de91118f77d6d59261b59574a39c0
 SF:client/src/components/questionsAndAnswers/components/Interact.jsx
 FN:3,(anonymous_0)
 FN:8,(anonymous_1)
@@ -161,6 +164,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
+<<<<<<< HEAD
 SF:client/src/components/questionsAndAnswers/components/QuestionsAnswersMain.jsx
 FN:10,(anonymous_0)
 FN:26,(anonymous_1)
@@ -242,6 +246,8 @@ BRF:4
 BRH:0
 end_of_record
 TN:
+=======
+>>>>>>> 2e4a7f682b5de91118f77d6d59261b59574a39c0
 SF:client/src/components/questionsAndAnswers/components/QuestionsListEntry.jsx
 FN:3,(anonymous_0)
 FNF:1
@@ -296,6 +302,7 @@ LH:2
 BRF:0
 BRH:0
 end_of_record
+<<<<<<< HEAD
 TN:
 SF:client/src/components/ratingsAndReviews/RatingsAndReviews.jsx
 FN:9,(anonymous_0)
@@ -796,3 +803,5 @@ BRDA:72,1,1,0
 BRF:4
 BRH:0
 end_of_record
+=======
+>>>>>>> 2e4a7f682b5de91118f77d6d59261b59574a39c0
