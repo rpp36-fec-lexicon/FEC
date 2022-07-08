@@ -4,14 +4,11 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
 const RatingSummary = (props) => {
-  console.log('props in rating summary', props);
-
   const recommended = props.metaData.recommended;
   let recommendedPercent;
   let recommendedTrue;
   let recommendedFalse;
   let total;
-
 
   recommendedTrue = parseInt(props.metaData.recommended.true);
   recommendedFalse = parseInt(props.metaData.recommended.false);

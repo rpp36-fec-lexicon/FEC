@@ -27,25 +27,11 @@ class RatingsAndReviews extends React.Component {
   filterRating(starRating) {
     const reviews = this.props.reviews;
     if (this.state['star' + starRating]) {
-
     }
-
-    // if (!this.state.filterRatingClickCount) {
-    //   reviews.forEach(review => {
-    //     if (review.rating === starRating) {
-    //       this.state.filteredReviews.push(review);
-    //     }
-    //   });
-    // }
   }
 
-  // componentDidMount() {
-  //   const reviews = this.props.reviews;
-  //   this.setState({reviews});
-  // }
-
   render() {
-    console.log('props in ratingsreviews', this.props);
+    console.log('props in ratingsreview', this.props);
     if (this.props.reviews !== null) {
       return (
         <div className="content-container">

@@ -36,7 +36,7 @@ class ReviewList extends React.Component {
       this.state.endReviewIndex += 2;
     }
 
-    this.setState({reviewsShowing}, () => { console.log(this.state.endReviewIndex); });
+    this.setState({reviewsShowing});
   }
 
   render() {
