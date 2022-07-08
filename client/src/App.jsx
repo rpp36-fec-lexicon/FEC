@@ -11,7 +11,7 @@ class App extends React.Component {
     // console.log("pp", props);
     super(props);
     this.state = {
-      productId: 71699,
+      productId: 71697,
       productInfo: undefined,
       styleInfo: [],
       defaultStyle: undefined,
