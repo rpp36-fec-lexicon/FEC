@@ -14,10 +14,12 @@ class ProductOverview extends React.Component {
       style: [],
       selectedStyle: '',
       selectedPhoto: '',
+      rating: 0
     };
   }
   componentDidMount() {
     // this.getProducts();
+
   }
 
   // getProducts() {
@@ -34,7 +36,8 @@ class ProductOverview extends React.Component {
   // }
 
   render() {
-    console.log(this.props.productInfo);
+    // console.log(this.props.productInfo);
+    console.log('props in overview', this.props);
     if (this.props.productInfo) {
       return (
         <div>
