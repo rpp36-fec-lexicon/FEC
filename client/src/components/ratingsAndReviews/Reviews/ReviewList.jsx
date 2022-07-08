@@ -60,10 +60,13 @@ class ReviewList extends React.Component {
             </select>
           </div>
 
-          {this.state.reviewsShowing.map(review => {
-            return <ReviewItem review={review} key={review['review_id']}/>;
-          })}
-          <br></br>
+          <div className="scrollable">
+            {this.state.reviewsShowing.map(review => {
+              return <ReviewItem review={review} key={review['review_id']}/>;
+            })}
+            <br></br>
+          </div>
+
           <div style={sameLineStyle}>{moreReviewsButton}</div>
           <button style={sameLineStyle} id="addReview">ADD A REVIEW  +</button>
         </div>
