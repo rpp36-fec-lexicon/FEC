@@ -48,7 +48,7 @@ class ProductOverview extends React.Component {
 
   render() {
     console.log(this.props.productInfo);
-    if (this.props.productInfo && this.props.defaultStyle) {
+    if (this.props.productInfo && this.props.defaultStyle && this.props.rating) {
       console.log('this is the current style ', this.state.selectedStyle);
       return (
         <div>
@@ -58,14 +58,14 @@ class ProductOverview extends React.Component {
               <Showcase id={this.state.selectedStyle.style_id} photos={this.state.selectedStyle.photos} currentPhoto={this.changePhoto}/>
               <Checkout id={this.state.selectedStyle.style_id} skus={this.state.selectedStyle.skus}/>
               <ProductInformation category={this.props.productInfo.category} name={this.props.productInfo.name}
-                price={this.state.selectedStyle.original_price} salePrice={this.state.selectedStyle.sale_price}/>
+                price={this.state.selectedStyle.original_price} salePrice={this.state.selectedStyle.sale_price} rating={this.props.rating}/>
               <SelectStyle styles={this.props.styleList} changeStyle={this.changeStyle} selectedStyle={this.state.selectedStyle}/>
             </div> :
             <div>
               <Showcase id={this.props.defaultStyle.style_id} photos={this.props.defaultStyle.photos} currentPhoto={this.changePhoto}/>
               <Checkout id={this.props.defaultStyle.style_id} skus={this.props.defaultStyle.skus}/>
               <ProductInformation category={this.props.productInfo.category} name={this.props.productInfo.name}
-                price={this.props.defaultStyle.original_price} salePrice={this.props.defaultStyle.sale_price}/>
+                price={this.props.defaultStyle.original_price} salePrice={this.props.defaultStyle.sale_price} rating={this.props.rating}/>
               <SelectStyle styles={this.props.styleList} changeStyle={this.changeStyle} selectedStyle={this.props.defaultStyle}/>
             </div>
           }

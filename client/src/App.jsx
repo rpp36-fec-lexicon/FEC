@@ -20,7 +20,7 @@ class App extends React.Component {
       metaData: null,
       rating: null,
       totalNumberOfRatings: null
-    }
+    };
   }
 
   getAllReviewsFunc() {
@@ -32,7 +32,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // this.updateProduct(this.state.productId);
+    this.updateProduct(this.state.productId);
     this.getAllReviewsFunc()
       .then(response => {
         const reviewData = response.data;
@@ -123,10 +123,10 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-        <ProductOverview productInfo={this.state.productInfo} defaultStyle={this.state.defaultStyle} styleList={this.state.styleInfo}/>
+        <ProductOverview productInfo={this.state.productInfo} defaultStyle={this.state.defaultStyle} styleList={this.state.styleInfo} rating={this.state.rating}/>
         {/* <RelatedAndOutfit prodID={this.state.productId} rating={this.state.rating}/> */}
         {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */}
-        <RatingsAndReviews productId={this.state.productId} reviewData={this.state.reviewData} reviews={this.state.reviews} metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} />
+        {/* <RatingsAndReviews productId={this.state.productId} reviewData={this.state.reviewData} reviews={this.state.reviews} metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} /> */}
         {/* <RelatedAndOutfit prodID={this.state.productId} /> */}
         {/* <RelatedAndOutfit
           prodID={this.state.productId}

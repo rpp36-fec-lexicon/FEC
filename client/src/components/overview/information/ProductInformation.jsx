@@ -10,7 +10,7 @@ class ProductInformation extends React.Component {
   render() {
     return (
       <div>
-        <h4> Review stuff here</h4>
+        <h4> STARS: {this.props.rating} </h4>
         <h3> {this.props.category} </h3>
         <h2> {this.props.name} </h2>
         {this.props.salePrice !== null ?
