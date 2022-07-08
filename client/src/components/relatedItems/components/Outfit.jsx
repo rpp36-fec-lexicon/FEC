@@ -91,6 +91,7 @@ class Outfit extends React.Component {
               options={{
                 cellAlign: "left",
                 contain: true,
+                pageDots: false,
               }}
             >
               {this.state.itemInfoAndStyle.map((itemData, index) => (

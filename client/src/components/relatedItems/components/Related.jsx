@@ -82,7 +82,7 @@ class Related extends React.Component {
           <br></br>
           <br></br>
           <br></br>
-          Related Products:
+          <h4>Related Products:</h4>
           <div>
             {" "}
             {this.state.modalSeen ? (
@@ -106,6 +106,7 @@ class Related extends React.Component {
               options={{
                 cellAlign: "left",
                 contain: true,
+                pageDots: false,
               }}
             >
               {this.state.itemInfoAndStyle.map((itemData, index) => (

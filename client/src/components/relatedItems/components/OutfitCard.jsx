@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Stars from "react-stars-display";
+// import Stars from "react-stars-display";
 
 class OutfitCard extends React.Component {
   constructor(props) {
@@ -85,9 +85,7 @@ class OutfitCard extends React.Component {
             )}
           </div>
 
-          <div>
-            <Stars stars={2} />
-          </div>
+          <div>{/* <Stars stars={2} /> */}</div>
         </div>
       </div>
     );

@@ -36,6 +36,7 @@ class RelatedAndOutfit extends React.Component {
     // console.log("RelatedAndOutfit ID", this.props.prodID);
     return (
       <div>
+        vvv
         <Related
           prodID={this.props.prodID}
           // prodInfo={this.state.prodInfo}

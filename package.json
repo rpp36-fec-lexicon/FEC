@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "webpack": "webpack --mode development --watch",
-    "test": " jest --coverage",
+    "test": "jest --coverage",
     "lint": "eslint ./"
   },
   "repository": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/AdilovM/FEC#readme",
   "dependencies": {
+    "@testing-library/react": "^13.3.0",
     "axios": "^0.27.2",
     "body-parser": "^1.20.0",
     "chai": "^4.3.6",
@@ -30,17 +31,18 @@
     "express": "^4.18.1",
     "flickity": "^2.3.0",
     "jest": "^28.1.2",
+    "jest-environment-jsdom": "^28.1.2",
     "jquery": "^3.6.0",
     "mocha": "^10.0.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.5",
     "react-flickity-component": "^3.6.2",
     "react-icons": "^4.4.0",
     "react-native-star-rating-bar-graph": "^1.0.0",
-    "react-stars-display": "^0.1.24"
+    "react-stars-display": "^0.1.24",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",

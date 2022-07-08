@@ -1,13 +1,17 @@
-// const Related = require('/Users/filimonkiros/HackReactor/RPP36/Weeks_Jun20_Jul30/FEC/client/src/components/relatedItems/components/Related.jsx')
+import React from 'react';
+import App from './App.jsx';
+import {render, screen} from '@testing-library/react';
+import '@testing-library/jest-dom'
 
-describe('Functionality of Related component', () => {
-  test('Get product ID from parent component', () => {
-    // const Item = new Related ()
-    // console.log('ite', Item.state)
-    expect('a').toEqual('a')
-  })
+test('dummy test to check if jest works', () => {
+    expect(true).toBe(true);
+  });
+
+test('renders word Atelier', () => {
+  render(<App />);
+  const divElement = screen.getByText('Atelier');
+  expect(divElement).toBeInTheDocument();
 });
-
 /*
 TESTING REQUIREMENTS
 -------------------------------
