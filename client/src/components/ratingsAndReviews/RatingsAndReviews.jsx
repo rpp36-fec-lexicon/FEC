@@ -1,9 +1,10 @@
 import React from 'react';
 import ReviewList from './Reviews/ReviewList.jsx';
 import RatingSummary from './Ratings/RatingSummary.jsx';
-const sampleReviews = require('./sampleData/sampleReviews.js').sampleReviews;
+const sampleReviewData = require('./sampleData/sampleReviews.js').sampleReviews;
+const sampleReviews = require('./sampleData/sampleReviews.js').sampleReviews.results;
 const sampleMeta = require('./sampleData/sampleMeta.js').sampleMeta;
-const samepleRating = require('./sampleData/sampleMeta.js').rating;
+const sampleRating = require('./sampleData/sampleMeta.js').rating;
 const sampleTotalNumberOfRatings = require('./sampleData/sampleMeta.js').totalNumberOfRatings;
 const axios = require('axios');
 
@@ -50,23 +51,17 @@ class RatingsAndReviews extends React.Component {
         <div className="content-container">
           <div className="row">
             <div className="left-panel box">
-              <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/>
+              {/* <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/> */}
+              <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/>
             </div>
             <div className="right-panel box">
-              <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} />
+              {/* <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} /> */}
+              <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} />
             </div>
           </div>
         </div>
-
-        // <div>
-        //   <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/>
-        //   {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings}/> */}
-        //   <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} />
-        //   {/* <ReviewList reviewData={sampleReviews} reviews={sampleReviews.results} /> */}
-        // </div>
       );
     }
-
   }
 }
 
