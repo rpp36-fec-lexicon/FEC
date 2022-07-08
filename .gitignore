@@ -4,3 +4,7 @@ bundle.js
 node_modules/
 babel.config.js
 .env
+
+# Ignore test-related files
+/coverage.data
+/coverage/
