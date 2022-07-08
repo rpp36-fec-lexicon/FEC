@@ -17,69 +17,69 @@ class App extends React.Component {
       defaultStyle: undefined,
     };
   }
-  componentDidMount() {
-    this.updateProduct(this.state.productId);
-  }
+  // componentDidMount() {
+  //   this.updateProduct(this.state.productId);
+  // }
 
-  prodIDChanger(relatedID) {
-    this.updateProduct(relatedID);
-  }
+  // prodIDChanger(relatedID) {
+  //   this.updateProduct(relatedID);
+  // }
 
-  updateProduct(productId) {
-    var query = { productId: productId };
-    $.ajax({
-      url: "/products/:product_id",
-      type: "POST",
-      data: query,
-      success: (data) => {
-        // console.log("THIS IS MY DATA!", data);
-        this.setState({
-          productId: productId,
-          productInfo: data,
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    }).then(() => {
-      $.ajax({
-        url: "/products/:product_id/styles",
-        type: "POST",
-        data: query,
-        success: (styles) => {
-          // console.log("THIS IS STYLE DATA", styles);
-          this.setState({
-            styleInfo: styles.results,
-            defaultStyle: styles.results.find(
-              (product) => product["default?"] === true
-            ),
-          });
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-    });
-  }
+  // updateProduct(productId) {
+  //   var query = { productId: productId };
+  //   $.ajax({
+  //     url: "/products/:product_id",
+  //     type: "POST",
+  //     data: query,
+  //     success: (data) => {
+  //       // console.log("THIS IS MY DATA!", data);
+  //       this.setState({
+  //         productId: productId,
+  //         productInfo: data,
+  //       });
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   }).then(() => {
+  //     $.ajax({
+  //       url: "/products/:product_id/styles",
+  //       type: "POST",
+  //       data: query,
+  //       success: (styles) => {
+  //         // console.log("THIS IS STYLE DATA", styles);
+  //         this.setState({
+  //           styleInfo: styles.results,
+  //           defaultStyle: styles.results.find(
+  //             (product) => product["default?"] === true
+  //           ),
+  //         });
+  //       },
+  //       error: (err) => {
+  //         console.log(err);
+  //       },
+  //     });
+  //   });
+  // }
 
   render() {
     // console.log("app rend", this.state.productId);
     return (
       <div>
         <h1>Atelier</h1>
-        <ProductOverview productInfo={this.state.productInfo}/>
-        <RatingsAndReviews />
-        <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} />
-        <RelatedAndOutfit
+        {/* <ProductOverview productInfo={this.state.productInfo}/> */}
+        {/* <RatingsAndReviews /> */}
+        {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */}
+        {/* <RelatedAndOutfit
           prodID={this.state.productId}
           prodInfo={this.state.productInfo}
           prodIDChanger={this.prodIDChanger.bind(this)}
-        />
+        /> */}
       </div>
     );
   }
 }
 
-ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+// ReactDOM.createRoot(document.getElementById("app")).render(<App />);
 
 export default App;
