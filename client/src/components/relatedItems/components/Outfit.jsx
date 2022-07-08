@@ -1,15 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import OutfitCard from "./OutfitCard.jsx";
-import Flickity from "react-flickity-component";
-import $ from "jquery";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import OutfitCard from './OutfitCard.jsx';
+import Flickity from 'react-flickity-component';
+import $ from 'jquery';
 
 class Outfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       outfitItems: [],
-      prodInfo: "",
+      prodInfo: '',
       // modalSeen: false,
       // relatedProdFeat: [],
       // relatedProdName: "",
@@ -18,7 +18,7 @@ class Outfit extends React.Component {
 
   componentDidMount() {
     $.ajax({
-      type: "GET",
+      type: 'GET',
       url: `/products/${this.props.prodID}`,
       success: (prodInfo) => {
         // console.log("main prod", prodInfo.id); // {id, name, category, features...}
@@ -52,27 +52,27 @@ class Outfit extends React.Component {
     // console.log("outfitItems", this.state.outfitItems);
     return (
       <div>
-        {" "}
+        {' '}
         Your Outfit
         <div
           className="flex-container"
           style={{
-            padding: "15px 15px 15px 15px",
-            marginRight: "50px",
-            marginLeft: "40px",
+            padding: '15px 15px 15px 15px',
+            marginRight: '50px',
+            marginLeft: '40px',
           }}
         >
           <div
             className="flex-child"
             style={{
-              margin: "15px 15px 15px 15px",
+              margin: '15px 15px 15px 15px',
             }}
           >
             <button
               style={{
-                height: "100%",
-                width: "100%",
-                fontSize: "15px",
+                height: '100%',
+                width: '100%',
+                fontSize: '15px',
               }}
               // should only add a prod once to list.
               onClick={() => {
@@ -81,7 +81,7 @@ class Outfit extends React.Component {
             >
               <span>
                 [&#x2B;] <br></br>
-              </span>{" "}
+              </span>{' '}
               Add to Outfit
             </button>
           </div>
