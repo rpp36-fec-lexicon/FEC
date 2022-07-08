@@ -47,20 +47,22 @@ class ProductOverview extends React.Component {
         <div>
           <h1>Product Overview!</h1>
           {/* <PrimaryImage /> */}
-          {/* <Checkout /> */}
-          {/* <ProductDescription slogan={this.props.productInfo.slogan} description={this.props.productInfo.description} features={this.props.productInfo.features}/> */}
+          {/* <Checkout id={this.props.defaultStyle.style_id} skus={this.props.defaultStyle.skus}/> */}
           {this.state.selectedStyle ?
             <div>
+              <Checkout id={this.state.selectedStyle.style_id} skus={this.state.selectedStyle.skus}/>
               <ProductInformation category={this.props.productInfo.category} name={this.props.productInfo.name}
                 price={this.state.selectedStyle.original_price} salePrice={this.state.selectedStyle.sale_price}/>
               <SelectStyle styles={this.props.styleList} changeStyle={this.changeStyle} selectedStyle={this.state.selectedStyle}/>
             </div> :
             <div>
+              <Checkout id={this.props.defaultStyle.style_id} skus={this.props.defaultStyle.skus}/>
               <ProductInformation category={this.props.productInfo.category} name={this.props.productInfo.name}
                 price={this.props.defaultStyle.original_price} salePrice={this.props.defaultStyle.sale_price}/>
               <SelectStyle styles={this.props.styleList} changeStyle={this.changeStyle} selectedStyle={this.props.defaultStyle}/>
             </div>
           }
+          {/* <ProductDescription slogan={this.props.productInfo.slogan} description={this.props.productInfo.description} features={this.props.productInfo.features}/> */}
         </div>
       );
     }
