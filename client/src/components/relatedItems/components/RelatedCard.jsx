@@ -22,6 +22,14 @@ class RelatedCard extends React.Component {
         });
       }
     });
+    if (this.state.defaultOriginalPrice === 0) {
+      this.setState({
+        defaultOriginalPrice:
+          this.props.itemData.itemStyles.results[0].original_price,
+        defaultSalePrice: null,
+        defaultPhoto: this.props.itemData.itemStyles.results[0].photos[0].url,
+      });
+    }
   }
 
   render() {

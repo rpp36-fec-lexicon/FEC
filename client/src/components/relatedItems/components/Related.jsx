@@ -16,7 +16,7 @@ class Related extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Related rend", this.props.prodID); // CHANGE prodID here
+    // console.log("Related rend", this.props.prodID); // CHANGE prodID here
     $.ajax({
       type: "GET",
       url: `/products/${this.props.prodID}/related`,
