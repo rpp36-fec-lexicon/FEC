@@ -1,6 +1,8 @@
 import React from 'react';
 import ReviewItem from './ReviewItem.jsx';
 import MoreReviews from './MoreReviews.jsx';
+import AddFirstReview from './AddFirstReview.jsx';
+import AddAnotherReview from './AddAnotherReview.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -10,18 +12,21 @@ class ReviewList extends React.Component {
       startReviewIndex: 0,
       endReviewIndex: 4
     };
-    this.moreReviewsFunc = this.moreReviewsFunc.bind(this);
+    this.showMoreReviewsFunc = this.showMoreReviewsFunc.bind(this);
   }
 
   componentDidMount() {
     var reviewsShowing;
     if (this.props.reviews.length >= 2) {
       reviewsShowing = this.props.reviews.slice(0, 2);
-      this.setState({reviewsShowing});
+    } else {
+      reviewsShowing = this.props.reviews.slice();
     }
+
+    this.setState({reviewsShowing});
   }
 
-  moreReviewsFunc() {
+  showMoreReviewsFunc() {
     var reviewsShowing;
     if (this.state.endReviewIndex >= this.props.reviews.length) {
       reviewsShowing = this.props.reviews.slice();
@@ -40,13 +45,21 @@ class ReviewList extends React.Component {
       display: 'inline-block'
     };
 
+    let addFirstReviewButton;
+    let addAnotherReviewButton;
+    if (!this.props.reviews.length) {
+      addFirstReviewButton = <AddFirstReview />;
+    } else {
+      addAnotherReviewButton = <AddAnotherReview />;
+    }
+
     if (this.props.reviews && this.state.reviewsShowing) {
       const reviews = this.props.reviews;
       const lastReview = reviews[reviews.length - 1];
       const lastShowingReview = this.state.reviewsShowing[this.state.reviewsShowing.length - 1];
       let moreReviewsButton;
       if (reviews.length > 2 && lastReview['review_id'] !== lastShowingReview['review_id']) {
-        moreReviewsButton = <MoreReviews moreReviewsFunc={this.moreReviewsFunc}/>;
+        moreReviewsButton = <MoreReviews showMoreReviewsFunc={this.showMoreReviewsFunc}/>;
       }
 
       return (
@@ -59,16 +72,19 @@ class ReviewList extends React.Component {
               <option id="relevance">Relevance</option>
             </select>
           </div>
-
+          <div>{addFirstReviewButton}</div>
           <div className="scrollable">
             {this.state.reviewsShowing.map(review => {
               return <ReviewItem review={review} key={review['review_id']}/>;
             })}
             <br></br>
+            <div style={sameLineStyle}>{moreReviewsButton}</div>
+            <div style={sameLineStyle}>{addAnotherReviewButton}</div>
           </div>
 
-          <div style={sameLineStyle}>{moreReviewsButton}</div>
-          <button style={sameLineStyle} id="addReview">ADD A REVIEW  +</button>
+          {/* <div style={sameLineStyle}>{moreReviewsButton}</div>
+          <div style={sameLineStyle}>{addAnotherReviewButton}</div> */}
+          {/* <button style={sameLineStyle} id="addReview">ADD A REVIEW  +</button> */}
         </div>
       );
     }

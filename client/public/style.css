@@ -54,7 +54,7 @@ progress {
 }
 
 .scrollable {
-  height: 700px;
+  height: 600px;
   overflow: auto;
   margin: 20px;
   text-align: justify;
