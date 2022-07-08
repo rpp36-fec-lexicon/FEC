@@ -38,21 +38,32 @@ class RatingsAndReviews extends React.Component {
     // }
   }
 
-  componentDidMount() {
-    const reviews = this.props.reviews;
-    this.setState({reviews});
-  }
+  // componentDidMount() {
+  //   const reviews = this.props.reviews;
+  //   this.setState({reviews});
+  // }
 
   render() {
-    console.log('props in reviews', this.props);
-    if (this.props.reviewData !== null) {
+    console.log('props in ratingsreviews', this.props);
+    if (this.props.reviews !== null) {
       return (
-        <div>
-          <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/>
-          {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings}/> */}
-          <ReviewList reviewData={this.props.reviewData} reviews={this.state.reviews} />
-          {/* <ReviewList reviewData={sampleReviews} reviews={sampleReviews.results} /> */}
+        <div className="content-container">
+          <div className="row">
+            <div className="left-panel box">
+              <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/>
+            </div>
+            <div className="right-panel box">
+              <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} />
+            </div>
+          </div>
         </div>
+
+        // <div>
+        //   <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/>
+        //   {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings}/> */}
+        //   <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} />
+        //   {/* <ReviewList reviewData={sampleReviews} reviews={sampleReviews.results} /> */}
+        // </div>
       );
     }
 

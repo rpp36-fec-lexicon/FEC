@@ -18,12 +18,16 @@ const RatingSummary = (props) => {
   total = recommendedTrue + recommendedFalse;
   recommendedPercent = Math.floor((recommendedTrue / total) * 100);
 
+  const sameLineStyle = {
+    display: 'inline-block'
+  };
+
   return (
 
     <div>
       <h2>RATINGS & REVIEWS</h2>
-      <h1>{props.rating}</h1>
-      <Stars stars={props.rating}/>
+      <h1 style={sameLineStyle}>{props.rating}</h1>
+      <Stars style={sameLineStyle} stars={props.rating}/>
       <div>{recommendedPercent}% of reviews recommend this product</div>
       <RatingBreakdown ratings={props.metaData.ratings} totalNumberOfRatings={props.totalNumberOfRatings} filterRating={props.filterRating}/>
       <ProductBreakdown />

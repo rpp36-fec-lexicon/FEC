@@ -37,18 +37,47 @@ class ReviewItem extends React.Component {
     }
 
     let recommend;
-      if (review.recommend) {
-        recommend = <Recommend />
-      }
+    if (review.recommend) {
+      recommend = <Recommend />;
+    }
+
+    const sameLineStyle = {
+      display: 'inline-block'
+    };
+
+    const underlineStyle = {
+      textDecoration: 'underline'
+    };
+
+    const sameLineAndUnderlineStyle = {
+      display: 'inline-block',
+      textDecoration: 'underline'
+    };
+
+    const sameLineAndToTheRightStyle = {
+      display: 'inline-block',
+      position: 'absolute',
+      right: 180
+    };
 
     return (
       <div>
-        <Stars stars={review.rating}/>
-        <div>{review['reviewer_name']}, {month[monthIndex]} {date}, {year}</div>
-        <div id="reviewSummary">{review.summary}</div>
+        <br></br>
+        <Stars style={sameLineStyle} stars={review.rating}/>
+        <div style={sameLineAndToTheRightStyle}>{review['reviewer_name']}, {month[monthIndex]} {date}, {year}</div>
+        <h3 id="reviewSummary">{review.summary}</h3>
         {reviewBody}
+        <br></br>
         {recommend}
-        <div onClick={() => { this.increaseHelpfulnessFunc() }}>Helpful? Yes ({this.state.helpfulness})</div>
+        <br></br>
+        <div style={sameLineStyle}>Helpful?</div>
+        <div style={sameLineAndUnderlineStyle} onClick={() => { this.increaseHelpfulnessFunc() }}>Yes</div>
+        <div style={sameLineStyle}>({this.state.helpfulness})</div>
+        <div style={sameLineStyle}>|</div>
+        <div style={sameLineStyle}>Report</div>
+        <br></br>
+        <br></br>
+        <hr></hr>
       </div>
     );
   }
