@@ -1,8 +1,8 @@
-import React from 'react';
-import $ from 'jquery';
-import Flickity from 'react-flickity-component';
-import RelatedCard from './RelatedCard.jsx';
-import Comparison from './Comparison.jsx';
+import React from "react";
+import $ from "jquery";
+import Flickity from "react-flickity-component";
+import RelatedCard from "./RelatedCard.jsx";
+import Comparison from "./Comparison.jsx";
 
 class Related extends React.Component {
   constructor(props) {
@@ -11,14 +11,14 @@ class Related extends React.Component {
       itemInfoAndStyle: [],
       modalSeen: false,
       relatedProdFeat: [],
-      relatedProdName: '',
+      relatedProdName: "",
     };
   }
 
   componentDidMount() {
-    console.log('Related rend', this.props.prodID); // CHANGE prodID here
+    // console.log("Related rend", this.props.prodID); // CHANGE prodID here
     $.ajax({
-      type: 'GET',
+      type: "GET",
       url: `/products/${this.props.prodID}/related`,
 
       success: (arrayOfProdIDs) => {
@@ -26,11 +26,11 @@ class Related extends React.Component {
 
         arrayOfProdIDs.forEach((itemID) => {
           $.ajax({
-            type: 'GET',
+            type: "GET",
             url: `/products/${itemID}`,
             success: (relatedItemInfo) => {
               $.ajax({
-                type: 'GET',
+                type: "GET",
                 url: `/products/${itemID}/styles`,
                 success: (relatedItemStyles) => {
                   relatedItemData.push({
@@ -70,58 +70,59 @@ class Related extends React.Component {
   }
 
   render() {
-    // console.log(" Related props", this.props.prodID);
+    // console.log(" Related props", this.props.prodInfo);
 
-    if (this.props.prodInfo !== undefined) {
-      return (
+    // if (this.props.prodInfo !== undefined) {
+    return (
+      <div>
         <div>
-          <br></br>Temp prodID: {this.props.prodID}
-          <br></br>
-          Main prod in Overview: {this.props.prodInfo.name}, category:{' '}
-          {this.props.prodInfo.category}
-          <br></br>
-          <br></br>
-          <br></br>
-          Related Products:
-          <div>
-            {' '}
-            {this.state.modalSeen ? (
-              <Comparison
-                mainProdName={this.props.prodInfo.name}
-                relatedProdName={this.state.relatedProdName}
-                toggle={this.comparison.bind(this)}
-                mainProdFeat={this.props.prodInfo.features}
-                relatedProdFeat={this.state.relatedProdFeat}
-              />
-            ) : null}{' '}
-          </div>
-          <div
-            style={{
-              padding: '15px 15px 15px 15px',
-              marginRight: '50px',
-              marginLeft: '50px',
+          {this.state.modalSeen ? (
+            <Comparison
+              mainProdName={this.props.prodInfo.name}
+              relatedProdName={this.state.relatedProdName}
+              toggle={this.comparison.bind(this)}
+              mainProdFeat={this.props.prodInfo.features}
+              relatedProdFeat={this.state.relatedProdFeat}
+            />
+          ) : null}{" "}
+        </div>
+        <div
+          style={{
+            padding: "15px 15px 15px 15px",
+            marginRight: "50px",
+            marginLeft: "50px",
+          }}
+        >
+          <Flickity
+            options={{
+              cellAlign: "left",
+              contain: true,
+              pageDots: false,
             }}
           >
-            <Flickity
-              options={{
-                cellAlign: 'left',
-                contain: true,
-              }}
-            >
-              {this.state.itemInfoAndStyle.map((itemData, index) => (
-                <RelatedCard
-                  itemData={itemData}
-                  comparison={this.comparison.bind(this)}
-                  prodIDChanger={this.props.prodIDChanger}
-                  key={index}
-                />
-              ))}
-            </Flickity>
-          </div>
+            {this.state.itemInfoAndStyle.map((itemData, index) => (
+              <RelatedCard
+                itemData={itemData}
+                comparison={this.comparison.bind(this)}
+                prodIDChanger={this.props.prodIDChanger}
+                key={index}
+              />
+            ))}
+          </Flickity>
         </div>
-      );
-    }
+      </div>
+    );
+    // }
   }
 }
 
 export default Related;
+
+{
+  /* Temp prodID: {this.props.prodID} */
+}
+
+{
+  /* Main prod in Overview: {this.props.prodInfo.name}, category:{" "}
+        {this.props.prodInfo.category} */
+}

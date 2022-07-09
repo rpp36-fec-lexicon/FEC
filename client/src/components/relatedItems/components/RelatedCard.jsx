@@ -1,6 +1,6 @@
-import React from 'react';
-import $ from 'jquery';
-import Stars from 'react-stars-display';
+import React from "react";
+import $ from "jquery";
+// import Stars from "react-stars-display";
 
 class RelatedCard extends React.Component {
   constructor(props) {
@@ -8,13 +8,13 @@ class RelatedCard extends React.Component {
     this.state = {
       defaultOriginalPrice: 0,
       defaultSalePrice: 0,
-      defaultPhoto: '',
+      defaultPhoto: "",
     };
   }
 
   componentDidMount() {
     this.props.itemData.itemStyles.results.forEach((styleInfoObj) => {
-      if (styleInfoObj['default?']) {
+      if (styleInfoObj["default?"]) {
         this.setState({
           defaultOriginalPrice: styleInfoObj.original_price,
           defaultSalePrice: styleInfoObj.sale_price,
@@ -22,34 +22,47 @@ class RelatedCard extends React.Component {
         });
       }
     });
+    if (this.state.defaultOriginalPrice === 0) {
+      this.setState({
+        defaultOriginalPrice:
+          this.props.itemData.itemStyles.results[0].original_price,
+        defaultSalePrice: null,
+        defaultPhoto: this.props.itemData.itemStyles.results[0].photos[0].url,
+      });
+    }
   }
 
   render() {
     return (
       <div
         style={{
-          border: '1px solid grey',
-          padding: '15px 15px 15px 15px',
-          margin: '15px 15px 15px 15px',
+          border: "1px solid grey",
+          padding: "15px 15px 15px 15px",
+          margin: "15px 15px 15px 15px",
         }}
-        onClick={() =>
-          this.props.prodIDChanger(this.props.itemData.itemInfo.id)
-        }
+        // onClick={() =>
+        //   this.props.prodIDChanger(this.props.itemData.itemInfo.id)
+        // }
       >
         <div
           style={{
-            height: '200px',
-            width: '200px',
-            marginBottom: '10px',
+            height: "200px",
+            width: "200px",
+            marginBottom: "10px",
             backgroundImage: `url(${this.state.defaultPhoto})`,
-            backgroundSize: '200px 200px',
+            backgroundSize: "200px 200px",
           }}
-        >
+          onClick={() =>
+            this.props.prodIDChanger(this.props.itemData.itemInfo.id)
+          }
+        ></div>
+        <div>
           <button
+            className="comparisonBtn"
             style={{
-              float: 'right',
-              background: 'transparent',
-              borderColor: 'transparent',
+              float: "right",
+              background: "transparent",
+              borderColor: "transparent",
             }}
             onClick={() => {
               this.props.comparison(
@@ -65,7 +78,7 @@ class RelatedCard extends React.Component {
         <div>
           <div>{this.props.itemData.itemInfo.category}</div>
           <div>
-            {' '}
+            {" "}
             <b>{this.props.itemData.itemInfo.name}</b>
           </div>
           <div>
@@ -73,17 +86,17 @@ class RelatedCard extends React.Component {
               `$${this.state.defaultOriginalPrice}`
             ) : (
               <span>
-                <span style={{ color: 'red' }}>
-                  {' '}
+                <span style={{ color: "red" }}>
+                  {" "}
                   ${this.state.defaultSalePrice}
-                </span>{' '}
+                </span>{" "}
                 <del> ${this.state.defaultOriginalPrice}</del>
               </span>
             )}
           </div>
           <div>
-            {' '}
-            <Stars stars={3.5} />
+            star reviews here
+            {/* <Stars stars={3.5} /> */}
           </div>
         </div>
       </div>
