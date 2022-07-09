@@ -1,5 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
 
+const Img = styled.img`
+  margin: 5px;
+  border: 2px solid;
+  border-radius: 50%;
+  height: 72px;
+  width: 72px;
+  object-fit: cover;
+  cursor: pointer;
+`;
 
 class SelectStyle extends React.Component {
   constructor(props) {
@@ -7,11 +17,25 @@ class SelectStyle extends React.Component {
     this.state = {};
   }
 
+  handleClick(id, name) {
+    this.props.changeStyle(id);
+  }
+
   render() {
+    console.log('Props in Styles ', this.props);
     return (
       <div>
-        <h3>Style  "Selected Style Name Here" </h3>
-        {/* map through styles, getting img id, src url, and handleClick change */}
+        <h3> {`Style > ${this.props.selectedStyle.name}`}</h3>
+        <div>
+          {this.props.styles.map((style) => (
+            <Img
+              key={style.style_id}
+              src={style.photos[0].thumbnail_url}
+              onClick={() => this.handleClick(style.style_id)}
+              a=""
+            />
+          ))}
+        </div>
       </div>
     );
   }
