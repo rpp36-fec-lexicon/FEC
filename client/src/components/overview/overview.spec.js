@@ -10,7 +10,7 @@ import '@testing-library/jest-dom';
 
 import ProductOveriew from './ProductOveriew.jsx';
 
-describe('Related Products', ()=>{
+describe('Product Overview', ()=>{
   let temporarySandBox;
   beforeEach(() => {
     temporarySandBox = document.createElement('div');
