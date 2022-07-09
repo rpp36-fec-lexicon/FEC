@@ -17,5 +17,10 @@ it('returns questions for given productID'), async () => {
         question: 'Is there any discount?'
       }
     ]
+  });
+
+  const questions = await qetQuestionsByProductID (1,() => {
+    console.log(data[0].questions);
   })
+
 }
