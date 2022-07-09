@@ -9,6 +9,10 @@ const Stars = (props) => {
   return (
     <div style={flexStyle}>
       <div>stars here</div>
+      <div>&#9734;</div>
+      <div>&#9733;</div>
+
+
     </div>
   );
 };
