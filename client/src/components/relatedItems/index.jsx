@@ -1,7 +1,7 @@
-import React from "react";
-import Related from "./components/Related.jsx";
-import Outfit from "./components/Outfit.jsx";
-import $ from "jquery";
+import React from 'react';
+import Related from './components/Related.jsx';
+import Outfit from './components/Outfit.jsx';
+import $ from 'jquery';
 
 class RelatedAndOutfit extends React.Component {
   constructor(props) {

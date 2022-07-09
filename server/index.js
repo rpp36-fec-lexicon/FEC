@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const key = require('../config.js').TOKEN;
 const axios = require('axios');
 const QA = require('./QuestionsAnswers.js');
 const app = express();
@@ -54,7 +53,7 @@ app.get('/reviews', (req, res) => {
   const productId = req.query.productId;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${productId}`,
     { headers: {
-      'Authorization': key
+      'Authorization': myAPIKey
     }})
     .then(response => {
       res.status(200).send(response.data);
@@ -68,7 +67,7 @@ app.get('/reviews/meta', (req, res) => {
   const productId = req.query.productId;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${productId}`,
     {headers: {
-      'Authorization': key
+      'Authorization': myAPIKey
     }})
     .then(response => {
       res.status(200).send(response.data);
