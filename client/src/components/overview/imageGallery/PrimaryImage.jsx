@@ -1,4 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const IMG = styled.img`
+  border: 1px solid;
+  border-radius: 15%;
+  height: 352px;
+  width: 352px;
+  object-fit: cover;
+`;
 
 
 class PrimaryImage extends React.Component {
@@ -10,8 +19,8 @@ class PrimaryImage extends React.Component {
   render() {
     return (
       <div>
-        <div id="mainImg" style={{margin: '32px 16px 5px 5px', height: '540px', width: '570px', backgroundColor: 'powderblue'}}>
-          <img
+        <div>
+          <IMG
             src={this.props.pic}
             alt={this.props.pic}
           />

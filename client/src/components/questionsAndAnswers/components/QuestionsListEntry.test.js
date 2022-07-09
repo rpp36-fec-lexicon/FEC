@@ -8,3 +8,10 @@ test('renders questions', () => {
   const divElement = screen.getByText('Q:');
   expect(divElement).toBeInTheDocument();
 });
+
+
+test('renders questions', () => {
+  render(<QuestionsListEntry />);
+  const divElement = screen.getByText('asked by:');
+  expect(divElement).toBeInTheDocument();
+});

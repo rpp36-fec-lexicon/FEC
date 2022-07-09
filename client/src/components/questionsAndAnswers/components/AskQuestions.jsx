@@ -1,6 +1,6 @@
 import React from 'react';
-import LoadMoreAnswers from './LoadMoreAnswers.jsx';
-import QuestionForm from './QuestionForm.jsx';
+// import LoadMoreAnswers from './LoadMoreAnswers.jsx';
+// import QuestionForm from './QuestionForm.jsx';
 import interact from './Interact.jsx';
 
 const AskQuestions = (props) => (
@@ -15,7 +15,7 @@ const AskQuestions = (props) => (
         type="submit">
         MORE QUESTIONS
       </button>
-      <QuestionForm mainProductId={props.mainProductId} updateQuestions={props.updateQuestions}/>
+      {/* <QuestionForm mainProductId={props.mainProductId} updateQuestions={props.updateQuestions}/> */}
     </div>
   </div>
 );
