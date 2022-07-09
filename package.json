@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server/index.js",
     "webpack": "webpack --mode development --watch",
-    "test": " jest --coverage",
+    "test": "jest",
     "lint": "eslint ./"
   },
   "repository": {

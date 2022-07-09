@@ -20,7 +20,7 @@ class App extends React.Component {
       metaData: null,
       rating: null,
       totalNumberOfRatings: null
-    }
+    };
   }
 
   getAllReviewsFunc() {
