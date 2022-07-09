@@ -17,6 +17,7 @@ class ReviewList extends React.Component {
 
   componentDidMount() {
     var reviewsShowing;
+
     if (this.props.reviews.length >= 2) {
       reviewsShowing = this.props.reviews.slice(0, 2);
     } else {

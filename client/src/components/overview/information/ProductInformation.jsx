@@ -10,10 +10,17 @@ class ProductInformation extends React.Component {
   render() {
     return (
       <div>
-        <h4> Review stuff here</h4>
-        <h3> Category stuff </h3>
-        <h2> Product Name </h2>
-        <h4> Price </h4>
+        <h4> STARS: {this.props.rating} </h4>
+        <h3> {this.props.category} </h3>
+        <h2> {this.props.name} </h2>
+        {this.props.salePrice !== null ?
+          <h4>
+            <b style={{color: 'red'}}>${this.props.salePrice}</b>
+            <b style={{textDecoration: 'line-through'}}>${this.props.price}</b>
+          </h4>
+          :
+          <h4> ${this.props.price}</h4>
+        }
       </div>
     );
   }

@@ -1,9 +1,9 @@
 import React from 'react';
-// import Stars from 'react-stars-display';
+import Stars from 'react-stars-display';
 import ShortReviewBody from './ShortReviewBody.jsx';
 import LongReviewBody from './LongReviewBody.jsx';
 import Recommend from './Recommend.jsx';
-import Stars from './Stars.jsx';
+// import Stars from './Stars.jsx';
 
 class ReviewItem extends React.Component {
   constructor(props) {
@@ -70,7 +70,7 @@ class ReviewItem extends React.Component {
       <div>
         <br></br>
         <div style={flexStyle}>
-          <Stars rating={review.rating}/>
+          <Stars stars={review.rating}/>
           <div>{review['reviewer_name']}, {month[monthIndex]} {date}, {year}</div>
         </div>
 

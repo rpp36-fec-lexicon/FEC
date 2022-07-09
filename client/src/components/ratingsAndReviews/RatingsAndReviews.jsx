@@ -37,12 +37,12 @@ class RatingsAndReviews extends React.Component {
         <div className="content-container">
           <div className="row">
             <div className="left-panel box">
-              {/* <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/> */}
-              <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/>
+              <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/>
+              {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/> */}
             </div>
             <div className="right-panel box">
-              {/* <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} /> */}
-              <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} />
+              <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} />
+              {/* <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} /> */}
             </div>
           </div>
         </div>

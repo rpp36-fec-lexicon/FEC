@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Stars from "react-stars-display";
+// import Stars from "react-stars-display";
 
 class OutfitCard extends React.Component {
   constructor(props) {
@@ -12,17 +12,7 @@ class OutfitCard extends React.Component {
     };
   }
 
-  componentDidMount() {
-    // this.props.itemData.itemStyles.results.forEach((styleInfoObj) => {
-    //   if (styleInfoObj["default?"]) {
-    //     this.setState({
-    //       defaultOriginalPrice: styleInfoObj.original_price,
-    //       defaultSalePrice: styleInfoObj.sale_price,
-    //       defaultPhoto: styleInfoObj.photos[0].url,
-    //     });
-    //   }
-    // });
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -85,9 +75,7 @@ class OutfitCard extends React.Component {
             )}
           </div>
 
-          <div>
-            <Stars stars={2} />
-          </div>
+          <div>{/* <Stars stars={2} /> */}</div>
         </div>
       </div>
     );

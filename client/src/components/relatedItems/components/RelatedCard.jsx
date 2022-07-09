@@ -1,6 +1,6 @@
 import React from "react";
 import $ from "jquery";
-import Stars from "react-stars-display";
+// import Stars from "react-stars-display";
 
 class RelatedCard extends React.Component {
   constructor(props) {
@@ -22,6 +22,14 @@ class RelatedCard extends React.Component {
         });
       }
     });
+    if (this.state.defaultOriginalPrice === 0) {
+      this.setState({
+        defaultOriginalPrice:
+          this.props.itemData.itemStyles.results[0].original_price,
+        defaultSalePrice: null,
+        defaultPhoto: this.props.itemData.itemStyles.results[0].photos[0].url,
+      });
+    }
   }
 
   render() {
@@ -32,9 +40,9 @@ class RelatedCard extends React.Component {
           padding: "15px 15px 15px 15px",
           margin: "15px 15px 15px 15px",
         }}
-        onClick={() =>
-          this.props.prodIDChanger(this.props.itemData.itemInfo.id)
-        }
+        // onClick={() =>
+        //   this.props.prodIDChanger(this.props.itemData.itemInfo.id)
+        // }
       >
         <div
           style={{
@@ -44,8 +52,13 @@ class RelatedCard extends React.Component {
             backgroundImage: `url(${this.state.defaultPhoto})`,
             backgroundSize: "200px 200px",
           }}
-        >
+          onClick={() =>
+            this.props.prodIDChanger(this.props.itemData.itemInfo.id)
+          }
+        ></div>
+        <div>
           <button
+            className="comparisonBtn"
             style={{
               float: "right",
               background: "transparent",
@@ -82,8 +95,8 @@ class RelatedCard extends React.Component {
             )}
           </div>
           <div>
-            {" "}
-            <Stars stars={3.5} />
+            star reviews here
+            {/* <Stars stars={3.5} /> */}
           </div>
         </div>
       </div>
