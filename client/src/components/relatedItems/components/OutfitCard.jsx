@@ -12,17 +12,7 @@ class OutfitCard extends React.Component {
     };
   }
 
-  componentDidMount() {
-    // this.props.itemData.itemStyles.results.forEach((styleInfoObj) => {
-    //   if (styleInfoObj["default?"]) {
-    //     this.setState({
-    //       defaultOriginalPrice: styleInfoObj.original_price,
-    //       defaultSalePrice: styleInfoObj.sale_price,
-    //       defaultPhoto: styleInfoObj.photos[0].url,
-    //     });
-    //   }
-    // });
-  }
+  componentDidMount() {}
 
   render() {
     return (

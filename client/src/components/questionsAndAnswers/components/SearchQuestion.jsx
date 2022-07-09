@@ -34,7 +34,7 @@ class SearchQuestion extends React.Component {
           <form>
             <input
               onChange={this.onChange}
-              onClick={() => {interact('input', 'searchBarClicked')}}
+              onClick={() => { interact('input', 'searchBarClicked'); }}
               type='text'
               placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS'
               style={{ width: '370px', height: '37px' }}
@@ -43,8 +43,8 @@ class SearchQuestion extends React.Component {
           <div>{/* <QuestionEntry term={props.term}/> */}</div>
         </div>
       </div>
-    )
+    );
   }
-};
+}
 
 export default SearchQuestion;

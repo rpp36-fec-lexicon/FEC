@@ -40,9 +40,9 @@ class RelatedCard extends React.Component {
           padding: "15px 15px 15px 15px",
           margin: "15px 15px 15px 15px",
         }}
-        onClick={() =>
-          this.props.prodIDChanger(this.props.itemData.itemInfo.id)
-        }
+        // onClick={() =>
+        //   this.props.prodIDChanger(this.props.itemData.itemInfo.id)
+        // }
       >
         <div
           style={{
@@ -52,7 +52,11 @@ class RelatedCard extends React.Component {
             backgroundImage: `url(${this.state.defaultPhoto})`,
             backgroundSize: "200px 200px",
           }}
-        >
+          onClick={() =>
+            this.props.prodIDChanger(this.props.itemData.itemInfo.id)
+          }
+        ></div>
+        <div>
           <button
             className="comparisonBtn"
             style={{

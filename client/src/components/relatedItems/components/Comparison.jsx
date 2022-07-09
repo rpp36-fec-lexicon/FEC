@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
 class Comparison extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      commonFeat: "",
-      mainProdUnqFeat: "",
-      relatedProdUnqFeat: "",
+      commonFeat: '',
+      mainProdUnqFeat: '',
+      relatedProdUnqFeat: '',
     };
   }
   componentDidMount() {
@@ -21,7 +21,7 @@ class Comparison extends React.Component {
 
     const mainProdFeatCollection = [];
     mainProdFeatObj.forEach((featTuple) => {
-      let mainProdFeatTuple = "";
+      let mainProdFeatTuple = '';
       if (featTuple[1][1] !== null) {
         mainProdFeatTuple = `${featTuple[0][1]} (${featTuple[1][1]})`;
       } else {
@@ -40,7 +40,7 @@ class Comparison extends React.Component {
 
     const relatedProdFeatCollection = [];
     relatedProdFeatObj.forEach((featTuple) => {
-      let relatedProdFeatTuple = "";
+      let relatedProdFeatTuple = '';
       if (featTuple[1][1] !== null) {
         relatedProdFeatTuple = `${featTuple[0][1]} (${featTuple[1][1]})`;
       } else {
@@ -81,16 +81,17 @@ class Comparison extends React.Component {
     });
   }
 
-  handleCloseButton = () => {
-    this.props.toggle();
-  };
+  // handleCloseButton = () => {
+  //   this.props.toggle();
+  // };
+
   render() {
     // console.log("props in comp", this.props);
     return (
       <div className="modal">
         <div className="modal_content">
           <span className="close" onClick={this.handleCloseButton}>
-            &times;{" "}
+            &times;{' '}
           </span>
           <table>
             <tbody>
@@ -115,20 +116,20 @@ class Comparison extends React.Component {
               </tr>
               {this.state.commonFeat.length !== 0
                 ? this.state.commonFeat.map((feature, index) => (
-                    <CommonFeatureMapper feature={feature} key={index} />
-                  ))
+                  <CommonFeatureMapper feature={feature} key={index} />
+                ))
                 : null}
 
               {this.state.mainProdUnqFeat.length !== 0
                 ? this.state.mainProdUnqFeat.map((feature, index) => (
-                    <MainFeatureMapper feature={feature} key={index} />
-                  ))
+                  <MainFeatureMapper feature={feature} key={index} />
+                ))
                 : null}
 
               {this.state.relatedProdUnqFeat.length !== 0
                 ? this.state.relatedProdUnqFeat.map((feature, index) => (
-                    <RelatedFeatureMapper feature={feature} key={index} />
-                  ))
+                  <RelatedFeatureMapper feature={feature} key={index} />
+                ))
                 : null}
             </tbody>
           </table>
@@ -141,7 +142,7 @@ class Comparison extends React.Component {
 const CommonFeatureMapper = (props) => {
   // console.log("ff", props);
   return (
-    <tr style={{ overflowY: "auto" }}>
+    <tr style={{ overflowY: 'auto' }}>
       <td>&#10003;</td>
       <td>{props.feature}</td>
       <td>&#10003;</td>
@@ -152,7 +153,7 @@ const CommonFeatureMapper = (props) => {
 const MainFeatureMapper = (props) => {
   // console.log("MainFeatureMapper", props);
   return (
-    <tr style={{ overflowY: "auto" }}>
+    <tr style={{ overflowY: 'auto' }}>
       <td>&#10003;</td>
       <td>{props.feature}</td>
       <td></td>
@@ -163,7 +164,7 @@ const MainFeatureMapper = (props) => {
 const RelatedFeatureMapper = (props) => {
   // console.log("ff", props);
   return (
-    <tr style={{ overflowY: "auto" }}>
+    <tr style={{ overflowY: 'auto' }}>
       <td></td>
       <td>{props.feature}</td>
       <td>&#10003;</td>

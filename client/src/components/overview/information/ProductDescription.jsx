@@ -14,7 +14,7 @@ class ProductDescription extends React.Component {
         <h4>{this.props.slogan}</h4>
         <p>{this.props.description}</p>
         <div>
-          {this.props.features.map((element) => <h4 key={element.feature}>{element.feature} : {element.value}</h4>)}
+          {this.props.features.map((element) => element.value !== null ? <h4 key={element.feature}>{element.feature} : {element.value} </h4> : <h4 key={element.feature}>{element.feature} </h4>)}
         </div>
       </div>
     );

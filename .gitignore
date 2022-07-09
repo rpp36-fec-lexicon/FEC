@@ -5,3 +5,4 @@ node_modules/
 babel.config.js
 .env
 coverage/
+bundle.js.map
