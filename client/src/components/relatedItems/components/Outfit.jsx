@@ -52,8 +52,6 @@ class Outfit extends React.Component {
     // console.log("outfitItems", this.state.outfitItems);
     return (
       <div>
-        {" "}
-        Your Outfit
         <div
           className="flex-container"
           style={{

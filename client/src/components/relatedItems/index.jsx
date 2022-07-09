@@ -7,7 +7,7 @@ class RelatedAndOutfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // prodId: "",
+      prodInfo: "",
     };
     //
     // console.log("RelatedAndOutfit ID", this.props);
@@ -17,34 +17,36 @@ class RelatedAndOutfit extends React.Component {
     //   prodId: this.props.prodID,
     // });
     // console.log("RelatedAndOutfit", this.props.prodID);
-    // $.ajax({
-    //   type: "GET",
-    //   url: `/products/${this.props.prodID}`,
-    //   success: (prodInfo) => {
-    //     // console.log("main prod", prodInfo.id); // {id, name, category, features...}
-    //     this.setState({
-    //       prodInfo: prodInfo,
-    //     });
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //   },
-    // });
+    $.ajax({
+      type: "GET",
+      url: `/products/${this.props.prodID}`,
+      success: (prodInfo) => {
+        // console.log("main prod", prodInfo.id); // {id, name, category, features...}
+        this.setState({
+          prodInfo: prodInfo,
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   render() {
     return (
-      <div>
-        vvv
+      <div id="RelatedID">
+        <h5>Related Products:</h5>
         <Related
           prodID={this.props.prodID}
           // prodInfo={this.state.prodInfo}
-          prodInfo={this.props.prodInfo}
+          prodInfo={this.state.prodInfo}
           prodIDChanger={this.props.prodIDChanger}
         />
         <br></br>
         <br></br>
         <br></br>
+        <h5>Your Outfit:</h5>
+
         <Outfit
           prodID={this.props.prodID}
           prodInfo={this.props.prodInfo}

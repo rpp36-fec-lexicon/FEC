@@ -1,18 +1,45 @@
-// import React from 'react';
-// import App from './../../App.jsx';
-// import {render, screen} from '@testing-library/react';
-// import '@testing-library/jest-dom'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { act } from 'react-dom/test-utils';
 
-// test('dummy test to check if jest works', () => {
-//     expect(true).toBe(true);
-//   });
+import RelatedAndOutfit from './Index.jsx';
+import Related from './components/Related.jsx';
 
-// test('renders word Atelier', () => {
-//   render(<App />);
-//   const divElement = screen.getByText('Atelier');
-//   expect(divElement).toBeInTheDocument();
-// });
-// /*
+import {render, screen} from '@testing-library/react';
+import '@testing-library/jest-dom'
+
+describe('Related Products', ()=>{
+  let temporarySandBox;
+  beforeEach(() => {
+    temporarySandBox = document.createElement('div');
+    document.body.appendChild(temporarySandBox);
+  });
+  afterEach(() => {
+    document.body.removeChild(temporarySandBox);
+    temporarySandBox = null;
+  });
+
+  describe('Testing main entry (Index) of Related Products component', ()=>{
+    it('should find headers to both "related products" and "your outfit"', async () => {
+      render(<RelatedAndOutfit />);
+      expect(screen.getByText("Related Products:")).toBeInTheDocument();
+      expect(screen.getByText("Your Outfit:")).toBeInTheDocument();
+    });
+  })
+
+  describe('Testing Related Products component', ()=>{
+    it('counts the number of divs created by Related class component', async () => {
+      act(() => {
+        ReactDOM.createRoot(temporarySandBox).render(<Related />);
+      });
+      let renderedInfo = temporarySandBox.querySelector('div');
+      expect(renderedInfo.childNodes.length).toBe(2);
+    });
+  })
+
+})
+
+/*
 // TESTING REQUIREMENTS
 // -------------------------------
 // Unit Tests for server and client code using Jest

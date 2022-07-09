@@ -54,6 +54,7 @@ class RelatedCard extends React.Component {
           }}
         >
           <button
+            className="comparisonBtn"
             style={{
               float: "right",
               background: "transparent",
