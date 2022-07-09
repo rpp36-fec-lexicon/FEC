@@ -4,6 +4,11 @@
 // configure({adapter: new Adapter()});
 // import ReviewItem from './Reviews/ReviewItem.jsx';
 
+test('dummy test to check if jest works', () => {
+    expect(true).toBe(true);
+  });
+
+
 // test('ReviewItem renders the review summary', () => {
 //   const listItem = shallow(
 //     <ReviewItem
