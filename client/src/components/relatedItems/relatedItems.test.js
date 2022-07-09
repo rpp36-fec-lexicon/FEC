@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { act } from 'react-dom/test-utils';
 
-import RelatedAndOutfit from './Index.jsx';
+import RelatedAndOutfit from './index.jsx';
 import Related from './components/Related.jsx';
 
 import {render, screen} from '@testing-library/react';
