@@ -1,5 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 // import Stars from "react-stars-display";
 
 class OutfitCard extends React.Component {
@@ -8,7 +8,7 @@ class OutfitCard extends React.Component {
     this.state = {
       defaultOriginalPrice: 0,
       defaultSalePrice: 0,
-      defaultPhoto: "",
+      defaultPhoto: '',
     };
   }
 
@@ -18,9 +18,9 @@ class OutfitCard extends React.Component {
     return (
       <div
         style={{
-          border: "1px solid grey",
-          padding: "15px 15px 15px 15px",
-          margin: "15px 15px 15px 15px",
+          border: '1px solid grey',
+          padding: '15px 15px 15px 15px',
+          margin: '15px 15px 15px 15px',
         }}
         // onClick={() =>
         //   this.props.prodIDChanger(this.props.itemData.itemInfo.id)
@@ -28,20 +28,20 @@ class OutfitCard extends React.Component {
       >
         <div
           style={{
-            height: "200px",
-            width: "200px",
-            marginBottom: "10px",
+            height: '200px',
+            width: '200px',
+            marginBottom: '10px',
             backgroundImage: `url(${this.state.defaultPhoto})`,
-            backgroundSize: "200px 200px",
+            backgroundSize: '200px 200px',
           }}
         >
           <button
             style={{
-              color: "yellow",
-              float: "right",
-              fontSize: "20px",
-              background: "transparent",
-              borderColor: "transparent",
+              color: 'yellow',
+              float: 'right',
+              fontSize: '20px',
+              background: 'transparent',
+              borderColor: 'transparent',
             }}
             onClick={() => {
               // this.props.comparison(
@@ -57,7 +57,7 @@ class OutfitCard extends React.Component {
         <div>
           <div>{this.props.itemData.itemInfo.category}</div>
           <div>
-            {" "}
+            {' '}
             <b>{this.props.itemData.itemInfo.name}</b>
           </div>
 
@@ -66,10 +66,10 @@ class OutfitCard extends React.Component {
               `$${this.state.defaultOriginalPrice}`
             ) : (
               <span>
-                <span style={{ color: "red" }}>
-                  {" "}
+                <span style={{ color: 'red' }}>
+                  {' '}
                   ${this.state.defaultSalePrice}
-                </span>{" "}
+                </span>{' '}
                 <del> ${this.state.defaultOriginalPrice}</del>
               </span>
             )}

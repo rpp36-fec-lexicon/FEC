@@ -1,13 +1,13 @@
-import React from "react";
-import Related from "./components/Related.jsx";
-import Outfit from "./components/Outfit.jsx";
-import $ from "jquery";
+import React from 'react';
+import Related from './components/Related.jsx';
+import Outfit from './components/Outfit.jsx';
+import $ from 'jquery';
 
 class RelatedAndOutfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      prodInfo: "",
+      prodInfo: '',
     };
     //
     // console.log("RelatedAndOutfit ID", this.props);
@@ -18,7 +18,7 @@ class RelatedAndOutfit extends React.Component {
     // });
     // console.log("RelatedAndOutfit", this.props.prodID);
     $.ajax({
-      type: "GET",
+      type: 'GET',
       url: `/products/${this.props.prodID}`,
       success: (prodInfo) => {
         // console.log("main prod", prodInfo.id); // {id, name, category, features...}
