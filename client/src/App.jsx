@@ -124,14 +124,14 @@ class App extends React.Component {
       <div>
         <h1>Atelier</h1>
         <ProductOverview productInfo={this.state.productInfo} defaultStyle={this.state.defaultStyle} styleList={this.state.styleInfo} rating={this.state.rating}/>
-        {/* <RatingsAndReviews productId={this.state.productId} reviewData={this.state.reviewData} reviews={this.state.reviews} metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} /> */}
-        {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */}
-        {/* <RelatedAndOutfit prodID={this.state.productId} rating={this.state.rating}/> */}
+        <RatingsAndReviews productId={this.state.productId} reviewData={this.state.reviewData} reviews={this.state.reviews} metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} />
+        <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} />
+        <RelatedAndOutfit prodID={this.state.productId} rating={this.state.rating}/>
       </div>
     );
   }
 }
 
-// ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+ReactDOM.createRoot(document.getElementById('app')).render(<App />);
 
 export default App;

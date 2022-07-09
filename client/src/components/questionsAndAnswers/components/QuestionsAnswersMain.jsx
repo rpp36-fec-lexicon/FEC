@@ -2,9 +2,6 @@ import React from 'react';
 import QuestionsAnswersList from './QuestionsAnswersList.jsx';
 import SearchQuestion from './SearchQuestion.jsx';
 import $ from 'jquery';
-// import QuestionEntry from './QuestionEntry.jsx'
-// import sampleQuestionsAnswers from '../sampledata/QuestionsAnswersAPI.js'
-// import { useContext } from 'react';
 
 class QuestionsAnswersMain extends React.Component {
   constructor(props) {
