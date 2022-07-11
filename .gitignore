@@ -4,13 +4,10 @@ bundle.js
 node_modules/
 babel.config.js
 .env
-<<<<<<< HEAD
 bundle.js.map
 
 # Ignore test-related files
 /coverage.data
 /coverage/
-=======
 coverage/
-bundle.js.map
->>>>>>> dab1d051fe6516e33f2ff2adaea2ee1ed9c3f5eb
+

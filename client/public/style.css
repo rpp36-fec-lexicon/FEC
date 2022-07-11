@@ -88,3 +88,54 @@ td {
   margin-right: 20px;
   flex-grow: 9;
 }
+
+.relatedCarousel {
+  display: flex;
+  /* border: 10px solid orange; */
+}
+
+.RelatedCarouselItem {
+  flex-grow: 1;
+}
+
+.MAINrelatedCarousel {
+  display: flex;
+  /* overflow: auto; */
+  /* border: 2px solid rgb(20, 223, 47); */
+}
+
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  cursor: pointer;
+}
+.left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+.right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.carouselContainer::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #aaa;
+  /* display: none; */
+}
+
+.carouselContainer::-webkit-scrollbar-thumb {
+  background-color: black;
+}
+
+/* .left_disabled { display: none; } */
