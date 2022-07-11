@@ -45,7 +45,7 @@ class Checkout extends React.Component {
             (
               <>
                 <option>Select Size</option>
-                {this.getSizes().map((size) => <option key={size}>{size}</option>)}
+                {this.getSizes().map((size) => <option key={size} id="size">{size}</option>)}
               </>
             ) :
             <option>OUT OF STOCK</option>}

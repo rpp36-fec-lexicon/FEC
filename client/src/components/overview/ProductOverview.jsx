@@ -19,7 +19,6 @@ class ProductOverview extends React.Component {
     };
     this.selectedStyle = this.selectedStyle.bind(this);
     this.changeStyle = this.changeStyle.bind(this);
-    this.testFunc = this.testFunc.bind(this);
   }
   componentDidMount() {
     this.selectedStyle();
@@ -30,12 +29,7 @@ class ProductOverview extends React.Component {
     this.setState({
       selectedStyle: tempStyle,
       styles: this.props.styleList
-    }, this.testFunc());
-    console.log('temp style', tempStyle);
-  }
-
-  testFunc() {
-    console.log('new state ', this);
+    });
   }
 
   changeStyle(id) {
@@ -52,7 +46,7 @@ class ProductOverview extends React.Component {
       console.log('this is the current style ', this.state.selectedStyle);
       return (
         <div>
-          <h1>Product Overview!</h1>
+          <h1 id="overviewHead">Product Overview!</h1>
           {this.state.selectedStyle ?
             <div>
               <Showcase id={this.state.selectedStyle.style_id} photos={this.state.selectedStyle.photos} currentPhoto={this.changePhoto}/>
