@@ -12,46 +12,40 @@ class RelatedAndOutfit extends React.Component {
     };
   }
   componentDidMount() {}
-  isOverflowing(element) {
-    return element.scrollWidth >= element.offsetWidth;
-  }
 
   leftScroll() {
-    document.querySelector(".carouselContainer").scrollBy(-280, 0);
+    document.querySelector(".carouselContainer").scrollBy(-250, 0);
     document
       .querySelector(".carouselContainer")
       .addEventListener("scroll", (event) => {
         var xLeftFrame =
           document.querySelector(".carouselContainer").scrollLeft;
         this.setState({ xLeftFrame });
-        var z = document.querySelector(".carouselContainer").scrollWidth;
-        var s = document.querySelector(".carouselContainer").offsetWidth;
-        if (Math.round(xLeftFrame) + s !== z) {
+        var sWid = document.querySelector(".carouselContainer").scrollWidth;
+        var ofWid = document.querySelector(".carouselContainer").offsetWidth;
+        if (Math.round(xLeftFrame) + ofWid !== sWid) {
           this.setState({ xRightFrame: 1 });
         }
       });
   }
 
   rightScroll() {
-    document.querySelector(".carouselContainer").scrollBy(280, 0);
+    document.querySelector(".carouselContainer").scrollBy(250, 0);
     document
       .querySelector(".carouselContainer")
       .addEventListener("scroll", (event) => {
         var xLeftFrame =
           document.querySelector(".carouselContainer").scrollLeft;
         this.setState({ xLeftFrame });
-
-        var z = document.querySelector(".carouselContainer").scrollWidth;
-        var s = document.querySelector(".carouselContainer").offsetWidth;
-
-        if (Math.round(xLeftFrame) + s === z) {
+        var sWid = document.querySelector(".carouselContainer").scrollWidth;
+        var ofWid = document.querySelector(".carouselContainer").offsetWidth;
+        if (Math.round(xLeftFrame) + ofWid === sWid) {
           this.setState({ xRightFrame: 0 });
         }
       });
   }
 
   render() {
-    console.log("xRightFrame", this.state.xLeftFrame);
     return (
       <div>
         <h5>Related Products:</h5>
@@ -61,8 +55,6 @@ class RelatedAndOutfit extends React.Component {
           style={{
             padding: "15px 15px 15px 15px",
             margin: "15px 15px 15px 15px",
-            // border: "5px solid blue",
-            // overflow: "auto",
             position: "relative",
           }}
         >
@@ -75,16 +67,7 @@ class RelatedAndOutfit extends React.Component {
             ></button>
           )}
 
-          <div
-            className="carouselContainer"
-            style={{
-              padding: "15px 15px 15px 15px",
-              margin: "15px 15px 15px 15px",
-              // border: "5px solid red",
-              overflow: "auto",
-              // position: "relative",
-            }}
-          >
+          <div className="carouselContainer">
             <Related
               prodID={this.props.prodID}
               prodInfo={this.props.prodInfo}

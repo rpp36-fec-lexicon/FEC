@@ -90,9 +90,6 @@ class Comparison extends React.Component {
     return (
       <div className="modal">
         <div className="modal_content">
-          <span className="close" onClick={this.handleCloseButton}>
-            &times;{" "}
-          </span>
           <table>
             <tbody>
               <tr>

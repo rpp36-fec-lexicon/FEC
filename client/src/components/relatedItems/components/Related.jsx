@@ -23,7 +23,6 @@ class Related extends React.Component {
 
       success: (arrayOfProdIDs) => {
         var relatedItemData = [];
-
         arrayOfProdIDs.forEach((itemID) => {
           $.ajax({
             type: "GET",
@@ -74,8 +73,8 @@ class Related extends React.Component {
     // console.log("state in Related", this.state.itemInfoAndStyle);
     // if (this.props.prodInfo !== undefined) {
     return (
-      <div className="MAINrelatedCarousel">
-        <div>
+      <div>
+        <div className="comp">
           {this.state.modalSeen ? (
             <Comparison
               mainProdName={this.props.prodInfo.name}
