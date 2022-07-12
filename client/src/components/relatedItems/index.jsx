@@ -8,10 +8,39 @@ class RelatedAndOutfit extends React.Component {
     super(props);
     this.state = {
       xLeftFrame: 0,
-      xRightFrame: 1,
+      xRightFrame: 1, // make 1 only if carousel list is long enough
+      // relatedCount: 0,
     };
   }
-  componentDidMount() {}
+  componentDidMount() {
+    /*
+    find num of ralated items
+    if their width sum is less than screen size, don't show right arrow
+    */
+    $.ajax({
+      type: "GET",
+      url: `/products/${this.props.prodID}/related`,
+      success: (arrayOfProdIDs) => {
+        this.setState({
+          relatedCount: arrayOfProdIDs.length,
+        });
+        var screenWidth = document.body.clientWidth;
+        var relatedProdsWidth = arrayOfProdIDs.length * 184 + 120;
+
+        if (screenWidth > relatedProdsWidth) {
+          this.setState({
+            xRightFrame: 0,
+          });
+        }
+        // console.log("rcount", this.state.relatedCount, );
+
+        console.log("swid", screenWidth, "rwid", relatedProdsWidth);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
   leftScroll() {
     document.querySelector(".carouselContainer").scrollBy(-250, 0);
@@ -49,7 +78,6 @@ class RelatedAndOutfit extends React.Component {
     return (
       <div>
         <h5>Related Products:</h5>
-
         <div
           className="mainD"
           style={{

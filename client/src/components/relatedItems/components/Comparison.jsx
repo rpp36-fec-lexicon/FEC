@@ -81,10 +81,6 @@ class Comparison extends React.Component {
     });
   }
 
-  // handleCloseButton = () => {
-  //   this.props.toggle();
-  // };
-
   render() {
     // console.log("props in comp", this.props);
     return (

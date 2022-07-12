@@ -15,7 +15,7 @@
 }
 
 .comp {
- position: fixed;
+ position: absolute;
  left: 30%;
 }
 
@@ -55,7 +55,7 @@ progress {
 
 
 /* Hide carousel arrows when reaching end */
-.flickity-prev-next-button:disabled { display: none; }
+/* .flickity-prev-next-button:disabled { display: none; } */
 
 .qbutton {
   display: flex;
@@ -87,6 +87,7 @@ progress {
 .relatedCarousel {
   display: flex;
   /* border: 10px solid orange; */
+  width: 50%;
 }
 
 .RelatedCarouselItem {
@@ -122,7 +123,7 @@ progress {
   padding: 15px 15px 15px 15px;
   margin: 15px 15px 15px 15px;
   overflow-x: scroll;
-  overflow-y: visible;
+  /* overflow-y: visible; */
 }
 
 

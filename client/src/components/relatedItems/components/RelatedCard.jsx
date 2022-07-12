@@ -41,7 +41,7 @@ class RelatedCard extends React.Component {
           border: "1px solid grey",
           padding: "15px 15px 15px 15px",
           margin: "15px 15px 15px 15px",
-          width: "150px",
+          // width: "50px",
         }}
       >
         <div
@@ -55,24 +55,26 @@ class RelatedCard extends React.Component {
           onClick={() =>
             this.props.prodIDChanger(this.props.itemData.itemInfo.id)
           }
-        ></div>
-        <div>
-          <button
-            className="comparisonBtn"
-            style={{
-              float: "right",
-              background: "transparent",
-              borderColor: "transparent",
-            }}
-            onClick={() => {
-              this.props.comparison(
-                this.props.itemData.itemInfo.features,
-                this.props.itemData.itemInfo.name
-              );
-            }}
-          >
-            &#11088;
-          </button>
+        >
+          <div>
+            <button
+              className="comparisonBtn"
+              style={{
+                float: "right",
+                background: "transparent",
+                borderColor: "transparent",
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                this.props.comparison(
+                  this.props.itemData.itemInfo.features,
+                  this.props.itemData.itemInfo.name
+                );
+              }}
+            >
+              &#11088;
+            </button>
+          </div>
         </div>
 
         <div>

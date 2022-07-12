@@ -86,7 +86,6 @@ class Related extends React.Component {
           ) : null}{" "}
         </div>
 
-        {/* <div></div> */}
         <div className="relatedCarousel">
           {this.state.itemInfoAndStyle.map((itemData, index) => (
             <RelatedCard
@@ -97,10 +96,6 @@ class Related extends React.Component {
             />
           ))}
         </div>
-
-        {/* <button class="left">
-          <i class="fas fa-angle-double-left"></i>
-        </button> */}
       </div>
     );
     // }
