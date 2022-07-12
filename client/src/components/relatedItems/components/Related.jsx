@@ -23,7 +23,17 @@ class Related extends React.Component {
 
       success: (arrayOfProdIDs) => {
         var relatedItemData = [];
+        // related Ids cant have duplicate not have overview id
+        var UNQarrayOfProdIDs = [];
         arrayOfProdIDs.forEach((itemID) => {
+          if (
+            itemID !== this.props.prodID &&
+            !UNQarrayOfProdIDs.includes(itemID)
+          ) {
+            UNQarrayOfProdIDs.push(itemID);
+          }
+        });
+        UNQarrayOfProdIDs.forEach((itemID) => {
           $.ajax({
             type: "GET",
             url: `/products/${itemID}`,
