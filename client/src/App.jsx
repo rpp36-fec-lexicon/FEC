@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import ProductOverview from "./components/overview/ProductOverview.jsx";
-import RatingsAndReviews from "./components/ratingsAndReviews/RatingsAndReviews.jsx";
-import RelatedAndOutfit from "./components/relatedItems/index.jsx";
-import QuestionsAnswersMain from "./components/questionsAndAnswers/components/QuestionsAnswersMain.jsx";
-import $ from "jquery";
-const axios = require("axios");
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import ProductOverview from './components/overview/ProductOverview.jsx';
+import RatingsAndReviews from './components/ratingsAndReviews/RatingsAndReviews.jsx';
+import RelatedAndOutfit from './components/relatedItems/index.jsx';
+import QuestionsAnswersMain from './components/questionsAndAnswers/components/QuestionsAnswersMain.jsx';
+import $ from 'jquery';
+const axios = require('axios');
 
 class App extends React.Component {
   constructor(props) {
@@ -25,13 +25,13 @@ class App extends React.Component {
   }
 
   getAllReviewsFunc() {
-    return axios.get("/reviews", {
+    return axios.get('/reviews', {
       params: { productId: this.state.productId },
     });
   }
 
   getAllMetaFunc() {
-    return axios.get("/reviews/meta", {
+    return axios.get('/reviews/meta', {
       params: { productId: this.state.productId },
     });
   }
@@ -54,8 +54,6 @@ class App extends React.Component {
       .catch(err => {
         console.log('error fetching reviews in filterRating', err);
       });
-
-
   }
 
   componentDidMount() {
@@ -69,8 +67,8 @@ class App extends React.Component {
   updateProduct(productId) {
     var query = { productId: productId };
     $.ajax({
-      url: "/products/:product_id",
-      type: "POST",
+      url: '/products/:product_id',
+      type: 'POST',
       data: query,
       success: (data) => {
         // console.log("THIS IS MY DATA!", data);
@@ -85,15 +83,15 @@ class App extends React.Component {
     })
       .then(() => {
         $.ajax({
-          url: "/products/:product_id/styles",
-          type: "POST",
+          url: '/products/:product_id/styles',
+          type: 'POST',
           data: query,
           success: (styles) => {
-            console.log("THIS IS STYLE DATA", styles);
+            // console.log('THIS IS STYLE DATA', styles);
             this.setState({
               styleInfo: styles.results,
               defaultStyle: styles.results.find(
-                (product) => product["default?"] === true
+                (product) => product['default?'] === true
               ),
             });
             if (this.defaultStyle === undefined) {
@@ -137,12 +135,8 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-        {/* <ProductOverview productInfo={this.state.productInfo} rating={this.state.rating}/> */}
-        {/* <RelatedAndOutfit prodID={this.state.productId} rating={this.state.rating}/> */}
-        {/* <QuestionsAnswersMain productId={this.state.productId} key={this.state.productId} /> */}
-        {/* <RatingsAndReviews productId={this.state.productId} reviewData={this.state.reviewData} reviews={this.state.reviews} metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} filterRating={this.filterRating}/> */}
 
-        <ProductOverview
+        {/* <ProductOverview
           productInfo={this.state.productInfo}
           defaultStyle={this.state.defaultStyle}
           styleList={this.state.styleInfo}
@@ -158,7 +152,7 @@ class App extends React.Component {
         <QuestionsAnswersMain
           productId={this.state.productId}
           key={this.state.productId}
-        />
+        /> */}
 
         <RatingsAndReviews
           productId={this.state.productId}
@@ -174,6 +168,6 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+ReactDOM.createRoot(document.getElementById('app')).render(<App />);
 
 export default App;

@@ -4,6 +4,7 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
 const RatingSummary = (props) => {
+
   const recommended = props.metaData.recommended;
   let recommendedPercent;
   let recommendedTrue;
@@ -22,7 +23,6 @@ const RatingSummary = (props) => {
   return (
 
     <div>
-      <h2>RATINGS & REVIEWS</h2>
       <h1 style={sameLineStyle}>{props.rating}</h1>
       <Stars style={sameLineStyle} stars={props.rating}/>
       <div>{recommendedPercent}% of reviews recommend this product</div>

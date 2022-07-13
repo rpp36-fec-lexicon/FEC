@@ -2,13 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { act } from 'react-dom/test-utils';
 
-import RelatedAndOutfit from './index.jsx';
-import Related from './components/Related.jsx';
+import ShortReviewBody from '../Reviews/ShortReviewBody.jsx';
 
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom'
 
-describe('Related Products', ()=>{
+describe('ShortReviewBody', ()=>{
   let temporarySandBox;
   beforeEach(() => {
     temporarySandBox = document.createElement('div');
@@ -19,24 +18,12 @@ describe('Related Products', ()=>{
     temporarySandBox = null;
   });
 
-  describe('Testing main entry (Index) of Related Products component', ()=>{
-    it('should find headers to both "related products" and "your outfit"', async () => {
-      render(<RelatedAndOutfit />);
-      expect(screen.getByText("Related Products:")).toBeInTheDocument();
-      expect(screen.getByText("Your Outfit:")).toBeInTheDocument();
+  describe('ShortReviewBody Component', ()=>{
+    it('should render all of the review body received as props', async () => {
+      render(<ShortReviewBody reviewBody={'this is the short review body'}/>);
+      expect(screen.getByText('this is the short review body')).toBeInTheDocument();
     });
   })
-
-  describe('Testing Related Products component', ()=>{
-    it('counts the number of divs created by Related class component', async () => {
-      act(() => {
-        ReactDOM.createRoot(temporarySandBox).render(<Related />);
-      });
-      let renderedInfo = temporarySandBox.querySelector('div');
-      expect(renderedInfo.childNodes.length).toBe(2);
-    });
-  })
-
 })
 
 /*

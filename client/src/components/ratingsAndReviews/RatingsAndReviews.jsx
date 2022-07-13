@@ -32,20 +32,25 @@ class RatingsAndReviews extends React.Component {
 
   render() {
     console.log('props in ratingsreview', this.props);
+
     if (this.props.reviews !== null) {
       return (
-        <div className="content-container">
-          <div className="row">
-            <div className="left-panel box">
-              <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/>
-              {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/> */}
-            </div>
-            <div className="right-panel box">
-              <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} />
-              {/* <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} /> */}
+        <div>
+          <h3>RATINGS & REVIEWS</h3>
+          <div className="content-container">
+            <div className="row">
+              <div className="left-panel">
+                {/* <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/> */}
+                <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/>
+              </div>
+              <div className="right-panel">
+                {/* <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} /> */}
+                <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} />
+              </div>
             </div>
           </div>
         </div>
+
       );
     }
   }
