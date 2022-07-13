@@ -8,16 +8,12 @@ class RelatedAndOutfit extends React.Component {
     super(props);
     this.state = {
       xLeftFrame: 0,
-      xRightFrame: 1, // make 1 only if carousel list is long enough
-      // relatedCount: 0,
+      xRightFrame: 0,
     };
   }
   componentDidMount() {
-    /*
-    find num of ralated items
-    if their width sum is less than screen size, don't show right arrow
-    */
     $.ajax({
+      // THIS REQUEST IS FOR SCREEN WIDTH CALCULATION
       type: "GET",
       url: `/products/${this.props.prodID}/related`,
       success: (arrayOfProdIDs) => {
@@ -27,14 +23,11 @@ class RelatedAndOutfit extends React.Component {
         var screenWidth = document.body.clientWidth;
         var relatedProdsWidth = arrayOfProdIDs.length * 184 + 120;
 
-        if (screenWidth > relatedProdsWidth) {
+        if (screenWidth < relatedProdsWidth) {
           this.setState({
-            xRightFrame: 0,
+            xRightFrame: 1,
           });
         }
-        // console.log("rcount", this.state.relatedCount, );
-
-        console.log("swid", screenWidth, "rwid", relatedProdsWidth);
       },
       error: (err) => {
         console.log(err);
@@ -75,6 +68,7 @@ class RelatedAndOutfit extends React.Component {
   }
 
   render() {
+    // console.log("proId in RelatedAndOutfit", this.props.prodID);
     return (
       <div>
         <h5>Related Products:</h5>
@@ -119,11 +113,11 @@ class RelatedAndOutfit extends React.Component {
         <br></br>
         <h5>Your Outfit:</h5>
 
-        {/* <Outfit
+        <Outfit
           prodID={this.props.prodID}
           prodInfo={this.props.prodInfo}
           // prodIDChanger={this.props.prodIDChanger}
-        /> */}
+        />
         <br></br>
         <br></br>
         <br></br>

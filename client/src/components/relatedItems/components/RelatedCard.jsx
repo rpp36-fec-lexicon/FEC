@@ -52,9 +52,10 @@ class RelatedCard extends React.Component {
             backgroundImage: `url(${this.state.defaultPhoto})`,
             backgroundSize: "150px 150px",
           }}
-          onClick={() =>
-            this.props.prodIDChanger(this.props.itemData.itemInfo.id)
-          }
+          onClick={() => {
+            this.props.prodIDChanger(this.props.itemData.itemInfo.id);
+            this.props.relatedItemsUpdater(this.props.itemData.itemInfo.id);
+          }}
         >
           <div>
             <button

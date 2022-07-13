@@ -139,12 +139,12 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-        <ProductOverview
+        {/* <ProductOverview
           productInfo={this.state.productInfo}
           defaultStyle={this.state.defaultStyle}
           styleList={this.state.styleInfo}
           rating={this.state.rating}
-        />
+        /> */}
         <RelatedAndOutfit
           prodID={this.state.productId}
           prodInfo={this.state.productInfo}
