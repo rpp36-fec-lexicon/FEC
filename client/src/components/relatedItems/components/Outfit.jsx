@@ -19,54 +19,57 @@ class Outfit extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   // console.log("Related rend", this.props.prodID); // CHANGE prodID here
-  //   $.ajax({
-  //     type: 'GET',
-  //     url: `/products/${this.props.prodID}/related`,
+  componentDidMount() {
+    // console.log("Related rend", this.props.prodID); // CHANGE prodID here
+    // $.ajax({
+    //   type: "GET",
+    //   url: `/products/${this.props.prodID}/related`,
+    //   success: (arrayOfProdIDs) => {
+    //     var relatedItemData = [];
+    //     arrayOfProdIDs.forEach((itemID) => {
+    //       $.ajax({
+    //         type: "GET",
+    //         url: `/products/${itemID}`,
+    //         success: (relatedItemInfo) => {
+    //           $.ajax({
+    //             type: "GET",
+    //             url: `/products/${itemID}/styles`,
+    //             success: (relatedItemStyles) => {
+    //               relatedItemData.push({
+    //                 itemInfo: relatedItemInfo,
+    //                 itemStyles: relatedItemStyles,
+    //               });
+    //               this.setState({
+    //                 itemInfoAndStyle: relatedItemData,
+    //               });
+    //             },
+    //             error: (err) => {
+    //               console.log(err);
+    //             },
+    //           });
+    //         },
+    //         error: (err) => {
+    //           console.log(err);
+    //         },
+    //       });
+    //     });
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   },
+    // });
+  }
+  outfitAdder() {
+    var outfitContainer = this.state.outfitItems;
 
-  //     success: (arrayOfProdIDs) => {
-  //       var relatedItemData = [];
+    if (!outfitContainer.includes(this.props.prodInfo)) {
+      outfitContainer.push(this.props.prodInfo);
+    }
 
-  //       arrayOfProdIDs.forEach((itemID) => {
-  //         $.ajax({
-  //           type: 'GET',
-  //           url: `/products/${itemID}`,
-  //           success: (relatedItemInfo) => {
-  //             $.ajax({
-  //               type: 'GET',
-  //               url: `/products/${itemID}/styles`,
-  //               success: (relatedItemStyles) => {
-  //                 relatedItemData.push({
-  //                   itemInfo: relatedItemInfo,
-  //                   itemStyles: relatedItemStyles,
-  //                 });
-
-  //                 this.setState({
-  //                   itemInfoAndStyle: relatedItemData,
-  //                 });
-  //               },
-  //               error: (err) => {
-  //                 console.log(err);
-  //               },
-  //             });
-  //           },
-  //           error: (err) => {
-  //             console.log(err);
-  //           },
-  //         });
-  //       });
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
-  // outfitAdder() {
-  //   this.setState({
-  //     outfitItems: this.state.itemInfoAndStyle,
-  //   });
-  // }
+    this.setState({
+      outfitItems: outfitContainer,
+    });
+  }
 
   render() {
     // console.log("outfitItems", this.state.outfitItems);
@@ -94,9 +97,9 @@ class Outfit extends React.Component {
                 fontSize: "15px",
               }}
               // should only add a prod once to list.
-              // onClick={() => {
-              //   this.outfitAdder();
-              // }}
+              onClick={() => {
+                this.outfitAdder();
+              }}
             >
               <span>
                 [&#x2B;] <br></br>
@@ -105,9 +108,23 @@ class Outfit extends React.Component {
             </button>
           </div>
 
+          <div className="flex-child relatedCarousel">
+            {this.state.outfitItems.map((item, index) => (
+              <OutfitCard
+                prodInfo={item}
+                styleInfo={this.props.styleInfo}
+                key={index}
+              />
+            ))}
+          </div>
+
           {/* <div className="flex-child">
             {this.state.outfitItems.length !== 0 ? (
-              <OutfitRenderer data={this.state.itemInfoAndStyle} />
+              //  {this.state.outfitItems.map()}
+              <OutfitRenderer
+                prodInfo={this.state.outfitItems}
+                styleInfo={this.props.styleInfo}
+              />
             ) : null}
           </div> */}
         </div>
@@ -117,9 +134,10 @@ class Outfit extends React.Component {
 }
 
 // const OutfitRenderer = (props) => {
-//   console.log("PPP", props);
+//   // console.log("PPP", props);
 //   return (
 //     <div
+//       className="RelatedCarouselItem"
 //       style={{
 //         border: "1px solid grey",
 //         padding: "15px 15px 15px 15px",
@@ -128,11 +146,11 @@ class Outfit extends React.Component {
 //     >
 //       <div
 //         style={{
-//           height: "200px",
-//           width: "200px",
+//           height: "150px",
+//           width: "150px",
 //           marginBottom: "10px",
-//           backgroundImage: `url(${props.data[0].itemStyles.results[0].photos[0].url})`,
-//           backgroundSize: "200px 200px",
+//           backgroundImage: `url(${props.styleInfo[0].photos[0].url})`,
+//           backgroundSize: "150px 150px",
 //         }}
 //       >
 //         <button

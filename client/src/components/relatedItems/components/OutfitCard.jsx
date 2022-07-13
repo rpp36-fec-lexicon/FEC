@@ -12,11 +12,30 @@ class OutfitCard extends React.Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.styleInfo.forEach((styleInfoObj) => {
+      if (styleInfoObj["default?"]) {
+        this.setState({
+          defaultOriginalPrice: styleInfoObj.original_price,
+          defaultSalePrice: styleInfoObj.sale_price,
+          defaultPhoto: styleInfoObj.photos[0].url,
+        });
+      }
+    });
+
+    if (this.state.defaultOriginalPrice === 0) {
+      this.setState({
+        defaultOriginalPrice: this.props.styleInfo[0].original_price,
+        defaultSalePrice: null,
+        defaultPhoto: this.props.styleInfo[0].photos[0].url,
+      });
+    }
+  }
 
   render() {
     return (
       <div
+        className="RelatedCarouselItem"
         style={{
           border: "1px solid grey",
           padding: "15px 15px 15px 15px",
@@ -28,19 +47,19 @@ class OutfitCard extends React.Component {
       >
         <div
           style={{
-            height: "200px",
-            width: "200px",
+            height: "150px",
+            width: "150px",
             marginBottom: "10px",
             backgroundImage: `url(${this.state.defaultPhoto})`,
-            backgroundSize: "200px 200px",
+            backgroundSize: "150px 150px",
           }}
         >
           <button
             style={{
-              color: "yellow",
+              color: "red",
               float: "right",
               fontSize: "20px",
-              background: "transparent",
+              background: "black",
               borderColor: "transparent",
             }}
             onClick={() => {
@@ -55,10 +74,10 @@ class OutfitCard extends React.Component {
         </div>
 
         <div>
-          <div>{this.props.itemData.itemInfo.category}</div>
+          <div>{this.props.prodInfo.category}</div>
           <div>
             {" "}
-            <b>{this.props.itemData.itemInfo.name}</b>
+            <b>{this.props.prodInfo.name}</b>
           </div>
 
           <div>

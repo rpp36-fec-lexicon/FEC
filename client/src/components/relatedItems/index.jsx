@@ -116,6 +116,7 @@ class RelatedAndOutfit extends React.Component {
         <Outfit
           prodID={this.props.prodID}
           prodInfo={this.props.prodInfo}
+          styleInfo={this.props.styleInfo}
           // prodIDChanger={this.props.prodIDChanger}
         />
         <br></br>
