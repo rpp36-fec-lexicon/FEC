@@ -71,8 +71,20 @@ class Outfit extends React.Component {
     });
   }
 
+  outfitRemover(id) {
+    console.log("id", id);
+    for (let i = 0; i < this.state.outfitItems.length; i++) {
+      if (this.state.outfitItems[i].id === id) {
+        this.state.outfitItems.splice([i], 1);
+      }
+    }
+    this.setState({
+      outfitItems: this.state.outfitItems,
+    });
+  }
+
   render() {
-    // console.log("outfitItems", this.state.outfitItems);
+    console.log("outfitItems", this.state.outfitItems);
     return (
       <div>
         <div
@@ -112,6 +124,7 @@ class Outfit extends React.Component {
             {this.state.outfitItems.map((item, index) => (
               <OutfitCard
                 prodInfo={item}
+                outfitRemover={this.outfitRemover.bind(this)}
                 styleInfo={this.props.styleInfo}
                 key={index}
               />

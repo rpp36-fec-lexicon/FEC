@@ -63,10 +63,8 @@ class OutfitCard extends React.Component {
               borderColor: "transparent",
             }}
             onClick={() => {
-              // this.props.comparison(
-              //   this.props.itemData.itemInfo.features,
-              //   this.props.itemData.itemInfo.name
-              // );
+              this.props.outfitRemover(this.props.prodInfo.id);
+              // id of current item... not the one that was cliked
             }}
           >
             &times;
