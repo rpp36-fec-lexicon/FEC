@@ -14,7 +14,6 @@ class Related extends React.Component {
       relatedProdName: "",
     };
   }
-  // can ajax in cdm be invoked by a func insteat (like by prodIdchanger click)
 
   componentDidMount() {
     // USED FOR INITIAL RELATED PRODS REQUEST
@@ -121,10 +120,20 @@ class Related extends React.Component {
     });
   }
 
+  comparisonCloser(e) {
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
+  }
+
   render() {
     return (
-      <div>
-        <div className="comp">
+      <div
+        onClick={() => {
+          this.setState({ modalSeen: false });
+        }}
+      >
+        <div className="comp" onClick={this.comparisonCloser}>
           {this.state.modalSeen ? (
             <Comparison
               mainProdName={this.props.prodInfo.name}
@@ -136,17 +145,12 @@ class Related extends React.Component {
           ) : null}{" "}
         </div>
 
-        <div
-          className="relatedCarousel"
-          onClick={() => {
-            this.setState({ modalSeen: false });
-          }}
-        >
+        <div className="relatedCarousel">
           {this.state.itemInfoAndStyle.map((itemData, index) => (
-            <RelatedCard // HAS TO RE-RENDER when card is clicked (i.e. each item has it's own related items)
+            <RelatedCard
               itemData={itemData}
-              comparison={this.comparison.bind(this)}
               prodIDChanger={this.props.prodIDChanger}
+              comparison={this.comparison.bind(this)}
               relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
               key={index}
             />

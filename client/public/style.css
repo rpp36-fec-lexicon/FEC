@@ -17,6 +17,7 @@
 .comp {
  position: absolute;
  left: 30%;
+ /* pointer-events:none */
 }
 
 td {
