@@ -9,3 +9,4 @@ const MoreReviews = (props) => {
 };
 
 export default MoreReviews;
+

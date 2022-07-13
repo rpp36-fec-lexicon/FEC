@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import LongReviewBody from '../Reviews/LongReviewBody.jsx';
 import {render, screen} from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
 describe('LongReviewBody', ()=>{
