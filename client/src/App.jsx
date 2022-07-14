@@ -137,19 +137,19 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-        {/* <ProductOverview
+        <ProductOverview
           productInfo={this.state.productInfo}
           defaultStyle={this.state.defaultStyle}
           styleList={this.state.styleInfo}
           rating={this.state.rating}
-        /> */}
+        />
         <RelatedAndOutfit
           prodID={this.state.productId}
           prodInfo={this.state.productInfo}
           styleInfo={this.state.styleInfo}
           prodIDChanger={this.prodIDChanger.bind(this)}
         />
-        {/*
+
         <QuestionsAnswersMain
           productId={this.state.productId}
           productInfo={this.state.productInfo}
@@ -163,7 +163,7 @@ class App extends React.Component {
           rating={this.state.rating}
           totalNumberOfRatings={this.state.totalNumberOfRatings}
           filterRating={this.filterRating}
-        /> */}
+        />
       </div>
     );
   }
