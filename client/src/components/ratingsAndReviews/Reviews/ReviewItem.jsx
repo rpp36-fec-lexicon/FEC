@@ -12,7 +12,6 @@ class ReviewItem extends React.Component {
       helpfulClick: 0,
       helpfulness: this.props.review.helpfulness
     };
-
   }
 
   increaseHelpfulnessFunc() {

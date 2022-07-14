@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import ReviewItem from '../Reviews/ReviewItem.jsx';
-
+import userEvent from '@testing-library/user-event';
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 
@@ -37,8 +37,18 @@ describe('ReviewItem', () => {
       expect(summaryTextEle).toBeInTheDocument();
     });
 
-    // it('should increase helpfulness count by 1 when Yes is clicked', async() => {
+    it('should increase helpfulness count by 1 when Yes is clicked', async() => {
+      render(<ReviewItem review={review}/>)
+      let helpfulnessCountEle;
+      //Before Yes Click
+      helpfulnessCountEle = screen.getByText(`(${review.helpfulness})`);
+      expect(helpfulnessCountEle).toBeInTheDocument();
 
-    // })
+      //After yes Click
+      const yesClickEle = screen.getByText('Yes');
+      await userEvent.click(yesClickEle);
+      helpfulnessCountEle = screen.getByText(`(${review.helpfulness + 1})`);
+      expect(helpfulnessCountEle).toBeInTheDocument();
+    })
   });
 });
