@@ -71,7 +71,14 @@ td {
 /* Hide carousel arrows when reaching end */
 .flickity-prev-next-button:disabled { display: none; }
 
-
+.qbutton {
+  display: flex;
+  position: relative;
+  margin-left: 30em;
+  height: 3vh;
+  margin-bottom: 4em;
+  color: white
+}
 
 .flex-container {
   display: flex;

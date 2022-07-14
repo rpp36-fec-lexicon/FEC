@@ -36,6 +36,7 @@
     "jquery": "^3.6.0",
     "mocha": "^10.0.0",
     "mysql": "^2.18.1",
+    "node-fetch": "^3.2.6",
     "nodemon": "^2.0.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -53,6 +54,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "babel-loader": "^8.2.5",
     "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor",
+    "jest-fetch-mock": "^3.0.3",
     "style-loader": "^3.3.1",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0"
