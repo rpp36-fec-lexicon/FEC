@@ -26,15 +26,14 @@ td {
   text-align: center;
 }
 
-
-/* Start of Ratings Reviews CSS */
+/* START OF RATINGS AND REVIEWS CSS */
 
 progress {
   background-color: green;
 }
 
 .content-container {
-  padding: 10%;
+  padding: 1%;
   height: 100vh;
   font-size: 16px;
 }
@@ -52,7 +51,16 @@ progress {
   flex: 7;
 }
 
-/* End of Ratings Review CSS */
+.scrollable {
+  height: 600px;
+  overflow: auto;
+  margin: 20px;
+  text-align: justify;
+  padding: 20px;
+}
+
+
+/* END OF RATINGS AND REVIEWS CSS */
 
 
 /* Hide carousel arrows when reaching end */
