@@ -4,5 +4,10 @@ bundle.js
 node_modules/
 babel.config.js
 .env
-coverage/
 bundle.js.map
+
+# Ignore test-related files
+/coverage.data
+/coverage/
+coverage/
+

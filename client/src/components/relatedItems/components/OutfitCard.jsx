@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 // import Stars from "react-stars-display";
 
 class OutfitCard extends React.Component {
@@ -8,19 +8,38 @@ class OutfitCard extends React.Component {
     this.state = {
       defaultOriginalPrice: 0,
       defaultSalePrice: 0,
-      defaultPhoto: '',
+      defaultPhoto: "",
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.props.styleInfo.forEach((styleInfoObj) => {
+      if (styleInfoObj["default?"]) {
+        this.setState({
+          defaultOriginalPrice: styleInfoObj.original_price,
+          defaultSalePrice: styleInfoObj.sale_price,
+          defaultPhoto: styleInfoObj.photos[0].url,
+        });
+      }
+    });
+
+    if (this.state.defaultOriginalPrice === 0) {
+      this.setState({
+        defaultOriginalPrice: this.props.styleInfo[0].original_price,
+        defaultSalePrice: null,
+        defaultPhoto: this.props.styleInfo[0].photos[0].url,
+      });
+    }
+  }
 
   render() {
     return (
       <div
+        className="RelatedCarouselItem"
         style={{
-          border: '1px solid grey',
-          padding: '15px 15px 15px 15px',
-          margin: '15px 15px 15px 15px',
+          border: "1px solid grey",
+          padding: "15px 15px 15px 15px",
+          margin: "15px 15px 15px 15px",
         }}
         // onClick={() =>
         //   this.props.prodIDChanger(this.props.itemData.itemInfo.id)
@@ -28,26 +47,24 @@ class OutfitCard extends React.Component {
       >
         <div
           style={{
-            height: '200px',
-            width: '200px',
-            marginBottom: '10px',
+            height: "150px",
+            width: "150px",
+            marginBottom: "10px",
             backgroundImage: `url(${this.state.defaultPhoto})`,
-            backgroundSize: '200px 200px',
+            backgroundSize: "150px 150px",
           }}
         >
           <button
             style={{
-              color: 'yellow',
-              float: 'right',
-              fontSize: '20px',
-              background: 'transparent',
-              borderColor: 'transparent',
+              color: "red",
+              float: "right",
+              fontSize: "20px",
+              background: "black",
+              borderColor: "transparent",
             }}
             onClick={() => {
-              // this.props.comparison(
-              //   this.props.itemData.itemInfo.features,
-              //   this.props.itemData.itemInfo.name
-              // );
+              this.props.outfitRemover(this.props.prodInfo.id);
+              // id of current item... not the one that was cliked
             }}
           >
             &times;
@@ -55,10 +72,10 @@ class OutfitCard extends React.Component {
         </div>
 
         <div>
-          <div>{this.props.itemData.itemInfo.category}</div>
+          <div>{this.props.prodInfo.category}</div>
           <div>
-            {' '}
-            <b>{this.props.itemData.itemInfo.name}</b>
+            {" "}
+            <b>{this.props.prodInfo.name}</b>
           </div>
 
           <div>
@@ -66,10 +83,10 @@ class OutfitCard extends React.Component {
               `$${this.state.defaultOriginalPrice}`
             ) : (
               <span>
-                <span style={{ color: 'red' }}>
-                  {' '}
+                <span style={{ color: "red" }}>
+                  {" "}
                   ${this.state.defaultSalePrice}
-                </span>{' '}
+                </span>{" "}
                 <del> ${this.state.defaultOriginalPrice}</del>
               </span>
             )}

@@ -1,39 +1,65 @@
 import React from 'react';
 import QuestionsAnswersList from './QuestionsAnswersList.jsx';
 import SearchQuestion from './SearchQuestion.jsx';
+import AskQuestions from './AskQuestions.jsx';
 import $ from 'jquery';
-// import QuestionEntry from './QuestionEntry.jsx'
-// import sampleQuestionsAnswers from '../sampledata/QuestionsAnswersAPI.js'
-// import { useContext } from 'react';
 
 class QuestionsAnswersMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: props.productId,
-      term: '',
-      questionsAndAnswers: [],
+      productId: this.props.productId,
+      productInfo: this.props.productInfo,
       questions: [],
-      defaultQuestions: [],
-      isReported: false,
+      searchTerm: ''
     };
     this.getQuestionsByProductID = this.getQuestionsByProductID.bind(this);
     this.getQuestionAnswerList = this.getQuestionAnswerList.bind(this);
     this.postProductIdToServer = this.postProductIdToServer.bind(this);
     this.searchQuestion = this.searchQuestion.bind(this);
+    this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
+    this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
   }
 
   componentDidMount() {
-    this.getQuestionsByProductID();
+    this.getQuestionsByProductID(this.productId);
+  }
+
+  componendDidUpdate() {
+    if ((this.state.productInfo !== this.props.productInfo) || (this.state.productId !== this.props.product)) {
+      this.setState({
+        productInfo: this.props.productInfo,
+        productId: this.props.product
+      });
+      this.getQuestionsByProductID(this.props.productId);
+    }
+  }
+
+  searchQuestion(term) {
+    this.setState({
+      searchTerm: term
+    });
   }
 
   getQuestionsByProductID () {
-    // console.log(`${this.state.productId}`);
     fetch(`/questions?product_id=${this.state.productId}`)
       .then((res) => res.json())
       .then((data) => {
+        // more than 2 questions, load more question button will not appear
+        if (data.results.length > 2) {
+          this.setState({
+            isloadQsButtonVisible: true,
+          });
+        // less than 2 questions, load more question button will not appear
+        } else if (data.results.length < 2) {
+          this.setState({
+            isloadQsButtonVisible: false,
+            isloadAsButtonVisible: false,
+          });
+        }
         this.setState({
-          questions: data.results
+          questions: data.results,
+          isloadQsButtonVisible: false
         });
       }).then(() => {
         this.getQuestionAnswerList();
@@ -52,6 +78,7 @@ class QuestionsAnswersMain extends React.Component {
       answersAll.map(answer => {
         //if seller add to priority array
         if (answer.answerer_name.toLowerCase() === 'seller') {
+          console.log(answer.answerer_name);
           answersSeller.push({
             id: answer.id,
             text: answer.body,
@@ -98,21 +125,37 @@ class QuestionsAnswersMain extends React.Component {
       success: () => {
       },
       error: () => {
-        console.log(`sendProductIdToServer failed to send productId : ${productID.id} to server`);
+        console.log(`postProductIdToServer function failed to send productId : ${productID.id} to server`);
       },
     });
   }
-  searchQuestion(term) {
-    this.setState({
-      term: term
+
+
+  loadMoreAnswers() {
+    //Sorts the answer array of all questions to get max length
+    const answersArray = this.state.questionsAndAnswers.map(e => {
+      return e.answers.length;
     });
-    if (term.length >= 3) {
+    const sorted = answersArray.sort(function(a, b) {
+      return b - a;
+    });
+    if ((this.state.answersToShow >= sorted[0]) || (answersArray.length === 0)) {
       this.setState({
-        questionsAndAnswers: this.getQuestionsByProductID()
+        isloadAsButtonVisible: false,
       });
     }
-    this.getQuestionsByProductID();
-    this.getQuestionAnswerList();
+    this.setState((prev) => ({ answersToShow: prev.answersToShow + 2 }));
+  }
+
+  loadMoreQuestions() {
+    if (this.state.questionsToShow > this.state.questionsAndAnswers.length) {
+      this.setState({
+        isloadQsButtonVisible: false,
+      });
+    } else {
+      this.setState((prev) => ({ questionsToShow: prev.questionsToShow + 2 }));
+      this.getQuestionsApi();
+    }
   }
 
   render() {

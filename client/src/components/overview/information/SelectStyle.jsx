@@ -22,7 +22,7 @@ class SelectStyle extends React.Component {
   }
 
   render() {
-    console.log('Props in Styles ', this.props);
+    // console.log('Props in Styles ', this.props);
     return (
       <div>
         <h3> {`Style > ${this.props.selectedStyle.name}`}</h3>

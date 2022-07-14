@@ -25,7 +25,7 @@ class Checkout extends React.Component {
       this.setState({ currentSkuQuantity: -1});
     } else {
       Object.entries(this.props.skus).find((product) => {
-        console.log('product?', product[1].size);
+        // console.log('product?', product[1].size);
         if (product[1].size === e.target.value) {
           num = product[1].quantity;
           this.setState({
@@ -37,7 +37,7 @@ class Checkout extends React.Component {
   }
 
   render() {
-    console.log('props in checkout', this.props);
+    // console.log('props in checkout', this.props);
     return (
       <div>
         <select name="size" id="size" onChange={this.userSelect}>

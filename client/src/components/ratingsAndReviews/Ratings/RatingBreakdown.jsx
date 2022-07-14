@@ -1,9 +1,9 @@
 import React from 'react';
 
 const RatingBreakdown = (props) => {
-  console.log('props.ratings in rating breakdown', props.ratings);
-  console.log('props.totalNumOfratings in breakdown', props.totalNumberOfRatings);
-  console.log('props.filterRating in breakdown', props.filterRating);
+  // console.log('props.ratings in rating breakdown', props.ratings);
+  // console.log('props.totalNumOfratings in breakdown', props.totalNumberOfRatings);
+  // console.log('props.filterRating in breakdown', props.filterRating);
 
   const underlineStyle = {
     textDecoration: 'underline'

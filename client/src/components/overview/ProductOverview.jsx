@@ -29,7 +29,16 @@ class ProductOverview extends React.Component {
     this.setState({
       selectedStyle: tempStyle,
       styles: this.props.styleList
+<<<<<<< HEAD
     });
+=======
+    }, this.testFunc());
+    // console.log('temp style', tempStyle);
+  }
+
+  testFunc() {
+    // console.log('new state ', this);
+>>>>>>> 27168e8e5950bc05c2310466ddf4ff4aae2726c3
   }
 
   changeStyle(id) {
@@ -41,9 +50,9 @@ class ProductOverview extends React.Component {
   }
 
   render() {
-    console.log(this.props.productInfo);
+    // console.log(this.props.productInfo);
     if (this.props.productInfo && this.props.defaultStyle && this.props.rating) {
-      console.log('this is the current style ', this.state.selectedStyle);
+      // console.log('this is the current style ', this.state.selectedStyle);
       return (
         <div>
           <h1 id="overviewHead">Product Overview!</h1>
