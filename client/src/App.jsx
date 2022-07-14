@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import ProductOverview from './components/overview/ProductOverview.jsx';
-import RatingsAndReviews from './components/ratingsAndReviews/RatingsAndReviews.jsx';
-import RelatedAndOutfit from './components/relatedItems/index.jsx';
-import QuestionsAnswersMain from './components/questionsAndAnswers/components/QuestionsAnswersMain.jsx';
-import $ from 'jquery';
-const axios = require('axios');
+import React from "react";
+import ReactDOM from "react-dom/client";
+import ProductOverview from "./components/overview/ProductOverview.jsx";
+import RatingsAndReviews from "./components/ratingsAndReviews/RatingsAndReviews.jsx";
+import RelatedAndOutfit from "./components/relatedItems/index.jsx";
+import QuestionsAnswersMain from "./components/questionsAndAnswers/components/QuestionsAnswersMain.jsx";
+import $ from "jquery";
+const axios = require("axios");
 
 class App extends React.Component {
   constructor(props) {
@@ -19,45 +19,44 @@ class App extends React.Component {
       reviews: null,
       metaData: null,
       rating: null,
-      totalNumberOfRatings: null
+      totalNumberOfRatings: null,
     };
     this.filterRating = this.filterRating.bind(this);
   }
 
+  componentDidMount() {
+    this.updateProduct(this.state.productId);
+  }
+
   getAllReviewsFunc() {
-    return axios.get('/reviews', {
+    return axios.get("/reviews", {
       params: { productId: this.state.productId },
     });
   }
 
   getAllMetaFunc() {
-    return axios.get('/reviews/meta', {
+    return axios.get("/reviews/meta", {
       params: { productId: this.state.productId },
     });
   }
 
   filterRating(starRating) {
-    console.dir(starRating);
+    // console.dir(starRating);
 
     let filteredReviews = [];
     this.getAllReviewsFunc
-      .then(response => {
+      .then((response) => {
         const allReviews = response.data.results;
-        allReviews.forEach(review => {
+        allReviews.forEach((review) => {
           if (review.rating === starRating) {
             filteredReviews.push(review);
           }
         });
-
-        this.setState({reviews: filteredReviews});
+        this.setState({ reviews: filteredReviews });
       })
-      .catch(err => {
-        console.log('error fetching reviews in filterRating', err);
+      .catch((err) => {
+        console.log("error fetching reviews in filterRating", err);
       });
-  }
-
-  componentDidMount() {
-    this.updateProduct(this.state.productId);
   }
 
   prodIDChanger(relatedID) {
@@ -67,8 +66,8 @@ class App extends React.Component {
   updateProduct(productId) {
     var query = { productId: productId };
     $.ajax({
-      url: '/products/:product_id',
-      type: 'POST',
+      url: "/products/:product_id",
+      type: "POST",
       data: query,
       success: (data) => {
         // console.log("THIS IS MY DATA!", data);
@@ -83,15 +82,15 @@ class App extends React.Component {
     })
       .then(() => {
         $.ajax({
-          url: '/products/:product_id/styles',
-          type: 'POST',
+          url: "/products/:product_id/styles",
+          type: "POST",
           data: query,
           success: (styles) => {
             // console.log('THIS IS STYLE DATA', styles);
             this.setState({
               styleInfo: styles.results,
               defaultStyle: styles.results.find(
-                (product) => product['default?'] === true
+                (product) => product["default?"] === true
               ),
             });
             if (this.defaultStyle === undefined) {
@@ -104,11 +103,11 @@ class App extends React.Component {
         });
       })
       .then(() => {
-        this.getAllReviewsFunc()
-          .then((response) => {
-            const reviewData = response.data;
-            const reviews = response.data.results;
-            this.getAllMetaFunc().then((response) => {
+        this.getAllReviewsFunc().then((response) => {
+          const reviewData = response.data;
+          const reviews = response.data.results;
+          this.getAllMetaFunc()
+            .then((response) => {
               const metaData = response.data;
               const ratings = metaData.ratings;
               let totalNumberOfRatings = 0;
@@ -121,13 +120,18 @@ class App extends React.Component {
 
               rating = totalRatings / totalNumberOfRatings;
               rating = Math.round(10 * rating) / 10;
-              this.setState({ reviews, reviewData, metaData, rating, totalNumberOfRatings });
-
-            }).catch(err => {
-              console.log('error getting reviews and metaData', err);
+              this.setState({
+                reviews,
+                reviewData,
+                metaData,
+                rating,
+                totalNumberOfRatings,
+              });
+            })
+            .catch((err) => {
+              console.log("error getting reviews and metaData", err);
             });
-
-          });
+        });
       });
   }
 
@@ -135,20 +139,19 @@ class App extends React.Component {
     return (
       <div>
         <h1>Atelier</h1>
-
         {/* <ProductOverview
           productInfo={this.state.productInfo}
           defaultStyle={this.state.defaultStyle}
           styleList={this.state.styleInfo}
           rating={this.state.rating}
-        />
-
+        /> */}
         <RelatedAndOutfit
           prodID={this.state.productId}
           prodInfo={this.state.productInfo}
+          styleInfo={this.state.styleInfo}
           prodIDChanger={this.prodIDChanger.bind(this)}
         />
-
+        {/*
         <QuestionsAnswersMain
           productId={this.state.productId}
           key={this.state.productId}
@@ -168,6 +171,6 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+ReactDOM.createRoot(document.getElementById("app")).render(<App />);
 
 export default App;
