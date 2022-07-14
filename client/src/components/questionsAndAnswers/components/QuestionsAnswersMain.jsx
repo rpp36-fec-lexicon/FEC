@@ -8,16 +8,10 @@ class QuestionsAnswersMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: props.productId,
-      term: '',
-      questionsAndAnswers: [],
+      productId: this.props.productId,
+      productInfo: this.props.productInfo,
       questions: [],
-      defaultQuestions: [],
-      isReported: false,
-      questionsToShow: 2,
-      answersToShow: 2,
-      isloadQsButtonVisible: true,
-      isloadAsButtonVisible: true,
+      searchTerm: ''
     };
     this.getQuestionsByProductID = this.getQuestionsByProductID.bind(this);
     this.getQuestionAnswerList = this.getQuestionAnswerList.bind(this);
@@ -28,11 +22,26 @@ class QuestionsAnswersMain extends React.Component {
   }
 
   componentDidMount() {
-    this.getQuestionsByProductID();
+    this.getQuestionsByProductID(this.productId);
+  }
+
+  componendDidUpdate() {
+    if ((this.state.productInfo !== this.props.productInfo) || (this.state.productId !== this.props.product)) {
+      this.setState({
+        productInfo: this.props.productInfo,
+        productId: this.props.product
+      });
+      this.getQuestionsByProductID(this.props.productId);
+    }
+  }
+
+  searchQuestion(term) {
+    this.setState({
+      searchTerm: term
+    });
   }
 
   getQuestionsByProductID () {
-    console.log(`${this.state.productId}`);
     fetch(`/questions?product_id=${this.state.productId}`)
       .then((res) => res.json())
       .then((data) => {
@@ -69,6 +78,7 @@ class QuestionsAnswersMain extends React.Component {
       answersAll.map(answer => {
         //if seller add to priority array
         if (answer.answerer_name.toLowerCase() === 'seller') {
+          console.log(answer.answerer_name);
           answersSeller.push({
             id: answer.id,
             text: answer.body,
@@ -120,27 +130,13 @@ class QuestionsAnswersMain extends React.Component {
     });
   }
 
-  searchQuestion(term) {
-    this.setState({
-      term: term
-    });
-    if (term.length >= 3) {
-      this.setState({
-        questionsAndAnswers: this.getQuestionsByProductID(),
-        visibleQuestions: 2,
-        visibleAnswers: 2
-      });
-    }
-    this.getQuestionsByProductID();
-    this.getQuestionAnswerList();
-  }
 
   loadMoreAnswers() {
     //Sorts the answer array of all questions to get max length
     const answersArray = this.state.questionsAndAnswers.map(e => {
       return e.answers.length;
     });
-    const sorted = answersArray.sort(function(a,b) {
+    const sorted = answersArray.sort(function(a, b) {
       return b - a;
     });
     if ((this.state.answersToShow >= sorted[0]) || (answersArray.length === 0)) {

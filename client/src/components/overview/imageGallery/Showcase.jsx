@@ -17,7 +17,7 @@ class Showcase extends React.Component {
   }
 
   render() {
-    console.log('Showcase props for pictures ', this.props);
+    // console.log('Showcase props for pictures ', this.props);
     return (
       <div>
         <PrimaryImage pic={this.props.photos[0].url}/>
