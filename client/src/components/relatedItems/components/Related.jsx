@@ -1,8 +1,8 @@
-import React from 'react';
-import $ from 'jquery';
-import Flickity from 'react-flickity-component';
-import RelatedCard from './RelatedCard.jsx';
-import Comparison from './Comparison.jsx';
+import React from "react";
+import $ from "jquery";
+import Flickity from "react-flickity-component";
+import RelatedCard from "./RelatedCard.jsx";
+import Comparison from "./Comparison.jsx";
 
 class Related extends React.Component {
   constructor(props) {
@@ -11,26 +11,79 @@ class Related extends React.Component {
       itemInfoAndStyle: [],
       modalSeen: false,
       relatedProdFeat: [],
-      relatedProdName: '',
+      relatedProdName: "",
     };
   }
 
   componentDidMount() {
-    // console.log("Related rend", this.props.prodID); // CHANGE prodID here
+    // USED FOR INITIAL RELATED PRODS REQUEST
     $.ajax({
-      type: 'GET',
+      type: "GET",
       url: `/products/${this.props.prodID}/related`,
-
       success: (arrayOfProdIDs) => {
         var relatedItemData = [];
-
+        var UNQarrayOfProdIDs = [];
         arrayOfProdIDs.forEach((itemID) => {
+          if (
+            itemID !== this.props.prodID &&
+            !UNQarrayOfProdIDs.includes(itemID)
+          ) {
+            UNQarrayOfProdIDs.push(itemID);
+          }
+        });
+        UNQarrayOfProdIDs.forEach((itemID) => {
           $.ajax({
-            type: 'GET',
+            type: "GET",
             url: `/products/${itemID}`,
             success: (relatedItemInfo) => {
               $.ajax({
-                type: 'GET',
+                type: "GET",
+                url: `/products/${itemID}/styles`,
+                success: (relatedItemStyles) => {
+                  relatedItemData.push({
+                    itemInfo: relatedItemInfo,
+                    itemStyles: relatedItemStyles,
+                  });
+                  this.setState({
+                    itemInfoAndStyle: relatedItemData,
+                  });
+                },
+                error: (err) => {
+                  console.log(err);
+                },
+              });
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  relatedItemsUpdater(clickedProdID) {
+    $.ajax({
+      type: "GET",
+      url: `/products/${clickedProdID}/related`,
+      success: (arrayOfProdIDs) => {
+        var relatedItemData = [];
+        var UNQarrayOfProdIDs = [];
+        arrayOfProdIDs.forEach((itemID) => {
+          if (itemID !== clickedProdID && !UNQarrayOfProdIDs.includes(itemID)) {
+            UNQarrayOfProdIDs.push(itemID);
+          }
+        });
+        UNQarrayOfProdIDs.forEach((itemID) => {
+          $.ajax({
+            type: "GET",
+            url: `/products/${itemID}`,
+            success: (relatedItemInfo) => {
+              $.ajax({
+                type: "GET",
                 url: `/products/${itemID}/styles`,
                 success: (relatedItemStyles) => {
                   relatedItemData.push({
@@ -59,8 +112,6 @@ class Related extends React.Component {
     });
   }
 
-  // say i have another func that does saem as CDM, but on click on related item
-
   comparison(relatedProdFeat, relatedProdName) {
     this.setState({
       modalSeen: !this.state.modalSeen,
@@ -69,13 +120,20 @@ class Related extends React.Component {
     });
   }
 
-  render() {
-    // console.log(" Related props", this.props.prodInfo);
+  comparisonCloser(e) {
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
+  }
 
-    // if (this.props.prodInfo !== undefined) {
+  render() {
     return (
-      <div>
-        <div>
+      <div
+        onClick={() => {
+          this.setState({ modalSeen: false });
+        }}
+      >
+        <div className="comp" onClick={this.comparisonCloser}>
           {this.state.modalSeen ? (
             <Comparison
               mainProdName={this.props.prodInfo.name}
@@ -84,45 +142,23 @@ class Related extends React.Component {
               mainProdFeat={this.props.prodInfo.features}
               relatedProdFeat={this.state.relatedProdFeat}
             />
-          ) : null}{' '}
+          ) : null}{" "}
         </div>
-        <div
-          style={{
-            padding: '15px 15px 15px 15px',
-            marginRight: '50px',
-            marginLeft: '50px',
-          }}
-        >
-          <Flickity
-            options={{
-              cellAlign: 'left',
-              contain: true,
-              pageDots: false,
-            }}
-          >
-            {this.state.itemInfoAndStyle.map((itemData, index) => (
-              <RelatedCard
-                itemData={itemData}
-                comparison={this.comparison.bind(this)}
-                prodIDChanger={this.props.prodIDChanger}
-                key={index}
-              />
-            ))}
-          </Flickity>
+
+        <div className="relatedCarousel">
+          {this.state.itemInfoAndStyle.map((itemData, index) => (
+            <RelatedCard
+              itemData={itemData}
+              prodIDChanger={this.props.prodIDChanger}
+              comparison={this.comparison.bind(this)}
+              relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
+              key={index}
+            />
+          ))}
         </div>
       </div>
     );
-    // }
   }
 }
 
 export default Related;
-
-{
-  /* Temp prodID: {this.props.prodID} */
-}
-
-{
-  /* Main prod in Overview: {this.props.prodInfo.name}, category:{" "}
-        {this.props.prodInfo.category} */
-}
