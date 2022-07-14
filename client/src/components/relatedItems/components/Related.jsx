@@ -8,7 +8,7 @@ class Related extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      itemInfoAndStyle: [],
+      // itemInfoAndStyle: [],
       modalSeen: false,
       relatedProdFeat: [],
       relatedProdName: "",
@@ -17,100 +17,100 @@ class Related extends React.Component {
 
   componentDidMount() {
     // USED FOR INITIAL RELATED PRODS REQUEST
-    $.ajax({
-      type: "GET",
-      url: `/products/${this.props.prodID}/related`,
-      success: (arrayOfProdIDs) => {
-        var relatedItemData = [];
-        var UNQarrayOfProdIDs = [];
-        arrayOfProdIDs.forEach((itemID) => {
-          if (
-            itemID !== this.props.prodID &&
-            !UNQarrayOfProdIDs.includes(itemID)
-          ) {
-            UNQarrayOfProdIDs.push(itemID);
-          }
-        });
-        UNQarrayOfProdIDs.forEach((itemID) => {
-          $.ajax({
-            type: "GET",
-            url: `/products/${itemID}`,
-            success: (relatedItemInfo) => {
-              $.ajax({
-                type: "GET",
-                url: `/products/${itemID}/styles`,
-                success: (relatedItemStyles) => {
-                  relatedItemData.push({
-                    itemInfo: relatedItemInfo,
-                    itemStyles: relatedItemStyles,
-                  });
-                  this.setState({
-                    itemInfoAndStyle: relatedItemData,
-                  });
-                },
-                error: (err) => {
-                  console.log(err);
-                },
-              });
-            },
-            error: (err) => {
-              console.log(err);
-            },
-          });
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    // $.ajax({
+    //   type: "GET",
+    //   url: `/products/${this.props.prodID}/related`,
+    //   success: (arrayOfProdIDs) => {
+    //     var relatedItemData = [];
+    //     var UNQarrayOfProdIDs = [];
+    //     arrayOfProdIDs.forEach((itemID) => {
+    //       if (
+    //         itemID !== this.props.prodID &&
+    //         !UNQarrayOfProdIDs.includes(itemID)
+    //       ) {
+    //         UNQarrayOfProdIDs.push(itemID);
+    //       }
+    //     });
+    //     UNQarrayOfProdIDs.forEach((itemID) => {
+    //       $.ajax({
+    //         type: "GET",
+    //         url: `/products/${itemID}`,
+    //         success: (relatedItemInfo) => {
+    //           $.ajax({
+    //             type: "GET",
+    //             url: `/products/${itemID}/styles`,
+    //             success: (relatedItemStyles) => {
+    //               relatedItemData.push({
+    //                 itemInfo: relatedItemInfo,
+    //                 itemStyles: relatedItemStyles,
+    //               });
+    //               this.setState({
+    //                 itemInfoAndStyle: relatedItemData,
+    //               });
+    //             },
+    //             error: (err) => {
+    //               console.log(err);
+    //             },
+    //           });
+    //         },
+    //         error: (err) => {
+    //           console.log(err);
+    //         },
+    //       });
+    //     });
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   },
+    // });
   }
 
-  relatedItemsUpdater(clickedProdID) {
-    $.ajax({
-      type: "GET",
-      url: `/products/${clickedProdID}/related`,
-      success: (arrayOfProdIDs) => {
-        var relatedItemData = [];
-        var UNQarrayOfProdIDs = [];
-        arrayOfProdIDs.forEach((itemID) => {
-          if (itemID !== clickedProdID && !UNQarrayOfProdIDs.includes(itemID)) {
-            UNQarrayOfProdIDs.push(itemID);
-          }
-        });
-        UNQarrayOfProdIDs.forEach((itemID) => {
-          $.ajax({
-            type: "GET",
-            url: `/products/${itemID}`,
-            success: (relatedItemInfo) => {
-              $.ajax({
-                type: "GET",
-                url: `/products/${itemID}/styles`,
-                success: (relatedItemStyles) => {
-                  relatedItemData.push({
-                    itemInfo: relatedItemInfo,
-                    itemStyles: relatedItemStyles,
-                  });
+  // relatedItemsUpdater(clickedProdID) {
+  //   $.ajax({
+  //     type: "GET",
+  //     url: `/products/${clickedProdID}/related`,
+  //     success: (arrayOfProdIDs) => {
+  //       var relatedItemData = [];
+  //       var UNQarrayOfProdIDs = [];
+  //       arrayOfProdIDs.forEach((itemID) => {
+  //         if (itemID !== clickedProdID && !UNQarrayOfProdIDs.includes(itemID)) {
+  //           UNQarrayOfProdIDs.push(itemID);
+  //         }
+  //       });
+  //       UNQarrayOfProdIDs.forEach((itemID) => {
+  //         $.ajax({
+  //           type: "GET",
+  //           url: `/products/${itemID}`,
+  //           success: (relatedItemInfo) => {
+  //             $.ajax({
+  //               type: "GET",
+  //               url: `/products/${itemID}/styles`,
+  //               success: (relatedItemStyles) => {
+  //                 relatedItemData.push({
+  //                   itemInfo: relatedItemInfo,
+  //                   itemStyles: relatedItemStyles,
+  //                 });
 
-                  this.setState({
-                    itemInfoAndStyle: relatedItemData,
-                  });
-                },
-                error: (err) => {
-                  console.log(err);
-                },
-              });
-            },
-            error: (err) => {
-              console.log(err);
-            },
-          });
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
+  //                 this.setState({
+  //                   itemInfoAndStyle: relatedItemData,
+  //                 });
+  //               },
+  //               error: (err) => {
+  //                 console.log(err);
+  //               },
+  //             });
+  //           },
+  //           error: (err) => {
+  //             console.log(err);
+  //           },
+  //         });
+  //       });
+  //     },
+  //     error: (err) => {
+  //       console.log(err);
+  //     },
+  //   });
+  // }
 
   comparison(relatedProdFeat, relatedProdName) {
     this.setState({
@@ -146,12 +146,12 @@ class Related extends React.Component {
         </div>
 
         <div className="relatedCarousel">
-          {this.state.itemInfoAndStyle.map((itemData, index) => (
+          {this.props.itemInfoAndStyle.map((itemData, index) => (
             <RelatedCard
               itemData={itemData}
               prodIDChanger={this.props.prodIDChanger}
               comparison={this.comparison.bind(this)}
-              relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
+              relatedItemsUpdater={this.props.relatedItemsUpdater}
               key={index}
             />
           ))}

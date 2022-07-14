@@ -41,9 +41,10 @@ class OutfitCard extends React.Component {
           padding: "15px 15px 15px 15px",
           margin: "15px 15px 15px 15px",
         }}
-        // onClick={() =>
-        //   this.props.prodIDChanger(this.props.itemData.itemInfo.id)
-        // }
+        onClick={() => {
+          this.props.prodIDChanger(this.props.prodId);
+          this.props.relatedItemsUpdater(this.props.prodId);
+        }}
       >
         <div
           style={{
@@ -63,7 +64,8 @@ class OutfitCard extends React.Component {
               borderColor: "transparent",
             }}
             onClick={(e) => {
-              console.log("e", e);
+              // console.log("e", e);
+              e.stopPropagation();
               this.props.outfitRemover(this.props.prodId);
             }}
           >

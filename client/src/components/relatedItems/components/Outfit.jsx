@@ -128,8 +128,10 @@ class Outfit extends React.Component {
               <OutfitCard
                 prodId={item.id}
                 prodInfo={item}
-                outfitRemover={this.outfitRemover.bind(this)}
                 styleInfo={this.props.styleInfo}
+                outfitRemover={this.outfitRemover.bind(this)}
+                prodIDChanger={this.props.prodIDChanger}
+                relatedItemsUpdater={this.props.relatedItemsUpdater}
                 key={index}
               />
             ))}
