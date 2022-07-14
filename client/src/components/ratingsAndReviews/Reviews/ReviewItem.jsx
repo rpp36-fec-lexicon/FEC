@@ -3,6 +3,7 @@ import Stars from 'react-stars-display';
 import ShortReviewBody from './ShortReviewBody.jsx';
 import LongReviewBody from './LongReviewBody.jsx';
 import Recommend from './Recommend.jsx';
+import ReviewPhotos from './ReviewPhotos.jsx';
 // import Stars from './Stars.jsx';
 
 class ReviewItem extends React.Component {
@@ -12,6 +13,7 @@ class ReviewItem extends React.Component {
       helpfulClick: 0,
       helpfulness: this.props.review.helpfulness
     };
+    this.expandPhotoFunc = this.expandPhotoFunc.bind(this);
   }
 
   increaseHelpfulnessFunc() {
@@ -19,6 +21,11 @@ class ReviewItem extends React.Component {
       this.setState({helpfulness: this.state.helpfulness + 1});
       this.state.helpfulClick += 1;
     }
+  }
+
+  expandPhotoFunc() {
+    const review = this.props.review;
+
   }
 
   render () {
@@ -31,14 +38,19 @@ class ReviewItem extends React.Component {
     let reviewBody;
 
     if (review.body.length < 250) {
-      reviewBody = <ShortReviewBody reviewBody={review.body}/>
+      reviewBody = <ShortReviewBody reviewBody={review.body}/>;
     } else {
-      reviewBody = <LongReviewBody reviewBody={review.body}/>
+      reviewBody = <LongReviewBody reviewBody={review.body}/>;
     }
 
     let recommend;
     if (review.recommend) {
       recommend = <Recommend />;
+    }
+
+    let reviewPhotos;
+    if (review.photos.length) {
+      reviewPhotos = <ReviewPhotos photos={review.photos} expandPhotoFunc={this.expandPhotoFunc}/>;
     }
 
     const sameLineStyle = {
@@ -75,6 +87,8 @@ class ReviewItem extends React.Component {
 
         <h3 id="reviewSummary">{review.summary}</h3>
         {reviewBody}
+
+        {reviewPhotos}
         <br></br>
         {recommend}
         <br></br>

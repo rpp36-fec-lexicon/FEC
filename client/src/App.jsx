@@ -145,12 +145,12 @@ class App extends React.Component {
           styleList={this.state.styleInfo}
           rating={this.state.rating}
         /> */}
-        <RelatedAndOutfit
+        {/* <RelatedAndOutfit
           prodID={this.state.productId}
           prodInfo={this.state.productInfo}
           styleInfo={this.state.styleInfo}
           prodIDChanger={this.prodIDChanger.bind(this)}
-        />
+        /> */}
         {/*
         <QuestionsAnswersMain
           productId={this.state.productId}
