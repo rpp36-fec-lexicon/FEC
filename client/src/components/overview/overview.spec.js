@@ -14,6 +14,7 @@ import mockData from './mockData.js';
 import ProductOverview from './ProductOverview.jsx';
 import ProductDescription from './information/ProductDescription.jsx';
 import Checkout from './checkout/Checkout.jsx';
+import SelectStyle from './information/SelectStyle.jsx';
 
 describe('Product Overview', ()=>{
   let temporarySandBox;
@@ -43,22 +44,36 @@ describe('Product Overview', ()=>{
       expect(screen.getByRole('option', {name: '-'})).toBeInTheDocument();
     });
 
-    // test('should handle click on size and update quantity options', () => {
-    //   act(() => {
-    //     render(<Checkout id={mockData.styleList.results[0].style_id} skus={mockData.styleList.results[0].skus}/>, temporarySandBox);
-    //   });
-    //   configure({ testIdAttribute: 'id'});
-    //   let options = screen.getAllByTestId('size');
-    //   // fireEvent.change(options, {target: {value: 'XS'}});
-    //   // userEvent.selectOptions(options, ['XS']);
+    it('should handle click on size and update quantity options', () => {
+      act(() => {
+        render(<Checkout id={mockData.styleList.results[0].style_id} skus={mockData.styleList.results[0].skus}/>, temporarySandBox);
+      });
+      configure({ testIdAttribute: 'id'});
+      let dropdown = screen.getByTestId('size');
+      expect(dropdown.value).toBe('Select Size');
+      fireEvent.change(dropdown, {target: {value: 'XS'}});
+      expect(dropdown.value).toBe('XS');
+      let quantity = screen.getByTestId('quant');
+      expect(quantity.length).toBe(8);
+    });
 
-    //   expect(screen.getByTestId('XS').selected).toBe(true);
-    //   expect(screen.getByTestId('S').selected).toBe(false);
-    //   expect(screen.getByTestId('M').selected).toBe(false);
-    //   expect(options[3].selected).toBeFalsy();
-    //   expect(options[4].selected).toBeFalsy();
-    //   expect(options[5].selected).toBeFalsy();
-    // });
+    it('change product data if a different style was picked', () => {
+      let state = {
+        selectedStyle: undefined
+      };
+      // var changeStyle(id) {
+      //   state.selectedStyle = mockData.styleList.find((element) => element.style_id === id);
+      // }
+      act(() => {
+        render(<SelectStyle styles={mockData.styleList.results} selectedStyle={mockData.styleList.results[0]}/>);
+      });
+      expect(screen.getByRole('heading', {name: 'Style > Forest Green & Black'})).toBeInTheDocument();
+      configure({testIdAttribute: 'name'});
+      const newStyle = screen.getByTestId('Desert Brown & Tan');
+      expect(newStyle).toBeInTheDocument();
+      // fireEvent.click(newStyle);
+      // expect(screen.getByRole('heading', {name: 'Style > Desert Brown & Tan'})).toBeInTheDocument();
+    });
   });
 });
 
@@ -72,3 +87,5 @@ describe('Product Overview', ()=>{
 // Consider adding Browser Integration tests with Jest + React-Testing-Library/Enzyme
 //   for your React Components (probably not enzyme unless you are using a lower version of react)
 // */
+
+// Product Description : Test if Null (So colon disappears)
