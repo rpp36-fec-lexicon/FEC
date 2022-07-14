@@ -4,6 +4,7 @@ import { act } from 'react-dom/test-utils';
 
 import RelatedAndOutfit from './index.jsx';
 import Related from './components/Related.jsx';
+import Outfit from './components/Outfit.jsx';
 
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom'
@@ -37,6 +38,15 @@ describe('Related Products', ()=>{
     });
   })
 
+  describe('Testing Your Outfit component', ()=>{
+    it('finds the existence of a outfit adder button', async () => {
+      act(() => {
+        ReactDOM.createRoot(temporarySandBox).render(<Outfit />);
+      });
+      let renderedInfo = temporarySandBox.querySelector('button');
+      expect(renderedInfo.className).toBe('outfitAdderBTN');
+    });
+  })
 })
 
 /*

@@ -1,30 +1,33 @@
-import React from 'react';
-import Related from './components/Related.jsx';
-import Outfit from './components/Outfit.jsx';
-import $ from 'jquery';
+import React from "react";
+import Related from "./components/Related.jsx";
+import Outfit from "./components/Outfit.jsx";
+import $ from "jquery";
 
 class RelatedAndOutfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      prodInfo: '',
+      xLeftFrame: 0,
+      xRightFrame: 0,
     };
-    //
-    // console.log("RelatedAndOutfit ID", this.props);
   }
   componentDidMount() {
-    // this.setState({
-    //   prodId: this.props.prodID,
-    // });
-    // console.log("RelatedAndOutfit", this.props.prodID);
     $.ajax({
-      type: 'GET',
-      url: `/products/${this.props.prodID}`,
-      success: (prodInfo) => {
-        // console.log("main prod", prodInfo.id); // {id, name, category, features...}
+      // THIS REQUEST IS FOR SCREEN WIDTH CALCULATION
+      type: "GET",
+      url: `/products/${this.props.prodID}/related`,
+      success: (arrayOfProdIDs) => {
         this.setState({
-          prodInfo: prodInfo,
+          relatedCount: arrayOfProdIDs.length,
         });
+        var screenWidth = document.body.clientWidth;
+        var relatedProdsWidth = arrayOfProdIDs.length * 184 + 120;
+
+        if (screenWidth < relatedProdsWidth) {
+          this.setState({
+            xRightFrame: 1,
+          });
+        }
       },
       error: (err) => {
         console.log(err);
@@ -32,16 +35,79 @@ class RelatedAndOutfit extends React.Component {
     });
   }
 
+  leftScroll() {
+    document.querySelector(".carouselContainer").scrollBy(-250, 0);
+    document
+      .querySelector(".carouselContainer")
+      .addEventListener("scroll", (event) => {
+        var xLeftFrame =
+          document.querySelector(".carouselContainer").scrollLeft;
+        this.setState({ xLeftFrame });
+        var sWid = document.querySelector(".carouselContainer").scrollWidth;
+        var ofWid = document.querySelector(".carouselContainer").offsetWidth;
+        if (Math.round(xLeftFrame) + ofWid !== sWid) {
+          this.setState({ xRightFrame: 1 });
+        }
+      });
+  }
+
+  rightScroll() {
+    document.querySelector(".carouselContainer").scrollBy(250, 0);
+    document
+      .querySelector(".carouselContainer")
+      .addEventListener("scroll", (event) => {
+        var xLeftFrame =
+          document.querySelector(".carouselContainer").scrollLeft;
+        this.setState({ xLeftFrame });
+        var sWid = document.querySelector(".carouselContainer").scrollWidth;
+        var ofWid = document.querySelector(".carouselContainer").offsetWidth;
+        if (Math.round(xLeftFrame) + ofWid === sWid) {
+          this.setState({ xRightFrame: 0 });
+        }
+      });
+  }
+
   render() {
+    // console.log("proId in RelatedAndOutfit", this.props.prodID);
     return (
-      <div id="RelatedID">
+      <div>
         <h5>Related Products:</h5>
-        <Related
-          prodID={this.props.prodID}
-          // prodInfo={this.state.prodInfo}
-          prodInfo={this.state.prodInfo}
-          prodIDChanger={this.props.prodIDChanger}
-        />
+        <div
+          className="mainD"
+          style={{
+            padding: "15px 15px 15px 15px",
+            margin: "15px 15px 15px 15px",
+            position: "relative",
+          }}
+        >
+          {this.state.xLeftFrame === 0 ? null : (
+            <button
+              className="arrow left"
+              onClick={(e) => {
+                this.leftScroll();
+              }}
+            ></button>
+          )}
+
+          <div className="carouselContainer">
+            <Related
+              prodID={this.props.prodID}
+              prodInfo={this.props.prodInfo}
+              styleInfo={this.props.styleInfo}
+              prodIDChanger={this.props.prodIDChanger}
+            />
+          </div>
+
+          {this.state.xRightFrame === 0 ? null : (
+            <button
+              className="arrow right"
+              onClick={(e) => {
+                this.rightScroll();
+              }}
+            ></button>
+          )}
+        </div>
+
         <br></br>
         <br></br>
         <br></br>
@@ -50,6 +116,7 @@ class RelatedAndOutfit extends React.Component {
         <Outfit
           prodID={this.props.prodID}
           prodInfo={this.props.prodInfo}
+          styleInfo={this.props.styleInfo}
           // prodIDChanger={this.props.prodIDChanger}
         />
         <br></br>
