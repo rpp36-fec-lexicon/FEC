@@ -44,7 +44,7 @@ class RatingsAndReviews extends React.Component {
   // }
 
   render() {
-    console.log('props in ratingsreviews', this.props);
+    // console.log('props in ratingsreviews', this.props);
     if (this.props.reviews !== null) {
       return (
         <div className="content-container">

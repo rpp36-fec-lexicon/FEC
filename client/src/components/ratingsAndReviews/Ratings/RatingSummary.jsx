@@ -4,7 +4,7 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 
 const RatingSummary = (props) => {
-  console.log('props in rating summary', props);
+  // console.log('props in rating summary', props);
 
   const recommended = props.metaData.recommended;
   let recommendedPercent;

@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const QA = require('./QuestionsAnswers.js');
+const interaction = require('./interaction.js');
 const app = express();
 const myAPIKey = process.env.myAPIKey;
 const data = require('./product.js');
@@ -77,9 +78,7 @@ app.get('/reviews/meta', (req, res) => {
     });
 });
 
-/*
-Routes for Questions API
-*/
+// API CALLS FOR QUESTIONS AND ANSWERS
 
 app.get('/questions', (req, res) => {
   QA.qetQuestionsByProductID(req.query.product_id, cb => {
@@ -92,15 +91,6 @@ app.post('/questions', (req, res) => {
   res.send('question was posted');
 });
 
-app.get('/interaction', (req, res) => {
-  res.send('good');
-});
-
-app.post('/interaction', (req, res) => {
-  const data = req.body;
-  QA.interact(data);
-  res.send('good');
-});
 /*
 Route for Products API
 */
@@ -147,6 +137,16 @@ app.post('/products/:product_id/styles', (req, res) => {
       res.send(data);
     }
   });
+});
+
+app.get('/interaction', (req, res) => {
+  res.send('interaction was success');
+});
+
+app.post('/interaction', (req, res) => {
+  const data = req.body;
+  interaction.logInteractions(data);
+  res.send('interaction was success');
 });
 
 app.listen(port, () => {
