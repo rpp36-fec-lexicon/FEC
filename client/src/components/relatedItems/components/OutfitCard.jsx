@@ -62,9 +62,9 @@ class OutfitCard extends React.Component {
               background: "black",
               borderColor: "transparent",
             }}
-            onClick={() => {
-              this.props.outfitRemover(this.props.prodInfo.id);
-              // id of current item... not the one that was cliked
+            onClick={(e) => {
+              console.log("e", e);
+              this.props.outfitRemover(this.props.prodId);
             }}
           >
             &times;

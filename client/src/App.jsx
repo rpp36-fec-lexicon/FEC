@@ -149,8 +149,8 @@ class App extends React.Component {
           styleInfo={this.state.styleInfo}
           prodIDChanger={this.prodIDChanger.bind(this)}
         />
-        {/*
-        <QuestionsAnswersMain
+
+        {/* <QuestionsAnswersMain
           productId={this.state.productId}
           productInfo={this.state.productInfo}
           key={this.state.productId}

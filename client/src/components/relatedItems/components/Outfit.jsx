@@ -84,7 +84,7 @@ class Outfit extends React.Component {
   }
 
   render() {
-    console.log("outfitItems", this.state.outfitItems);
+    // console.log("outfitItems", this.state.outfitItems);
     return (
       <div>
         <div
@@ -123,6 +123,7 @@ class Outfit extends React.Component {
           <div className="flex-child relatedCarousel">
             {this.state.outfitItems.map((item, index) => (
               <OutfitCard
+                prodId={item.id}
                 prodInfo={item}
                 outfitRemover={this.outfitRemover.bind(this)}
                 styleInfo={this.props.styleInfo}
