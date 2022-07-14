@@ -61,8 +61,11 @@ class Outfit extends React.Component {
   }
   outfitAdder() {
     var outfitContainer = this.state.outfitItems;
-
-    if (!outfitContainer.includes(this.props.prodInfo)) {
+    var existingIDs = [];
+    for (let i = 0; i < this.state.outfitItems.length; i++) {
+      existingIDs.push(this.state.outfitItems[i].id);
+    }
+    if (!existingIDs.includes(this.props.prodInfo.id)) {
       outfitContainer.push(this.props.prodInfo);
     }
 
