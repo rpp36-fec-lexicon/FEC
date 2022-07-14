@@ -70,7 +70,6 @@ class App extends React.Component {
       type: "POST",
       data: query,
       success: (data) => {
-        // console.log("THIS IS MY DATA!", data);
         this.setState({
           productId: productId,
           productInfo: data,
@@ -154,6 +153,7 @@ class App extends React.Component {
         {/*
         <QuestionsAnswersMain
           productId={this.state.productId}
+          productInfo={this.state.productInfo}
           key={this.state.productId}
         /> */}
 
