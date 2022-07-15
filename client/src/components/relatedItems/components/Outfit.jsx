@@ -10,7 +10,7 @@ class Outfit extends React.Component {
     super(props);
     this.state = {
       outfitItems: [],
-      itemInfoAndStyle: [],
+      // itemInfoAndStyle: [],
       prodInfo: "",
       relatedProdFeat: [],
       relatedProdName: "",
@@ -39,8 +39,6 @@ class Outfit extends React.Component {
   }
 
   outfitRemover(id) {
-    // console.log("id", id);
-    // console.log("outfitItems", this.state.outfitItems[0][0]);
     for (let i = 0; i < this.state.outfitItems.length; i++) {
       if (this.state.outfitItems[i][0][0].id === id) {
         this.state.outfitItems.splice([i], 1);
@@ -49,7 +47,6 @@ class Outfit extends React.Component {
     this.setState({
       outfitItems: this.state.outfitItems,
     });
-    // console.log("outfitItems", this.state.outfitItems);
   }
 
   leftScroll() {
