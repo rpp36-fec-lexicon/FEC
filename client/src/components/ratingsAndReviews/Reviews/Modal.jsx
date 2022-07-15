@@ -11,14 +11,21 @@ class Modal extends React.Component {
 
 
   render() {
+    const expandStyle = {
+      width: '700px',
+      height: '473px'
+    };
+
     if (!this.props.showModal) {
       return null;
     }
 
     return (
       <div className="modalPhoto">
-        <img src={this.props.photo.url}/>
-        <button onClick={() => { this.props.closeModalFunc(); }}>Close Modal</button>
+        <div className="modalPhoto-content">
+          <span className="close" onClick={() => { this.props.closeModalFunc(); }}>&times;</span>
+          <img style={expandStyle} src={this.props.photo.url}/>
+        </div>
       </div>
     );
   }

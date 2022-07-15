@@ -3,7 +3,7 @@ import React from 'react';
 const AddFirstReview = (props) => {
   return (
     <div>
-      <button>ADD A REVIEW  + </button>
+      <button>BE THE FIRST TO ADD A REVIEW!</button>
     </div>
   );
 };

@@ -15,7 +15,7 @@ class ReviewList extends React.Component {
       endReviewIndex: 4,
     };
     this.showMoreReviewsFunc = this.showMoreReviewsFunc.bind(this);
-    this.sortByHelpfulFunc = this.sortByHelpfulFunc.bind(this);
+    this.sortByHelpfulFunc = this.sortByHelpfulnessFunc.bind(this);
     this.sortByNewestFunc = this.sortByNewestFunc.bind(this);
     this.sortByRelevanceFunc = this.sortByRelevanceFunc.bind(this);
   }
@@ -46,8 +46,13 @@ class ReviewList extends React.Component {
     this.setState({reviewsShowing});
   }
 
-  sortByHelpfulFunc() {
+  sortByHelpfulnessFunc() {
     const reviews = this.state.reviews;
+    const sortedReviews = [];
+
+    const innerFunc = () => {
+
+    };
 
   }
 
@@ -72,7 +77,7 @@ class ReviewList extends React.Component {
       reviewsHeading = 'There are no reviews yet.';
       addFirstReviewButton = <AddFirstReview />;
     } else {
-      reviewsHeading = <ReviewsHeading reviews={this.props.reviews} sortByHelpfulFunc={this.sortByHelpfulFunc}/>;
+      reviewsHeading = <ReviewsHeading reviews={this.props.reviews} sortByHelpfulnessFunc={this.sortByHelpfulnessFunc} sortByNewestFunc={this.sortByNewestFunc} sortByRelevanceFunc={this.sortByRelevanceFunc}/>;
       addAnotherReviewButton = <AddAnotherReview />;
     }
 

@@ -5,9 +5,9 @@ const ReviewsHeading = (props) => {
     <div>
       {props.reviews.length} reviews, sorted by
       <select>
-        <option id="helpful" onClick={() => { props.sortByHelpfulFunc(); }}>Helpful</option>
-        <option id="newest">Newest</option>
-        <option id="relevance">Relevance</option>
+        <option id="helpful" onClick={() => { props.sortByHelpfulnessFunc(); }}>Helpful</option>
+        <option id="newest" onClick={() => { props.sortByNewestFunc(); }}>Newest</option>
+        <option id="relevance" onClick={() => { props.sortByRelevanceFunc(); }}>Relevance</option>
       </select>
     </div>
   );
