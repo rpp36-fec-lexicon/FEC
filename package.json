@@ -44,7 +44,8 @@
     "react-icons": "^4.4.0",
     "react-native-star-rating-bar-graph": "^1.0.0",
     "react-stars-display": "^0.1.24",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "underscore": "^1.13.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",

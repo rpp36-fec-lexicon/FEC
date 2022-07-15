@@ -1,28 +1,159 @@
-import React from 'react';
-import questions from '../sampledata/sampleQuestions.js';
-import QuestionsListEntry from './QuestionsListEntry.jsx';
+import React, { useState, useEffect } from 'react';
+// import { useTracking } from 'react-tracking';
+import Question from './Question.jsx';
+import QuestionModal from './QuestionModal.jsx';
+import _ from 'underscore';
+import axios from 'axios';
+
 const QuestionsAnswersList = (props) => {
-  return (
-    <div>
-      {props.questions.map((question) => {
-        return (
-          <QuestionsListEntry
-            question={question.question_body}
-            askedBy={question.asker_name}
-            askedDate={question.question_date}
-            key={question.question_id}
-          />
-        );
-      })}
-      {/* {
-      sampleQuestionsAnswers.product_id === props.productId
-      ?
-      sampleQuestionsAnswers.results
-      :
-      "nothing"
-      } */}
-    </div>
-  );
+
+  var unsortedQuestions = _.sortBy(props.questions, 'question_helpfulness');
+  var sortedQuestions = unsortedQuestions.reverse();
+  var displayQuestions = [];
+
+  const [count, setCount] = useState(2);
+  const [show, setShow] = useState(false);
+  const [filter, setFilter] = useState(props.filter);
+  const [productInfo, setProductInfo] = useState(props.productInfo);
+  const closeModal = () => {
+    setShow(false);
+  };
+  // const { Track, trackEvent } = useTracking({},
+  //   { dispatch: data => {
+  //     axios.post('/interactions', {
+  //       time: data.time,
+  //       element: data.element,
+  //       widget: data.widget
+  //     })
+  //       .catch((error) => {
+  //         console.log('Client unable to post interaction: ', error);
+  //       });
+  //   }});
+
+  var checkFilter = (sortedQuestions) => {
+    var splitFilter = [];
+    var filteredQuestions = [];
+    if (filter.length > 2 && !filter.includes(' ')) {
+      splitFilter = filter.split();
+    }
+    if (filter.includes(' ')) {
+      splitFilter = filter.split(' ');
+    }
+    if (_.contains(splitFilter, '')) {
+      splitFilter = _.without(splitFilter, '');
+    }
+
+    for (let i = 0; i < sortedQuestions.length; i++) {
+      for (let j = 0; j < splitFilter.length; j++) {
+        var lowerCase = sortedQuestions[i].question_body.toLowerCase();
+        if (lowerCase.includes(splitFilter[j])) {
+          filteredQuestions.push(sortedQuestions[i]);
+        }
+      }
+    }
+    filteredQuestions = _.uniq(filteredQuestions);
+    if (filteredQuestions.length > 0) {
+      return filteredQuestions;
+    } else {
+      return sortedQuestions;
+    }
+  };
+
+  const addQuestion = () => {
+    sortedQuestions = checkFilter(sortedQuestions);
+    for (let i = 0; i < count; i++) {
+      if (!sortedQuestions[i]) {
+        return;
+      }
+      displayQuestions.push(sortedQuestions[i]);
+    }
+  };
+
+  useEffect(() => {
+    setFilter(props.filter);
+    if (productInfo !== props.productInfo) {
+      setCount(2);
+      setProductInfo(props.productInfo);
+    }
+  });
+
+  if (sortedQuestions.length > 0) {
+    addQuestion();
+  }
+
+  if (displayQuestions.length === 0) {
+    return (
+      <div>
+        <button onClick={() => setShow(true)}>Add Questions +</button>
+        <QuestionModal
+          show={show}
+          hide={closeModal}
+          // name={props.productInfo.name}
+          productId={props.product}
+          update={props.update}/>
+      </div>
+
+    );
+  } else if (displayQuestions.length !== sortedQuestions.length) {
+    return (
+      <div>
+        <div>
+          {displayQuestions.map((question, answer) =>
+            console.log([question.answers])
+            // <Question
+            //   // key={question.question_id}
+            //   id={question.question_id}
+            //   helpfulness={question.question_helpfulness}
+            //   question={question.question_body}
+            //   answer={[question.answers]}
+            //   // name={props.productInfo.name}
+            //   update={props.update}
+            //   darkMode={props.darkMode}
+            // />
+          )}
+        </div>
+        <div>
+          <button onClick={() => setCount(count + 2)}>More Questions</button>
+          <button onClick={() => setShow(true)}>Add Questions +</button>
+          <QuestionModal
+            show={show}
+            hide={closeModal}
+            // name={props.productInfo.name}
+            productId={props.product}
+            update={props.update}/>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <div>
+          {displayQuestions.map((question, answer) =>
+            <Question
+              // key={question.question_id}
+              id={question.question_id}
+              helpfulness={question.question_helpfulness}
+              question={question.question_body}
+              answer={[question.answers]}
+              // name={props.productInfo.name}
+              update={props.update}
+              darkMode={props.darkMode}
+            />
+          )}
+        </div>
+        <div>
+          <button onClick={() => setShow(true)}>Add Questions +</button>
+          <QuestionModal
+            show={show}
+            hide={closeModal}
+            // name={props.productInfo.name}
+            productId={props.product}
+            update={props.update}/>
+        </div>
+      </div>
+
+    );
+  }
 };
 
 export default QuestionsAnswersList;
