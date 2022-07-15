@@ -3,6 +3,7 @@ import Stars from 'react-stars-display';
 import ShortReviewBody from './ShortReviewBody.jsx';
 import LongReviewBody from './LongReviewBody.jsx';
 import Recommend from './Recommend.jsx';
+// import Stars from './Stars.jsx';
 
 class ReviewItem extends React.Component {
   constructor(props) {
@@ -11,7 +12,6 @@ class ReviewItem extends React.Component {
       helpfulClick: 0,
       helpfulness: this.props.review.helpfulness
     };
-
   }
 
   increaseHelpfulnessFunc() {
@@ -60,18 +60,26 @@ class ReviewItem extends React.Component {
       right: 180
     };
 
+    const flexStyle = {
+      display: 'flex',
+      justifyContent: 'space-between'
+    };
+
     return (
       <div>
         <br></br>
-        <Stars style={sameLineStyle} stars={review.rating}/>
-        <div style={sameLineAndToTheRightStyle}>{review['reviewer_name']}, {month[monthIndex]} {date}, {year}</div>
+        <div style={flexStyle}>
+          <Stars stars={review.rating}/>
+          <div>{review['reviewer_name']}, {month[monthIndex]} {date}, {year}</div>
+        </div>
+
         <h3 id="reviewSummary">{review.summary}</h3>
         {reviewBody}
         <br></br>
         {recommend}
         <br></br>
         <div style={sameLineStyle}>Helpful?</div>
-        <div style={sameLineAndUnderlineStyle} onClick={() => { this.increaseHelpfulnessFunc() }}>Yes</div>
+        <div style={sameLineAndUnderlineStyle} onClick={() => { this.increaseHelpfulnessFunc(); }}>Yes</div>
         <div style={sameLineStyle}>({this.state.helpfulness})</div>
         <div style={sameLineStyle}>|</div>
         <div style={sameLineStyle}>Report</div>

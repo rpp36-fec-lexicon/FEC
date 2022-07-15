@@ -85,6 +85,7 @@ class App extends React.Component {
           type: "POST",
           data: query,
           success: (styles) => {
+            // console.log('THIS IS STYLE DATA', styles);
             this.setState({
               styleInfo: styles.results,
               defaultStyle: styles.results.find(
@@ -154,7 +155,8 @@ class App extends React.Component {
           productId={this.state.productId}
           productInfo={this.state.productInfo}
           key={this.state.productId}
-        />
+        /> */}
+
         <RatingsAndReviews
           productId={this.state.productId}
           reviewData={this.state.reviewData}

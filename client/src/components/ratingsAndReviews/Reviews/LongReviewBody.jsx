@@ -21,21 +21,11 @@ class LongReviewBody extends React.Component {
     return (
       <div>
         <div>{this.state.reviewBody}</div>
-        <a onClick={ () => { this.showAllReviewBodyFunc() }}>Show more</a>
+        <a onClick={ () => { this.showAllReviewBodyFunc(); }}>Show more</a>
       </div>
     );
   }
 }
 
-// const LongReviewBody = (props) => {
-//   const first250 = props.reviewBody.substring(0, 250);
-//   const after250 = props.reviewBody.substring(250, props.reviewBody.length);
-//   return (
-//     <div>
-//       <div>{first250}</div>
-//       <a onClick={ () => { props.showAllReviewBodyFunc() }}>Show more</a>
-//     </div>
-//   );
-// }
-
 export default LongReviewBody;
+
