@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 71698,
+      productId: 71697,
       productInfo: undefined,
       styleInfo: [],
       defaultStyle: undefined,
@@ -121,127 +121,6 @@ class App extends React.Component {
     });
   }
 
-  // updateProduct(proId) {
-  //   this.setState({ flag: false });
-  //   Promise.all([this.getProductInfo(), this.getProductStyles()]).then((values) => {
-  //     console.log(values[0].data);
-  //     console.log(values[1].data);
-  //     var styles = values[1].data.results;
-  //     var defaultStyle = styles.find(
-  //       (product) => product['default?'] === true
-  //     );
-  //     if (defaultStyle === undefined) { defaultStyle = styles[0]; }
-  //     this.setState({
-  //       flag: true,
-  //       productInfo: values[0].data,
-  //       styleInfo: styles,
-  //       defaultStyle: defaultStyle
-  //     });
-  //   }).catch((err) => {
-  //     console.log(err);
-  //   }).then(() => {
-  //     this.getAllReviewsFunc().then((response) => {
-  //       const reviewData = response.data;
-  //       const reviews = response.data.results;
-  //       this.getAllMetaFunc()
-  //         .then((response) => {
-  //           const metaData = response.data;
-  //           const ratings = metaData.ratings;
-  //           let totalNumberOfRatings = 0;
-  //           let totalRatings = 0;
-  //           let rating;
-  //           for (var key in ratings) {
-  //             totalNumberOfRatings += parseInt(ratings[key]);
-  //             totalRatings += parseInt(key) * parseInt(ratings[key]);
-  //           }
-
-  //           rating = totalRatings / totalNumberOfRatings;
-  //           rating = Math.round(10 * rating) / 10;
-  //           this.setState({
-  //             reviews,
-  //             reviewData,
-  //             metaData,
-  //             rating,
-  //             totalNumberOfRatings,
-  //           });
-  //         })
-  //         .catch((err) => {
-  //           console.log('error getting reviews and metaData', err);
-  //         });
-  //     });
-  //   });
-  // }
-
-  // updateProduct(productId) {
-  //   var query = { productId: productId };
-  //   $.ajax({
-  //     url: '/products/:product_id',
-  //     type: 'POST',
-  //     data: query,
-  //     success: (data) => {
-  //       this.setState({
-  //         productId: productId,
-  //         productInfo: data,
-  //       });
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     },
-  //   })
-  //     .then(() => {
-  //       $.ajax({
-  //         url: '/products/:product_id/styles',
-  //         type: 'POST',
-  //         data: query,
-  //         success: (styles) => {
-  //           this.setState({
-  //             styleInfo: styles.results,
-  //             defaultStyle: styles.results.find(
-  //               (product) => product['default?'] === true
-  //             ),
-  //           });
-  //           if (this.defaultStyle === undefined) {
-  //             this.setState({ defaultStyle: styles.results[0] });
-  //           }
-  //         },
-  //         error: (err) => {
-  //           console.log(err);
-  //         },
-  //       });
-  //     })
-  //     .then(() => {
-  //       this.getAllReviewsFunc().then((response) => {
-  //         const reviewData = response.data;
-  //         const reviews = response.data.results;
-  //         this.getAllMetaFunc()
-  //           .then((response) => {
-  //             const metaData = response.data;
-  //             const ratings = metaData.ratings;
-  //             let totalNumberOfRatings = 0;
-  //             let totalRatings = 0;
-  //             let rating;
-  //             for (var key in ratings) {
-  //               totalNumberOfRatings += parseInt(ratings[key]);
-  //               totalRatings += parseInt(key) * parseInt(ratings[key]);
-  //             }
-
-  //             rating = totalRatings / totalNumberOfRatings;
-  //             rating = Math.round(10 * rating) / 10;
-  //             this.setState({
-  //               reviews,
-  //               reviewData,
-  //               metaData,
-  //               rating,
-  //               totalNumberOfRatings,
-  //             });
-  //           })
-  //           .catch((err) => {
-  //             console.log('error getting reviews and metaData', err);
-  //           });
-  //       });
-  //     });
-  // }
-
   render() {
     if (this.state.flag) {
       return (
@@ -251,7 +130,7 @@ class App extends React.Component {
             productInfo={this.state.productInfo}
             defaultStyle={this.state.defaultStyle}
             styleList={this.state.styleInfo}
-            rating={3}
+            rating={this.state.rating}
           />
           <RelatedAndOutfit
             prodID={this.state.productId}
