@@ -4,6 +4,7 @@ import ShortReviewBody from './ShortReviewBody.jsx';
 import LongReviewBody from './LongReviewBody.jsx';
 import Recommend from './Recommend.jsx';
 import ReviewPhotos from './ReviewPhotos.jsx';
+import SellerResponse from './SellerResponse.jsx';
 
 class ReviewItem extends React.Component {
   constructor(props) {
@@ -46,6 +47,11 @@ class ReviewItem extends React.Component {
       reviewPhotos = <ReviewPhotos photos={review.photos}/>;
     }
 
+    let sellerResponse;
+    if (review.response) {
+      sellerResponse = <SellerResponse response={review.response}/>;
+    }
+
     const sameLineStyle = {
       display: 'inline-block'
     };
@@ -74,6 +80,7 @@ class ReviewItem extends React.Component {
         {reviewPhotos}
         <br></br>
         {recommend}
+        {sellerResponse}
         <br></br>
         <div style={sameLineStyle}>Helpful?</div>
         <div style={sameLineAndUnderlineStyle} onClick={() => { this.increaseHelpfulnessFunc(); }}>Yes</div>
