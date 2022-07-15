@@ -1,42 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import Stars from "react-stars-display";
+
 import { useState, useEffect } from "react";
 
 class OutfitCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // defaultOriginalPrice: 0,
-      // defaultSalePrice: 0,
-      // defaultPhoto: "",
-      // defaultStyle: this.props.defaultStyle,
-    };
+    this.state = {};
   }
 
-  componentDidMount() {
-    // this.props.styleInfo.forEach((styleInfoObj) => {
-    //   if (styleInfoObj["default?"]) {
-    //     // console.log("fire");
-    //     this.setState({
-    //       defaultOriginalPrice: styleInfoObj.original_price,
-    //       defaultSalePrice: styleInfoObj.sale_price,
-    //       defaultPhoto: styleInfoObj.photos[0].url,
-    //     });
-    //   }
-    // });
-    // if (this.state.defaultOriginalPrice === 0) {
-    //   this.setState({
-    //     defaultOriginalPrice: this.props.styleInfo[0].original_price,
-    //     defaultSalePrice: null,
-    //     defaultPhoto: this.props.styleInfo[0].photos[0].url,
-    //   });
-    // }
-  }
+  componentDidMount() {}
 
   render() {
-    // console.log("OutfitCard", this.props);
-    // if (this.props.defaultStyle.length !== 0) {
     return (
       <div
         className="RelatedCarouseOutfit"
@@ -50,7 +25,7 @@ class OutfitCard extends React.Component {
           this.props.relatedItemsUpdater(this.props.prodInfo[0].id);
         }}
       >
-        <Presistor />
+        {/* <Presistor outfits={}/> */}
         <div
           style={{
             height: "150px",
@@ -71,7 +46,6 @@ class OutfitCard extends React.Component {
             onClick={(e) => {
               e.stopPropagation();
               this.props.outfitRemover(this.props.prodInfo[0].id);
-              // when remover is fired: category and name are removed, but not photo and price
             }}
           >
             &times;
@@ -98,14 +72,13 @@ class OutfitCard extends React.Component {
             )}
           </div>
 
-          <div>{/* <Stars stars={2} /> */}</div>
+          <div> star reviews here</div>
         </div>
       </div>
     );
-    // }
   }
 }
-const Presistor = () => {
+const Presistor = (props) => {
   // console.log("called");
   const [items, setItems] = useState([]);
   useEffect(() => {

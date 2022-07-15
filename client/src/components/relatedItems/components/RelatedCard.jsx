@@ -1,48 +1,16 @@
 import React from "react";
 import $ from "jquery";
-// import Stars from "react-stars-display";
 
 class RelatedCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      // defaultOriginalPrice: 0,
-      // defaultSalePrice: 0,
-      // defaultPhoto: "",
-    };
+    this.state = {};
   }
 
-  componentDidMount() {
-    // this.props.itemData.itemStyles.results.forEach((styleInfoObj) => {
-    //   if (styleInfoObj["default?"]) {
-    //     // console.log("fir");
-    //     // console.log("ori", styleInfoObj.original_price);
-    //     this.setState({
-    //       defaultOriginalPrice: styleInfoObj.original_price,
-    //       defaultSalePrice: styleInfoObj.sale_price,
-    //       defaultPhoto: styleInfoObj.photos[0].url,
-    //     });
-    //   }
-    // });
-    // DONT REMOVE IF BLOCK, there was a need for it!!!!
-    // if (this.state.defaultOriginalPrice === 0) {
-    //   console.log("shouldn't be fir");
-    //   this.setState({
-    //     defaultOriginalPrice: this.props.itemData.itemStyles.results[0].original_price,
-    //     defaultSalePrice: null,
-    //     defaultPhoto: this.props.itemData.itemStyles.results[0].photos[0].url,
-    //   });
-    // }
-  }
+  componentDidMount() {}
 
   render() {
-    // console.log("sale render", this.state.defaultSalePrice);
-    // this.props.itemData.itemStyles.results.forEach((val) => {
-    //   if (val["default?"]) {
-    //     console.log("sale:", val);
-    //   }
-    // });
-    console.log("sty:", this.props.itemData.itemStyles);
+    // console.log("sty:", this.props.itemData.itemStyles);
     return (
       <div
         className="RelatedCarouselItem"
@@ -111,25 +79,7 @@ class RelatedCard extends React.Component {
             )}
           </div>
 
-          {/*
-          <div>
-            {this.state.defaultSalePrice === null ? (
-              `$${this.state.defaultOriginalPrice}`
-            ) : (
-              <span>
-                <span style={{ color: "red" }}>
-                  {" "}
-                  ${this.state.defaultSalePrice}
-                </span>{" "}
-                <del> ${this.state.defaultOriginalPrice}</del>
-              </span>
-            )}
-          </div> */}
-
-          <div>
-            star reviews here
-            {/* <Stars stars={3.5} /> */}
-          </div>
+          <div>star reviews here</div>
         </div>
       </div>
     );

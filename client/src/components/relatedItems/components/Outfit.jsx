@@ -1,5 +1,5 @@
 import React from "react";
-// import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import OutfitCard from "./OutfitCard.jsx";
 import Flickity from "react-flickity-component";
@@ -19,7 +19,12 @@ class Outfit extends React.Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    var pulledItems = storageGetter();
+    this.setState({
+      outfitItems: pulledItems,
+    });
+  }
 
   outfitAdder() {
     // console.log("outfitItems", this.state.outfitItems);
@@ -113,12 +118,11 @@ class Outfit extends React.Component {
                 fontSize: "15px",
                 marginTop: "15px",
               }}
-              // should only add a prod once to list.
               onClick={() => {
                 this.outfitAdder();
-                // this.useEffect()
               }}
             >
+              <Presistor outfits={this.state.outfitItems} />
               <br></br>
               <span>
                 [&#x2B;] <br></br>
@@ -136,14 +140,14 @@ class Outfit extends React.Component {
               position: "relative",
             }}
           >
-            {this.state.xLeftFrame === 0 ? null : (
+            {/* {this.state.xLeftFrame === 0 ? null : (
               <button
                 className="arrow left"
                 onClick={(e) => {
                   this.leftScroll();
                 }}
               ></button>
-            )}
+            )} */}
 
             <div className="flex-child relatedCarouselOutfit">
               {this.state.outfitItems.map((itemTuple, index) => (
@@ -158,71 +162,35 @@ class Outfit extends React.Component {
               ))}
             </div>
 
-            {this.state.xRightFrame === 0 ? null : (
+            {/* {this.state.xRightFrame === 0 ? null : (
               <button
                 className="arrow right"
                 onClick={(e) => {
                   this.rightScroll();
                 }}
               ></button>
-            )}
+            )} */}
           </div>
-
-          {/* <div className="flex-child">
-            {this.state.outfitItems.length !== 0 ? (
-              //  {this.state.outfitItems.map()}
-              <OutfitRenderer
-                prodInfo={this.state.outfitItems}
-                styleInfo={this.props.styleInfo}
-              />
-            ) : null}
-          </div> */}
         </div>
       </div>
     );
   }
 }
-// const Presistor = () => {
-//   console.log("called");
-//   const [items, setItems] = useState([]);
-//   useEffect(() => {
-//     localStorage.setItem("items", JSON.stringify(items));
-//   }, [items]);
-// };
 
-// const OutfitRenderer = (props) => {
-//   // console.log("PPP", props);
-//   return (
-//     <div
-//       className="RelatedCarouselItem"
-//       style={{
-//         border: "1px solid grey",
-//         padding: "15px 15px 15px 15px",
-//         margin: "15px 15px 15px 15px",
-//       }}
-//     >
-//       <div
-//         style={{
-//           height: "150px",
-//           width: "150px",
-//           marginBottom: "10px",
-//           backgroundImage: `url(${props.styleInfo[0].photos[0].url})`,
-//           backgroundSize: "150px 150px",
-//         }}
-//       >
-//         <button
-//           className="closeBtn"
-//           style={{
-//             float: "right",
-//             background: "transparent",
-//             borderColor: "transparent",
-//           }}
-//         >
-//           &times;
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
+const Presistor = (props) => {
+  // console.log("js", props); // JSON.stringify(props.outfits)
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(props.outfits));
+  }, [props]);
+};
+
+const storageGetter = (key = "items", defaultValue = []) => {
+  // console.log("get");
+  if (typeof window !== "undefined") {
+    const saved = localStorage.getItem(key);
+    const initial = saved !== null ? JSON.parse(saved) : defaultValue;
+    return initial;
+  }
+};
 
 export default Outfit;

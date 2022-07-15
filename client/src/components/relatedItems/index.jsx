@@ -96,7 +96,7 @@ class RelatedAndOutfit extends React.Component {
         this.setState({ xLeftFrame });
         var sWid = document.querySelector(".carouselContainer").scrollWidth;
         var ofWid = document.querySelector(".carouselContainer").offsetWidth;
-        if (Math.round(xLeftFrame) + ofWid === sWid) {
+        if (Math.round(xLeftFrame) + ofWid === sWid + 1) {
           this.setState({ xRightFrame: 0 });
         }
       });
