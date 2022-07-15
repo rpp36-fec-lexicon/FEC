@@ -3,6 +3,7 @@ import ReviewItem from './ReviewItem.jsx';
 import MoreReviews from './MoreReviews.jsx';
 import AddFirstReview from './AddFirstReview.jsx';
 import AddAnotherReview from './AddAnotherReview.jsx';
+import ReviewsHeading from './ReviewsHeading.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -13,9 +14,8 @@ class ReviewList extends React.Component {
       endReviewIndex: 4,
     };
     this.showMoreReviewsFunc = this.showMoreReviewsFunc.bind(this);
+    this.sortReviewsFunc = this.sortReviewsFunc.bind(this);
   }
-
-
 
   componentDidMount() {
     var reviewsShowing;
@@ -42,6 +42,10 @@ class ReviewList extends React.Component {
     this.setState({reviewsShowing});
   }
 
+  sortReviewsFunc() {
+
+  }
+
   render() {
 
     const sameLineStyle = {
@@ -50,9 +54,12 @@ class ReviewList extends React.Component {
 
     let addFirstReviewButton;
     let addAnotherReviewButton;
+    let reviewsHeading;
     if (!this.props.reviews.length) {
+      reviewsHeading = 'There are no reviews yet.';
       addFirstReviewButton = <AddFirstReview />;
     } else {
+      reviewsHeading = <ReviewsHeading reviews={this.props.reviews} sortReviewsFunc={this.sortReviewsFunc}/>;
       addAnotherReviewButton = <AddAnotherReview />;
     }
 
@@ -67,14 +74,7 @@ class ReviewList extends React.Component {
 
       return (
         <div>
-          <div>
-            {reviews.length} reviews, sorted by
-            <select onClick={() => { props.sortReviewsFunc(); }}>
-              <option id="helpful">Helpful</option>
-              <option id="newest">Newest</option>
-              <option id="relevance">Relevance</option>
-            </select>
-          </div>
+          {reviewsHeading}
           <div>{addFirstReviewButton}</div>
           <div className="scrollable">
             {this.state.reviewsShowing.map(review => {
@@ -84,10 +84,6 @@ class ReviewList extends React.Component {
             <div style={sameLineStyle}>{moreReviewsButton}</div>
             <div style={sameLineStyle}>{addAnotherReviewButton}</div>
           </div>
-
-          {/* <div style={sameLineStyle}>{moreReviewsButton}</div>
-          <div style={sameLineStyle}>{addAnotherReviewButton}</div> */}
-          {/* <button style={sameLineStyle} id="addReview">ADD A REVIEW  +</button> */}
         </div>
       );
     }

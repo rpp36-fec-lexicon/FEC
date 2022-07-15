@@ -5,6 +5,7 @@ import LongReviewBody from './LongReviewBody.jsx';
 import Recommend from './Recommend.jsx';
 import ReviewPhotos from './ReviewPhotos.jsx';
 import SellerResponse from './SellerResponse.jsx';
+import ReviewsHeading from './ReviewsHeading.jsx';
 
 class ReviewItem extends React.Component {
   constructor(props) {

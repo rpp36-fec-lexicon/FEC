@@ -17,7 +17,6 @@ class Modal extends React.Component {
 
     return (
       <div className="modalPhoto">
-        <h1>Modal Message</h1>
         <img src={this.props.photo.url}/>
         <button onClick={() => { this.props.closeModalFunc(); }}>Close Modal</button>
       </div>
