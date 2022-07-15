@@ -11,6 +11,7 @@ const SellerResponse = (props) => {
 
   return (
     <div style={responseStyle}>
+      <br></br>
       <div style={boldStyle}>Response:</div>
       <br></br>
       <div>{props.response}</div>

@@ -9,40 +9,53 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      reviews: [],
       reviewsShowing: null,
       startReviewIndex: 0,
       endReviewIndex: 4,
     };
     this.showMoreReviewsFunc = this.showMoreReviewsFunc.bind(this);
-    this.sortReviewsFunc = this.sortReviewsFunc.bind(this);
+    this.sortByHelpfulFunc = this.sortByHelpfulFunc.bind(this);
+    this.sortByNewestFunc = this.sortByNewestFunc.bind(this);
+    this.sortByRelevanceFunc = this.sortByRelevanceFunc.bind(this);
   }
 
   componentDidMount() {
-    var reviewsShowing;
+    this.setState({reviews: this.props.reviews}, () => {
+      var reviewsShowing;
 
-    if (this.props.reviews.length >= 2) {
-      reviewsShowing = this.props.reviews.slice(0, 2);
-    } else {
-      reviewsShowing = this.props.reviews.slice();
-    }
-
-    this.setState({reviewsShowing});
+      if (this.state.reviews.length >= 2) {
+        reviewsShowing = this.state.reviews.slice(0, 2);
+      } else {
+        reviewsShowing = this.state.reviews.slice();
+      }
+      this.setState({reviewsShowing});
+    });
   }
 
   showMoreReviewsFunc() {
     var reviewsShowing;
-    if (this.state.endReviewIndex >= this.props.reviews.length) {
-      reviewsShowing = this.props.reviews.slice();
+    if (this.state.endReviewIndex >= this.state.reviews.length) {
+      reviewsShowing = this.state.reviews.slice();
       this.state.endReviewIndex += 2;
     } else {
-      reviewsShowing = this.props.reviews.slice(this.state.startReviewIndex, this.state.endReviewIndex);
+      reviewsShowing = this.state.reviews.slice(this.state.startReviewIndex, this.state.endReviewIndex);
       this.state.endReviewIndex += 2;
     }
 
     this.setState({reviewsShowing});
   }
 
-  sortReviewsFunc() {
+  sortByHelpfulFunc() {
+    const reviews = this.state.reviews;
+
+  }
+
+  sortByNewestFunc() {
+
+  }
+
+  sortByRelevanceFunc() {
 
   }
 
@@ -55,16 +68,16 @@ class ReviewList extends React.Component {
     let addFirstReviewButton;
     let addAnotherReviewButton;
     let reviewsHeading;
-    if (!this.props.reviews.length) {
+    if (!this.state.reviews.length) {
       reviewsHeading = 'There are no reviews yet.';
       addFirstReviewButton = <AddFirstReview />;
     } else {
-      reviewsHeading = <ReviewsHeading reviews={this.props.reviews} sortReviewsFunc={this.sortReviewsFunc}/>;
+      reviewsHeading = <ReviewsHeading reviews={this.props.reviews} sortByHelpfulFunc={this.sortByHelpfulFunc}/>;
       addAnotherReviewButton = <AddAnotherReview />;
     }
 
-    if (this.props.reviews && this.state.reviewsShowing) {
-      const reviews = this.props.reviews;
+    if (this.state.reviews && this.state.reviewsShowing) {
+      const reviews = this.state.reviews;
       const lastReview = reviews[reviews.length - 1];
       const lastShowingReview = this.state.reviewsShowing[this.state.reviewsShowing.length - 1];
       let moreReviewsButton;
