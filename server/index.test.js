@@ -8,6 +8,7 @@ it('returns questions for given productID'), async () => {
     data: [
       {
         productID: 1,
+
         questionID: 1,
         question: 'When can be delivered?'
       },

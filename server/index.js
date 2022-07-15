@@ -78,7 +78,9 @@ app.get('/reviews/meta', (req, res) => {
     });
 });
 
-// API CALLS FOR QUESTIONS AND ANSWERS
+/*
+Routes for Questions API
+*/
 
 app.get('/questions', (req, res) => {
   QA.qetQuestionsByProductID(req.query.product_id, cb => {

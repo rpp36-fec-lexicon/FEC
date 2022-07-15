@@ -1,50 +1,24 @@
-import React from 'react';
-import QuestionsAnswersList from './QuestionsAnswersList.jsx';
-import interact from './Interact.jsx';
+import React, { useEffect } from 'react';
 
-class SearchQuestion extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      term: '',
-    };
-    this.searchQuestion = this.searchQuestion.bind(this);
-    this.onChange = this.onChange.bind(this);
-  }
+const SearchQuestion = (props) => {
 
-  onChange(e) {
-    this.setState({
-      term: e.target.value,
-    }, () => {
-      this.searchQuestion(e);
-    });
-  }
+  const performSearch = (e) => {
+    props.searchQuestions(e.target.value);
+  };
 
-  searchQuestion(e) {
-    e.preventDefault();
-    this.props.search(this.state.term);
 
-  }
+  return (
+    <div className="search">
+      <textarea
+        onChange={(e) => performSearch(e)}
+        type="text"
+        cols="144"
+        maxLength="200"
+        placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS...">
+      </textarea>
+    </div>
+  );
 
-  render() {
-    return (
-      <div>
-        <div>
-          <h1>QUESTIONS AND ANSWERS</h1>
-          <form>
-            <input
-              onChange={this.onChange}
-              onClick={() => { interact('input', 'searchBarClicked'); }}
-              type='text'
-              placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS'
-              style={{ width: '370px', height: '37px' }}
-            />
-          </form>
-          <div>{/* <QuestionEntry term={props.term}/> */}</div>
-        </div>
-      </div>
-    );
-  }
-}
+};
 
 export default SearchQuestion;
