@@ -15,6 +15,8 @@ class RelatedCard extends React.Component {
   componentDidMount() {
     this.props.itemData.itemStyles.results.forEach((styleInfoObj) => {
       if (styleInfoObj["default?"]) {
+        // console.log("fir");
+        console.log("ori", styleInfoObj.original_price);
         this.setState({
           defaultOriginalPrice: styleInfoObj.original_price,
           defaultSalePrice: styleInfoObj.sale_price,
@@ -22,17 +24,24 @@ class RelatedCard extends React.Component {
         });
       }
     });
-    if (this.state.defaultOriginalPrice === 0) {
-      this.setState({
-        defaultOriginalPrice:
-          this.props.itemData.itemStyles.results[0].original_price,
-        defaultSalePrice: null,
-        defaultPhoto: this.props.itemData.itemStyles.results[0].photos[0].url,
-      });
-    }
+    // DONT REMOVE IF BLOCK, there was a need for it!!!!
+    // if (this.state.defaultOriginalPrice === 0) {
+    //   console.log("shouldn't be fir");
+    //   this.setState({
+    //     defaultOriginalPrice: this.props.itemData.itemStyles.results[0].original_price,
+    //     defaultSalePrice: null,
+    //     defaultPhoto: this.props.itemData.itemStyles.results[0].photos[0].url,
+    //   });
+    // }
   }
 
   render() {
+    // console.log("sale render", this.state.defaultSalePrice);
+    // this.props.itemData.itemStyles.results.forEach((val) => {
+    //   if (val["default?"]) {
+    //     console.log("sale:", val);
+    //   }
+    // });
     return (
       <div
         className="RelatedCarouselItem"

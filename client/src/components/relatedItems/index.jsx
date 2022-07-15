@@ -192,19 +192,17 @@ class RelatedAndOutfit extends React.Component {
         </div>
 
         <br></br>
-        <br></br>
-        <br></br>
+
         <h5>Your Outfit:</h5>
 
         <Outfit
           prodID={this.props.prodID}
           prodInfo={this.props.prodInfo}
           styleInfo={this.props.styleInfo}
+          defaultStyle={this.props.defaultStyle}
           prodIDChanger={this.props.prodIDChanger}
           relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
         />
-        <br></br>
-        <br></br>
         <br></br>
       </div>
     );
