@@ -12,37 +12,33 @@ class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      styles: [],
       selectedStyle: undefined,
       selectedPhoto: '',
-      rating: 0
+      productInfo: undefined,
     };
-    this.selectedStyle = this.selectedStyle.bind(this);
     this.changeStyle = this.changeStyle.bind(this);
   }
   componentDidMount() {
-    this.selectedStyle();
-  }
-
-  selectedStyle() {
-    var tempStyle = this.props.defaultStyle;
     this.setState({
-      selectedStyle: tempStyle,
-      styles: this.props.styleList
-<<<<<<< HEAD
+      selectedStyle: this.props.defaultStyle,
+      productInfo: this.props.productInfo
     });
-=======
-    }, this.testFunc());
-    // console.log('temp style', tempStyle);
   }
 
-  testFunc() {
-    // console.log('new state ', this);
->>>>>>> 27168e8e5950bc05c2310466ddf4ff4aae2726c3
+  componentDidUpdate() {
+    if (this.state.productInfo !== this.props.productInfo) {
+      this.setState({
+        productInfo: this.props.productInfo,
+        selectedStyle: this.props.defaultStyle
+      });
+    }
   }
 
   changeStyle(id) {
-    this.setState({ selectedStyle: this.props.styleList.find((element) => element.style_id === id)});
+    this.setState({
+      selectedStyle: this.props.styleList.find((element) => element.style_id === id),
+      productId: this.props.productInfo.id
+    });
   }
 
   changePhoto(photoId) {
@@ -53,6 +49,7 @@ class ProductOverview extends React.Component {
     // console.log(this.props.productInfo);
     if (this.props.productInfo && this.props.defaultStyle && this.props.rating) {
       // console.log('this is the current style ', this.state.selectedStyle);
+      console.log('thisId', this.props.productInfo);
       return (
         <div>
           <h1 id="overviewHead">Product Overview!</h1>
