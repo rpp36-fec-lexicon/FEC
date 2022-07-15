@@ -10,10 +10,12 @@ class ReviewList extends React.Component {
     this.state = {
       reviewsShowing: null,
       startReviewIndex: 0,
-      endReviewIndex: 4
+      endReviewIndex: 4,
     };
     this.showMoreReviewsFunc = this.showMoreReviewsFunc.bind(this);
   }
+
+
 
   componentDidMount() {
     var reviewsShowing;

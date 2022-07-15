@@ -4,7 +4,6 @@ import ShortReviewBody from './ShortReviewBody.jsx';
 import LongReviewBody from './LongReviewBody.jsx';
 import Recommend from './Recommend.jsx';
 import ReviewPhotos from './ReviewPhotos.jsx';
-// import Stars from './Stars.jsx';
 
 class ReviewItem extends React.Component {
   constructor(props) {
@@ -13,7 +12,6 @@ class ReviewItem extends React.Component {
       helpfulClick: 0,
       helpfulness: this.props.review.helpfulness
     };
-    this.expandPhotoFunc = this.expandPhotoFunc.bind(this);
   }
 
   increaseHelpfulnessFunc() {
@@ -21,11 +19,6 @@ class ReviewItem extends React.Component {
       this.setState({helpfulness: this.state.helpfulness + 1});
       this.state.helpfulClick += 1;
     }
-  }
-
-  expandPhotoFunc() {
-    const review = this.props.review;
-
   }
 
   render () {
@@ -50,26 +43,16 @@ class ReviewItem extends React.Component {
 
     let reviewPhotos;
     if (review.photos.length) {
-      reviewPhotos = <ReviewPhotos photos={review.photos} expandPhotoFunc={this.expandPhotoFunc}/>;
+      reviewPhotos = <ReviewPhotos photos={review.photos}/>;
     }
 
     const sameLineStyle = {
       display: 'inline-block'
     };
 
-    const underlineStyle = {
-      textDecoration: 'underline'
-    };
-
     const sameLineAndUnderlineStyle = {
       display: 'inline-block',
       textDecoration: 'underline'
-    };
-
-    const sameLineAndToTheRightStyle = {
-      display: 'inline-block',
-      position: 'absolute',
-      right: 180
     };
 
     const flexStyle = {
@@ -100,6 +83,7 @@ class ReviewItem extends React.Component {
         <br></br>
         <br></br>
         <hr></hr>
+
       </div>
     );
   }

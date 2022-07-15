@@ -10,7 +10,7 @@ const ReviewPhotos = (props) => {
     <div>
       <br></br>
       {props.photos.map(photo => {
-        return <ReviewPhoto photo={photo} key={photo.id} expandPhotoFunc={props.expandPhotoFunc}/>;
+        return <ReviewPhoto photo={photo} key={photo.id} />;
       })}
     </div>
   );
