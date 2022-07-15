@@ -40,17 +40,17 @@ class Checkout extends React.Component {
     // console.log('props in checkout', this.props);
     return (
       <div>
-        <select name="size" onChange={this.userSelect}>
+        <select name="size" id="size" onChange={this.userSelect}>
           {this.getSizes().length > 0 ?
             (
               <>
                 <option>Select Size</option>
-                {this.getSizes().map((size) => <option key={size}>{size}</option>)}
+                {this.getSizes().map((size) => <option key={size} value={size}>{size}</option>)}
               </>
             ) :
             <option>OUT OF STOCK</option>}
         </select>
-        <select name="quant" disabled={this.state.currentSkuQuantity === -1}>
+        <select name="quant" id="quant" disabled={this.state.currentSkuQuantity === -1}>
           {this.state.currentSkuQuantity === -1
           && (
             <option>-</option>

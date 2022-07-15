@@ -13,18 +13,45 @@ const IMG = styled.img`
 class Showcase extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    const { photos } = props;
+    this.state = {
+      photos,
+      currPhoto: photos[0]
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.state.photos !== this.props.photos) {
+      this.setState({ photos: this.props.photos, currPhoto: this.props.photos[0] });
+    }
+  }
+
+  handleClick(link) {
+    this.setState({
+      currPhoto: this.state.photos.find((pic) => pic.url === link)
+    });
   }
 
   render() {
-    // console.log('Showcase props for pictures ', this.props);
+    console.log('Showcase props for pictures ', this.props);
     return (
       <div>
-        <PrimaryImage pic={this.props.photos[0].url}/>
+        {this.state.currPhoto ?
+          <>
+            <PrimaryImage pic={this.state.currPhoto.url}/>
+          </>
+          :
+          <>
+            <PrimaryImage pic={this.props.photos[0].url}/>
+          </>
+        }
+        {/* <PrimaryImage pic={currPhoto.url}/> */}
         {this.props.photos.map((pic) => (
           <IMG
             key={pic.url}
             src={pic.thumbnail_url}
+            onClick={() => this.handleClick(pic.url)}
             alt={pic.url}
           />
         ))}
