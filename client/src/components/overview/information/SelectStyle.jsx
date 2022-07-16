@@ -31,6 +31,7 @@ class SelectStyle extends React.Component {
             <Img
               key={style.style_id}
               src={style.photos[0].thumbnail_url}
+              name={style.name}
               onClick={() => this.handleClick(style.style_id)}
               a=""
             />

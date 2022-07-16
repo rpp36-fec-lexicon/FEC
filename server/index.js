@@ -165,9 +165,9 @@ app.get('/products', (req, res) => {
 });
 
 app.post('/products/:product_id', (req, res) => {
-  // console.log(req.body.productId);
+  console.log(req.body.params);
   // res.render('products' + req.body.productId);
-  data.getProductInfo(req.body.productId, (err, data) => {
+  data.getProductInfo(req.body.params.productId, (err, data) => {
     if (err) {
       console.log(err);
       res.status(400);
@@ -181,7 +181,7 @@ app.post('/products/:product_id', (req, res) => {
 });
 
 app.post('/products/:product_id/styles', (req, res) => {
-  data.getProductStyles(req.body.productId, (err, data) => {
+  data.getProductStyles(req.body.params.productId, (err, data) => {
     if (err) {
       console.log(err);
       res.status(400);
