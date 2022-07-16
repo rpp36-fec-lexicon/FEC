@@ -67,17 +67,25 @@ class ReviewList extends React.Component {
       sortedReviews.push(largest);
       const largestIndex = reviews.indexOf(largest);
       reviews.splice(largestIndex, 1);
+
+      innerFunc(array);
     };
 
     innerFunc(reviews);
 
-    console.log(sortedReviews);
+    console.log('sortedReviews', sortedReviews);
 
-    if (reviews.length === sortedReviews.length) {
-      this.setState({reviews: sortedReviews}, () => { console.log('this.state.reviews', this.state.reviews); });
-    }
+    this.setState({reviews: sortedReviews}, () => {
+      console.log('this.state.reviews', this.state.reviews);
+      var reviewsShowing;
 
-
+      if (this.state.reviews.length >= 2) {
+        reviewsShowing = this.state.reviews.slice(0, 2);
+      } else {
+        reviewsShowing = this.state.reviews.slice();
+      }
+      this.setState({reviewsShowing});
+    });
   }
 
   sortByNewestFunc() {
