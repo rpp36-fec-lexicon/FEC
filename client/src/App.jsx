@@ -105,15 +105,13 @@ class App extends React.Component {
     });
   }
 
-
-
   render() {
     if (this.state.flag) {
       return (
         <React.Fragment>
 
           <h1>Atelier</h1>
-          <ProductOverview
+          {/* <ProductOverview
             productInfo={this.state.productInfo}
             defaultStyle={this.state.defaultStyle}
             styleList={this.state.styleInfo}
@@ -130,7 +128,8 @@ class App extends React.Component {
             productId={this.state.productId}
             productInfo={this.state.productInfo}
             key={this.state.productId}
-          />
+          /> */}
+
           <RatingsAndReviews
             productId={this.state.productId}
             reviewData={this.state.reviewData}
