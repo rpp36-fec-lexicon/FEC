@@ -147,7 +147,7 @@ class App extends React.Component {
               productInfo={this.state.productInfo}
               key={this.state.productId}
             />
-            <RatingsAndReviews
+            {/* <RatingsAndReviews
               productId={this.state.productId}
               reviewData={this.state.reviewData}
               reviews={this.state.reviews}
@@ -155,7 +155,7 @@ class App extends React.Component {
               rating={this.state.rating}
               totalNumberOfRatings={this.state.totalNumberOfRatings}
               filterRating={this.filterRating}
-            />
+            /> */}
           </div>
         </React.Fragment>
       );
