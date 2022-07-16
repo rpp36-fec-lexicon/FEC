@@ -75,6 +75,7 @@ class Checkout extends React.Component {
             Check Out
           </button>
 
+          {/* if product alreaedy in outfit, don't show button */}
           <button
             type="fav"
             value="fav"

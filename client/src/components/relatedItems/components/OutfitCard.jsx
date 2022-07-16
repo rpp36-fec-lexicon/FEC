@@ -78,11 +78,11 @@ class OutfitCard extends React.Component {
     );
   }
 }
-const Presistor = (props) => {
-  // console.log("called");
-  const [items, setItems] = useState([]);
-  useEffect(() => {
-    localStorage.setItem("items", JSON.stringify(items));
-  }, [items]);
-};
+// const Presistor = (props) => {
+//   // console.log("called");
+//   const [items, setItems] = useState([]);
+//   useEffect(() => {
+//     localStorage.setItem("items", JSON.stringify(items));
+//   }, [items]);
+// };
 export default OutfitCard;
