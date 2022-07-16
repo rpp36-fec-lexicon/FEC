@@ -4,11 +4,17 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { render, screen } from '@testing-library/react';
+import { render, fireEvent, screen, waitFor } from '@testing-library/react';
+import { configure } from '@testing-library/dom';
 import { act } from 'react-dom/test-utils';
 import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
 
-import ProductOveriew from './ProductOveriew.jsx';
+import mockData from './mockData.js';
+import ProductOverview from './ProductOverview.jsx';
+import ProductDescription from './information/ProductDescription.jsx';
+import Checkout from './checkout/Checkout.jsx';
+import SelectStyle from './information/SelectStyle.jsx';
 
 describe('Product Overview', ()=>{
   let temporarySandBox;
@@ -21,25 +27,55 @@ describe('Product Overview', ()=>{
     temporarySandBox = null;
   });
 
-  describe('Testing main entry (Index) of Related Products component', ()=>{
-    it('should find headers to both "related products" and "your outfit"', async () => {
-      render(<RelatedAndOutfit />);
-      expect(screen.getByText("Related Products:")).toBeInTheDocument();
-      expect(screen.getByText("Your Outfit:")).toBeInTheDocument();
+  describe('Testing main entry of ProductOverview component', () => {
+    it('should find headers in Product Overview', () => {
+      render(<ProductOverview productInfo={mockData.productInfo} defaultStyle={mockData.styleList.results[0]} styleList={mockData.styleList.results} rating={3.9}/>);
+      configure({ testIdAttribute: 'id'});
+      waitFor(() => screen.getByTestId('overviewHead'));
+      expect(screen.getByTestId('overviewHead')).toHaveTextContent('Product Overview!');
     });
-  })
 
-  describe('Testing Related Products component', ()=>{
-    it('counts the number of divs created by Related class component', async () => {
+    it('should render checkout component', () => {
       act(() => {
-        ReactDOM.createRoot(temporarySandBox).render(<Related />);
+        render(<Checkout id={mockData.styleList.results[0].style_id} skus={mockData.styleList.results[0].skus}/>, temporarySandBox);
       });
-      let renderedInfo = temporarySandBox.querySelector('div');
-      expect(renderedInfo.childNodes.length).toBe(2);
+      expect(temporarySandBox).not.toBeNull();
+      expect(screen.getAllByRole('option').length).toBe(8);
+      expect(screen.getByRole('option', {name: '-'})).toBeInTheDocument();
     });
-  })
 
-})
+    it('should handle click on size and update quantity options', () => {
+      act(() => {
+        render(<Checkout id={mockData.styleList.results[0].style_id} skus={mockData.styleList.results[0].skus}/>, temporarySandBox);
+      });
+      configure({ testIdAttribute: 'id'});
+      let dropdown = screen.getByTestId('size');
+      expect(dropdown.value).toBe('Select Size');
+      fireEvent.change(dropdown, {target: {value: 'XS'}});
+      expect(dropdown.value).toBe('XS');
+      let quantity = screen.getByTestId('quant');
+      expect(quantity.length).toBe(8);
+    });
+
+    it('change product data if a different style was picked', () => {
+      let state = {
+        selectedStyle: undefined
+      };
+      // var changeStyle(id) {
+      //   state.selectedStyle = mockData.styleList.find((element) => element.style_id === id);
+      // }
+      act(() => {
+        render(<SelectStyle styles={mockData.styleList.results} selectedStyle={mockData.styleList.results[0]}/>);
+      });
+      expect(screen.getByRole('heading', {name: 'Style > Forest Green & Black'})).toBeInTheDocument();
+      configure({testIdAttribute: 'name'});
+      const newStyle = screen.getByTestId('Desert Brown & Tan');
+      expect(newStyle).toBeInTheDocument();
+      // fireEvent.click(newStyle);
+      // expect(screen.getByRole('heading', {name: 'Style > Desert Brown & Tan'})).toBeInTheDocument();
+    });
+  });
+});
 
 /*
 // TESTING REQUIREMENTS
@@ -51,3 +87,5 @@ describe('Product Overview', ()=>{
 // Consider adding Browser Integration tests with Jest + React-Testing-Library/Enzyme
 //   for your React Components (probably not enzyme unless you are using a lower version of react)
 // */
+
+// Product Description : Test if Null (So colon disappears)

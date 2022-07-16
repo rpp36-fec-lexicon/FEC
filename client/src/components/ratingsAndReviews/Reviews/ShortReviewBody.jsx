@@ -6,6 +6,6 @@ const ShortReviewBody = (props) => {
       <div>{props.reviewBody}</div>
     </div>
   );
-}
+};
 
 export default ShortReviewBody;

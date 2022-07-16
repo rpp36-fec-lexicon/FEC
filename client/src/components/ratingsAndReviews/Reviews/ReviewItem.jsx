@@ -3,6 +3,9 @@ import Stars from 'react-stars-display';
 import ShortReviewBody from './ShortReviewBody.jsx';
 import LongReviewBody from './LongReviewBody.jsx';
 import Recommend from './Recommend.jsx';
+import ReviewPhotos from './ReviewPhotos.jsx';
+import SellerResponse from './SellerResponse.jsx';
+import ReviewsHeading from './ReviewsHeading.jsx';
 
 class ReviewItem extends React.Component {
   constructor(props) {
@@ -11,7 +14,6 @@ class ReviewItem extends React.Component {
       helpfulClick: 0,
       helpfulness: this.props.review.helpfulness
     };
-
   }
 
   increaseHelpfulnessFunc() {
@@ -31,9 +33,9 @@ class ReviewItem extends React.Component {
     let reviewBody;
 
     if (review.body.length < 250) {
-      reviewBody = <ShortReviewBody reviewBody={review.body}/>
+      reviewBody = <ShortReviewBody reviewBody={review.body}/>;
     } else {
-      reviewBody = <LongReviewBody reviewBody={review.body}/>
+      reviewBody = <LongReviewBody reviewBody={review.body}/>;
     }
 
     let recommend;
@@ -41,12 +43,18 @@ class ReviewItem extends React.Component {
       recommend = <Recommend />;
     }
 
+    let reviewPhotos;
+    if (review.photos.length) {
+      reviewPhotos = <ReviewPhotos photos={review.photos}/>;
+    }
+
+    let sellerResponse;
+    if (review.response) {
+      sellerResponse = <SellerResponse response={review.response}/>;
+    }
+
     const sameLineStyle = {
       display: 'inline-block'
-    };
-
-    const underlineStyle = {
-      textDecoration: 'underline'
     };
 
     const sameLineAndUnderlineStyle = {
@@ -54,30 +62,36 @@ class ReviewItem extends React.Component {
       textDecoration: 'underline'
     };
 
-    const sameLineAndToTheRightStyle = {
-      display: 'inline-block',
-      position: 'absolute',
-      right: 180
+    const flexStyle = {
+      display: 'flex',
+      justifyContent: 'space-between'
     };
 
     return (
       <div>
         <br></br>
-        <Stars style={sameLineStyle} stars={review.rating}/>
-        <div style={sameLineAndToTheRightStyle}>{review['reviewer_name']}, {month[monthIndex]} {date}, {year}</div>
+        <div style={flexStyle}>
+          <Stars stars={review.rating}/>
+          <div>{review['reviewer_name']}, {month[monthIndex]} {date}, {year}</div>
+        </div>
+
         <h3 id="reviewSummary">{review.summary}</h3>
         {reviewBody}
+
+        {reviewPhotos}
         <br></br>
         {recommend}
+        {sellerResponse}
         <br></br>
         <div style={sameLineStyle}>Helpful?</div>
-        <div style={sameLineAndUnderlineStyle} onClick={() => { this.increaseHelpfulnessFunc() }}>Yes</div>
+        <div style={sameLineAndUnderlineStyle} onClick={() => { this.increaseHelpfulnessFunc(); }}>Yes</div>
         <div style={sameLineStyle}>({this.state.helpfulness})</div>
         <div style={sameLineStyle}>|</div>
         <div style={sameLineStyle}>Report</div>
         <br></br>
         <br></br>
         <hr></hr>
+
       </div>
     );
   }
