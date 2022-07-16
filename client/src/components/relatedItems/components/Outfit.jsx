@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import OutfitCard from "./OutfitCard.jsx";
 import Flickity from "react-flickity-component";
@@ -9,61 +10,32 @@ class Outfit extends React.Component {
     super(props);
     this.state = {
       outfitItems: [],
-      itemInfoAndStyle: [],
+      // itemInfoAndStyle: [],
       prodInfo: "",
       relatedProdFeat: [],
       relatedProdName: "",
-      // modalSeen: false,
-      // relatedProdFeat: [],
-      // relatedProdName: "",
+      xLeftFrame: 0,
+      xRightFrame: 0,
     };
   }
 
   componentDidMount() {
-    // console.log("Related rend", this.props.prodID); // CHANGE prodID here
-    // $.ajax({
-    //   type: "GET",
-    //   url: `/products/${this.props.prodID}/related`,
-    //   success: (arrayOfProdIDs) => {
-    //     var relatedItemData = [];
-    //     arrayOfProdIDs.forEach((itemID) => {
-    //       $.ajax({
-    //         type: "GET",
-    //         url: `/products/${itemID}`,
-    //         success: (relatedItemInfo) => {
-    //           $.ajax({
-    //             type: "GET",
-    //             url: `/products/${itemID}/styles`,
-    //             success: (relatedItemStyles) => {
-    //               relatedItemData.push({
-    //                 itemInfo: relatedItemInfo,
-    //                 itemStyles: relatedItemStyles,
-    //               });
-    //               this.setState({
-    //                 itemInfoAndStyle: relatedItemData,
-    //               });
-    //             },
-    //             error: (err) => {
-    //               console.log(err);
-    //             },
-    //           });
-    //         },
-    //         error: (err) => {
-    //           console.log(err);
-    //         },
-    //       });
-    //     });
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //   },
-    // });
+    var pulledItems = storageGetter();
+    this.setState({
+      outfitItems: pulledItems,
+    });
   }
-  outfitAdder() {
-    var outfitContainer = this.state.outfitItems;
 
-    if (!outfitContainer.includes(this.props.prodInfo)) {
-      outfitContainer.push(this.props.prodInfo);
+  outfitAdder() {
+    // console.log("outfitItems", this.state.outfitItems);
+    var outfitContainer = this.state.outfitItems;
+    var existingIDs = [];
+    for (let i = 0; i < this.state.outfitItems.length; i++) {
+      existingIDs.push(this.state.outfitItems[i][0][0].id);
+    }
+    if (!existingIDs.includes(this.props.prodInfo.id)) {
+      outfitContainer.push([[this.props.prodInfo], [this.props.defaultStyle]]);
+      // check style connection adn add it here
     }
 
     this.setState({
@@ -72,9 +44,8 @@ class Outfit extends React.Component {
   }
 
   outfitRemover(id) {
-    console.log("id", id);
     for (let i = 0; i < this.state.outfitItems.length; i++) {
-      if (this.state.outfitItems[i].id === id) {
+      if (this.state.outfitItems[i][0][0].id === id) {
         this.state.outfitItems.splice([i], 1);
       }
     }
@@ -83,8 +54,46 @@ class Outfit extends React.Component {
     });
   }
 
+  leftScroll() {
+    document.querySelector(".relatedCarouselOutfit").scrollBy(-250, 0);
+    document
+      .querySelector(".relatedCarouselOutfit")
+      .addEventListener("scroll", (event) => {
+        var xLeftFrame = document.querySelector(
+          ".relatedCarouselOutfit"
+        ).scrollLeft;
+        this.setState({ xLeftFrame });
+        var sWid = document.querySelector(".relatedCarouselOutfit").scrollWidth;
+        var ofWid = document.querySelector(
+          ".relatedCarouselOutfit"
+        ).offsetWidth;
+        if (Math.round(xLeftFrame) + ofWid !== sWid) {
+          this.setState({ xRightFrame: 1 });
+        }
+      });
+  }
+
+  rightScroll() {
+    document.querySelector(".relatedCarouselOutfit").scrollBy(250, 0);
+    document
+      .querySelector(".relatedCarouselOutfit")
+      .addEventListener("scroll", (event) => {
+        var xLeftFrame = document.querySelector(
+          ".relatedCarouselOutfit"
+        ).scrollLeft;
+        this.setState({ xLeftFrame });
+        var sWid = document.querySelector(".relatedCarouselOutfit").scrollWidth;
+        var ofWid = document.querySelector(
+          ".relatedCarouselOutfit"
+        ).offsetWidth;
+        if (Math.round(xLeftFrame) + ofWid === sWid) {
+          this.setState({ xRightFrame: 0 });
+        }
+      });
+  }
+
   render() {
-    console.log("outfitItems", this.state.outfitItems);
+    // console.log("outfitItems", this.state.outfitItems);
     return (
       <div>
         <div
@@ -101,84 +110,87 @@ class Outfit extends React.Component {
               margin: "15px 15px 15px 15px",
             }}
           >
-            <button
+            <button //outfitAdder
               className="outfitAdderBTN"
               style={{
-                height: "100%",
-                width: "100%",
+                height: "250px",
+                width: "80px",
                 fontSize: "15px",
+                marginTop: "15px",
               }}
-              // should only add a prod once to list.
               onClick={() => {
                 this.outfitAdder();
               }}
             >
+              <Presistor outfits={this.state.outfitItems} />
+              <br></br>
               <span>
                 [&#x2B;] <br></br>
               </span>{" "}
+              <br></br>
               Add to Outfit
             </button>
           </div>
 
-          <div className="flex-child relatedCarousel">
-            {this.state.outfitItems.map((item, index) => (
-              <OutfitCard
-                prodInfo={item}
-                outfitRemover={this.outfitRemover.bind(this)}
-                styleInfo={this.props.styleInfo}
-                key={index}
-              />
-            ))}
-          </div>
+          <div
+            className="mainD"
+            style={{
+              padding: "15px 15px 15px 15px",
+              // margin: "15px 15px 15px 15px",
+              position: "relative",
+            }}
+          >
+            {/* {this.state.xLeftFrame === 0 ? null : (
+              <button
+                className="arrow left"
+                onClick={(e) => {
+                  this.leftScroll();
+                }}
+              ></button>
+            )} */}
 
-          {/* <div className="flex-child">
-            {this.state.outfitItems.length !== 0 ? (
-              //  {this.state.outfitItems.map()}
-              <OutfitRenderer
-                prodInfo={this.state.outfitItems}
-                styleInfo={this.props.styleInfo}
-              />
-            ) : null}
-          </div> */}
+            <div className="flex-child relatedCarouselOutfit">
+              {this.state.outfitItems.map((itemTuple, index) => (
+                <OutfitCard
+                  prodInfo={itemTuple[0]}
+                  prodStyle={itemTuple[1]}
+                  outfitRemover={this.outfitRemover.bind(this)}
+                  prodIDChanger={this.props.prodIDChanger}
+                  relatedItemsUpdater={this.props.relatedItemsUpdater}
+                  key={index}
+                />
+              ))}
+            </div>
+
+            {/* {this.state.xRightFrame === 0 ? null : (
+              <button
+                className="arrow right"
+                onClick={(e) => {
+                  this.rightScroll();
+                }}
+              ></button>
+            )} */}
+          </div>
         </div>
       </div>
     );
   }
 }
 
-// const OutfitRenderer = (props) => {
-//   // console.log("PPP", props);
-//   return (
-//     <div
-//       className="RelatedCarouselItem"
-//       style={{
-//         border: "1px solid grey",
-//         padding: "15px 15px 15px 15px",
-//         margin: "15px 15px 15px 15px",
-//       }}
-//     >
-//       <div
-//         style={{
-//           height: "150px",
-//           width: "150px",
-//           marginBottom: "10px",
-//           backgroundImage: `url(${props.styleInfo[0].photos[0].url})`,
-//           backgroundSize: "150px 150px",
-//         }}
-//       >
-//         <button
-//           className="closeBtn"
-//           style={{
-//             float: "right",
-//             background: "transparent",
-//             borderColor: "transparent",
-//           }}
-//         >
-//           &times;
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
+const Presistor = (props) => {
+  // console.log("js", props); // JSON.stringify(props.outfits)
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(props.outfits));
+  }, [props]);
+};
+
+const storageGetter = (key = "items", defaultValue = []) => {
+  // console.log("get");
+  if (typeof window !== "undefined") {
+    const saved = localStorage.getItem(key);
+    const initial = saved !== null ? JSON.parse(saved) : defaultValue;
+    return initial;
+  }
+};
 
 export default Outfit;

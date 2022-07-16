@@ -1,38 +1,16 @@
 import React from "react";
 import $ from "jquery";
-// import Stars from "react-stars-display";
 
 class RelatedCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      defaultOriginalPrice: 0,
-      defaultSalePrice: 0,
-      defaultPhoto: "",
-    };
+    this.state = {};
   }
 
-  componentDidMount() {
-    this.props.itemData.itemStyles.results.forEach((styleInfoObj) => {
-      if (styleInfoObj["default?"]) {
-        this.setState({
-          defaultOriginalPrice: styleInfoObj.original_price,
-          defaultSalePrice: styleInfoObj.sale_price,
-          defaultPhoto: styleInfoObj.photos[0].url,
-        });
-      }
-    });
-    if (this.state.defaultOriginalPrice === 0) {
-      this.setState({
-        defaultOriginalPrice:
-          this.props.itemData.itemStyles.results[0].original_price,
-        defaultSalePrice: null,
-        defaultPhoto: this.props.itemData.itemStyles.results[0].photos[0].url,
-      });
-    }
-  }
+  componentDidMount() {}
 
   render() {
+    // console.log("sty:", this.props.itemData.itemStyles);
     return (
       <div
         className="RelatedCarouselItem"
@@ -49,7 +27,7 @@ class RelatedCard extends React.Component {
             height: "150px",
             width: "150px",
             marginBottom: "10px",
-            backgroundImage: `url(${this.state.defaultPhoto})`,
+            backgroundImage: `url(${this.props.itemData.itemStyles.results[0].photos[0].url})`,
             backgroundSize: "150px 150px",
           }}
           onClick={() => {
@@ -85,22 +63,23 @@ class RelatedCard extends React.Component {
             <b>{this.props.itemData.itemInfo.name}</b>
           </div>
           <div>
-            {this.state.defaultSalePrice === null ? (
-              `$${this.state.defaultOriginalPrice}`
+            {this.props.itemData.itemStyles.results[0].sale_price === null ? (
+              `$${this.props.itemData.itemStyles.results[0].original_price}`
             ) : (
               <span>
                 <span style={{ color: "red" }}>
                   {" "}
-                  ${this.state.defaultSalePrice}
+                  ${this.props.itemData.itemStyles.results[0].sale_price}
                 </span>{" "}
-                <del> ${this.state.defaultOriginalPrice}</del>
+                <del>
+                  {" "}
+                  ${this.props.itemData.itemStyles.results[0].original_price}
+                </del>
               </span>
             )}
           </div>
-          <div>
-            star reviews here
-            {/* <Stars stars={3.5} /> */}
-          </div>
+
+          <div>star reviews here</div>
         </div>
       </div>
     );
