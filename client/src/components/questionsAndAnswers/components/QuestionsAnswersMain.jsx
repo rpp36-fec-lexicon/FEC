@@ -1,185 +1,77 @@
 import React from 'react';
-import QuestionsAnswersList from './QuestionsAnswersList.jsx';
+import axios from 'axios';
 import SearchQuestion from './SearchQuestion.jsx';
-import AskQuestions from './AskQuestions.jsx';
-import $ from 'jquery';
+import QuestionsAnswersList from './QuestionsAnswersList.jsx';
 
 class QuestionsAnswersMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: this.props.productId,
+      productId: this.props.product,
       productInfo: this.props.productInfo,
       questions: [],
-      searchTerm: ''
+      search: ''
     };
-    this.getQuestionsByProductID = this.getQuestionsByProductID.bind(this);
-    this.getQuestionAnswerList = this.getQuestionAnswerList.bind(this);
-    this.postProductIdToServer = this.postProductIdToServer.bind(this);
-    this.searchQuestion = this.searchQuestion.bind(this);
-    this.loadMoreAnswers = this.loadMoreAnswers.bind(this);
-    this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
   }
 
   componentDidMount() {
-    this.getQuestionsByProductID(this.productId);
+    this.getQuestions(this.state.productId);
   }
 
-  componendDidUpdate() {
+  componentDidUpdate () {
     if ((this.state.productInfo !== this.props.productInfo) || (this.state.productId !== this.props.product)) {
       this.setState({
         productInfo: this.props.productInfo,
         productId: this.props.product
       });
-      this.getQuestionsByProductID(this.props.productId);
+      this.getQuestions(this.props.product);
     }
   }
 
-  searchQuestion(term) {
+  searchQuestions (value) {
     this.setState({
-      searchTerm: term
+      search: value
     });
   }
 
-  getQuestionsByProductID () {
-    fetch(`/questions?product_id=${this.state.productId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        // more than 2 questions, load more question button will not appear
-        if (data.results.length > 2) {
-          this.setState({
-            isloadQsButtonVisible: true,
-          });
-        // less than 2 questions, load more question button will not appear
-        } else if (data.results.length < 2) {
-          this.setState({
-            isloadQsButtonVisible: false,
-            isloadAsButtonVisible: false,
-          });
-        }
+  getQuestions (id) {
+    axios.get('/questions', {
+      params: {
+        productId: id
+      }
+    })
+      .then((result) => {
         this.setState({
-          questions: data.results,
-          isloadQsButtonVisible: false
+          questions: result.data
         });
-      }).then(() => {
-        this.getQuestionAnswerList();
-        this.postProductIdToServer();
+      })
+      .catch((error) => {
+        console.log('Error Getting Questions:', error);
       });
   }
-  getQuestionAnswerList() {
-    // const list = this.state.questions;
-    const formattedQuestionsAnswers = [];
-    const questionsAnswersToDisplay = [];
-    this.state.questions.map(QA => {
-      let answersAll = Object.values(QA.answers);
-      let answersSeller = [];
-      let answersNonSellerHelpful = [];
-      let answersToDisplay = [];
-      answersAll.map(answer => {
-        //if seller add to priority array
-        if (answer.answerer_name.toLowerCase() === 'seller') {
-          console.log(answer.answerer_name);
-          answersSeller.push({
-            id: answer.id,
-            text: answer.body,
-            helpfulnessCount: answer.helpfulness,
-            name: answer.answerer_name,
-            date: answer.date,
-            photos: answer.photos
-          });
-        } else {
-          answersNonSellerHelpful.push({
-            id: answer.id,
-            text: answer.body,
-            helpfulnessCount: answer.helpfulness,
-            name: answer.answerer_name,
-            date: answer.date,
-            photos: answer.photos
-          });
-        }
-        answersNonSellerHelpful.sort(function(a, b) {
-          return b.helpfulness - a.helpfulness;
-        });
-        answersToDisplay = answersSeller.concat(answersNonSellerHelpful);
-        return answersToDisplay;
-      });
-      questionsAnswersToDisplay.push({
-        id: QA.question_id,
-        question: QA.question_body,
-        isHelpful: QA.question_helpfulness,
-        answers: answersToDisplay
-      });
-    });
-    this.setState({
-      questionsAndAnswers: questionsAnswersToDisplay
-    });
-  }
 
-  postProductIdToServer() {
-    const productID = { id: this.state.productId };
-    $.ajax({
-      method: 'POST',
-      url: '/questions',
-      contentType: 'application/json',
-      data: JSON.stringify(productID),
-      success: () => {
-      },
-      error: () => {
-        console.log(`postProductIdToServer function failed to send productId : ${productID.id} to server`);
-      },
-    });
-  }
-
-
-  loadMoreAnswers() {
-    //Sorts the answer array of all questions to get max length
-    const answersArray = this.state.questionsAndAnswers.map(e => {
-      return e.answers.length;
-    });
-    const sorted = answersArray.sort(function(a, b) {
-      return b - a;
-    });
-    if ((this.state.answersToShow >= sorted[0]) || (answersArray.length === 0)) {
-      this.setState({
-        isloadAsButtonVisible: false,
-      });
-    }
-    this.setState((prev) => ({ answersToShow: prev.answersToShow + 2 }));
-  }
-
-  loadMoreQuestions() {
-    if (this.state.questionsToShow > this.state.questionsAndAnswers.length) {
-      this.setState({
-        isloadQsButtonVisible: false,
-      });
-    } else {
-      this.setState((prev) => ({ questionsToShow: prev.questionsToShow + 2 }));
-      this.getQuestionsApi();
-    }
-  }
-
-  render() {
+  render () {
     return (
-      <div>
-        <div>
-          <SearchQuestion
-            search={this.searchQuestion}
-          />
+      <div id="qa-module" className={'module_container'}>
+        <div className="qa-title">
+          <h3>QUESTIONS & ANSWERS</h3>
         </div>
-        <div>
+        <div className="qa-search">
+          <SearchQuestion searchQuestions={this.searchQuestions.bind(this)}/>
+        </div>
+        <div className="qa-list">
           <QuestionsAnswersList
-            questions = {this.state.questions}
-            key={this.state.questions.question_id}
+            product={this.state.productId}
+            questions={this.state.questions}
+            productInfo={this.state.productInfo}
+            filter={this.state.search}
+            darkMode={this.props.darkMode}
+            update={this.componentDidMount.bind(this)}
           />
-        </div>
-        <br/>
-        <div>
-          <button style={{width: '150px', height: '39px'}}>
-            ADD A QUESTION  +
-          </button>
         </div>
       </div>
     );
   }
 }
+
 export default QuestionsAnswersMain;

@@ -105,39 +105,43 @@ class App extends React.Component {
     });
   }
 
+
+
   render() {
     if (this.state.flag) {
       return (
-        <div>
-          <h1>Atelier</h1>
-          {/* <ProductOverview
-            productInfo={this.state.productInfo}
-            defaultStyle={this.state.defaultStyle}
-            styleList={this.state.styleInfo}
-            rating={this.state.rating}
-          />
-          <RelatedAndOutfit
-            prodID={this.state.productId}
-            prodInfo={this.state.productInfo}
-            styleInfo={this.state.styleInfo}
-            prodIDChanger={this.prodIDChanger.bind(this)}
-          />
+        <React.Fragment>
+          <div>
+            <h1>Atelier</h1>
+            <ProductOverview
+              productInfo={this.state.productInfo}
+              defaultStyle={this.state.defaultStyle}
+              styleList={this.state.styleInfo}
+              rating={this.state.rating}
+            />
+            <RelatedAndOutfit
+              prodID={this.state.productId}
+              prodInfo={this.state.productInfo}
+              styleInfo={this.state.styleInfo}
+              prodIDChanger={this.prodIDChanger.bind(this)}
+            />
 
-          <QuestionsAnswersMain
-            productId={this.state.productId}
-            productInfo={this.state.productInfo}
-            key={this.state.productId}
-          /> */}
-
-          <RatingsAndReviews
-            productId={this.state.productId}
-            reviewData={this.state.reviewData}
-            reviews={this.state.reviews}
-            metaData={this.state.metaData}
-            rating={this.state.rating}
-            totalNumberOfRatings={this.state.totalNumberOfRatings}
-          />
-        </div>
+            <QuestionsAnswersMain
+              productId={this.state.productId}
+              productInfo={this.state.productInfo}
+              key={this.state.productId}
+            />
+            <RatingsAndReviews
+              productId={this.state.productId}
+              reviewData={this.state.reviewData}
+              reviews={this.state.reviews}
+              metaData={this.state.metaData}
+              rating={this.state.rating}
+              totalNumberOfRatings={this.state.totalNumberOfRatings}
+              filterRating={this.filterRating}
+            />
+          </div>
+        </React.Fragment>
       );
     }
   }
