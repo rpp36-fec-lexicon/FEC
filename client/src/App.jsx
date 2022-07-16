@@ -22,7 +22,6 @@ class App extends React.Component {
       totalNumberOfRatings: null,
       flag: false
     };
-    this.filterRating = this.filterRating.bind(this);
   }
 
   componentDidMount() {
@@ -53,25 +52,6 @@ class App extends React.Component {
     });
   }
 
-  filterRating(starRating) {
-    // console.dir(starRating);
-
-    let filteredReviews = [];
-    this.getAllReviewsFunc
-      .then((response) => {
-        const allReviews = response.data.results;
-        allReviews.forEach((review) => {
-          if (review.rating === starRating) {
-            filteredReviews.push(review);
-          }
-        });
-        this.setState({ reviews: filteredReviews });
-      })
-      .catch((err) => {
-        console.log('error fetching reviews in filterRating', err);
-      });
-  }
-
   prodIDChanger(relatedID) {
     this.setState({ productId: relatedID}, () =>{
       this.updateProduct(relatedID);
@@ -90,6 +70,10 @@ class App extends React.Component {
       let totalNumberOfRatings = 0;
       let totalRatings = 0;
       let rating;
+
+      if (!Object.keys(ratings)) {
+        rating = 0;
+      }
 
       for (var key in ratings) {
         totalNumberOfRatings += parseInt(ratings[key]);
@@ -127,36 +111,36 @@ class App extends React.Component {
     if (this.state.flag) {
       return (
         <React.Fragment>
-          <div>
-            <h1>Atelier</h1>
-            <ProductOverview
-              productInfo={this.state.productInfo}
-              defaultStyle={this.state.defaultStyle}
-              styleList={this.state.styleInfo}
-              rating={this.state.rating}
-            />
-            <RelatedAndOutfit
-              prodID={this.state.productId}
-              prodInfo={this.state.productInfo}
-              styleInfo={this.state.styleInfo}
-              prodIDChanger={this.prodIDChanger.bind(this)}
-            />
 
-            <QuestionsAnswersMain
-              productId={this.state.productId}
-              productInfo={this.state.productInfo}
-              key={this.state.productId}
-            />
-            <RatingsAndReviews
-              productId={this.state.productId}
-              reviewData={this.state.reviewData}
-              reviews={this.state.reviews}
-              metaData={this.state.metaData}
-              rating={this.state.rating}
-              totalNumberOfRatings={this.state.totalNumberOfRatings}
-              filterRating={this.filterRating}
-            />
-          </div>
+          <h1>Atelier</h1>
+          <ProductOverview
+            productInfo={this.state.productInfo}
+            defaultStyle={this.state.defaultStyle}
+            styleList={this.state.styleInfo}
+            rating={this.state.rating}
+          />
+          <RelatedAndOutfit
+            prodID={this.state.productId}
+            prodInfo={this.state.productInfo}
+            styleInfo={this.state.styleInfo}
+            prodIDChanger={this.prodIDChanger.bind(this)}
+          />
+
+          <QuestionsAnswersMain
+            productId={this.state.productId}
+            productInfo={this.state.productInfo}
+            key={this.state.productId}
+          />
+          <RatingsAndReviews
+            productId={this.state.productId}
+            reviewData={this.state.reviewData}
+            reviews={this.state.reviews}
+            metaData={this.state.metaData}
+            rating={this.state.rating}
+            totalNumberOfRatings={this.state.totalNumberOfRatings}
+            filterRating={this.filterRating}
+          />
+
         </React.Fragment>
       );
     }

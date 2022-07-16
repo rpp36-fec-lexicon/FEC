@@ -25,9 +25,20 @@ class RatingsAndReviews extends React.Component {
   }
 
   filterRating(starRating) {
-    const reviews = this.props.reviews;
-    if (this.state['star' + starRating]) {
-    }
+    let filteredReviews = [];
+    this.getAllReviewsFunc
+      .then((response) => {
+        const allReviews = response.data.results;
+        allReviews.forEach((review) => {
+          if (review.rating === starRating) {
+            filteredReviews.push(review);
+          }
+        });
+        this.setState({ reviews: filteredReviews });
+      })
+      .catch((err) => {
+        console.log('error fetching reviews in filterRating', err);
+      });
   }
 
   render() {

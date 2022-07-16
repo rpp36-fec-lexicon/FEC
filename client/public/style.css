@@ -52,14 +52,43 @@ progress {
 }
 
 .scrollable {
-  height: 600px;
+  height: 800px;
   overflow: auto;
   margin: 20px;
   text-align: justify;
   padding: 20px;
 }
 
+.modalPhoto {
+  position: relative;
+  z-index: 1;
+}
 
+.modalPhoto-content {
+  background-color: #fefefe;
+  width: 700px;
+  height: 490px;
+  position: absolute;
+  top: 10%;
+  left: 0%;
+  padding: 20px;
+  border: 2px solid black;
+  /* width: 80%; */
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 /* END OF RATINGS AND REVIEWS CSS */
 
 
