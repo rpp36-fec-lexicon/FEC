@@ -165,7 +165,7 @@ app.get('/products', (req, res) => {
 });
 
 app.post('/products/:product_id', (req, res) => {
-  console.log(req.body.params);
+  // console.log(req.body.params);
   // res.render('products' + req.body.productId);
   data.getProductInfo(req.body.params.productId, (err, data) => {
     if (err) {
