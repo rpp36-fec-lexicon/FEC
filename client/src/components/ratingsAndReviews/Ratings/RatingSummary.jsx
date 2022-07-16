@@ -1,8 +1,6 @@
 import React from 'react';
-import Stars from 'react-stars-display';
-import RatingBreakdown from './RatingBreakdown.jsx';
-import ProductBreakdown from './ProductBreakdown.jsx';
-import Recommendation from './Recommendation.jsx';
+
+import RatingDetails from './RatingDetails.jsx';
 
 const RatingSummary = (props) => {
   // console.log('props in rating summary', props);
@@ -19,28 +17,22 @@ const RatingSummary = (props) => {
   total = recommendedTrue + recommendedFalse;
   recommendedPercent = Math.floor((recommendedTrue / total) * 100);
 
-  let recommendation;
-  if (recommended.true === undefined) {
-    recommendation = '';
+  let ratingDetails;
+  if (!props.rating) {
+    ratingDetails = 'There are no ratings yet.';
   } else {
-    recommendation = <Recommendation recommendedPercent={recommendedPercent}/>;
+    ratingDetails = <RatingDetails
+      rating={props.rating}
+      recommendedPercent={recommendedPercent}
+      ratings={props.metaData.ratings}
+      totalNumberOfRatings={props.totalNumberOfRatings}
+      filterRating={props.filterRating}
+    />;
   }
 
-
-
-  const sameLineStyle = {
-    display: 'inline-block'
-  };
-
   return (
-
     <div>
-      <h1 style={sameLineStyle}>{props.rating}</h1>
-      <Stars style={sameLineStyle} stars={props.rating}/>
-      {/* <div>{recommendedPercent}% of reviews recommend this product</div> */}
-      {recommendation}
-      <RatingBreakdown ratings={props.metaData.ratings} totalNumberOfRatings={props.totalNumberOfRatings} filterRating={props.filterRating}/>
-      <ProductBreakdown />
+      {ratingDetails}
     </div>
   );
 };
