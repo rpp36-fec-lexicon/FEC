@@ -19,12 +19,31 @@ class Showcase extends React.Component {
       currPhoto: photos[0]
     };
     this.handleClick = this.handleClick.bind(this);
+    this.changePhoto = this.changePhoto.bind(this);
+    this.handleArrowClick = this.handleArrowClick.bind(this);
   }
 
   componentDidUpdate() {
     if (this.state.photos !== this.props.photos) {
       this.setState({ photos: this.props.photos, currPhoto: this.props.photos[0] });
     }
+  }
+
+  changePhoto(num) {
+    const {photos} = this.state;
+    this.setState({
+      currPhoto: photos[(photos.indexOf(this.state.currPhoto) + num + photos.length) % photos.length]
+    });
+  }
+
+  handleArrowClick(direction) {
+    if (direction === 'right') {
+      return this.state.currPhoto.url !== this.state.photos[this.state.photos.length - 1].url;
+    }
+    if (direction === 'left') {
+      return this.state.currPhoto.url !== this.state.photos[0].url;
+    }
+    return false;
   }
 
   handleClick(link) {
@@ -37,16 +56,21 @@ class Showcase extends React.Component {
     console.log('Showcase props for pictures ', this.props);
     return (
       <div>
-        {this.state.currPhoto ?
-          <>
-            <PrimaryImage pic={this.state.currPhoto.url}/>
-          </>
-          :
-          <>
-            <PrimaryImage pic={this.props.photos[0].url}/>
-          </>
-        }
-        {/* <PrimaryImage pic={currPhoto.url}/> */}
+        {this.handleArrowClick('right') && (
+          <button
+            style={{margin: '40px'}}
+            onClick={() => this.changePhoto(1)}
+            className='fa fa-arrow-right'
+          />
+        )}
+        {this.handleArrowClick('left') && (
+          <button
+            style={{margin: '40px'}}
+            onClick={() => this.changePhoto(-1)}
+            className='fa fa-arrow-left'
+          />
+        )}
+        <PrimaryImage pic={this.state.currPhoto.url}/>
         {this.props.photos.map((pic) => (
           <IMG
             key={pic.url}
