@@ -117,10 +117,19 @@ progress {
 .flex-child:first-child {
   margin-right: 20px;
   /* flex-grow: 2; */
+  flex-basis: 100px;
+	flex-grow: 0;
+	flex-shrink: 0;
 }
 .flex-child:nth-child(2) {
   margin-right: 20px;
-  flex-grow: 9;
+  flex-grow: 1;
+}
+
+.relatedCarouselOutfit {
+  display: flex;
+  /* border: 10px solid orange; */
+  width: 50%;
 }
 
 .relatedCarousel {
@@ -128,6 +137,7 @@ progress {
   /* border: 10px solid orange; */
   width: 50%;
 }
+
 
 .RelatedCarouselItem {
   flex-grow: 1;

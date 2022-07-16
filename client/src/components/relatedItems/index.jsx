@@ -7,27 +7,62 @@ class RelatedAndOutfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      itemInfoAndStyle: [],
       xLeftFrame: 0,
       xRightFrame: 0,
     };
   }
   componentDidMount() {
     $.ajax({
-      // THIS REQUEST IS FOR SCREEN WIDTH CALCULATION
       type: "GET",
       url: `/products/${this.props.prodID}/related`,
       success: (arrayOfProdIDs) => {
-        this.setState({
-          relatedCount: arrayOfProdIDs.length,
-        });
+        // FOR SCREEN WIDTH CALCULATION
         var screenWidth = document.body.clientWidth;
         var relatedProdsWidth = arrayOfProdIDs.length * 184 + 120;
-
         if (screenWidth < relatedProdsWidth) {
           this.setState({
             xRightFrame: 1,
           });
         }
+        // FOR RELATED PRODS CALCULATION
+        var relatedItemData = [];
+        var UNQarrayOfProdIDs = [];
+        arrayOfProdIDs.forEach((itemID) => {
+          if (
+            itemID !== this.props.prodID &&
+            !UNQarrayOfProdIDs.includes(itemID)
+          ) {
+            UNQarrayOfProdIDs.push(itemID);
+          }
+        });
+        UNQarrayOfProdIDs.forEach((itemID) => {
+          $.ajax({
+            type: "GET",
+            url: `/products/${itemID}`,
+            success: (relatedItemInfo) => {
+              $.ajax({
+                type: "GET",
+                url: `/products/${itemID}/styles`,
+                success: (relatedItemStyles) => {
+                  relatedItemData.push({
+                    itemInfo: relatedItemInfo,
+                    itemStyles: relatedItemStyles,
+                  });
+                  this.setState({
+                    itemInfoAndStyle: relatedItemData,
+                  });
+                },
+                error: (err) => {
+                  console.log(err);
+                },
+              });
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
+        });
       },
       error: (err) => {
         console.log(err);
@@ -61,12 +96,58 @@ class RelatedAndOutfit extends React.Component {
         this.setState({ xLeftFrame });
         var sWid = document.querySelector(".carouselContainer").scrollWidth;
         var ofWid = document.querySelector(".carouselContainer").offsetWidth;
-        if (Math.round(xLeftFrame) + ofWid === sWid) {
+        if (Math.round(xLeftFrame) + ofWid === sWid + 1) {
           this.setState({ xRightFrame: 0 });
         }
       });
   }
 
+  relatedItemsUpdater(clickedProdID) {
+    $.ajax({
+      type: "GET",
+      url: `/products/${clickedProdID}/related`,
+      success: (arrayOfProdIDs) => {
+        var relatedItemData = [];
+        var UNQarrayOfProdIDs = [];
+        arrayOfProdIDs.forEach((itemID) => {
+          if (itemID !== clickedProdID && !UNQarrayOfProdIDs.includes(itemID)) {
+            UNQarrayOfProdIDs.push(itemID);
+          }
+        });
+        UNQarrayOfProdIDs.forEach((itemID) => {
+          $.ajax({
+            type: "GET",
+            url: `/products/${itemID}`,
+            success: (relatedItemInfo) => {
+              $.ajax({
+                type: "GET",
+                url: `/products/${itemID}/styles`,
+                success: (relatedItemStyles) => {
+                  relatedItemData.push({
+                    itemInfo: relatedItemInfo,
+                    itemStyles: relatedItemStyles,
+                  });
+
+                  this.setState({
+                    itemInfoAndStyle: relatedItemData,
+                  });
+                },
+                error: (err) => {
+                  console.log(err);
+                },
+              });
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
   render() {
     // console.log("proId in RelatedAndOutfit", this.props.prodID);
     return (
@@ -95,6 +176,8 @@ class RelatedAndOutfit extends React.Component {
               prodInfo={this.props.prodInfo}
               styleInfo={this.props.styleInfo}
               prodIDChanger={this.props.prodIDChanger}
+              itemInfoAndStyle={this.state.itemInfoAndStyle}
+              relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
             />
           </div>
 
@@ -109,18 +192,17 @@ class RelatedAndOutfit extends React.Component {
         </div>
 
         <br></br>
-        <br></br>
-        <br></br>
+
         <h5>Your Outfit:</h5>
 
         <Outfit
           prodID={this.props.prodID}
           prodInfo={this.props.prodInfo}
           styleInfo={this.props.styleInfo}
-          // prodIDChanger={this.props.prodIDChanger}
+          defaultStyle={this.props.defaultStyle}
+          prodIDChanger={this.props.prodIDChanger}
+          relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
         />
-        <br></br>
-        <br></br>
         <br></br>
       </div>
     );
