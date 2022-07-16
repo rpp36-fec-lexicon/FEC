@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { useState, useEffect } from "react";
 import ProductOverview from "./components/overview/ProductOverview.jsx";
 import RatingsAndReviews from "./components/ratingsAndReviews/RatingsAndReviews.jsx";
 import RelatedAndOutfit from "./components/relatedItems/index.jsx";
@@ -21,11 +22,47 @@ class App extends React.Component {
       rating: null,
       totalNumberOfRatings: null,
       flag: false,
+      outfitItems: [],
     };
   }
 
   componentDidMount() {
     this.prodIDChanger(this.state.productId);
+
+    var pulledItems = storageGetter();
+    this.setState({
+      outfitItems: pulledItems,
+    });
+  }
+
+  outfitAdder() {
+    // console.log("outfitItems", this.state.outfitItems);
+    var outfitContainer = this.state.outfitItems;
+    var existingIDs = [];
+    for (let i = 0; i < this.state.outfitItems.length; i++) {
+      existingIDs.push(this.state.outfitItems[i][0][0].id);
+    }
+    if (!existingIDs.includes(this.state.productId)) {
+      outfitContainer.push([
+        [this.state.productInfo],
+        [this.state.defaultStyle],
+      ]);
+    }
+
+    this.setState({
+      outfitItems: outfitContainer,
+    });
+  }
+
+  outfitRemover(id) {
+    for (let i = 0; i < this.state.outfitItems.length; i++) {
+      if (this.state.outfitItems[i][0][0].id === id) {
+        this.state.outfitItems.splice([i], 1);
+      }
+    }
+    this.setState({
+      outfitItems: this.state.outfitItems,
+    });
   }
 
   getAllReviewsFunc() {
@@ -124,6 +161,8 @@ class App extends React.Component {
             defaultStyle={this.state.defaultStyle}
             styleList={this.state.styleInfo}
             rating={this.state.rating}
+            outfitAdder={this.outfitAdder.bind(this)}
+            outfitItems={this.state.outfitItems}
           />
           <RelatedAndOutfit
             prodID={this.state.productId}
@@ -131,6 +170,9 @@ class App extends React.Component {
             styleInfo={this.state.styleInfo}
             defaultStyle={this.state.defaultStyle}
             prodIDChanger={this.prodIDChanger.bind(this)}
+            outfitAdder={this.outfitAdder.bind(this)}
+            outfitRemover={this.outfitRemover.bind(this)}
+            outfitItems={this.state.outfitItems}
           />
 
           <QuestionsAnswersMain
@@ -152,6 +194,15 @@ class App extends React.Component {
     }
   }
 }
+
+const storageGetter = (key = "items", defaultValue = []) => {
+  // console.log("get");
+  if (typeof window !== "undefined") {
+    const saved = localStorage.getItem(key);
+    const initial = saved !== null ? JSON.parse(saved) : defaultValue;
+    return initial;
+  }
+};
 
 ReactDOM.createRoot(document.getElementById("app")).render(<App />);
 

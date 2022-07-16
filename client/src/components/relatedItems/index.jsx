@@ -202,6 +202,9 @@ class RelatedAndOutfit extends React.Component {
           defaultStyle={this.props.defaultStyle}
           prodIDChanger={this.props.prodIDChanger}
           relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
+          outfitAdder={this.props.outfitAdder}
+          outfitRemover={this.props.outfitRemover}
+          outfitItems={this.props.outfitItems}
         />
         <br></br>
       </div>
