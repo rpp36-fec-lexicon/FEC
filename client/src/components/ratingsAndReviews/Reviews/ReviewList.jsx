@@ -15,7 +15,7 @@ class ReviewList extends React.Component {
       endReviewIndex: 4,
     };
     this.showMoreReviewsFunc = this.showMoreReviewsFunc.bind(this);
-    this.sortByHelpfulFunc = this.sortByHelpfulnessFunc.bind(this);
+    this.sortByHelpfulnessFunc = this.sortByHelpfulnessFunc.bind(this);
     this.sortByNewestFunc = this.sortByNewestFunc.bind(this);
     this.sortByRelevanceFunc = this.sortByRelevanceFunc.bind(this);
   }
@@ -47,12 +47,29 @@ class ReviewList extends React.Component {
   }
 
   sortByHelpfulnessFunc() {
-    const reviews = this.state.reviews;
+    console.log('helpfulness sort');
+    const reviews = (this.state.reviews).slice();
     const sortedReviews = [];
 
-    const innerFunc = () => {
+    const innerFunc = (array) => {
+      if (!array.length) {
+        return;
+      }
+      const largest = array[0];
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].helpfulness >= largest) {
+          largest = array[i];
+        }
+      }
 
+      sortedReviews.push(largest);
     };
+
+    innerFunc(reviews);
+
+    if (reviews.length === sortedReviews.length) {
+      this.setState({reviews: sortedReviews}, () => { console.log('this.state.reviews', this.state.reviews); });
+    }
 
   }
 
