@@ -6,7 +6,6 @@ const getQuestions = (productId) => {
 
   return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/qa/questions?product_id=${productId}&count=100`, {headers: { Authorization: myAPIKey}})
     .then((results) => {
-      // console.log(results.data.results);
       return results.data.results;
     })
     .catch((error) => {

@@ -3,41 +3,82 @@ import ReviewItem from './ReviewItem.jsx';
 import MoreReviews from './MoreReviews.jsx';
 import AddFirstReview from './AddFirstReview.jsx';
 import AddAnotherReview from './AddAnotherReview.jsx';
+import ReviewsHeading from './ReviewsHeading.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      reviews: [],
       reviewsShowing: null,
       startReviewIndex: 0,
-      endReviewIndex: 4
+      endReviewIndex: 4,
     };
     this.showMoreReviewsFunc = this.showMoreReviewsFunc.bind(this);
+    this.sortByHelpfulnessFunc = this.sortByHelpfulnessFunc.bind(this);
+    this.sortByNewestFunc = this.sortByNewestFunc.bind(this);
+    this.sortByRelevanceFunc = this.sortByRelevanceFunc.bind(this);
   }
 
   componentDidMount() {
-    var reviewsShowing;
+    this.setState({reviews: this.props.reviews}, () => {
+      var reviewsShowing;
 
-    if (this.props.reviews.length >= 2) {
-      reviewsShowing = this.props.reviews.slice(0, 2);
-    } else {
-      reviewsShowing = this.props.reviews.slice();
-    }
-
-    this.setState({reviewsShowing});
+      if (this.state.reviews.length >= 2) {
+        reviewsShowing = this.state.reviews.slice(0, 2);
+      } else {
+        reviewsShowing = this.state.reviews.slice();
+      }
+      this.setState({reviewsShowing});
+    });
   }
 
   showMoreReviewsFunc() {
     var reviewsShowing;
-    if (this.state.endReviewIndex >= this.props.reviews.length) {
-      reviewsShowing = this.props.reviews.slice();
+    if (this.state.endReviewIndex >= this.state.reviews.length) {
+      reviewsShowing = this.state.reviews.slice();
       this.state.endReviewIndex += 2;
     } else {
-      reviewsShowing = this.props.reviews.slice(this.state.startReviewIndex, this.state.endReviewIndex);
+      reviewsShowing = this.state.reviews.slice(this.state.startReviewIndex, this.state.endReviewIndex);
       this.state.endReviewIndex += 2;
     }
 
     this.setState({reviewsShowing});
+  }
+
+  sortByHelpfulnessFunc() {
+    console.log('helpfulness sort');
+    const reviews = (this.state.reviews).slice();
+    const sortedReviews = [];
+
+    const innerFunc = (array) => {
+      if (!array.length) {
+        return;
+      }
+      const largest = array[0];
+      for (var i = 0; i < array.length; i++) {
+        if (array[i].helpfulness >= largest) {
+          largest = array[i];
+        }
+      }
+
+      sortedReviews.push(largest);
+    };
+
+    innerFunc(reviews);
+
+    if (reviews.length === sortedReviews.length) {
+      this.setState({reviews: sortedReviews}, () => { console.log('this.state.reviews', this.state.reviews); });
+    }
+
+  }
+
+  sortByNewestFunc() {
+
+  }
+
+  sortByRelevanceFunc() {
+
   }
 
   render() {
@@ -48,14 +89,17 @@ class ReviewList extends React.Component {
 
     let addFirstReviewButton;
     let addAnotherReviewButton;
-    if (!this.props.reviews.length) {
+    let reviewsHeading;
+    if (!this.state.reviews.length) {
+      reviewsHeading = 'There are no reviews yet.';
       addFirstReviewButton = <AddFirstReview />;
     } else {
+      reviewsHeading = <ReviewsHeading reviews={this.props.reviews} sortByHelpfulnessFunc={this.sortByHelpfulnessFunc} sortByNewestFunc={this.sortByNewestFunc} sortByRelevanceFunc={this.sortByRelevanceFunc}/>;
       addAnotherReviewButton = <AddAnotherReview />;
     }
 
-    if (this.props.reviews && this.state.reviewsShowing) {
-      const reviews = this.props.reviews;
+    if (this.state.reviews && this.state.reviewsShowing) {
+      const reviews = this.state.reviews;
       const lastReview = reviews[reviews.length - 1];
       const lastShowingReview = this.state.reviewsShowing[this.state.reviewsShowing.length - 1];
       let moreReviewsButton;
@@ -65,14 +109,7 @@ class ReviewList extends React.Component {
 
       return (
         <div>
-          <div>
-            {reviews.length} reviews, sorted by
-            <select onClick={() => { props.sortReviewsFunc(); }}>
-              <option id="helpful">Helpful</option>
-              <option id="newest">Newest</option>
-              <option id="relevance">Relevance</option>
-            </select>
-          </div>
+          {reviewsHeading}
           <div>{addFirstReviewButton}</div>
           <div className="scrollable">
             {this.state.reviewsShowing.map(review => {
@@ -82,10 +119,6 @@ class ReviewList extends React.Component {
             <div style={sameLineStyle}>{moreReviewsButton}</div>
             <div style={sameLineStyle}>{addAnotherReviewButton}</div>
           </div>
-
-          {/* <div style={sameLineStyle}>{moreReviewsButton}</div>
-          <div style={sameLineStyle}>{addAnotherReviewButton}</div> */}
-          {/* <button style={sameLineStyle} id="addReview">ADD A REVIEW  +</button> */}
         </div>
       );
     }

@@ -52,14 +52,43 @@ progress {
 }
 
 .scrollable {
-  height: 600px;
+  height: 800px;
   overflow: auto;
   margin: 20px;
   text-align: justify;
   padding: 20px;
 }
 
+.modalPhoto {
+  position: relative;
+  z-index: 1;
+}
 
+.modalPhoto-content {
+  background-color: #fefefe;
+  width: 700px;
+  height: 490px;
+  position: absolute;
+  top: 10%;
+  left: 0%;
+  padding: 20px;
+  border: 2px solid black;
+  /* width: 80%; */
+}
+
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 /* END OF RATINGS AND REVIEWS CSS */
 
 
@@ -88,10 +117,19 @@ progress {
 .flex-child:first-child {
   margin-right: 20px;
   /* flex-grow: 2; */
+  flex-basis: 100px;
+	flex-grow: 0;
+	flex-shrink: 0;
 }
 .flex-child:nth-child(2) {
   margin-right: 20px;
-  flex-grow: 9;
+  flex-grow: 1;
+}
+
+.relatedCarouselOutfit {
+  display: flex;
+  /* border: 10px solid orange; */
+  width: 50%;
 }
 
 .relatedCarousel {
@@ -99,6 +137,7 @@ progress {
   /* border: 10px solid orange; */
   width: 50%;
 }
+
 
 .RelatedCarouselItem {
   flex-grow: 1;

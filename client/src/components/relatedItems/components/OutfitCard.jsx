@@ -1,56 +1,37 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import Stars from "react-stars-display";
+
+import { useState, useEffect } from "react";
 
 class OutfitCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      defaultOriginalPrice: 0,
-      defaultSalePrice: 0,
-      defaultPhoto: "",
-    };
+    this.state = {};
   }
 
-  componentDidMount() {
-    this.props.styleInfo.forEach((styleInfoObj) => {
-      if (styleInfoObj["default?"]) {
-        this.setState({
-          defaultOriginalPrice: styleInfoObj.original_price,
-          defaultSalePrice: styleInfoObj.sale_price,
-          defaultPhoto: styleInfoObj.photos[0].url,
-        });
-      }
-    });
-
-    if (this.state.defaultOriginalPrice === 0) {
-      this.setState({
-        defaultOriginalPrice: this.props.styleInfo[0].original_price,
-        defaultSalePrice: null,
-        defaultPhoto: this.props.styleInfo[0].photos[0].url,
-      });
-    }
-  }
+  componentDidMount() {}
 
   render() {
     return (
       <div
-        className="RelatedCarouselItem"
+        className="RelatedCarouseOutfit"
         style={{
           border: "1px solid grey",
           padding: "15px 15px 15px 15px",
           margin: "15px 15px 15px 15px",
         }}
-        // onClick={() =>
-        //   this.props.prodIDChanger(this.props.itemData.itemInfo.id)
-        // }
+        onClick={() => {
+          this.props.prodIDChanger(this.props.prodInfo[0].id);
+          this.props.relatedItemsUpdater(this.props.prodInfo[0].id);
+        }}
       >
+        {/* <Presistor outfits={}/> */}
         <div
           style={{
             height: "150px",
             width: "150px",
             marginBottom: "10px",
-            backgroundImage: `url(${this.state.defaultPhoto})`,
+            backgroundImage: `url(${this.props.prodStyle[0].photos[0].url})`,
             backgroundSize: "150px 150px",
           }}
         >
@@ -62,41 +43,46 @@ class OutfitCard extends React.Component {
               background: "black",
               borderColor: "transparent",
             }}
-            onClick={() => {
-              this.props.outfitRemover(this.props.prodInfo.id);
-              // id of current item... not the one that was cliked
+            onClick={(e) => {
+              e.stopPropagation();
+              this.props.outfitRemover(this.props.prodInfo[0].id);
             }}
           >
             &times;
           </button>
         </div>
-
         <div>
-          <div>{this.props.prodInfo.category}</div>
+          <div>{this.props.prodInfo[0].category}</div>
           <div>
             {" "}
-            <b>{this.props.prodInfo.name}</b>
+            <b>{this.props.prodInfo[0].name}</b>
           </div>
 
           <div>
-            {this.state.defaultSalePrice === null ? (
-              `$${this.state.defaultOriginalPrice}`
+            {this.props.prodStyle[0].sale_price === null ? (
+              `$${this.props.prodStyle[0].original_price}`
             ) : (
               <span>
                 <span style={{ color: "red" }}>
                   {" "}
-                  ${this.state.defaultSalePrice}
+                  ${this.props.prodStyle[0].sale_price}
                 </span>{" "}
-                <del> ${this.state.defaultOriginalPrice}</del>
+                <del> ${this.props.prodStyle[0].original_price}</del>
               </span>
             )}
           </div>
 
-          <div>{/* <Stars stars={2} /> */}</div>
+          <div> star reviews here</div>
         </div>
       </div>
     );
   }
 }
-
+const Presistor = (props) => {
+  // console.log("called");
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items));
+  }, [items]);
+};
 export default OutfitCard;
