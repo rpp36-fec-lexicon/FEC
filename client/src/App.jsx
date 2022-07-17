@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import ProductOverview from "./components/overview/ProductOverview.jsx";
-import RatingsAndReviews from "./components/ratingsAndReviews/RatingsAndReviews.jsx";
-import RelatedAndOutfit from "./components/relatedItems/index.jsx";
-import QuestionsAnswersMain from "./components/questionsAndAnswers/components/QuestionsAnswersMain.jsx";
-import $ from "jquery";
-const axios = require("axios");
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import ProductOverview from './components/overview/ProductOverview.jsx';
+import RatingsAndReviews from './components/ratingsAndReviews/RatingsAndReviews.jsx';
+import RelatedAndOutfit from './components/relatedItems/index.jsx';
+import QuestionsAnswersMain from './components/questionsAndAnswers/components/QuestionsAnswersMain.jsx';
+import $ from 'jquery';
+const axios = require('axios');
 
 class App extends React.Component {
   constructor(props) {
@@ -29,25 +29,25 @@ class App extends React.Component {
   }
 
   getAllReviewsFunc() {
-    return axios.get("/reviews", {
+    return axios.get('/reviews', {
       params: { productId: this.state.productId },
     });
   }
 
   getAllMetaFunc() {
-    return axios.get("/reviews/meta", {
+    return axios.get('/reviews/meta', {
       params: { productId: this.state.productId },
     });
   }
 
   getProductInfo() {
-    return axios.post("/products/:product_id", {
+    return axios.post('/products/:product_id', {
       params: { productId: this.state.productId },
     });
   }
 
   getProductStyles() {
-    return axios.post("/products/:product_id/styles", {
+    return axios.post('/products/:product_id/styles', {
       params: { productId: this.state.productId },
     });
   }
@@ -89,7 +89,7 @@ class App extends React.Component {
 
         var styles = values[1].data.results;
         var defaultStyle = styles.find(
-          (product) => product["default?"] === true
+          (product) => product['default?'] === true
         );
         if (defaultStyle === undefined) {
           defaultStyle = styles[0];
@@ -151,6 +151,6 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+ReactDOM.createRoot(document.getElementById('app')).render(<App />);
 
 export default App;
