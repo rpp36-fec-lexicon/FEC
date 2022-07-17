@@ -18,17 +18,6 @@ const QuestionsAnswersList = (props) => {
   const closeModal = () => {
     setShow(false);
   };
-  // const { Track, trackEvent } = useTracking({},
-  //   { dispatch: data => {
-  //     axios.post('/interactions', {
-  //       time: data.time,
-  //       element: data.element,
-  //       widget: data.widget
-  //     })
-  //       .catch((error) => {
-  //         console.log('Client unable to post interaction: ', error);
-  //       });
-  //   }});
 
   var checkFilter = (sortedQuestions) => {
     var splitFilter = [];
@@ -88,7 +77,7 @@ const QuestionsAnswersList = (props) => {
         <QuestionModal
           show={show}
           hide={closeModal}
-          // name={props.productInfo.name}
+          name={props.productInfo.name}
           productId={props.product}
           update={props.update}/>
       </div>
@@ -99,17 +88,16 @@ const QuestionsAnswersList = (props) => {
       <div>
         <div>
           {displayQuestions.map((question, answer) =>
-            console.log([question.answers])
-            // <Question
-            //   // key={question.question_id}
-            //   id={question.question_id}
-            //   helpfulness={question.question_helpfulness}
-            //   question={question.question_body}
-            //   answer={[question.answers]}
-            //   // name={props.productInfo.name}
-            //   update={props.update}
-            //   darkMode={props.darkMode}
-            // />
+            <Question
+              key={question.question_id}
+              id={question.question_id}
+              helpfulness={question.question_helpfulness}
+              question={question.question_body}
+              answer={[question.answers]}
+              name={props.productInfo.name}
+              update={props.update}
+              darkMode={props.darkMode}
+            />
           )}
         </div>
         <div>
@@ -118,7 +106,7 @@ const QuestionsAnswersList = (props) => {
           <QuestionModal
             show={show}
             hide={closeModal}
-            // name={props.productInfo.name}
+            name={props.productInfo.name}
             productId={props.product}
             update={props.update}/>
         </div>
@@ -130,12 +118,12 @@ const QuestionsAnswersList = (props) => {
         <div>
           {displayQuestions.map((question, answer) =>
             <Question
-              // key={question.question_id}
+              key={question.question_id}
               id={question.question_id}
               helpfulness={question.question_helpfulness}
               question={question.question_body}
               answer={[question.answers]}
-              // name={props.productInfo.name}
+              name={props.productInfo.name}
               update={props.update}
               darkMode={props.darkMode}
             />
@@ -146,7 +134,7 @@ const QuestionsAnswersList = (props) => {
           <QuestionModal
             show={show}
             hide={closeModal}
-            // name={props.productInfo.name}
+            name={props.productInfo.name}
             productId={props.product}
             update={props.update}/>
         </div>

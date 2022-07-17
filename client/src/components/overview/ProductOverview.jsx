@@ -46,7 +46,13 @@ class ProductOverview extends React.Component {
   }
 
   render() {
+<<<<<<< HEAD
     if (this.state.productInfo && this.state.selectedStyle && this.props.rating) {
+=======
+    // console.log(this.props.productInfo);
+    if (this.props.productInfo && this.props.defaultStyle && this.props.rating) {
+      // console.log('this is the current style ', this.state.selectedStyle);
+>>>>>>> 2784ce179c41ed93ff0b18c6b897e4f3e98f86c1
       return (
         <div>
           <h1 id="overviewHead">Product Overview!</h1>
