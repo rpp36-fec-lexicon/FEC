@@ -56,35 +56,35 @@ const QuestionModal = (props) => {
     return null;
   }
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <div className="modal-header">
-          <div className="close-modal-button" onClick={()=> props.hide()}>X</div>
-          <h3 className="modal-title">Ask Your Question</h3>
-          <div className="modal-subtitle">About the {props.name}</div>
+    <div>
+      <div>
+        <div>
+          <div onClick={()=> props.hide()}>X</div>
+          <h3>Ask Your Question</h3>
+          <div>About the {props.name}</div>
         </div>
-        <div className="modal-body">
+        <div>
           <form>
-            <div className="add-question-body">
+            <div>
               <label>Your Question<sup>*</sup>: </label>
-              <div><textarea id="question-body" maxLength="1000" rows="5" cols="70" required></textarea></div>
+              <div><textarea maxLength="1000" rows="5" cols="70" required></textarea></div>
             </div>
-            <div className="add-question-nickname">
+            <div>
               <label>Your Username<sup>*</sup>: </label>
-              <input id="question-username" type="text" maxLength="60" placeholder="Example: jackson11!" required></input>
-              <div className="disclaimer"><label>For privacy reasons, do not use your full name or email address</label></div>
+              <input type="text" maxLength="60" placeholder="Example: jackson11!" required></input>
+              <div><label>For privacy reasons, do not use your full name or email address</label></div>
             </div>
-            <div className="add-question-email">
+            <div>
               <label>Your Email<sup>*</sup>: </label>
-              <input id="question-email" type="email" maxLength="60" placeholder="sample@email.com" required></input>
-              <div className="disclaimer"><label>For authentication reasons, you will not be emailed</label></div>
+              <input maxLength="60" placeholder="sample@email.com" required></input>
+              <div><label>For authentication reasons, you will not be emailed</label></div>
             </div>
           </form>
         </div>
-        <div className="modal-footer">
-          <div id="question-error" className="error">{error}</div>
-          <div className="submit-button">
-            <button className="modal-footer-button" onClick={() => validateForm()}>Submit Question</button>
+        <div>
+          <div className="error">{error}</div>
+          <div>
+            <button onClick={() => validateForm()}>Submit Question</button>
           </div>
         </div>
       </div>

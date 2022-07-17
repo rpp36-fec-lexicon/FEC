@@ -59,7 +59,7 @@ const Question = (props) => {
           id={props.id} update={props.update} darkMode={props.darkMode}
         />
         <AnswerList displayAnswers={displayAnswers} update={props.update} darkMode={props.darkMode}/>
-        <div className="expandCollapseAnswers" onClick={() => setCount(sortedAnswers.length)}><small>LOAD MORE ANSWERS</small></div>
+        <div onClick={() => setCount(sortedAnswers.length)}><small>LOAD MORE ANSWERS</small></div>
       </div>
     );
   } else if ((displayAnswers.length === sortedAnswers.length) && sortedAnswers.length > 2) {
@@ -69,7 +69,7 @@ const Question = (props) => {
           id={props.id} update={props.update} darkMode={props.darkMode}
         />
         <AnswerList displayAnswers={displayAnswers} update={props.update} darkMode={props.darkMode}/>
-        <div className="expandCollapseAnswers" onClick={() => setCount(2)}><small>COLLAPSE ANSWERS</small></div>
+        <div onClick={() => setCount(2)}><small>COLLAPSE ANSWERS</small></div>
       </div>
     );
   } else {

@@ -75,40 +75,40 @@ const Answer = (props) => {
 
   if (props.name === 'Seller') {
     return (
-      <div className="singleAnswer">
+      <div>
         <div>{props.answer}
-          <div className="thumbnails">
+          <div>
             {props.photos.map((photo, i) =>
-              <AnswerModalThumbnails key={i} src={photo}/>
+              <AnswerModalThumbnail key={i} src={photo}/>
             )}
           </div>
-          <div className="answer-meta"> by
-            <div className="seller">&nbsp;{props.name}</div>
+          <div> by
+            <div>&nbsp;{props.name}</div>
             <div>,&nbsp;{convertDate(props.date)} |&nbsp;</div>
             <button onClick={() => answerHelpful()} id={props.id + 'answer'}
-              className={`answer-meta-helpful ${darkModeClass1}`}>&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
+            >&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
             <button onClick={() => reportAnswer()} id={props.id + 'report'}
-              className={`answer-meta-report ${darkModeClass1}`}>&nbsp;<u>Report</u></button>
+            >&nbsp;<u>Report</u></button>
           </div>
         </div>
       </div>
     );
   } else {
     return (
-      <div className="singleAnswer">
+      <div>
         <div>{props.answer}
-          <div className="thumbnails">
+          <div>
             {props.photos.map((photo, i) =>
-              <AnswerModalThumbnails key={i} src={photo}/>
+              <AnswerModalThumbnail key={i} src={photo}/>
             )}
           </div>
-          <div className="answer-meta">by
+          <div>by
             <div>&nbsp;{props.name}</div>
             <div>,&nbsp;{convertDate(props.date)} |&nbsp;</div>
             <button onClick={() => answerHelpful()} id={props.id + 'answer'}
-              className={`answer-meta-helpful ${darkModeClass1}`}>&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
+            >&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
             <button onClick={() => reportAnswer()} id={props.id + 'report'}
-              className={`answer-meta-report ${darkModeClass1}`}>&nbsp;<u>Report</u></button>
+            >&nbsp;<u>Report</u></button>
           </div>
         </div>
       </div>

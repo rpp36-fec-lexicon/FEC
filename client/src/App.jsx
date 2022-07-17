@@ -67,8 +67,6 @@ class App extends React.Component {
       this.getAllMetaFunc(),
     ])
       .then((values) => {
-        console.log(values[0].data);
-        console.log(values[1].data);
         const reviewData = values[2].data;
         const reviews = values[2].data.results;
         const metaData = values[3].data;
