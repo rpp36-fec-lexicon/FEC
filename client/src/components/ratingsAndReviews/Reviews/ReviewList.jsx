@@ -22,14 +22,7 @@ class ReviewList extends React.Component {
 
   componentDidMount() {
     this.setState({reviews: this.props.reviews}, () => {
-      var reviewsShowing;
-
-      if (this.state.reviews.length >= 2) {
-        reviewsShowing = this.state.reviews.slice(0, 2);
-      } else {
-        reviewsShowing = this.state.reviews.slice();
-      }
-      this.setState({reviewsShowing});
+      this.sortByRelevanceFunc();
     });
   }
 
