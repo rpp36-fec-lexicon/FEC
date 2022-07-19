@@ -34,7 +34,6 @@ class Showcase extends React.Component {
   }
 
   render() {
-    console.log('Showcase props for pictures ', this.props);
     return (
       <div>
         {this.state.currPhoto ?

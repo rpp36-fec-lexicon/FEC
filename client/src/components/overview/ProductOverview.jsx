@@ -55,7 +55,6 @@ class ProductOverview extends React.Component {
       this.props.rating
     ) {
       // console.log('this is the current style ', this.state.selectedStyle);
-      console.log("thisId", this.props.productInfo);
       return (
         <div>
           <h1 id="overviewHead">Product Overview!</h1>
