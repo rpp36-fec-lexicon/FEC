@@ -47,22 +47,19 @@ class ReviewList extends React.Component {
   }
 
   sortByHelpfulnessFunc() {
-    console.log('helpfulness sort');
     const reviews = (this.state.reviews).slice();
     const sortedReviews = [];
 
     const innerFunc = (array) => {
-      console.log('array', array);
       if (!array.length) {
         return;
       }
       let largest = array[0];
-      console.log('array[0]', array[0]);
-      for (var i = 0; i < array.length; i++) {
-        if (array[i].helpfulness >= largest.helpfulness) {
-          largest = array[i];
+      array.forEach(review => {
+        if (review.helpfulness >= largest.helpfulness) {
+          largest = review;
         }
-      }
+      });
 
       sortedReviews.push(largest);
       const largestIndex = reviews.indexOf(largest);
@@ -73,10 +70,7 @@ class ReviewList extends React.Component {
 
     innerFunc(reviews);
 
-    console.log('sortedReviews', sortedReviews);
-
     this.setState({reviews: sortedReviews}, () => {
-      console.log('this.state.reviews', this.state.reviews);
       var reviewsShowing;
 
       if (this.state.reviews.length >= 2) {
@@ -89,7 +83,22 @@ class ReviewList extends React.Component {
   }
 
   sortByNewestFunc() {
-    console.log('newest sort');
+    const reviews = this.state.reviews.slice();
+
+    reviews.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
+
+    this.setState({reviews}, () => {
+      var reviewsShowing;
+
+      if (this.state.reviews.length >= 2) {
+        reviewsShowing = this.state.reviews.slice(0, 2);
+      } else {
+        reviewsShowing = this.state.reviews.slice();
+      }
+      this.setState({reviewsShowing});
+    });
   }
 
   sortByRelevanceFunc() {
