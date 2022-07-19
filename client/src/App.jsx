@@ -146,7 +146,6 @@ class App extends React.Component {
             metaData={this.state.metaData}
             rating={this.state.rating}
             totalNumberOfRatings={this.state.totalNumberOfRatings}
-            filterRating={this.filterRating}
           />
         </React.Fragment>
       );
