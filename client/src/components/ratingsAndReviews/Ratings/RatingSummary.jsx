@@ -1,9 +1,11 @@
 import React from 'react';
 
 import RatingDetails from './RatingDetails.jsx';
+import ProductBreakdown from './ProductBreakdown.jsx';
+
 
 const RatingSummary = (props) => {
-  // console.log('props in rating summary', props);
+  console.log('props in rating summary', props);
 
   const recommended = props.metaData.recommended;
 
@@ -18,6 +20,7 @@ const RatingSummary = (props) => {
   recommendedPercent = Math.floor((recommendedTrue / total) * 100);
 
   let ratingDetails;
+  let productBreakdown;
   if (!props.rating) {
     ratingDetails = 'There are no ratings yet.';
   } else {
@@ -28,11 +31,16 @@ const RatingSummary = (props) => {
       totalNumberOfRatings={props.totalNumberOfRatings}
       filterRating={props.filterRating}
     />;
+    productBreakdown = <ProductBreakdown characteristics={props.metaData.characteristics}/>;
   }
 
   return (
     <div>
       {ratingDetails}
+      <br></br>
+      <br></br>
+      <br></br>
+      {productBreakdown}
     </div>
   );
 };
