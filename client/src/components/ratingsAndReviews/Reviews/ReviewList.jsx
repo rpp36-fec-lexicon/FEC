@@ -102,7 +102,54 @@ class ReviewList extends React.Component {
   }
 
   sortByRelevanceFunc() {
-    console.log('relevance sort');
+    const reviews = this.state.reviews.slice();
+    const yearsSplit = {};
+
+    reviews.forEach(review => {
+      const currentYear = review.date.substring(0, 4);
+      if (yearsSplit[currentYear] === undefined) {
+        yearsSplit[currentYear] = [];
+        yearsSplit[currentYear].push(review);
+      } else {
+        yearsSplit[currentYear].push(review);
+      }
+    });
+
+    const yearsInString = Object.keys(yearsSplit);
+    const yearsInNumber = yearsInString.map(year => {
+      return year = parseInt(year);
+    });
+
+    yearsInNumber.sort((a, b) => {
+      return b - a;
+    });
+
+    yearsInNumber.forEach(year => {
+      const reviewsByYear = yearsSplit[year.toString()];
+      reviewsByYear.sort((a, b) => {
+        return b.helpfulness - a.helpfulness;
+      });
+    });
+
+    console.log('years in number', yearsInNumber);
+
+    let sortedReviews = [];
+
+    yearsInNumber.forEach(year => {
+      const yearInString = year.toString();
+      sortedReviews = sortedReviews.concat(yearsSplit[yearInString]);
+    });
+
+    this.setState({reviews: sortedReviews}, () => {
+      var reviewsShowing;
+
+      if (this.state.reviews.length >= 2) {
+        reviewsShowing = this.state.reviews.slice(0, 2);
+      } else {
+        reviewsShowing = this.state.reviews.slice();
+      }
+      this.setState({reviewsShowing});
+    });
   }
 
   render() {
