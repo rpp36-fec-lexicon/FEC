@@ -55,18 +55,18 @@ class Showcase extends React.Component {
   render() {
     return (
       <div>
-        {this.handleArrowClick('right') && (
-          <button
-            style={{margin: '40px'}}
-            onClick={() => this.changePhoto(1)}
-            className='fa fa-arrow-right'
-          />
-        )}
         {this.handleArrowClick('left') && (
           <button
             style={{margin: '40px'}}
             onClick={() => this.changePhoto(-1)}
             className='fa fa-arrow-left'
+          />
+        )}
+        {this.handleArrowClick('right') && (
+          <button
+            style={{margin: '40px'}}
+            onClick={() => this.changePhoto(1)}
+            className='fa fa-arrow-right'
           />
         )}
         <PrimaryImage pic={this.state.currPhoto.url}/>
