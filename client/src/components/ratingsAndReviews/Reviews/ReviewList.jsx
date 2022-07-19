@@ -40,6 +40,7 @@ class ReviewList extends React.Component {
   }
 
   sortByHelpfulnessFunc() {
+    console.log('helpful')
     const reviews = (this.state.reviews).slice();
     const sortedReviews = [];
 
@@ -76,6 +77,7 @@ class ReviewList extends React.Component {
   }
 
   sortByNewestFunc() {
+    console.log('newest')
     const reviews = this.state.reviews.slice();
 
     reviews.sort((a, b) => {
@@ -95,6 +97,7 @@ class ReviewList extends React.Component {
   }
 
   sortByRelevanceFunc() {
+    console.log('relevance')
     const reviews = this.state.reviews.slice();
     const yearsSplit = {};
 
