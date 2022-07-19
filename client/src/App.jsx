@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { useState, useEffect } from "react";
 import ProductOverview from "./components/overview/ProductOverview.jsx";
 import RatingsAndReviews from "./components/ratingsAndReviews/RatingsAndReviews.jsx";
 import RelatedAndOutfit from "./components/relatedItems/index.jsx";
@@ -21,11 +22,55 @@ class App extends React.Component {
       rating: null,
       totalNumberOfRatings: null,
       flag: false,
+      outfitItems: [],
+      outfitItemsIDs: [],
     };
   }
 
   componentDidMount() {
     this.prodIDChanger(this.state.productId);
+    var pulledItems = storageGetter();
+    var existingIDs = [];
+    for (let i = 0; i < pulledItems.length; i++) {
+      existingIDs.push(pulledItems[i][0][0].id);
+    }
+    this.setState({
+      outfitItems: pulledItems,
+      outfitItemsIDs: existingIDs,
+    });
+  }
+
+  outfitAdder() {
+    // console.log("outfitItems", this.state.outfitItems);
+    var outfitContainer = this.state.outfitItems;
+    var existingIDs = [];
+    for (let i = 0; i < this.state.outfitItems.length; i++) {
+      existingIDs.push(this.state.outfitItems[i][0][0].id);
+    }
+    if (!existingIDs.includes(this.state.productId)) {
+      outfitContainer.push([
+        [this.state.productInfo],
+        [this.state.defaultStyle],
+      ]);
+    }
+    $(".MainOutfitAdderBTN").text("Item Added to Outfit");
+    $(".MainOutfitAdderBTN").addClass("disabledBTN");
+    this.setState({
+      outfitItems: outfitContainer,
+    });
+  }
+
+  outfitRemover(id) {
+    for (let i = 0; i < this.state.outfitItems.length; i++) {
+      if (this.state.outfitItems[i][0][0].id === id) {
+        this.state.outfitItems.splice([i], 1);
+      }
+    }
+    $(".MainOutfitAdderBTN").text(" Add to Outfits");
+    $(".MainOutfitAdderBTN").removeClass("disabledBTN");
+    this.setState({
+      outfitItems: this.state.outfitItems,
+    });
   }
 
   getAllReviewsFunc() {
@@ -118,10 +163,14 @@ class App extends React.Component {
         <React.Fragment>
           <h1>Atelier</h1>
           <ProductOverview
+            productId={this.state.productId}
             productInfo={this.state.productInfo}
             defaultStyle={this.state.defaultStyle}
             styleList={this.state.styleInfo}
             rating={this.state.rating}
+            outfitAdder={this.outfitAdder.bind(this)}
+            outfitItems={this.state.outfitItems}
+            outfitItemsIDs={this.state.outfitItemsIDs}
           />
           <RelatedAndOutfit
             prodID={this.state.productId}
@@ -129,6 +178,9 @@ class App extends React.Component {
             styleInfo={this.state.styleInfo}
             defaultStyle={this.state.defaultStyle}
             prodIDChanger={this.prodIDChanger.bind(this)}
+            outfitAdder={this.outfitAdder.bind(this)}
+            outfitRemover={this.outfitRemover.bind(this)}
+            outfitItems={this.state.outfitItems}
           />
 
           <QuestionsAnswersMain
@@ -150,6 +202,12 @@ class App extends React.Component {
     }
   }
 }
+
+const storageGetter = (key = "items") => {
+  const savedItems = localStorage.getItem(key);
+  const storeageResult = savedItems !== null ? JSON.parse(savedItems) : [];
+  return storeageResult;
+};
 
 ReactDOM.createRoot(document.getElementById("app")).render(<App />);
 
