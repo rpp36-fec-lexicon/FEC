@@ -41,7 +41,6 @@ class Checkout extends React.Component {
   }
 
   render() {
-    // console.log('props in checkout', this.props);
     return (
       <div>
         <select name="size" id="size" onChange={this.userSelect}>
@@ -75,17 +74,30 @@ class Checkout extends React.Component {
             Check Out
           </button>
 
-          {/* if product alreaedy in outfit, don't show button */}
-          <button
-            type="fav"
-            value="fav"
-            onClick={() => {
-              this.props.outfitAdder();
-            }}
-          >
-            Add to Outfits
-            <Presistor outfits={this.props.outfitItems} />
-          </button>
+          {this.props.outfitItemsIDs.includes(this.props.productId) ? (
+            <button
+              className="MainOutfitAdderBTN"
+              type="fav"
+              value="fav"
+              onClick={() => {
+                this.props.outfitAdder();
+              }}
+            >
+              Item Added to Outfit
+            </button>
+          ) : (
+            <button
+              className="MainOutfitAdderBTN"
+              type="fav"
+              value="fav"
+              onClick={() => {
+                this.props.outfitAdder();
+              }}
+            >
+              Add to Outfits
+              <Presistor outfits={this.props.outfitItems} />
+            </button>
+          )}
         </div>
       </div>
     );
@@ -93,7 +105,6 @@ class Checkout extends React.Component {
 }
 
 const Presistor = (props) => {
-  // console.log("js", props); // JSON.stringify(props.outfits)
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(props.outfits));
   }, [props]);

@@ -12,18 +12,23 @@
   padding: 20px;
   border-radius: 5px;
   border: 2px solid black;
+  overflow-y: scroll;
 }
 
 .comp {
  position: absolute;
  left: 30%;
- /* pointer-events:none */
+
 }
 
 td {
   overflow:hidden;
   white-space:nowrap;
   text-align: center;
+}
+
+.disabledBTN{
+  pointer-events: none;
 }
 
 /* START OF RATINGS AND REVIEWS CSS */
@@ -92,8 +97,6 @@ progress {
 /* END OF RATINGS AND REVIEWS CSS */
 
 
-/* Hide carousel arrows when reaching end */
-/* .flickity-prev-next-button:disabled { display: none; } */
 
 .qbutton {
   display: flex;
@@ -106,17 +109,14 @@ progress {
 
 .flex-container {
   display: flex;
-  width: 50%;
 }
 
 .flex-child {
   flex: 1;
-  /* border: 2px solid rgb(99, 99, 14); */
 }
 
 .flex-child:first-child {
   margin-right: 20px;
-  /* flex-grow: 2; */
   flex-basis: 100px;
 	flex-grow: 0;
 	flex-shrink: 0;
@@ -128,22 +128,28 @@ progress {
 
 .relatedCarouselOutfit {
   display: flex;
-  /* border: 10px solid orange; */
-  width: 50%;
+  overflow-x: scroll;
+}
+.relatedCarouselOutfit::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+}
+.relatedCarouselOutfit::-webkit-scrollbar-thumb {
+  background-color: black;
+}
+
+.mainD::-webkit-scrollbar {
+  display: none;
 }
 
 .relatedCarousel {
   display: flex;
-  /* border: 10px solid orange; */
   width: 50%;
 }
-
 
 .RelatedCarouselItem {
   flex-grow: 1;
 }
-
-
 
 .arrow {
   border: solid black;
@@ -167,26 +173,18 @@ progress {
   -webkit-transform: rotate(-45deg);
 }
 
-
 .carouselContainer {
   padding: 15px 15px 15px 15px;
   margin: 15px 15px 15px 15px;
   overflow-x: scroll;
-  /* overflow-y: visible; */
 }
-
-
-
 
 .carouselContainer::-webkit-scrollbar {
   width: 5px;
   height: 8px;
-  background-color: #aaa;
-  display: none;
 }
 
 .carouselContainer::-webkit-scrollbar-thumb {
   background-color: black;
 }
 
-/* .left_disabled { display: none; } */

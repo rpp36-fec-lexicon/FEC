@@ -23,15 +23,20 @@ class App extends React.Component {
       totalNumberOfRatings: null,
       flag: false,
       outfitItems: [],
+      outfitItemsIDs: [],
     };
   }
 
   componentDidMount() {
     this.prodIDChanger(this.state.productId);
-
     var pulledItems = storageGetter();
+    var existingIDs = [];
+    for (let i = 0; i < pulledItems.length; i++) {
+      existingIDs.push(pulledItems[i][0][0].id);
+    }
     this.setState({
       outfitItems: pulledItems,
+      outfitItemsIDs: existingIDs,
     });
   }
 
@@ -48,7 +53,8 @@ class App extends React.Component {
         [this.state.defaultStyle],
       ]);
     }
-
+    $(".MainOutfitAdderBTN").text("Item Added to Outfit");
+    $(".MainOutfitAdderBTN").addClass("disabledBTN");
     this.setState({
       outfitItems: outfitContainer,
     });
@@ -60,6 +66,8 @@ class App extends React.Component {
         this.state.outfitItems.splice([i], 1);
       }
     }
+    $(".MainOutfitAdderBTN").text(" Add to Outfits");
+    $(".MainOutfitAdderBTN").removeClass("disabledBTN");
     this.setState({
       outfitItems: this.state.outfitItems,
     });
@@ -104,8 +112,8 @@ class App extends React.Component {
       this.getAllMetaFunc(),
     ])
       .then((values) => {
-        console.log(values[0].data);
-        console.log(values[1].data);
+        // console.log(values[0].data);
+        // console.log(values[1].data);
         const reviewData = values[2].data;
         const reviews = values[2].data.results;
         const metaData = values[3].data;
@@ -157,12 +165,14 @@ class App extends React.Component {
         <React.Fragment>
           <h1>Atelier</h1>
           <ProductOverview
+            productId={this.state.productId}
             productInfo={this.state.productInfo}
             defaultStyle={this.state.defaultStyle}
             styleList={this.state.styleInfo}
             rating={this.state.rating}
             outfitAdder={this.outfitAdder.bind(this)}
             outfitItems={this.state.outfitItems}
+            outfitItemsIDs={this.state.outfitItemsIDs}
           />
           <RelatedAndOutfit
             prodID={this.state.productId}
@@ -195,13 +205,10 @@ class App extends React.Component {
   }
 }
 
-const storageGetter = (key = "items", defaultValue = []) => {
-  // console.log("get");
-  if (typeof window !== "undefined") {
-    const saved = localStorage.getItem(key);
-    const initial = saved !== null ? JSON.parse(saved) : defaultValue;
-    return initial;
-  }
+const storageGetter = (key = "items") => {
+  const savedItems = localStorage.getItem(key);
+  const storeageResult = savedItems !== null ? JSON.parse(savedItems) : [];
+  return storeageResult;
 };
 
 ReactDOM.createRoot(document.getElementById("app")).render(<App />);

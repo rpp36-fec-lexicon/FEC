@@ -25,7 +25,6 @@ class OutfitCard extends React.Component {
           this.props.relatedItemsUpdater(this.props.prodInfo[0].id);
         }}
       >
-        {/* <Presistor outfits={}/> */}
         <div
           style={{
             height: "150px",
@@ -78,11 +77,5 @@ class OutfitCard extends React.Component {
     );
   }
 }
-// const Presistor = (props) => {
-//   // console.log("called");
-//   const [items, setItems] = useState([]);
-//   useEffect(() => {
-//     localStorage.setItem("items", JSON.stringify(items));
-//   }, [items]);
-// };
+
 export default OutfitCard;

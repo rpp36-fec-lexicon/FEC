@@ -67,10 +67,12 @@ class ProductOverview extends React.Component {
                 currentPhoto={this.changePhoto}
               />
               <Checkout
+                productId={this.props.productId}
                 id={this.state.selectedStyle.style_id}
                 skus={this.state.selectedStyle.skus}
                 outfitAdder={this.props.outfitAdder}
                 outfitItems={this.props.outfitItems}
+                outfitItemsIDs={this.props.outfitItemsIDs}
               />
               <ProductInformation
                 category={this.props.productInfo.category}
@@ -93,10 +95,12 @@ class ProductOverview extends React.Component {
                 currentPhoto={this.changePhoto}
               />
               <Checkout
+                productId={this.props.productId}
                 id={this.props.defaultStyle.style_id}
                 skus={this.props.defaultStyle.skus}
                 outfitAdder={this.props.outfitAdder}
                 outfitItems={this.props.outfitItems}
+                outfitItemsIDs={this.props.outfitItemsIDs}
               />
               <ProductInformation
                 category={this.props.productInfo.category}

@@ -9,66 +9,58 @@ class Outfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // outfitItems: [],
-      // itemInfoAndStyle: [],
       prodInfo: "",
       relatedProdFeat: [],
       relatedProdName: "",
-      xLeftFrame: 0,
-      xRightFrame: 0,
+      xOutfitLeftFrame: 0,
+      xOutfitRightFrame: 0,
+      prevOutfitItemsLen: 0,
     };
   }
 
   componentDidMount() {
-    // var pulledItems = storageGetter();
-    // this.setState({
-    //   outfitItems: pulledItems,
-    // });
+    this.setState({ prevOutfitItemsLen: this.props.outfitItems.length });
+    var screenWidth = document.body.clientWidth;
+    var outfitsWidth = this.props.outfitItems.length * 184 + 600;
+    if (screenWidth < outfitsWidth) {
+      this.setState({
+        xOutfitRightFrame: 1,
+      });
+    }
   }
-
-  // outfitAdder() {
-  //   // console.log("outfitItems", this.state.outfitItems);
-  //   var outfitContainer = this.state.outfitItems;
-  //   var existingIDs = [];
-  //   for (let i = 0; i < this.state.outfitItems.length; i++) {
-  //     existingIDs.push(this.state.outfitItems[i][0][0].id);
-  //   }
-  //   if (!existingIDs.includes(this.props.prodInfo.id)) {
-  //     outfitContainer.push([[this.props.prodInfo], [this.props.defaultStyle]]);
-  //     // check style connection adn add it here
-  //   }
-
-  //   this.setState({
-  //     outfitItems: outfitContainer,
-  //   });
-  // }
-
-  // outfitRemover(id) {
-  //   for (let i = 0; i < this.props.outfitItems.length; i++) {
-  //     if (this.props.outfitItems[i][0][0].id === id) {
-  //       this.props.outfitItems.splice([i], 1);
-  //     }
-  //   }
-  //   this.setState({
-  //     outfitItems: this.state.outfitItems,
-  //   });
-  // }
+  componentDidUpdate() {
+    if (this.props.outfitItems.length !== this.state.prevOutfitItemsLen) {
+      this.setState({ prevOutfitItemsLen: this.props.outfitItems.length });
+      var screenWidth = document.body.clientWidth;
+      var outfitsWidth = this.state.prevOutfitItemsLen * 184 + 600;
+      if (screenWidth < outfitsWidth) {
+        this.setState({
+          xOutfitRightFrame: 1,
+        });
+      } else {
+        this.setState({
+          xOutfitRightFrame: 0,
+        });
+      }
+    }
+  }
 
   leftScroll() {
     document.querySelector(".relatedCarouselOutfit").scrollBy(-250, 0);
     document
       .querySelector(".relatedCarouselOutfit")
       .addEventListener("scroll", (event) => {
-        var xLeftFrame = document.querySelector(
+        var xOutfitLeftFrame = document.querySelector(
           ".relatedCarouselOutfit"
         ).scrollLeft;
-        this.setState({ xLeftFrame });
+        this.setState({ xOutfitLeftFrame });
         var sWid = document.querySelector(".relatedCarouselOutfit").scrollWidth;
         var ofWid = document.querySelector(
           ".relatedCarouselOutfit"
         ).offsetWidth;
-        if (Math.round(xLeftFrame) + ofWid !== sWid) {
-          this.setState({ xRightFrame: 1 });
+
+        if (Math.round(xOutfitLeftFrame) + ofWid !== sWid) {
+          this.setState({ xOutfitRightFrame: 1 });
         }
       });
   }
@@ -78,23 +70,21 @@ class Outfit extends React.Component {
     document
       .querySelector(".relatedCarouselOutfit")
       .addEventListener("scroll", (event) => {
-        var xLeftFrame = document.querySelector(
+        var xOutfitLeftFrame = document.querySelector(
           ".relatedCarouselOutfit"
         ).scrollLeft;
-        this.setState({ xLeftFrame });
+        this.setState({ xOutfitLeftFrame });
         var sWid = document.querySelector(".relatedCarouselOutfit").scrollWidth;
         var ofWid = document.querySelector(
           ".relatedCarouselOutfit"
         ).offsetWidth;
-        if (Math.round(xLeftFrame) + ofWid === sWid) {
-          this.setState({ xRightFrame: 0 });
+        if (Math.round(xOutfitLeftFrame) + ofWid > sWid) {
+          this.setState({ xOutfitRightFrame: 0 });
         }
       });
   }
 
   render() {
-    // console.log("outfitItems", this.state.outfitItems);
-    // if (this.props.outfitItems.length !== 0) {
     return (
       <div>
         <div
@@ -114,7 +104,7 @@ class Outfit extends React.Component {
             <button //outfitAdder
               className="outfitAdderBTN"
               style={{
-                height: "250px",
+                height: "270px",
                 width: "80px",
                 fontSize: "15px",
                 marginTop: "15px",
@@ -137,18 +127,18 @@ class Outfit extends React.Component {
             className="mainD"
             style={{
               padding: "15px 15px 15px 15px",
-              // margin: "15px 15px 15px 15px",
               position: "relative",
+              overflow: "auto",
             }}
           >
-            {/* {this.state.xLeftFrame === 0 ? null : (
-                <button
-                  className="arrow left"
-                  onClick={(e) => {
-                    this.leftScroll();
-                  }}
-                ></button>
-              )} */}
+            {this.state.xOutfitLeftFrame === 0 ? null : (
+              <button
+                className="arrow left"
+                onClick={(e) => {
+                  this.leftScroll();
+                }}
+              ></button>
+            )}
 
             <div className="flex-child relatedCarouselOutfit">
               {this.props.outfitItems.map((itemTuple, index) => (
@@ -163,36 +153,25 @@ class Outfit extends React.Component {
               ))}
             </div>
 
-            {/* {this.state.xRightFrame === 0 ? null : (
-                <button
-                  className="arrow right"
-                  onClick={(e) => {
-                    this.rightScroll();
-                  }}
-                ></button>
-              )} */}
+            {this.state.xOutfitRightFrame === 0 ? null : (
+              <button
+                className="arrow right"
+                onClick={(e) => {
+                  this.rightScroll();
+                }}
+              ></button>
+            )}
           </div>
         </div>
       </div>
     );
-    // }
   }
 }
 
 const Presistor = (props) => {
-  // console.log("js", props); // JSON.stringify(props.outfits)
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(props.outfits));
   }, [props]);
 };
-
-// const storageGetter = (key = "items", defaultValue = []) => {
-//   // console.log("get");
-//   if (typeof window !== "undefined") {
-//     const saved = localStorage.getItem(key);
-//     const initial = saved !== null ? JSON.parse(saved) : defaultValue;
-//     return initial;
-//   }
-// };
 
 export default Outfit;
