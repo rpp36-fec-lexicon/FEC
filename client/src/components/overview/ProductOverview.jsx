@@ -21,7 +21,7 @@ class ProductOverview extends React.Component {
   componentDidMount() {
     this.setState({
       selectedStyle: this.props.defaultStyle,
-      productInfo: this.props.productInfo
+      productInfo: this.props.productInfo,
     });
   }
 
@@ -29,30 +29,33 @@ class ProductOverview extends React.Component {
     if (this.state.productInfo !== this.props.productInfo) {
       this.setState({
         productInfo: this.props.productInfo,
-        selectedStyle: this.props.defaultStyle
+        selectedStyle: this.props.defaultStyle,
       });
     }
   }
 
   changeStyle(id) {
     this.setState({
-      selectedStyle: this.props.styleList.find((element) => element.style_id === id),
-      productId: this.props.productInfo.id
+      selectedStyle: this.props.styleList.find(
+        (element) => element.style_id === id
+      ),
+      productId: this.props.productInfo.id,
     });
   }
 
   changePhoto(photoId) {
-    this.setState({ selectedPhoto: photoId});
+    this.setState({ selectedPhoto: photoId });
   }
 
   render() {
+    // console.log('this is the current style ', this.state.selectedStyle);
     if (this.state.productInfo && this.state.selectedStyle && this.props.rating) {
       return (
         <div>
           <h1 id="overviewHead">Product Overview!</h1>
           <div>
             <Showcase id={this.state.selectedStyle.style_id} photos={this.state.selectedStyle.photos} currentPhoto={this.changePhoto}/>
-            <Checkout id={this.state.selectedStyle.style_id} skus={this.state.selectedStyle.skus}/>
+            <Checkout id={this.state.selectedStyle.style_id} skus={this.state.selectedStyle.skus} outfitAdder={this.props.outfitAdder} outfitItems={this.props.outfitItems} outfitItemsIDs={this.props.outfitItemsIDs}/>
             <ProductInformation category={this.props.productInfo.category} name={this.props.productInfo.name}
               price={this.state.selectedStyle.original_price} salePrice={this.state.selectedStyle.sale_price} rating={this.props.rating}/>
             <SelectStyle styles={this.props.styleList} changeStyle={this.changeStyle} selectedStyle={this.state.selectedStyle}/>
