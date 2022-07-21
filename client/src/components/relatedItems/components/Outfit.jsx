@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import OutfitCard from "./OutfitCard.jsx";
-import Flickity from "react-flickity-component";
 import $ from "jquery";
 
 class Outfit extends React.Component {
@@ -85,35 +84,18 @@ class Outfit extends React.Component {
   }
 
   render() {
+    // console.log("=======  OUTFIT PROPS  ======", this.props);
     return (
       <div>
-        <div
-          className="flex-container"
-          style={{
-            padding: "15px 15px 15px 15px",
-            marginRight: "50px",
-            marginLeft: "40px",
-          }}
-        >
-          <div
-            className="flex-child"
-            style={{
-              margin: "15px 15px 15px 15px",
-            }}
-          >
-            <button //outfitAdder
+        <div className="flex-container">
+          <div className="flex-child">
+            <button
               className="outfitAdderBTN"
-              style={{
-                height: "270px",
-                width: "80px",
-                fontSize: "15px",
-                marginTop: "15px",
-              }}
               onClick={() => {
                 this.props.outfitAdder();
               }}
             >
-              <Presistor outfits={this.props.outfitItems} />
+              <Persister outfits={this.props.outfitItems} />
               <br></br>
               <span>
                 [&#x2B;] <br></br>
@@ -124,15 +106,11 @@ class Outfit extends React.Component {
           </div>
 
           <div
-            className="mainD"
-            style={{
-              padding: "15px 15px 15px 15px",
-              position: "relative",
-              overflow: "auto",
-            }}
+            className="outfitList" //mainD
           >
             {this.state.xOutfitLeftFrame === 0 ? null : (
               <button
+                role="outfit_carousel_left_shifter"
                 className="arrow left"
                 onClick={(e) => {
                   this.leftScroll();
@@ -155,6 +133,7 @@ class Outfit extends React.Component {
 
             {this.state.xOutfitRightFrame === 0 ? null : (
               <button
+                role="outfit_carousel_right_shifter"
                 className="arrow right"
                 onClick={(e) => {
                   this.rightScroll();
@@ -168,7 +147,8 @@ class Outfit extends React.Component {
   }
 }
 
-const Presistor = (props) => {
+export const Persister = (props) => {
+  // console.log("=======  Persister PROPS  ======", props);
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(props.outfits));
   }, [props]);

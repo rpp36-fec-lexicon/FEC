@@ -12,14 +12,11 @@ class OutfitCard extends React.Component {
   componentDidMount() {}
 
   render() {
+    // console.log("=======  OUTFIT CARD PROPS  ======", this.props);
     return (
       <div
-        className="RelatedCarouseOutfit"
-        style={{
-          border: "1px solid grey",
-          padding: "15px 15px 15px 15px",
-          margin: "15px 15px 15px 15px",
-        }}
+        role="productIdUpdater"
+        className="relatedCarouseOutfitCard"
         onClick={() => {
           this.props.prodIDChanger(this.props.prodInfo[0].id);
           this.props.relatedItemsUpdater(this.props.prodInfo[0].id);
@@ -35,13 +32,8 @@ class OutfitCard extends React.Component {
           }}
         >
           <button
-            style={{
-              color: "red",
-              float: "right",
-              fontSize: "20px",
-              background: "black",
-              borderColor: "transparent",
-            }}
+            role="outfitRemover"
+            className="outfitRemoveBTN"
             onClick={(e) => {
               e.stopPropagation();
               this.props.outfitRemover(this.props.prodInfo[0].id);

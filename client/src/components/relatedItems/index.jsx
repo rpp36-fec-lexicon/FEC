@@ -70,8 +70,9 @@ class RelatedAndOutfit extends React.Component {
     });
   }
 
-  leftScroll() {
-    document.querySelector(".carouselContainer").scrollBy(-250, 0);
+  leftScroll(targetClass) {
+    // console.log("docc", document);
+    document.querySelector(targetClass).scrollBy(-250, 0);
     document
       .querySelector(".carouselContainer")
       .addEventListener("scroll", (event) => {
@@ -149,26 +150,21 @@ class RelatedAndOutfit extends React.Component {
     });
   }
   render() {
+    // console.log("=======  RELATED&OUTFIT PROPS  ======", this.props);
     return (
       <div>
         <h5>Related Products:</h5>
         <div
-          className="mainD"
-          style={{
-            padding: "15px 15px 15px 15px",
-            margin: "15px 15px 15px 15px",
-            position: "relative",
-          }}
+          className="relatedProductsMainClass" // mainD
         >
           {this.state.xLeftFrame === 0 ? null : (
             <button
               className="arrow left"
               onClick={(e) => {
-                this.leftScroll();
+                this.leftScroll(".carouselContainer");
               }}
             ></button>
           )}
-
           <div className="carouselContainer">
             <Related
               prodID={this.props.prodID}
@@ -178,8 +174,7 @@ class RelatedAndOutfit extends React.Component {
               itemInfoAndStyle={this.state.itemInfoAndStyle}
               relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
             />
-          </div>
-
+          </div>{" "}
           {this.state.xRightFrame === 0 ? null : (
             <button
               className="arrow right"
@@ -189,11 +184,7 @@ class RelatedAndOutfit extends React.Component {
             ></button>
           )}
         </div>
-
-        <br></br>
-
         <h5>Your Outfit:</h5>
-
         <Outfit
           prodID={this.props.prodID}
           prodInfo={this.props.prodInfo}
@@ -205,7 +196,6 @@ class RelatedAndOutfit extends React.Component {
           outfitRemover={this.props.outfitRemover}
           outfitItems={this.props.outfitItems}
         />
-        <br></br>
       </div>
     );
   }

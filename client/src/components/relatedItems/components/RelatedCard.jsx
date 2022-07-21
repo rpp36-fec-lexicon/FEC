@@ -10,19 +10,11 @@ class RelatedCard extends React.Component {
   componentDidMount() {}
 
   render() {
-    // console.log("sty:", this.props.itemData.itemStyles);
+    // console.log("ITEMD PROPS====", this.props);
     return (
-      <div
-        className="RelatedCarouselItem"
-        // className="flex-child"
-        style={{
-          border: "1px solid grey",
-          padding: "15px 15px 15px 15px",
-          margin: "15px 15px 15px 15px",
-          // width: "50px",
-        }}
-      >
+      <div className="RelatedCarouselItem">
         <div
+          role="productIdUpdaterInRelated"
           style={{
             height: "150px",
             width: "150px",
@@ -38,11 +30,7 @@ class RelatedCard extends React.Component {
           <div>
             <button
               className="comparisonBtn"
-              style={{
-                float: "right",
-                background: "transparent",
-                borderColor: "transparent",
-              }}
+              role="featureComparer"
               onClick={(e) => {
                 e.stopPropagation();
                 this.props.comparison(

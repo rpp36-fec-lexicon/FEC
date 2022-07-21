@@ -162,7 +162,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <h1>Atelier</h1>
-          <ProductOverview
+          {/* <ProductOverview
             productId={this.state.productId}
             productInfo={this.state.productInfo}
             defaultStyle={this.state.defaultStyle}
@@ -171,7 +171,7 @@ class App extends React.Component {
             outfitAdder={this.outfitAdder.bind(this)}
             outfitItems={this.state.outfitItems}
             outfitItemsIDs={this.state.outfitItemsIDs}
-          />
+          /> */}
           <RelatedAndOutfit
             prodID={this.state.productId}
             prodInfo={this.state.productInfo}
@@ -183,7 +183,7 @@ class App extends React.Component {
             outfitItems={this.state.outfitItems}
           />
 
-          <QuestionsAnswersMain
+          {/* <QuestionsAnswersMain
             productId={this.state.productId}
             productInfo={this.state.productInfo}
             key={this.state.productId}
@@ -196,19 +196,18 @@ class App extends React.Component {
             rating={this.state.rating}
             totalNumberOfRatings={this.state.totalNumberOfRatings}
             filterRating={this.filterRating}
-          />
+          /> */}
         </React.Fragment>
       );
     }
   }
 }
 
-const storageGetter = (key = "items") => {
+export const storageGetter = (key = "items") => {
   const savedItems = localStorage.getItem(key);
   const storeageResult = savedItems !== null ? JSON.parse(savedItems) : [];
   return storeageResult;
 };
 
 ReactDOM.createRoot(document.getElementById("app")).render(<App />);
-
 export default App;

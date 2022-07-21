@@ -95,7 +95,7 @@ class Checkout extends React.Component {
               }}
             >
               Add to Outfits
-              <Presistor outfits={this.props.outfitItems} />
+              <Persister outfits={this.props.outfitItems} />
             </button>
           )}
         </div>
@@ -104,7 +104,7 @@ class Checkout extends React.Component {
   }
 }
 
-const Presistor = (props) => {
+const Persister = (props) => {
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(props.outfits));
   }, [props]);
