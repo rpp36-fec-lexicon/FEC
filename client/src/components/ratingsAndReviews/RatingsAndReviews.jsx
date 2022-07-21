@@ -12,8 +12,12 @@ class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 71697,
-      reviews: [],
+      // productId: 71697,
+      reviewData: null,
+      reviews: null,
+      metaData: null,
+      rating: null,
+      totalNumberOfRatings: null,
       filterRatingClickCount: 0,
       star5: false,
       star4: false,
@@ -24,38 +28,44 @@ class RatingsAndReviews extends React.Component {
     this.filterRating = this.filterRating.bind(this);
   }
 
+  componentDidMount() {
+    const reviews = this.props.reviews;
+    const reviewData = this.props.reviewData;
+    const metaData = this.props.metaData;
+    const rating = this.props.rating;
+    const totalNumberOfRatings = this.props.totalNumberOfRatings;
+    this.setState({reviews, reviewData, metaData, rating, totalNumberOfRatings});
+  }
+
   filterRating(starRating) {
+    console.log('star', starRating, typeof starRating)
     let filteredReviews = [];
-    this.getAllReviewsFunc
-      .then((response) => {
-        const allReviews = response.data.results;
-        allReviews.forEach((review) => {
-          if (review.rating === starRating) {
-            filteredReviews.push(review);
-          }
-        });
-        this.setState({ reviews: filteredReviews });
-      })
-      .catch((err) => {
-        console.log('error fetching reviews in filterRating', err);
-      });
+    const reviews = this.props.reviews;
+    reviews.forEach(review => {
+      if (review.rating === parseInt(starRating)) {
+        filteredReviews.push(review);
+      }
+    });
+
+    this.setState({reviews: filteredReviews}, () => {
+      console.log('reviews in topapp rr', this.state.reviews);
+    });
   }
 
   render() {
-    // console.log('props in ratingsreviews', this.props);
-    if (this.props.reviews !== null) {
+    if (this.state.reviews !== null) {
       return (
         <div>
           <h3>RATINGS & REVIEWS</h3>
           <div className="content-container">
             <div className="row">
               <div className="left-panel">
-                {/* <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/> */}
-                <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/>
+                <RatingSummary metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} filterRating={this.filterRating}/>
+                {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/> */}
               </div>
               <div className="right-panel">
-                {/* <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} /> */}
-                <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} />
+                <ReviewList reviewData={this.state.reviewData} reviews={this.state.reviews} ratingCount={this.state.ratingCount}/>
+                {/* <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} /> */}
               </div>
             </div>
           </div>

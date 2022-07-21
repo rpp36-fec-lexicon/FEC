@@ -9,9 +9,10 @@ class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // consistentReviews: [],
       reviews: [],
       reviewsShowing: null,
-      startReviewIndex: 0,
+      // startReviewIndex: 0,
       endReviewIndex: 4,
     };
     this.showMoreReviewsFunc = this.showMoreReviewsFunc.bind(this);
@@ -21,9 +22,38 @@ class ReviewList extends React.Component {
   }
 
   componentDidMount() {
+
     this.setState({reviews: this.props.reviews}, () => {
       this.sortByRelevanceFunc();
     });
+
+  }
+
+  reviewsNotSameRating(reviews) {
+    const firstReviewRating = reviews[0].rating;
+    for (var i = 1; i < reviews.length; i++) {
+      if (reviews[i].rating !== firstReviewRating) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  componentDidUpdate(prevProps) {
+
+    if (this.props.reviews.length !== this.state.reviews.length) {
+      this.setState({reviews: this.props.reviews}, () => {
+        var reviewsShowing;
+
+        if (this.state.reviews.length >= 2) {
+          reviewsShowing = this.state.reviews.slice(0, 2);
+        } else {
+          reviewsShowing = this.state.reviews.slice();
+        }
+        this.setState({reviewsShowing});
+      });
+    }
   }
 
   showMoreReviewsFunc() {
@@ -32,7 +62,7 @@ class ReviewList extends React.Component {
       reviewsShowing = this.state.reviews.slice();
       this.state.endReviewIndex += 2;
     } else {
-      reviewsShowing = this.state.reviews.slice(this.state.startReviewIndex, this.state.endReviewIndex);
+      reviewsShowing = this.state.reviews.slice(0, this.state.endReviewIndex);
       this.state.endReviewIndex += 2;
     }
 
@@ -40,7 +70,6 @@ class ReviewList extends React.Component {
   }
 
   sortByHelpfulnessFunc() {
-    console.log('helpful')
     const reviews = (this.state.reviews).slice();
     const sortedReviews = [];
 
@@ -77,7 +106,6 @@ class ReviewList extends React.Component {
   }
 
   sortByNewestFunc() {
-    console.log('newest')
     const reviews = this.state.reviews.slice();
 
     reviews.sort((a, b) => {
@@ -97,7 +125,6 @@ class ReviewList extends React.Component {
   }
 
   sortByRelevanceFunc() {
-    console.log('relevance')
     const reviews = this.state.reviews.slice();
     const yearsSplit = {};
 
@@ -127,8 +154,6 @@ class ReviewList extends React.Component {
       });
     });
 
-    console.log('years in number', yearsInNumber);
-
     let sortedReviews = [];
 
     yearsInNumber.forEach(year => {
@@ -157,14 +182,16 @@ class ReviewList extends React.Component {
     let addFirstReviewButton;
     let addAnotherReviewButton;
     let reviewsHeading;
+
     if (!this.state.reviews.length) {
       reviewsHeading = 'There are no reviews yet.';
       addFirstReviewButton = <AddFirstReview />;
     } else {
-      reviewsHeading = <ReviewsHeading reviews={this.props.reviews} sortByHelpfulnessFunc={this.sortByHelpfulnessFunc} sortByNewestFunc={this.sortByNewestFunc} sortByRelevanceFunc={this.sortByRelevanceFunc}/>;
+      reviewsHeading = <ReviewsHeading reviews={this.state.reviews} sortByHelpfulnessFunc={this.sortByHelpfulnessFunc} sortByNewestFunc={this.sortByNewestFunc} sortByRelevanceFunc={this.sortByRelevanceFunc}/>;
       addAnotherReviewButton = <AddAnotherReview />;
     }
 
+    console.log('this.state.reviews in reviewslist', this.state.reviews)
     if (this.state.reviews && this.state.reviewsShowing) {
       const reviews = this.state.reviews;
       const lastReview = reviews[reviews.length - 1];

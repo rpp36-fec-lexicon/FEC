@@ -67,8 +67,6 @@ class App extends React.Component {
       this.getAllMetaFunc(),
     ])
       .then((values) => {
-        console.log(values[0].data);
-        console.log(values[1].data);
         const reviewData = values[2].data;
         const reviews = values[2].data.results;
         const metaData = values[3].data;
@@ -119,7 +117,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <h1>Atelier</h1>
-          {/* <ProductOverview
+          <ProductOverview
             productInfo={this.state.productInfo}
             defaultStyle={this.state.defaultStyle}
             styleList={this.state.styleInfo}
@@ -137,7 +135,7 @@ class App extends React.Component {
             productId={this.state.productId}
             productInfo={this.state.productInfo}
             key={this.state.productId}
-          /> */}
+          />
 
           <RatingsAndReviews
             productId={this.state.productId}
