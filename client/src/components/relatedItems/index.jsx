@@ -10,9 +10,19 @@ class RelatedAndOutfit extends React.Component {
       itemInfoAndStyle: [],
       xLeftFrame: 0,
       xRightFrame: 0,
+      xOutfitLeftFrame: 0,
+      xOutfitRightFrame: 0,
+      prevOutfitItemsLength: 0,
     };
   }
   componentDidMount() {
+    this.carouselSizeOnMount();
+    this.relatedDataRequest();
+  }
+  componentDidUpdate() {
+    this.carouselSizeOnUpdate();
+  }
+  relatedDataRequest() {
     $.ajax({
       type: "GET",
       url: `/products/${this.props.prodID}/related`,
@@ -69,38 +79,101 @@ class RelatedAndOutfit extends React.Component {
       },
     });
   }
-
-  leftScroll(targetClass) {
-    // console.log("docc", document);
-    document.querySelector(targetClass).scrollBy(-250, 0);
-    document
-      .querySelector(".carouselContainer")
-      .addEventListener("scroll", (event) => {
-        var xLeftFrame =
-          document.querySelector(".carouselContainer").scrollLeft;
-        this.setState({ xLeftFrame });
-        var sWid = document.querySelector(".carouselContainer").scrollWidth;
-        var ofWid = document.querySelector(".carouselContainer").offsetWidth;
-        if (Math.round(xLeftFrame) + ofWid !== sWid) {
-          this.setState({ xRightFrame: 1 });
-        }
+  carouselSizeOnMount() {
+    var screenWidth = document.body.clientWidth;
+    var outfitsWidth = this.props.outfitItems.length * 184 + 600;
+    if (screenWidth < outfitsWidth) {
+      this.setState({
+        xOutfitRightFrame: 1,
       });
+    } else {
+      this.setState({
+        xOutfitRightFrame: 0,
+      });
+    }
+  }
+  carouselSizeOnUpdate() {
+    if (this.props.outfitItems.length !== this.state.prevOutfitItemsLength) {
+      this.setState({
+        prevOutfitItemsLength: this.props.outfitItems.length,
+      });
+      var screenWidth = document.body.clientWidth;
+      var outfitsWidth = this.props.outfitItems.length * 184 + 600;
+
+      if (screenWidth < outfitsWidth) {
+        this.setState({
+          xOutfitRightFrame: 1,
+        });
+      } else {
+        this.setState({
+          xOutfitRightFrame: 0,
+        });
+      }
+    }
   }
 
-  rightScroll() {
-    document.querySelector(".carouselContainer").scrollBy(250, 0);
-    document
-      .querySelector(".carouselContainer")
-      .addEventListener("scroll", (event) => {
-        var xLeftFrame =
-          document.querySelector(".carouselContainer").scrollLeft;
-        this.setState({ xLeftFrame });
-        var sWid = document.querySelector(".carouselContainer").scrollWidth;
-        var ofWid = document.querySelector(".carouselContainer").offsetWidth;
-        if (Math.round(xLeftFrame) + ofWid === sWid + 1) {
-          this.setState({ xRightFrame: 0 });
-        }
-      });
+  leftScroll(targetClass) {
+    if (targetClass === ".carouselContainer") {
+      // console.log("left related");
+      document.querySelector(targetClass).scrollBy(-250, 0);
+      document
+        .querySelector(targetClass)
+        .addEventListener("scroll", (event) => {
+          var xLeftFrame = document.querySelector(targetClass).scrollLeft;
+          this.setState({ xLeftFrame });
+          var sWid = document.querySelector(targetClass).scrollWidth;
+          var ofWid = document.querySelector(targetClass).offsetWidth;
+          if (Math.round(xLeftFrame) + ofWid !== sWid) {
+            this.setState({ xRightFrame: 1 });
+          }
+        });
+    } else if (targetClass === ".relatedCarouselOutfit") {
+      // console.log("left outfit");
+      document.querySelector(targetClass).scrollBy(-250, 0);
+      document
+        .querySelector(targetClass)
+        .addEventListener("scroll", (event) => {
+          var xOutfitLeftFrame = document.querySelector(targetClass).scrollLeft;
+          this.setState({ xOutfitLeftFrame });
+          var sWid = document.querySelector(targetClass).scrollWidth;
+          var ofWid = document.querySelector(targetClass).offsetWidth;
+          if (Math.round(xOutfitLeftFrame) + ofWid !== sWid) {
+            this.setState({ xOutfitRightFrame: 1 });
+          }
+        });
+    }
+  }
+
+  rightScroll(targetClass) {
+    if (targetClass === ".carouselContainer") {
+      // console.log("right related");
+      document.querySelector(targetClass).scrollBy(250, 0);
+      document
+        .querySelector(targetClass)
+        .addEventListener("scroll", (event) => {
+          var xLeftFrame = document.querySelector(targetClass).scrollLeft;
+          this.setState({ xLeftFrame });
+          var sWid = document.querySelector(targetClass).scrollWidth;
+          var ofWid = document.querySelector(targetClass).offsetWidth;
+          if (Math.round(xLeftFrame) + ofWid === sWid + 1) {
+            this.setState({ xRightFrame: 0 });
+          }
+        });
+    } else if (targetClass === ".relatedCarouselOutfit") {
+      // console.log("right outfit");
+      document.querySelector(targetClass).scrollBy(250, 0);
+      document
+        .querySelector(targetClass)
+        .addEventListener("scroll", (event) => {
+          var xOutfitLeftFrame = document.querySelector(targetClass).scrollLeft;
+          this.setState({ xOutfitLeftFrame });
+          var sWid = document.querySelector(targetClass).scrollWidth;
+          var ofWid = document.querySelector(targetClass).offsetWidth;
+          if (Math.round(xOutfitLeftFrame) + ofWid === sWid + 1) {
+            this.setState({ xOutfitRightFrame: 0 });
+          }
+        });
+    }
   }
 
   relatedItemsUpdater(clickedProdID) {
@@ -179,7 +252,7 @@ class RelatedAndOutfit extends React.Component {
             <button
               className="arrow right"
               onClick={(e) => {
-                this.rightScroll();
+                this.rightScroll(".carouselContainer");
               }}
             ></button>
           )}
@@ -195,6 +268,10 @@ class RelatedAndOutfit extends React.Component {
           outfitAdder={this.props.outfitAdder}
           outfitRemover={this.props.outfitRemover}
           outfitItems={this.props.outfitItems}
+          leftScroll={this.leftScroll.bind(this)}
+          rightScroll={this.rightScroll.bind(this)}
+          xOutfitRightFrame={this.state.xOutfitRightFrame}
+          xOutfitLeftFrame={this.state.xOutfitLeftFrame}
         />
       </div>
     );
