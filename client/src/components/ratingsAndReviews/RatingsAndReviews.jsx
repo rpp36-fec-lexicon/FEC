@@ -18,14 +18,11 @@ class RatingsAndReviews extends React.Component {
       metaData: null,
       rating: null,
       totalNumberOfRatings: null,
-      filterRatingClickCount: 0,
-      star5: false,
-      star4: false,
-      star3: false,
-      star2: false,
-      star1: false
+      // filterRatingClickCount: 0,
+      clickedStars: null
+
     };
-    this.filterRating = this.filterRating.bind(this);
+    this.filterRatingFunc = this.filterRatingFunc.bind(this);
   }
 
   componentDidMount() {
@@ -37,19 +34,45 @@ class RatingsAndReviews extends React.Component {
     this.setState({reviews, reviewData, metaData, rating, totalNumberOfRatings});
   }
 
-  filterRating(starRating) {
-    console.log('star', starRating, typeof starRating)
+  filterRatingFunc(starRating) {
+    console.log('star', starRating);
+
+    const star = parseInt(starRating);
     let filteredReviews = [];
     const reviews = this.props.reviews;
     reviews.forEach(review => {
-      if (review.rating === parseInt(starRating)) {
+      if (review.rating === star) {
         filteredReviews.push(review);
       }
     });
 
-    this.setState({reviews: filteredReviews}, () => {
-      console.log('reviews in topapp rr', this.state.reviews);
-    });
+    let currentStars;
+
+    if (this.state.clickedStars !== null) {
+      console.log('not null');
+      currentStars = this.state.clickedStars;
+      if (currentStars.indexOf(star) < 0) {
+        currentStars.push(star);
+      } else {
+        const indexOfStar = currentStars.indexOf(star);
+        currentStars.splice(indexOfStar, 1);
+      }
+
+      this.setState({reviews: filteredReviews, clickedStars: currentStars}, () => {
+        console.log('state in topapp rr', this.state);
+      });
+
+    } else if (this.state.clickedStars === null) {
+      console.log('null')
+      currentStars = [];
+      currentStars.push(star);
+      console.log('currentStars in null', currentStars);
+
+      this.setState({reviews: filteredReviews, clickedStars: currentStars}, () => {
+        console.log('state in topapp rr', this.state);
+      });
+    }
+
   }
 
   render() {
@@ -60,7 +83,7 @@ class RatingsAndReviews extends React.Component {
           <div className="content-container">
             <div className="row">
               <div className="left-panel">
-                <RatingSummary metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} filterRating={this.filterRating}/>
+                <RatingSummary metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} filterRatingFunc={this.filterRatingFunc} clickedStars={this.state.clickedStars}/>
                 {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/> */}
               </div>
               <div className="right-panel">

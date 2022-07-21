@@ -27,7 +27,8 @@ const RatingSummary = (props) => {
       recommendedPercent={recommendedPercent}
       ratings={props.metaData.ratings}
       totalNumberOfRatings={props.totalNumberOfRatings}
-      filterRating={props.filterRating}
+      filterRatingFunc={props.filterRatingFunc}
+      clickedStars={props.clickedStars}
     />;
     productBreakdown = <ProductBreakdown characteristics={props.metaData.characteristics}/>;
   }
