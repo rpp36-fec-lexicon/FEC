@@ -12,11 +12,20 @@ const sampleMeta = {
     "true": "24"
   },
   "characteristics": {
+    "Size": {
+      "id": 240582,
+      // "value": "3.0869565217391304",
+      "value": "1"
+    },
+    "Width": {
+      "id": 240582,
+      // "value": "3.0869565217391304",
+      "value": "1"
+    },
     "Fit": {
       "id": 240582,
       // "value": "3.0869565217391304",
       "value": "1"
-
     },
     "Length": {
       "id": 240583,

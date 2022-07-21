@@ -1,7 +1,13 @@
 import React from 'react';
+import Size from './Size.jsx';
+import Width from './Width.jsx';
+import Fit from './Fit.jsx';
+import Length from './Length.jsx';
+import Comfort from './Comfort.jsx';
+import Quality from './Quality.jsx';
 
 const ProductBreakdown = (props) => {
-
+  console.log('props in product breakdown', props);
   const barStyle = {
     position: 'relative',
     width: '220px',
@@ -38,90 +44,89 @@ const ProductBreakdown = (props) => {
     fontSize: '13px'
   };
 
-  const fitValue = (220 / 5) * props.characteristics.Fit.value;
-  const fitStyle = {
-    position: 'absolute',
-    left: `${fitValue}px`,
-    top: '-2px'
-  };
+  let size;
+  let width;
+  let fit;
+  let length;
+  let comfort;
+  let quality;
 
-  const lengthValue = (220 / 5) * props.characteristics.Length.value;
-  const lengthStyle = {
-    position: 'absolute',
-    left: `${lengthValue}px`,
-    top: '-2px'
-  };
+  if (Object.keys(props.characteristics)) {
+    if (props.characteristics.Size !== undefined) {
+      size = <Size
+        size={props.characteristics.Size}
+        barStyle={barStyle}
+        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
+        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
+        leftNotationStyle={leftNotationStyle}
+        rightNotationStyle={rightNotationStyle}
+      />;
+    }
 
-  const comfortValue = (220 / 5) * props.characteristics.Comfort.value;
-  const comfortStyle = {
-    position: 'absolute',
-    left: `${comfortValue}px`,
-    top: '-2px'
-  };
+    if (props.characteristics.Width !== undefined) {
+      width = <Width
+        width={props.characteristics.Width}
+        barStyle={barStyle}
+        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
+        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
+        leftNotationStyle={leftNotationStyle}
+        rightNotationStyle={rightNotationStyle}/>;
+    }
 
-  const qualityValue = (220 / 5) * props.characteristics.Quality.value;
-  const qualityStyle = {
-    position: 'absolute',
-    left: `${qualityValue}px`,
-    top: '-2px'
-  };
+    if (props.characteristics.Fit !== undefined) {
+      fit = <Fit
+        fit={props.characteristics.Fit}
+        barStyle={barStyle}
+        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
+        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
+        leftNotationStyle={leftNotationStyle}
+        rightNotationStyle={rightNotationStyle}/>;
+    }
 
-  if (Object.keys(props)) {
+    if (props.characteristics.Length !== undefined) {
+      length = <Length
+        length={props.characteristics.Length}
+        barStyle={barStyle}
+        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
+        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
+        leftNotationStyle={leftNotationStyle}
+        rightNotationStyle={rightNotationStyle}/>;
+    }
+
+    if (props.characteristics.Comfort !== undefined) {
+      comfort = <Comfort
+        comfort={props.characteristics.Comfort}
+        barStyle={barStyle}
+        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
+        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
+        leftNotationStyle={leftNotationStyle}
+        rightNotationStyle={rightNotationStyle}/>;
+    }
+
+    if (props.characteristics.Quality !== undefined) {
+      quality = <Quality
+        quality={props.characteristics.Quality}
+        barStyle={barStyle}
+        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
+        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
+        leftNotationStyle={leftNotationStyle}
+        rightNotationStyle={rightNotationStyle}/>;
+    }
+
     return (
       <div>
+        {size}
 
-        <div>
-          Fit
-          <div style={barStyle}>
-            <div style={firstWhiteSpaceStyle}></div>
-            <div style={secondWhiteSpaceStyle}></div>
-            <div style={leftNotationStyle}>Too small</div>
-            <div style={rightNotationStyle}>Too large</div>
-            <div style={fitStyle}>&#9660;</div>
-          </div>
-        </div>
+        {width}
 
-        <br></br>
-        <br></br>
+        {fit}
 
-        <div>
-          Length
-          <div style={barStyle}>
-            <div style={firstWhiteSpaceStyle}></div>
-            <div style={secondWhiteSpaceStyle}></div>
-            <div style={leftNotationStyle}>Too short</div>
-            <div style={rightNotationStyle}>Too long</div>
-            <div style={lengthStyle}>&#9660;</div>
-          </div>
-        </div>
+        {length}
 
-        <br></br>
-        <br></br>
+        {comfort}
 
-        <div>
-          Comfort
-          <div style={barStyle}>
-            <div style={firstWhiteSpaceStyle}></div>
-            <div style={secondWhiteSpaceStyle}></div>
-            <div style={leftNotationStyle}>Poor</div>
-            <div style={rightNotationStyle}>Perfect</div>
-            <div style={comfortStyle}>&#9660;</div>
-          </div>
-        </div>
+        {quality}
 
-        <br></br>
-        <br></br>
-
-        <div>
-          Quality
-          <div style={barStyle}>
-            <div style={firstWhiteSpaceStyle}></div>
-            <div style={secondWhiteSpaceStyle}></div>
-            <div style={leftNotationStyle}>Poor</div>
-            <div style={rightNotationStyle}>Great</div>
-            <div style={qualityStyle}>&#9660;</div>
-          </div>
-        </div>
       </div>
     );
   }
