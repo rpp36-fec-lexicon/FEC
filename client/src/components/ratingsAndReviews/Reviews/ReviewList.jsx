@@ -186,8 +186,6 @@ class ReviewList extends React.Component {
   }
 
   render() {
-    console.log('props in reviewlist', this.props)
-    console.log('state in reviewlist', this.state)
     const sameLineStyle = {
       display: 'inline-block'
     };

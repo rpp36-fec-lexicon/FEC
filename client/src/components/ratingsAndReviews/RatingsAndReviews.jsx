@@ -52,18 +52,14 @@ class RatingsAndReviews extends React.Component {
 
       } else {
         currentStars = this.state.clickedStars;
-        console.log('currentstarsbeforesplice', currentStars)
         const indexOfStar = currentStars.indexOf(star);
         currentStars.splice(indexOfStar, 1);
-        console.log('currentstarsaftersplice', currentStars)
         filteredReviews = this.state.reviews;
-        console.log('filteredreviewsbeforesplice', filteredReviews)
         for (var i = filteredReviews.length - 1; i > -1; i--) {
           if (filteredReviews[i].rating === star) {
             filteredReviews.splice(i, 1);
           }
         }
-        console.log('fitleredreviewsafterspslice', filteredReviews)
       }
 
       if (!filteredReviews.length) {
@@ -82,9 +78,7 @@ class RatingsAndReviews extends React.Component {
           filteredReviews.push(review);
         }
       });
-      this.setState({reviews: filteredReviews, clickedStars: currentStars}, () => {
-        console.log('state in topapp rr', this.state);
-      });
+      this.setState({reviews: filteredReviews, clickedStars: currentStars});
     }
 
   }
