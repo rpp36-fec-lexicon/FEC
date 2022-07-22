@@ -18,8 +18,7 @@ class RatingsAndReviews extends React.Component {
       metaData: null,
       rating: null,
       totalNumberOfRatings: null,
-      // filterRatingClickCount: 0,
-      clickedStars: null
+      clickedStars: []
 
     };
     this.filterRatingFunc = this.filterRatingFunc.bind(this);
@@ -35,39 +34,54 @@ class RatingsAndReviews extends React.Component {
   }
 
   filterRatingFunc(starRating) {
-    console.log('star', starRating);
-
     const star = parseInt(starRating);
     let filteredReviews = [];
     const reviews = this.props.reviews;
-    reviews.forEach(review => {
-      if (review.rating === star) {
-        filteredReviews.push(review);
-      }
-    });
-
     let currentStars;
 
-    if (this.state.clickedStars !== null) {
-      console.log('not null');
+    if (this.state.clickedStars.length) {
       currentStars = this.state.clickedStars;
       if (currentStars.indexOf(star) < 0) {
         currentStars.push(star);
+        filteredReviews = this.state.reviews;
+        reviews.forEach(review => {
+          if (review.rating === star) {
+            filteredReviews.push(review);
+          }
+        });
+
       } else {
+        currentStars = this.state.clickedStars;
+        console.log('currentstarsbeforesplice', currentStars)
         const indexOfStar = currentStars.indexOf(star);
         currentStars.splice(indexOfStar, 1);
+        console.log('currentstarsaftersplice', currentStars)
+        filteredReviews = this.state.reviews;
+        console.log('filteredreviewsbeforesplice', filteredReviews)
+        for (var i = filteredReviews.length - 1; i > -1; i--) {
+          if (filteredReviews[i].rating === star) {
+            filteredReviews.splice(i, 1);
+          }
+        }
+        console.log('fitleredreviewsafterspslice', filteredReviews)
+      }
+
+      if (!filteredReviews.length) {
+        this.setState({reviews, clickedStars: currentStars});
       }
 
       this.setState({reviews: filteredReviews, clickedStars: currentStars}, () => {
         console.log('state in topapp rr', this.state);
       });
 
-    } else if (this.state.clickedStars === null) {
-      console.log('null')
+    } else if (!this.state.clickedStars.length) {
       currentStars = [];
       currentStars.push(star);
-      console.log('currentStars in null', currentStars);
-
+      reviews.forEach(review => {
+        if (review.rating === star) {
+          filteredReviews.push(review);
+        }
+      });
       this.setState({reviews: filteredReviews, clickedStars: currentStars}, () => {
         console.log('state in topapp rr', this.state);
       });
@@ -87,7 +101,7 @@ class RatingsAndReviews extends React.Component {
                 {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/> */}
               </div>
               <div className="right-panel">
-                <ReviewList reviewData={this.state.reviewData} reviews={this.state.reviews} ratingCount={this.state.ratingCount}/>
+                <ReviewList reviewData={this.state.reviewData} reviews={this.state.reviews} productInfo={this.props.productInfo}/>
                 {/* <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} /> */}
               </div>
             </div>

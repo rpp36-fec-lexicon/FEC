@@ -4,21 +4,23 @@ import MoreReviews from './MoreReviews.jsx';
 import AddFirstReview from './AddFirstReview.jsx';
 import AddAnotherReview from './AddAnotherReview.jsx';
 import ReviewsHeading from './ReviewsHeading.jsx';
+import ReviewModal from './ReviewModal.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // consistentReviews: [],
       reviews: [],
       reviewsShowing: null,
-      // startReviewIndex: 0,
       endReviewIndex: 4,
+      showReviewModal: false
     };
     this.showMoreReviewsFunc = this.showMoreReviewsFunc.bind(this);
     this.sortByHelpfulnessFunc = this.sortByHelpfulnessFunc.bind(this);
     this.sortByNewestFunc = this.sortByNewestFunc.bind(this);
     this.sortByRelevanceFunc = this.sortByRelevanceFunc.bind(this);
+    this.showReviewModalFunc = this.showReviewModalFunc.bind(this);
+    this.closeReviewModalFunc = this.closeReviewModalFunc.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +45,8 @@ class ReviewList extends React.Component {
   componentDidUpdate(prevProps) {
 
     if (this.props.reviews.length !== this.state.reviews.length) {
+      console.log('update, props reviews', this.props.reviews)
+      console.log('update, state reviews', this.state.reviews)
       this.setState({reviews: this.props.reviews}, () => {
         var reviewsShowing;
 
@@ -173,8 +177,17 @@ class ReviewList extends React.Component {
     });
   }
 
-  render() {
+  showReviewModalFunc() {
+    this.setState({showReviewModal: true});
+  }
 
+  closeReviewModalFunc() {
+    this.setState({showReviewModal: false});
+  }
+
+  render() {
+    console.log('props in reviewlist', this.props)
+    console.log('state in reviewlist', this.state)
     const sameLineStyle = {
       display: 'inline-block'
     };
@@ -183,15 +196,24 @@ class ReviewList extends React.Component {
     let addAnotherReviewButton;
     let reviewsHeading;
 
-    if (!this.state.reviews.length) {
-      reviewsHeading = 'There are no reviews yet.';
-      addFirstReviewButton = <AddFirstReview />;
-    } else {
-      reviewsHeading = <ReviewsHeading reviews={this.state.reviews} sortByHelpfulnessFunc={this.sortByHelpfulnessFunc} sortByNewestFunc={this.sortByNewestFunc} sortByRelevanceFunc={this.sortByRelevanceFunc}/>;
-      addAnotherReviewButton = <AddAnotherReview />;
+    let reviewModalComponent;
+
+    if (this.state.showReviewModal) {
+      reviewModalComponent = <ReviewModal showReviewModal={this.state.showReviewModal} productInfo={this.props.productInfo} closeReviewModalFunc={this.closeReviewModalFunc} />;
     }
 
-    console.log('this.state.reviews in reviewslist', this.state.reviews)
+    if (!this.state.showReviewModal) {
+      reviewModalComponent = null;
+    }
+
+    if (!this.state.reviews.length) {
+      reviewsHeading = 'There are no reviews yet.';
+      addFirstReviewButton = <AddFirstReview showReviewModalFunc={this.showReviewModalFunc}/>;
+    } else {
+      reviewsHeading = <ReviewsHeading reviews={this.state.reviews} sortByHelpfulnessFunc={this.sortByHelpfulnessFunc} sortByNewestFunc={this.sortByNewestFunc} sortByRelevanceFunc={this.sortByRelevanceFunc}/>;
+      addAnotherReviewButton = <AddAnotherReview showReviewModalFunc={this.showReviewModalFunc}/>;
+    }
+
     if (this.state.reviews && this.state.reviewsShowing) {
       const reviews = this.state.reviews;
       const lastReview = reviews[reviews.length - 1];
@@ -205,6 +227,7 @@ class ReviewList extends React.Component {
         <div>
           {reviewsHeading}
           <div>{addFirstReviewButton}</div>
+          {reviewModalComponent}
           <div className="scrollable">
             {this.state.reviewsShowing.map(review => {
               return <ReviewItem review={review} key={review['review_id']}/>;
@@ -212,6 +235,7 @@ class ReviewList extends React.Component {
             <br></br>
             <div style={sameLineStyle}>{moreReviewsButton}</div>
             <div style={sameLineStyle}>{addAnotherReviewButton}</div>
+
           </div>
         </div>
       );

@@ -89,6 +89,23 @@ progress {
   text-decoration: none;
   cursor: pointer;
 }
+
+.reviewModal {
+  position: relative;
+  z-index: 1;
+}
+
+.reviewModal-content {
+  background-color: #fefefe;
+  width: 700px;
+  height: 490px;
+  position: absolute;
+  top: 10%;
+  left: 0%;
+  padding: 20px;
+  border: 2px solid black;
+  /* width: 80%; */
+}
 /* END OF RATINGS AND REVIEWS CSS */
 
 

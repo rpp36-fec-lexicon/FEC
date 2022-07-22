@@ -138,7 +138,7 @@ class App extends React.Component {
           /> */}
 
           <RatingsAndReviews
-            productId={this.state.productId}
+            productInfo={this.state.productInfo}
             reviewData={this.state.reviewData}
             reviews={this.state.reviews}
             metaData={this.state.metaData}

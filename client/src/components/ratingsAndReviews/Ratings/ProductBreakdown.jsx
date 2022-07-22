@@ -7,7 +7,6 @@ import Comfort from './Comfort.jsx';
 import Quality from './Quality.jsx';
 
 const ProductBreakdown = (props) => {
-  console.log('props in product breakdown', props);
   const barStyle = {
     position: 'relative',
     width: '220px',

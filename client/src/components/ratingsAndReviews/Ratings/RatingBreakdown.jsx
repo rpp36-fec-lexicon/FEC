@@ -62,6 +62,6 @@ class RatingBreakdown extends React.Component {
     );
   }
 
-};
+}
 
 export default RatingBreakdown;

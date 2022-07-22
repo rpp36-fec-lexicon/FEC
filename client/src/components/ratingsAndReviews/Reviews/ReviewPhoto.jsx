@@ -12,7 +12,6 @@ class ReviewPhoto extends React.Component {
   }
 
   showModalFunc() {
-    console.log('show clicked');
     this.setState({showModal: true});
   }
 
@@ -38,8 +37,8 @@ class ReviewPhoto extends React.Component {
 
     return (
       <div>
-        <img onClick={() => { this.showModalFunc(); }} style={thumbnailStyle} src={this.props.photo.url}/>
         {modalComponent}
+        <img onClick={() => { this.showModalFunc(); }} style={thumbnailStyle} src={this.props.photo.url}/>
       </div>
     );
   }
