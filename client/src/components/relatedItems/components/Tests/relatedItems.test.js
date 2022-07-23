@@ -72,9 +72,6 @@ describe("Related Products", () => {
     //   updatingComponentSpy.mockClear();
     // });
 
-
-
-
     it("should test if relatedItemsUpdater function has been invoked", async () => {
       const mockFunc = jest.fn();
 
