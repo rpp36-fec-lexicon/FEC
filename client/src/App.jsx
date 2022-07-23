@@ -12,7 +12,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 71719,
+      productId: 71697,
       productInfo: undefined,
       styleInfo: [],
       defaultStyle: undefined,
@@ -29,6 +29,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.prodIDChanger(this.state.productId);
+    // eslint-disable-next-line no-use-before-define
     var pulledItems = storageGetter();
     var existingIDs = [];
     for (let i = 0; i < pulledItems.length; i++) {
@@ -162,7 +163,7 @@ class App extends React.Component {
       return (
         <React.Fragment>
           <h1>Atelier</h1>
-          {/* <ProductOverview
+          <ProductOverview
             productId={this.state.productId}
             productInfo={this.state.productInfo}
             defaultStyle={this.state.defaultStyle}
@@ -171,7 +172,7 @@ class App extends React.Component {
             outfitAdder={this.outfitAdder.bind(this)}
             outfitItems={this.state.outfitItems}
             outfitItemsIDs={this.state.outfitItemsIDs}
-          /> */}
+          />
           <RelatedAndOutfit
             prodID={this.state.productId}
             prodInfo={this.state.productInfo}
@@ -183,7 +184,7 @@ class App extends React.Component {
             outfitItems={this.state.outfitItems}
           />
 
-          {/* <QuestionsAnswersMain
+          <QuestionsAnswersMain
             productId={this.state.productId}
             productInfo={this.state.productInfo}
             key={this.state.productId}
@@ -196,7 +197,7 @@ class App extends React.Component {
             rating={this.state.rating}
             totalNumberOfRatings={this.state.totalNumberOfRatings}
             filterRating={this.filterRating}
-          /> */}
+          />
         </React.Fragment>
       );
     }
