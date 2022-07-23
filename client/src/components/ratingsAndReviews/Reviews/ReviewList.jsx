@@ -5,7 +5,6 @@ import AddFirstReview from './AddFirstReview.jsx';
 import AddAnotherReview from './AddAnotherReview.jsx';
 import ReviewsHeading from './ReviewsHeading.jsx';
 import ReviewModal from './ReviewModal.jsx';
-import UploadPhotoModal from './UploadPhotoModal.jsx';
 
 class ReviewList extends React.Component {
   constructor(props) {

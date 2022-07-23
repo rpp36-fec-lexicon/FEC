@@ -107,25 +107,6 @@ progress {
   /* width: 80%; */
 }
 
-.uploadPhotoModal {
-  position: relative;
-  z-index: 1;
-}
-
-.uploadPhotoModal-content {
-  background-color: #fefefe;
-  width: 400px;
-  height: 50px;
-  position: absolute;
-  top: 10%;
-  left: 0%;
-  padding: 20px;
-  border: 2px solid black;
-  /* width: 80%; */
-}
-
-
-
 .reviewScrollable {
   height: 800px;
   overflow: auto;
