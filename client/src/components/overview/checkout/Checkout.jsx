@@ -1,5 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React from 'react';
+import { useState, useEffect } from 'react';
 
 class Checkout extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class Checkout extends React.Component {
 
   userSelect(e) {
     var num;
-    if (e.target.value === "Select Size" || e.target.value === "OUT OF STOCK") {
+    if (e.target.value === 'Select Size' || e.target.value === 'OUT OF STOCK') {
       this.setState({ currentSkuQuantity: -1 });
     } else {
       Object.entries(this.props.skus).find((product) => {
@@ -106,7 +106,7 @@ class Checkout extends React.Component {
 
 const Presistor = (props) => {
   useEffect(() => {
-    localStorage.setItem("items", JSON.stringify(props.outfits));
+    localStorage.setItem('items', JSON.stringify(props.outfits));
   }, [props]);
 };
 
