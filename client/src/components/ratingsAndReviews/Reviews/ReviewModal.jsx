@@ -1,5 +1,6 @@
 import React from 'react';
 import StarReviewIcon from './StarReviewIcon.jsx';
+import UploadPhotoModal from './UploadPhotoModal.jsx';
 
 class ReviewModal extends React.Component {
   constructor(props) {
@@ -7,10 +8,9 @@ class ReviewModal extends React.Component {
     this.state = {
       clickedStar: null,
       starMessage: null,
-      reviewBodyMessage: 'Minimum required characters left: 50'
+      reviewBodyMessage: 'Minimum required characters left: 50',
+      showUploadPhotoModal: false
     };
-    this.clickFillStarFunc = this.clickFillStarFunc.bind(this);
-    this.charactersLeftFunc = this.charactersLeftFunc.bind(this);
     this.ratingMessage = {
       1: 'Poor',
       2: 'Fair',
@@ -18,6 +18,11 @@ class ReviewModal extends React.Component {
       4: 'Good',
       5: 'Great'
     };
+    this.clickFillStarFunc = this.clickFillStarFunc.bind(this);
+    this.charactersLeftFunc = this.charactersLeftFunc.bind(this);
+    this.showUploadPhotoModalFunc = this.showUploadPhotoModalFunc.bind(this);
+    this.closeUploadPhotoModalFunc = this.closeUploadPhotoModalFunc.bind(this);
+    this.uploadPhotoFunc = this.uploadPhotoFunc.bind(this);
   }
 
   clickFillStarFunc(star) {
@@ -27,7 +32,6 @@ class ReviewModal extends React.Component {
 
   charactersLeftFunc () {
     const textarea = document.getElementById('reviewBody');
-    console.dir(textarea);
     const minLength = 50;
     const maxLength = 1000;
     const currentTextLength = textarea.value.length;
@@ -38,6 +42,17 @@ class ReviewModal extends React.Component {
     } else if (currentTextLength >= minLength) {
       this.setState({reviewBodyMessage: `Minimum reached. Characters count: ${currentTextLength}`});
     }
+  }
+
+  showUploadPhotoModalFunc() {
+    this.setState({showUploadPhotoModal: true});
+  }
+
+  closeUploadPhotoModalFunc() {
+    this.setState({showUploadPhotoModal: false});
+  }
+
+  uploadPhotoFunc() {
 
   }
 
@@ -56,6 +71,13 @@ class ReviewModal extends React.Component {
       fontSize: '20px',
       margin: 'auto 10px'
     };
+
+    let uploadPhotoModalComponent;
+    if (this.state.showUploadPhotoModal) {
+      uploadPhotoModalComponent = <UploadPhotoModal closeUploadPhotoModalFunc={this.closeUploadPhotoModalFunc} uploadPhotoFunc={this.uploadPhotoFunc}/>;
+    } else {
+      uploadPhotoModalComponent = null;
+    }
 
     return (
       <div className="reviewModal ">
@@ -151,6 +173,13 @@ class ReviewModal extends React.Component {
               <h3>Review body<sup>*</sup></h3>
               <textarea type="input" id="reviewBody" className="reviewBody" minLength="50" maxLength="1000" placeholder="Why did you like the product or not?" onChange={() => { this.charactersLeftFunc(); }}></textarea>
               <div>{this.state.reviewBodyMessage}</div>
+            </div>
+
+            <div>
+              <h3>Upload your photos</h3>
+              {uploadPhotoModalComponent}
+              <button id="uploadPhoto" onClick={() => { this.showUploadPhotoModalFunc(); }}>Add a photo +</button>
+
             </div>
 
           </div>
