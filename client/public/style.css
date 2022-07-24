@@ -1,3 +1,64 @@
+* {
+  margin: 0;
+}
+.allComponents {
+  margin: 5px 5px 5px 5px;
+}
+
+.mainHeader {
+  width: 100%;
+  height: 15%;
+  background-color: rgb(48, 122, 250);
+  padding: 10px 10px 0px 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainHeader-child1 {
+  float: left;
+}
+
+.mainHeader-child2 {
+  float: right;
+}
+
+.logo {
+  width: 150px;
+  height: 100px;
+}
+
+.searchInput {
+  background-color: rgb(48, 122, 250);
+  box-shadow: none;
+  border-top: rgb(48, 122, 250);
+  border-left: rgb(48, 122, 250);
+  border-right: rgb(48, 122, 250);
+  border-bottom-color: white
+}
+.searchInput:focus {
+outline: none;
+}
+.searchContainer {
+  padding: 50px 50px 0px 0px;
+}
+.fa-magnifying-glass {
+ padding-left: 5px;
+ color: white;
+ transition: all .2s ease-in-out;
+}
+
+.fa-magnifying-glass:hover {
+  padding-left: 5px;
+  transform: scale(2);
+ }
+
+.searchInput, select, textarea{
+  color: white
+}
+
+/****************** RELATED AND OUTFIT STYLING ********************/
+/****************** CSS START ********************/
+
 .modal {
   position: relative;
   z-index: 1;
@@ -11,7 +72,7 @@
   padding: 20px;
   border-radius: 5px;
   border: 2px solid black;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .comp {
@@ -28,6 +89,135 @@ td {
 .disabledBTN {
   pointer-events: none;
 }
+
+.flex-container {
+  display: flex;
+  padding: 15px 15px 15px 15px;
+  margin-right: 50px;
+  margin-left: 40px;
+}
+
+.flex-child {
+  flex: 1;
+  margin: 15px 15px 15px 15px;
+}
+
+.flex-child:first-child {
+  margin-right: 20px;
+  flex-basis: 100px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.flex-child:nth-child(2) {
+  margin-right: 20px;
+  flex-grow: 1;
+}
+
+.relatedCarouselOutfit {
+  display: flex;
+  overflow-x: scroll;
+}
+.relatedCarouselOutfit::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+}
+.relatedCarouselOutfit::-webkit-scrollbar-thumb {
+  background-color: black;
+}
+
+.relatedProductsMainClass {
+  padding: 15px 15px 15px 15px;
+  margin: 15px 15px 15px 15px;
+  position: relative;
+}
+
+.relatedCarouseOutfitCard {
+  border: 1px solid grey;
+  padding: 15px 15px 15px 15px;
+  margin: 15px 15px 15px 15px;
+}
+
+.outfitAdderBTN {
+  height: 270px;
+  width: 80px;
+  font-size: 15px;
+  margin-top: 15px;
+}
+
+.outfitRemoveBTN {
+  color: red;
+  float: right;
+  font-size: 20px;
+  background: black;
+  border-color: transparent;
+}
+
+.outfitList {
+  padding: 15px 15px 15px 15px;
+  position: relative;
+  overflow: auto;
+}
+.outfitList::-webkit-scrollbar {
+  display: none;
+}
+
+.relatedCarousel {
+  display: flex;
+  width: 50%;
+}
+
+.RelatedCarouselItem {
+  flex-grow: 1;
+  border: 1px solid grey;
+  padding: 15px 15px 15px 15px;
+  margin: 15px 15px 15px 15px;
+}
+
+.comparisonBtn {
+  float: right;
+  background: transparent;
+  border-color: transparent;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  cursor: pointer;
+}
+.left {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+.right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.carouselContainer {
+  padding: 15px 15px 15px 15px;
+  margin: 15px 15px 15px 15px;
+  overflow-x: scroll;
+}
+
+.carouselContainer::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+}
+
+.carouselContainer::-webkit-scrollbar-thumb {
+  background-color: black;
+}
+
+/****************** RELATED AND OUTFIT STYLING ********************/
+/****************** CSS END ********************/
 
 /* START OF RATINGS AND REVIEWS CSS */
 
@@ -102,134 +292,6 @@ progress {
   margin-bottom: 4em;
   color: white;
 }
-
-.flex-container {
-  display: flex;
-  padding: 15px 15px 15px 15px;
-  margin-right: 50px;
-  margin-left: 40px;
-}
-
-.flex-child {
-  flex: 1;
-  margin: 15px 15px 15px 15px;
-}
-
-.flex-child:first-child {
-  margin-right: 20px;
-  flex-basis: 100px;
-  flex-grow: 0;
-  flex-shrink: 0;
-}
-.flex-child:nth-child(2) {
-  margin-right: 20px;
-  flex-grow: 1;
-}
-
-.relatedCarouselOutfit {
-  display: flex;
-  overflow-x: scroll;
-}
-.relatedCarouselOutfit::-webkit-scrollbar {
-  width: 5px;
-  height: 8px;
-}
-.relatedCarouselOutfit::-webkit-scrollbar-thumb {
-  background-color: black;
-}
-
-.relatedProductsMainClass {
-  padding: 15px 15px 15px 15px;
-  margin: 15px 15px 15px 15px;
-  position: relative;
-}
-
-.relatedCarouseOutfitCard {
-  border: 1px solid grey;
-  padding: 15px 15px 15px 15px;
-  margin: 15px 15px 15px 15px
-}
-
-.outfitAdderBTN{
-  height: 270px;
-  width: 80px;
-  font-size: 15px;
-  margin-top: 15px;
-}
-
-.outfitRemoveBTN {
-  color: red;
-  float: right;
-  font-size: 20px;
-  background: black;
-  border-color: transparent;
-}
-
-.outfitList {
-  padding: 15px 15px 15px 15px;
-  position: relative;
-  overflow: auto;
-}
-.outfitList::-webkit-scrollbar {
-  display: none;
-}
-
-.relatedCarousel {
-  display: flex;
-  width: 50%;
-}
-
-.RelatedCarouselItem {
-  flex-grow: 1;
-  border: 1px solid grey;
-  padding: 15px 15px 15px 15px;
-  margin: 15px 15px 15px 15px;
-}
-
-.comparisonBtn {
-  float: right;
-  background: transparent;
-  border-Color: transparent;
-}
-
-.arrow {
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 3px;
-  cursor: pointer;
-}
-.left {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: rotate(135deg);
-  -webkit-transform: rotate(135deg);
-}
-.right {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-
-.carouselContainer {
-  padding: 15px 15px 15px 15px;
-  margin: 15px 15px 15px 15px;
-  overflow-x: scroll;
-}
-
-.carouselContainer::-webkit-scrollbar {
-  width: 5px;
-  height: 8px;
-}
-
-.carouselContainer::-webkit-scrollbar-thumb {
-  background-color: black;
-}
-
-/* .left_disabled { display: none; } */
 
 /* QnA */
 .qa-title {

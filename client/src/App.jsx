@@ -6,6 +6,8 @@ import RatingsAndReviews from "./components/ratingsAndReviews/RatingsAndReviews.
 import RelatedAndOutfit from "./components/relatedItems/index.jsx";
 import QuestionsAnswersMain from "./components/questionsAndAnswers/components/QuestionsAnswersMain.jsx";
 import $ from "jquery";
+import logo from "./../public/logo.png";
+
 const axios = require("axios");
 
 class App extends React.Component {
@@ -24,6 +26,7 @@ class App extends React.Component {
       flag: false,
       outfitItems: [],
       outfitItemsIDs: [],
+      userInputInfo: null,
     };
   }
 
@@ -158,46 +161,71 @@ class App extends React.Component {
       });
   }
 
+  userInputID(userInput) {
+    this.setState({
+      userInputInfo: userInput,
+    });
+  }
+
   render() {
     if (this.state.flag) {
       return (
-        <React.Fragment>
-          <h1>Atelier</h1> {/* add font design and logo*/}
-          <ProductOverview
-            productId={this.state.productId}
-            productInfo={this.state.productInfo}
-            defaultStyle={this.state.defaultStyle}
-            styleList={this.state.styleInfo}
-            rating={this.state.rating}
-            outfitAdder={this.outfitAdder.bind(this)}
-            outfitItems={this.state.outfitItems}
-            outfitItemsIDs={this.state.outfitItemsIDs}
-          />
-          <RelatedAndOutfit
-            prodID={this.state.productId}
-            prodInfo={this.state.productInfo}
-            styleInfo={this.state.styleInfo}
-            defaultStyle={this.state.defaultStyle}
-            prodIDChanger={this.prodIDChanger.bind(this)}
-            outfitAdder={this.outfitAdder.bind(this)}
-            outfitRemover={this.outfitRemover.bind(this)}
-            outfitItems={this.state.outfitItems}
-          />
-          <QuestionsAnswersMain
-            productId={this.state.productId}
-            productInfo={this.state.productInfo}
-            key={this.state.productId}
-          />
-          <RatingsAndReviews
-            productId={this.state.productId}
-            reviewData={this.state.reviewData}
-            reviews={this.state.reviews}
-            metaData={this.state.metaData}
-            rating={this.state.rating}
-            totalNumberOfRatings={this.state.totalNumberOfRatings}
-            filterRating={this.filterRating}
-          />
-        </React.Fragment>
+        <>
+          <div className="mainHeader">
+            <div className="mainHeader-child1">
+              <img src={logo} className="logo" alt="Atelier company logo" />
+            </div>
+            <div className="mainHeader-child2">
+              <div className="searchContainer">
+                <input
+                  className="searchInput"
+                  type="text"
+                  onChange={(e) => this.userInputID(e.target.value)}
+                ></input>
+                <i
+                  class="fa-solid fa-magnifying-glass"
+                  onClick={() => this.prodIDChanger(this.state.userInputInfo)}
+                ></i>
+              </div>
+            </div>
+          </div>
+          <div className="allComponents">
+            <ProductOverview
+              productId={this.state.productId}
+              productInfo={this.state.productInfo}
+              defaultStyle={this.state.defaultStyle}
+              styleList={this.state.styleInfo}
+              rating={this.state.rating}
+              outfitAdder={this.outfitAdder.bind(this)}
+              outfitItems={this.state.outfitItems}
+              outfitItemsIDs={this.state.outfitItemsIDs}
+            />
+            <RelatedAndOutfit
+              prodID={this.state.productId}
+              prodInfo={this.state.productInfo}
+              styleInfo={this.state.styleInfo}
+              defaultStyle={this.state.defaultStyle}
+              prodIDChanger={this.prodIDChanger.bind(this)}
+              outfitAdder={this.outfitAdder.bind(this)}
+              outfitRemover={this.outfitRemover.bind(this)}
+              outfitItems={this.state.outfitItems}
+            />
+            <QuestionsAnswersMain
+              productId={this.state.productId}
+              productInfo={this.state.productInfo}
+              key={this.state.productId}
+            />
+            <RatingsAndReviews
+              productId={this.state.productId}
+              reviewData={this.state.reviewData}
+              reviews={this.state.reviews}
+              metaData={this.state.metaData}
+              rating={this.state.rating}
+              totalNumberOfRatings={this.state.totalNumberOfRatings}
+              filterRating={this.filterRating}
+            />
+          </div>
+        </>
       );
     }
   }
