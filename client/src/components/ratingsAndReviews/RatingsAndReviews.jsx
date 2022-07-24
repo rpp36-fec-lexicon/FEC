@@ -18,7 +18,8 @@ class RatingsAndReviews extends React.Component {
       metaData: null,
       rating: null,
       totalNumberOfRatings: null,
-      clickedStars: []
+      clickedStars: [],
+      example: false
 
     };
     this.filterRatingFunc = this.filterRatingFunc.bind(this);
@@ -40,10 +41,11 @@ class RatingsAndReviews extends React.Component {
     let currentStars;
 
     if (this.state.clickedStars.length) {
-      currentStars = this.state.clickedStars;
+      currentStars = this.state.clickedStars.slice();
+
       if (currentStars.indexOf(star) < 0) {
         currentStars.push(star);
-        filteredReviews = this.state.reviews;
+        filteredReviews = this.state.reviews.slice();
         reviews.forEach(review => {
           if (review.rating === star) {
             filteredReviews.push(review);
@@ -51,10 +53,10 @@ class RatingsAndReviews extends React.Component {
         });
 
       } else {
-        currentStars = this.state.clickedStars;
+        // currentStars = this.state.clickedStars.slice();
         const indexOfStar = currentStars.indexOf(star);
         currentStars.splice(indexOfStar, 1);
-        filteredReviews = this.state.reviews;
+        filteredReviews = this.state.reviews.slice();
         for (var i = filteredReviews.length - 1; i > -1; i--) {
           if (filteredReviews[i].rating === star) {
             filteredReviews.splice(i, 1);
@@ -63,7 +65,11 @@ class RatingsAndReviews extends React.Component {
       }
 
       if (!filteredReviews.length) {
-        this.setState({reviews, clickedStars: currentStars});
+
+        this.setState(
+          {reviews: null, clickedStars: null},
+          () => { this.setState({reviews: this.props.reviews, clickedStars: currentStars})}
+        );
       }
 
       this.setState({reviews: filteredReviews, clickedStars: currentStars}, () => {
@@ -84,6 +90,7 @@ class RatingsAndReviews extends React.Component {
   }
 
   render() {
+    console.log('productinfo', )
     if (this.state.reviews !== null) {
       return (
         <div>

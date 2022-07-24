@@ -12,8 +12,9 @@ class ReviewList extends React.Component {
     this.state = {
       reviews: [],
       reviewsShowing: null,
-      endReviewIndex: 4,
-      showReviewModal: false
+      endReviewIndex: 2,
+      showReviewModal: false,
+
     };
     this.showMoreReviewsFunc = this.showMoreReviewsFunc.bind(this);
     this.sortByHelpfulnessFunc = this.sortByHelpfulnessFunc.bind(this);
@@ -25,10 +26,9 @@ class ReviewList extends React.Component {
 
   componentDidMount() {
 
-    this.setState({reviews: this.props.reviews}, () => {
+    this.setState({reviews: this.props.reviews, reviewsShowing: this.props.reviews.slice(0, this.state.endReviewIndex)}, () => {
       this.sortByRelevanceFunc();
     });
-
   }
 
   reviewsNotSameRating(reviews) {
@@ -43,15 +43,16 @@ class ReviewList extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log('prevProps.reviews', prevProps.reviews.length)
+    console.log('this.props.reviews', this.props.reviews.length)
 
-    if (this.props.reviews.length !== this.state.reviews.length) {
-      console.log('update, props reviews', this.props.reviews)
-      console.log('update, state reviews', this.state.reviews)
+    if (this.props.reviews.length && prevProps.reviews.length !== this.props.reviews.length) {
+
       this.setState({reviews: this.props.reviews}, () => {
         var reviewsShowing;
 
         if (this.state.reviews.length >= 2) {
-          reviewsShowing = this.state.reviews.slice(0, 2);
+          reviewsShowing = this.state.reviews.slice(0, this.state.endReviewIndex);
         } else {
           reviewsShowing = this.state.reviews.slice();
         }
@@ -64,17 +65,17 @@ class ReviewList extends React.Component {
     var reviewsShowing;
     if (this.state.endReviewIndex >= this.state.reviews.length) {
       reviewsShowing = this.state.reviews.slice();
-      this.state.endReviewIndex += 2;
+      this.setState({reviewsShowing});
     } else {
-      reviewsShowing = this.state.reviews.slice(0, this.state.endReviewIndex);
-      this.state.endReviewIndex += 2;
+      this.setState({endReviewIndex: this.state.endReviewIndex + 2}, () => {
+        reviewsShowing = this.state.reviews.slice(0, this.state.endReviewIndex);
+        this.setState({reviewsShowing});
+      });
     }
-
-    this.setState({reviewsShowing});
   }
 
   sortByHelpfulnessFunc() {
-    const reviews = (this.state.reviews).slice();
+    const reviews = (this.props.reviews).slice();
     const sortedReviews = [];
 
     const innerFunc = (array) => {
@@ -193,14 +194,11 @@ class ReviewList extends React.Component {
     let addFirstReviewButton;
     let addAnotherReviewButton;
     let reviewsHeading;
-
     let reviewModalComponent;
 
     if (this.state.showReviewModal) {
       reviewModalComponent = <ReviewModal showReviewModal={this.state.showReviewModal} productInfo={this.props.productInfo} closeReviewModalFunc={this.closeReviewModalFunc} />;
-    }
-
-    if (!this.state.showReviewModal) {
+    } else {
       reviewModalComponent = null;
     }
 
@@ -224,7 +222,7 @@ class ReviewList extends React.Component {
       return (
         <div>
           {reviewsHeading}
-          <div>{addFirstReviewButton}</div>
+          {addFirstReviewButton}
           {reviewModalComponent}
           <div className="scrollable">
             {this.state.reviewsShowing.map(review => {

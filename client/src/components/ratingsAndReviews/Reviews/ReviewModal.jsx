@@ -72,10 +72,10 @@ class ReviewModal extends React.Component {
     const recommendEle = document.getElementById('recommend');
     const recommendChilren = recommendEle.children;
     const recChildrenArray = Array.from(recommendChilren);
-    console.dir(recommendEle)
-    console.log('children', recommendChilren, typeof recommendChilren);
-    console.log('recChilrenArray', recChildrenArray, Array.isArray(recChildrenArray));
-    console.log(recChildrenArray[1].checked);
+    // console.dir(recommendEle)
+    // console.log('children', recommendChilren, typeof recommendChilren);
+    // console.log('recChilrenArray', recChildrenArray, Array.isArray(recChildrenArray));
+    // console.log(recChildrenArray[1].checked);
 
 
 
