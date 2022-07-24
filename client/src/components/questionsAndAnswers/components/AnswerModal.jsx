@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import AnswerModalThumbnail from './AnswerModalThumbnail.jsx';
 // const cloudinaryAPIKey = process.env.cloudinaryAPIKey;
+const instance = axios.create();
 
 const AnswerModal = (props) => {
   const [thumbnails, setThumbnails] = useState([]);
@@ -61,12 +62,12 @@ const AnswerModal = (props) => {
   const photoThumbnail = () => {
     var file = document.querySelector('input[type=file').files[0];
     const form = new FormData();
-    form.append('api_key', '656359471775768');
+
     form.append('file', file);
     form.append('upload_preset', 'lexicon');
-    form.append('timestamp', (Date.now() / 1000) | 0);
     axios.post('https://api.cloudinary.com/v1_1/lexicon-atelier/image/upload/', form, { headers: { 'X-Requested-With': 'MLHttpRequest' } })
       .then(res => {
+        console.log(res.data.secure_url);
         let newUrl = res.data.secure_url;
         setThumbnails(thumbnails.concat(newUrl));
       })
