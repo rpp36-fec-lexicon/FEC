@@ -23,6 +23,7 @@ class PrimaryImage extends React.Component {
           <IMG
             src={this.props.pic}
             alt={this.props.pic}
+            onClick={() => this.props.expand()}
           />
         </div>
       </div>

@@ -1,12 +1,32 @@
 import React from 'react';
 import PrimaryImage from './PrimaryImage.jsx';
 import styled from 'styled-components';
+import Modal from 'react-bootstrap/Modal';
 
 const IMG = styled.img`
   margin: 5px;
   border-radius: 35%;
   height: 100px;
   width: 100px;
+  object-fit: cover;
+`;
+
+const Div = styled.div`  background: rgba(0,0,0,0.75);
+margin: -96px -8px;
+height: 100%;
+width: 100%;
+position: fixed;
+z-index: 10;
+display: flex;
+justify-content: center;
+backdrop-filter: blur(8px) contrast(70%);
+`;
+
+const Big = styled.img`
+  border: 1px solid;
+  border-radius: 15%;
+  height: 752px;
+  width: 752px;
   object-fit: cover;
 `;
 
@@ -18,6 +38,7 @@ class Showcase extends React.Component {
       photos,
       currPhoto: photos[0],
       picList: [],
+      modalSeen: false,
       count: 0,
       min: 0,
       max: 7
@@ -29,6 +50,7 @@ class Showcase extends React.Component {
     this.updateCount = this.updateCount.bind(this);
     this.nextThumbnails = this.nextThumbnails.bind(this);
     this.previousThumbnails = this.previousThumbnails.bind(this);
+    this.expand = this.expand.bind(this);
   }
 
   componentDidMount() {
@@ -118,49 +140,81 @@ class Showcase extends React.Component {
     });
   }
 
+  expand() {
+    this.setState({ modalSeen: !this.state.modalSeen });
+    console.log('WE EXPANDERINO!');
+  }
+
   render() {
     console.log('Photos props in showcase', this.props.photos.length);
     console.log('current count', this.state.count);
+    if (this.state.modalSeen) {
+      return (
+        <Div>
+          <Big
+            src={this.state.currPhoto.url}
+            alt={this.state.currPhoto.url}
+          />
+          <i
+            class="fa-solid fa-xmark fa-xl"
+            onClick={() => this.expand()}
+          />
+          {this.handleArrowClick('left') && (
+            <i
+              onClick={() => this.changePhoto(-1)}
+              class='fa fa-arrow-left fa-xl'
+            />
+          )}
+          {this.handleArrowClick('right') && (
+            <i
+              onClick={() => this.changePhoto(1)}
+              className='fa fa-arrow-right fa-xl'
+            />
+          )}
+          {this.sliceThumbnails(this.state.min, this.state.max)}
+          {this.handleArrowClick('up') && (
+            <i
+              onClick={() => this.previousThumbnails()}
+              className='fa fa-angle-up fa-xl'
+            />
+          )}
+          {this.handleArrowClick('down') && (
+            <i
+              onClick={() => this.nextThumbnails()}
+              className='fa fa-angle-down fa-xl'
+            />
+          )}
+        </Div>
+      );
+    }
     return (
       <div>
         {this.handleArrowClick('left') && (
-          <button
-            style={{margin: '40px'}}
+          <i
             onClick={() => this.changePhoto(-1)}
-            className='fa fa-arrow-left'
+            class='fa fa-arrow-left fa-xl'
           />
         )}
         {this.handleArrowClick('right') && (
-          <button
-            style={{margin: '40px'}}
+          <i
             onClick={() => this.changePhoto(1)}
-            className='fa fa-arrow-right'
+            className='fa fa-arrow-right fa-xl'
           />
         )}
-        <PrimaryImage pic={this.state.currPhoto.url}/>
+        <PrimaryImage pic={this.state.currPhoto.url} expand={this.expand}/>
         {this.sliceThumbnails(this.state.min, this.state.max)}
         {this.handleArrowClick('up') && (
-          <button
-            style={{margin: '40px'}}
+          <i
             onClick={() => this.previousThumbnails()}
-            className='fa fa-angle-up'
+            className='fa fa-angle-up fa-xl'
           />
         )}
         {this.handleArrowClick('down') && (
-          <button
-            style={{margin: '40px'}}
+          <i
             onClick={() => this.nextThumbnails()}
-            className='fa fa-angle-down'
+            className='fa fa-angle-down fa-xl'
           />
         )}
-        {/* {this.props.photos.map((pic) => (
-          <IMG
-            key={pic.url}
-            src={pic.thumbnail_url}
-            onClick={() => this.handleClick(pic.url)}
-            alt={pic.url}
-          />
-        ))} */}
       </div>
     );
   }
