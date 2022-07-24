@@ -5,6 +5,9 @@ const QA = require('./QuestionsAnswers.js');
 const interaction = require('./interaction.js');
 const app = express();
 const myAPIKey = process.env.myAPIKey;
+// const AWS = require("aws-sdk");
+// const s3 = new AWS.S3({apiVersion: '2006-03-01'});
+// const multiparty = require('multiparty');
 const data = require('./product.js');
 const port = 3000;
 const baseAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
@@ -105,7 +108,6 @@ app.post('/addQuestion', (req, res) => {
 });
 
 app.post('/addAnswer', (req, res) => {
-  console.log(req.body);
   QA.postAnswer(req.body)
     .then(() => {
       res.send('add answer success');
@@ -114,6 +116,7 @@ app.post('/addAnswer', (req, res) => {
       res.status(500).send(error).end();
     });
 });
+
 
 app.put ('/questionHelpful', (req, res) => {
   QA.questionHelpful(req.body.questionId)
