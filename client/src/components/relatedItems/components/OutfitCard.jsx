@@ -29,6 +29,7 @@ class OutfitCard extends React.Component {
             marginBottom: "10px",
             backgroundImage: `url(${this.props.prodStyle[0].photos[0].url})`,
             backgroundSize: "150px 150px",
+            borderRadius: "10%",
           }}
         >
           <button

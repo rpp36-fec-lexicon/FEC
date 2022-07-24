@@ -21,6 +21,7 @@ class RelatedCard extends React.Component {
             marginBottom: "10px",
             backgroundImage: `url(${this.props.itemData.itemStyles.results[0].photos[0].url})`,
             backgroundSize: "150px 150px",
+            borderRadius: "10%",
           }}
           onClick={() => {
             this.props.prodIDChanger(this.props.itemData.itemInfo.id);

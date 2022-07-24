@@ -1,3 +1,6 @@
+/****************** LOGO AND SEARCH BAR STYLING ********************/
+/****************** CSS START ********************/
+
 * {
   margin: 0;
 }
@@ -55,6 +58,11 @@ outline: none;
 .searchInput, select, textarea{
   color: white
 }
+/****************** CSS END ********************/
+/****************** LOGO AND SEARCH BAR STYLING ********************/
+
+
+
 
 /****************** RELATED AND OUTFIT STYLING ********************/
 /****************** CSS START ********************/
@@ -135,6 +143,7 @@ td {
   border: 1px solid grey;
   padding: 15px 15px 15px 15px;
   margin: 15px 15px 15px 15px;
+  border-radius: 10%;
 }
 
 .outfitAdderBTN {
@@ -142,14 +151,17 @@ td {
   width: 80px;
   font-size: 15px;
   margin-top: 15px;
+  border-radius: 10%;
 }
 
 .outfitRemoveBTN {
+  padding: 0px 0px 0px 0px;
   color: red;
   float: right;
-  font-size: 20px;
-  background: black;
+  font-size: 30px;
+  background: rgb(63, 63, 63);
   border-color: transparent;
+  border-radius: 50%;
 }
 
 .outfitList {
@@ -171,6 +183,7 @@ td {
   border: 1px solid grey;
   padding: 15px 15px 15px 15px;
   margin: 15px 15px 15px 15px;
+  border-radius: 10%;
 }
 
 .comparisonBtn {
