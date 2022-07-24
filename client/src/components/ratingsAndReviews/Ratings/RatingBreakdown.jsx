@@ -1,9 +1,7 @@
 import React from 'react';
 
 class RatingBreakdown extends React.Component {
-  // console.log('props.ratings in rating breakdown', props.ratings);
-  // console.log('props.totalNumOfratings in breakdown', props.totalNumberOfRatings);
-  // console.log('props.filterRating in breakdown', props.filterRating);
+
   constructor(props) {
     super(props);
     this.state = {
@@ -20,7 +18,7 @@ class RatingBreakdown extends React.Component {
       <div>
         <div id="5" onClick={(e) => {
           e.preventDefault();
-          this.props.filterRatingFunc(document.getElementById('5').id); }}>
+          this.props.filterRatingFunc(5); }}>
           <label style={underlineStyle} htmlFor="5stars">5 stars</label>
           <progress data-testid="5stars" id="5stars" value={this.props.ratings['5']} max={this.props.totalNumberOfRatings}></progress>
           ({this.props.ratings['5']})
@@ -28,7 +26,7 @@ class RatingBreakdown extends React.Component {
 
         <div id="4" onClick={(e) => {
           e.preventDefault();
-          this.props.filterRatingFunc(document.getElementById('4').id); }}>
+          this.props.filterRatingFunc(4); }}>
           <label style={underlineStyle} htmlFor="4stars">4 stars</label>
           <progress data-testid="4stars" id="4stars" value={this.props.ratings['4']} max={this.props.totalNumberOfRatings}></progress>
           ({this.props.ratings['4']})
@@ -36,7 +34,7 @@ class RatingBreakdown extends React.Component {
 
         <div id="3" onClick={(e) => {
           e.preventDefault();
-          this.props.filterRatingFunc(document.getElementById('3').id); }}>
+          this.props.filterRatingFunc(3); }}>
           <label style={underlineStyle} htmlFor="3stars">3 stars</label>
           <progress data-testid="3stars" id="3stars" value={this.props.ratings['3']} max={this.props.totalNumberOfRatings}></progress>
           ({this.props.ratings['3']})
@@ -44,7 +42,7 @@ class RatingBreakdown extends React.Component {
 
         <div id="2" onClick={(e) => {
           e.preventDefault();
-          this.props.filterRatingFunc(document.getElementById('2').id); }}>
+          this.props.filterRatingFunc(2); }}>
           <label style={underlineStyle} htmlFor="2stars">2 stars</label>
           <progress data-testid="2stars" id="2stars" value={this.props.ratings['2']} max={this.props.totalNumberOfRatings}></progress>
           ({this.props.ratings['2']})
@@ -52,7 +50,7 @@ class RatingBreakdown extends React.Component {
 
         <div id="1" onClick={(e) => {
           e.preventDefault();
-          this.props.filterRatingFunc(document.getElementById('1').id); }}>
+          this.props.filterRatingFunc(1); }}>
           <label style={underlineStyle} htmlFor="1stars">1 stars</label>
           <progress data-testid="1stars" id="1stars" value={this.props.ratings['1']} max={this.props.totalNumberOfRatings}></progress>
           ({this.props.ratings['1']})

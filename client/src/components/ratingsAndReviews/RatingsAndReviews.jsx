@@ -19,8 +19,8 @@ class RatingsAndReviews extends React.Component {
       rating: null,
       totalNumberOfRatings: null,
       clickedStars: [],
-      example: false
-
+      clickedEmptyStars: [],
+      ratedStars: null,
     };
     this.filterRatingFunc = this.filterRatingFunc.bind(this);
   }
@@ -34,11 +34,38 @@ class RatingsAndReviews extends React.Component {
     this.setState({reviews, reviewData, metaData, rating, totalNumberOfRatings});
   }
 
-  filterRatingFunc(starRating) {
-    const star = parseInt(starRating);
+  filterRatingFunc(star) {
+    // const star = parseInt(starRating);
     let filteredReviews = [];
     const reviews = this.props.reviews;
     let currentStars;
+    let clickedEmptyStars;
+    let ratedStars = {};
+
+    reviews.forEach(review => {
+      if (ratedStars[review.rating] === undefined) {
+        ratedStars[review.rating] = 1;
+      } else {
+        ratedStars[review.rating]++;
+      }
+    })
+
+    if (ratedStars[star] === undefined) {
+      console.log(`There are no reviews with ${star} stars`)
+      clickedEmptyStars = this.state.clickedEmptyStars.slice();
+
+      if (clickedEmptyStars.indexOf(star) < 0) {
+        clickedEmptyStars.push(star);
+        this.setState({clickedEmptyStars}, () => { document.getElementById('filterRatingEmptyMessage').innerHTML = `There are no reviews with ${star} stars`; })
+
+      } else {
+        const indexOfStar = clickedEmptyStars.indexOf(star);
+        clickedEmptyStars.splice(indexOfStar, 1);
+        this.setState({clickedEmptyStars}, () => { document.getElementById('filterRatingEmptyMessage').innerHTML = ''; })
+
+      }
+      return;
+    }
 
     if (this.state.clickedStars.length) {
       currentStars = this.state.clickedStars.slice();
@@ -52,6 +79,8 @@ class RatingsAndReviews extends React.Component {
           }
         });
 
+        document.getElementById('filterRatingMessage').innerHTML = `Current star rating filters: ${currentStars.join(', ')}`;
+
       } else {
         // currentStars = this.state.clickedStars.slice();
         const indexOfStar = currentStars.indexOf(star);
@@ -62,6 +91,13 @@ class RatingsAndReviews extends React.Component {
             filteredReviews.splice(i, 1);
           }
         }
+        if (!currentStars.length) {
+          document.getElementById('filterRatingMessage').innerHTML = '';
+        } else {
+
+          document.getElementById('filterRatingMessage').innerHTML = `Current star rating filters: ${currentStars.join(', ')}`;
+        }
+
       }
 
       if (!filteredReviews.length) {
@@ -71,10 +107,7 @@ class RatingsAndReviews extends React.Component {
           () => { this.setState({reviews: this.props.reviews, clickedStars: currentStars})}
         );
       }
-
-      this.setState({reviews: filteredReviews, clickedStars: currentStars}, () => {
-        console.log('state in topapp rr', this.state);
-      });
+      this.setState({reviews: filteredReviews, clickedStars: currentStars});
 
     } else if (!this.state.clickedStars.length) {
       currentStars = [];
@@ -84,7 +117,8 @@ class RatingsAndReviews extends React.Component {
           filteredReviews.push(review);
         }
       });
-      this.setState({reviews: filteredReviews, clickedStars: currentStars});
+      document.getElementById('filterRatingMessage').innerHTML = `Current star rating filters: ${currentStars.join(', ')}`;
+      this.setState({reviews: filteredReviews, clickedStars: currentStars, filterRatingMessage: `Current star rating filters: ${currentStars.join(', ')}`});
     }
 
   }
@@ -98,7 +132,7 @@ class RatingsAndReviews extends React.Component {
           <div className="content-container">
             <div className="row">
               <div className="left-panel">
-                <RatingSummary metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} filterRatingFunc={this.filterRatingFunc} clickedStars={this.state.clickedStars}/>
+                <RatingSummary metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} filterRatingFunc={this.filterRatingFunc} clickedStars={this.state.clickedStars} filterRatingMessage={this.state.filterRatingMessage}/>
                 {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/> */}
               </div>
               <div className="right-panel">

@@ -31,20 +31,7 @@ class ReviewList extends React.Component {
     });
   }
 
-  reviewsNotSameRating(reviews) {
-    const firstReviewRating = reviews[0].rating;
-    for (var i = 1; i < reviews.length; i++) {
-      if (reviews[i].rating !== firstReviewRating) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
   componentDidUpdate(prevProps) {
-    console.log('prevProps.reviews', prevProps.reviews.length)
-    console.log('this.props.reviews', this.props.reviews.length)
 
     if (this.props.reviews.length && prevProps.reviews.length !== this.props.reviews.length) {
 
