@@ -2,6 +2,7 @@ import React from "react";
 import Related from "./components/Related.jsx";
 import Outfit from "./components/Outfit.jsx";
 import $ from "jquery";
+import axios from "axios";
 
 class RelatedAndOutfit extends React.Component {
   constructor(props) {
@@ -46,6 +47,8 @@ class RelatedAndOutfit extends React.Component {
             UNQarrayOfProdIDs.push(itemID);
           }
         });
+
+        // style request
         UNQarrayOfProdIDs.forEach((itemID) => {
           $.ajax({
             type: "GET",
@@ -55,12 +58,41 @@ class RelatedAndOutfit extends React.Component {
                 type: "GET",
                 url: `/products/${itemID}/styles`,
                 success: (relatedItemStyles) => {
-                  relatedItemData.push({
-                    itemInfo: relatedItemInfo,
-                    itemStyles: relatedItemStyles,
-                  });
-                  this.setState({
-                    itemInfoAndStyle: relatedItemData,
+                  $.ajax({
+                    type: "GET",
+                    url: "/reviews/meta",
+                    data: { productId: itemID },
+                    success: (result) => {
+                      const ratings = result.ratings;
+                      let totalNumberOfRatings = 0;
+                      let totalRatings = 0;
+                      let rating;
+
+                      if (!Object.keys(ratings)) {
+                        rating = 0;
+                      }
+
+                      for (var key in ratings) {
+                        totalNumberOfRatings += parseInt(ratings[key]);
+                        totalRatings += parseInt(key) * parseInt(ratings[key]);
+                      }
+
+                      rating = totalRatings / totalNumberOfRatings;
+                      rating = Math.round(10 * rating) / 10;
+
+                      relatedItemData.push({
+                        itemInfo: relatedItemInfo,
+                        itemStyles: relatedItemStyles,
+                        itemRating: rating,
+                      });
+
+                      this.setState({
+                        itemInfoAndStyle: relatedItemData,
+                      });
+                    },
+                    error: (err) => {
+                      console.log(err);
+                    },
                   });
                 },
                 error: (err) => {

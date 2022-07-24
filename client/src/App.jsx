@@ -7,8 +7,7 @@ import RelatedAndOutfit from "./components/relatedItems/index.jsx";
 import QuestionsAnswersMain from "./components/questionsAndAnswers/components/QuestionsAnswersMain.jsx";
 import $ from "jquery";
 import logo from "./../public/logo.png";
-
-const axios = require("axios");
+import axios from "axios";
 
 class App extends React.Component {
   constructor(props) {
@@ -55,6 +54,7 @@ class App extends React.Component {
       outfitContainer.push([
         [this.state.productInfo],
         [this.state.defaultStyle],
+        [this.state.rating],
       ]);
     }
     $(".MainOutfitAdderBTN").text("Item Added to Outfit");

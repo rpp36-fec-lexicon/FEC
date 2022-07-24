@@ -51,6 +51,7 @@ class Outfit extends React.Component {
                 <OutfitCard
                   prodInfo={itemTuple[0]}
                   prodStyle={itemTuple[1]}
+                  prodRating={itemTuple[2]}
                   outfitRemover={this.props.outfitRemover}
                   prodIDChanger={this.props.prodIDChanger}
                   relatedItemsUpdater={this.props.relatedItemsUpdater}

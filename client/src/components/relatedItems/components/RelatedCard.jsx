@@ -68,7 +68,7 @@ class RelatedCard extends React.Component {
             )}
           </div>
 
-          <div>star reviews here</div>
+          <div>star: {this.props.itemData.itemRating}</div>
         </div>
       </div>
     );

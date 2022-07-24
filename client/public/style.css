@@ -156,12 +156,16 @@ td {
 
 .outfitRemoveBTN {
   padding: 0px 0px 0px 0px;
-  color: red;
+  margin: 0;
+  color:  rgb(48, 122, 250);
   float: right;
-  font-size: 30px;
-  background: rgb(63, 63, 63);
+  font-size: 20px;
+  background: white;
   border-color: transparent;
-  border-radius: 50%;
+  /* background: transparent; */
+  border-bottom-left-radius: 0%;
+  border-top-right-radius: 30%;
+  /* text-shadow: #e2f605; */
 }
 
 .outfitList {

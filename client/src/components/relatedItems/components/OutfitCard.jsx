@@ -40,7 +40,7 @@ class OutfitCard extends React.Component {
               this.props.outfitRemover(this.props.prodInfo[0].id);
             }}
           >
-            &times;
+            &#10006;
           </button>
         </div>
         <div>
@@ -64,7 +64,7 @@ class OutfitCard extends React.Component {
             )}
           </div>
 
-          <div> star reviews here</div>
+          <div> star {this.props.prodRating}</div>
         </div>
       </div>
     );
