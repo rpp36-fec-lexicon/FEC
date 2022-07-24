@@ -12,10 +12,16 @@ const RatingSummary = (props) => {
   let recommendedFalse;
   let total;
 
-  recommendedTrue = parseInt(props.metaData.recommended.true);
-  recommendedFalse = parseInt(props.metaData.recommended.false);
-  total = recommendedTrue + recommendedFalse;
-  recommendedPercent = Math.floor((recommendedTrue / total) * 100);
+  if (props.metaData.recommended.true && !props.metaData.recommended.false) {
+    recommendedPercent = 100;
+  } else if (!props.metaData.recommended.true && props.metaData.recommended.false) {
+    recommendedPercent = 0;
+  } else {
+    recommendedTrue = parseInt(props.metaData.recommended.true);
+    recommendedFalse = parseInt(props.metaData.recommended.false);
+    total = recommendedTrue + recommendedFalse;
+    recommendedPercent = Math.floor((recommendedTrue / total) * 100);
+  }
 
   let ratingDetails;
   let productBreakdown;
@@ -30,7 +36,7 @@ const RatingSummary = (props) => {
       filterRatingFunc={props.filterRatingFunc}
       clickedStars={props.clickedStars}
       clickedEmptyStars={props.clickedEmptyStars}
-      filterRatingMessage={props.filterRatingMessage}
+      // filterRatingMessage={props.filterRatingMessage}
     />;
     productBreakdown = <ProductBreakdown characteristics={props.metaData.characteristics}/>;
   }

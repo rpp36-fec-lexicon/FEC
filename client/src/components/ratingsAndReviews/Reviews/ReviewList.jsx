@@ -31,7 +31,6 @@ class ReviewList extends React.Component {
 
     this.setState({reviews: this.props.reviews, reviewsShowing: this.props.reviews.slice(0, this.state.endReviewIndex), relevanceSorted: true}, () => {
       this.sortByRelevanceFunc();
-      console.log('state in reviewlist', this.state)
     });
   }
 
@@ -99,7 +98,6 @@ class ReviewList extends React.Component {
       } else {
         reviewsShowing = this.state.reviews.slice();
       }
-      console.log('state at helpful', this.state)
       this.setState({reviewsShowing});
     });
   }
@@ -121,7 +119,6 @@ class ReviewList extends React.Component {
       } else {
         reviewsShowing = this.state.reviews.slice();
       }
-      console.log('state at newest', this.state)
       this.setState({reviewsShowing});
     });
   }
@@ -174,7 +171,6 @@ class ReviewList extends React.Component {
       } else {
         reviewsShowing = this.state.reviews.slice();
       }
-      console.log('state at relevance', this.state)
       this.setState({reviewsShowing});
     });
   }

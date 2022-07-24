@@ -124,7 +124,7 @@ class RatingsAndReviews extends React.Component {
   }
 
   render() {
-    console.log('productinfo', )
+    console.log('productinfo', this.props.productInfo)
     if (this.state.reviews !== null) {
       return (
         <div>
