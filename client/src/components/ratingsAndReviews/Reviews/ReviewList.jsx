@@ -14,6 +14,9 @@ class ReviewList extends React.Component {
       reviewsShowing: null,
       endReviewIndex: 2,
       showReviewModal: false,
+      relevanceSorted: false,
+      helpfulSorted: false,
+      newestSorted: false
 
     };
     this.showMoreReviewsFunc = this.showMoreReviewsFunc.bind(this);
@@ -26,8 +29,9 @@ class ReviewList extends React.Component {
 
   componentDidMount() {
 
-    this.setState({reviews: this.props.reviews, reviewsShowing: this.props.reviews.slice(0, this.state.endReviewIndex)}, () => {
+    this.setState({reviews: this.props.reviews, reviewsShowing: this.props.reviews.slice(0, this.state.endReviewIndex), relevanceSorted: true}, () => {
       this.sortByRelevanceFunc();
+      console.log('state in reviewlist', this.state)
     });
   }
 
@@ -36,14 +40,13 @@ class ReviewList extends React.Component {
     if (this.props.reviews.length && prevProps.reviews.length !== this.props.reviews.length) {
 
       this.setState({reviews: this.props.reviews}, () => {
-        var reviewsShowing;
-
-        if (this.state.reviews.length >= 2) {
-          reviewsShowing = this.state.reviews.slice(0, this.state.endReviewIndex);
-        } else {
-          reviewsShowing = this.state.reviews.slice();
+        if (this.state.relevanceSorted) {
+          this.sortByRelevanceFunc();
+        } else if (this.state.helpfulSorted) {
+          this.sortByHelpfulnessFunc();
+        } else if (this.state.newestSorted) {
+          this.sortByNewestFunc();
         }
-        this.setState({reviewsShowing});
       });
     }
   }
@@ -62,6 +65,9 @@ class ReviewList extends React.Component {
   }
 
   sortByHelpfulnessFunc() {
+    this.setState({relevanceSorted: false});
+    this.setState({newestSorted: false});
+
     const reviews = (this.props.reviews).slice();
     const sortedReviews = [];
 
@@ -85,7 +91,7 @@ class ReviewList extends React.Component {
 
     innerFunc(reviews);
 
-    this.setState({reviews: sortedReviews}, () => {
+    this.setState({reviews: sortedReviews, helpfulSorted: true}, () => {
       var reviewsShowing;
 
       if (this.state.reviews.length >= 2) {
@@ -93,18 +99,21 @@ class ReviewList extends React.Component {
       } else {
         reviewsShowing = this.state.reviews.slice();
       }
+      console.log('state at helpful', this.state)
       this.setState({reviewsShowing});
     });
   }
 
   sortByNewestFunc() {
+    this.setState({relevanceSorted: false});
+    this.setState({helpfulSorted: false});
     const reviews = this.state.reviews.slice();
 
     reviews.sort((a, b) => {
       return new Date(b.date) - new Date(a.date);
     });
 
-    this.setState({reviews}, () => {
+    this.setState({reviews, newestSorted: true}, () => {
       var reviewsShowing;
 
       if (this.state.reviews.length >= 2) {
@@ -112,11 +121,15 @@ class ReviewList extends React.Component {
       } else {
         reviewsShowing = this.state.reviews.slice();
       }
+      console.log('state at newest', this.state)
       this.setState({reviewsShowing});
     });
   }
 
   sortByRelevanceFunc() {
+    this.setState({newestSorted: false});
+    this.setState({helpfulSorted: false});
+
     const reviews = this.state.reviews.slice();
     const yearsSplit = {};
 
@@ -153,7 +166,7 @@ class ReviewList extends React.Component {
       sortedReviews = sortedReviews.concat(yearsSplit[yearInString]);
     });
 
-    this.setState({reviews: sortedReviews}, () => {
+    this.setState({reviews: sortedReviews, relevanceSorted: true}, () => {
       var reviewsShowing;
 
       if (this.state.reviews.length >= 2) {
@@ -161,6 +174,7 @@ class ReviewList extends React.Component {
       } else {
         reviewsShowing = this.state.reviews.slice();
       }
+      console.log('state at relevance', this.state)
       this.setState({reviewsShowing});
     });
   }

@@ -4,19 +4,9 @@ import RatingBreakdown from './RatingBreakdown.jsx';
 
 
 const RatingDetails = (props) => {
-  console.log('props in rating details', props)
   const sameLineStyle = {
     display: 'inline-block'
   };
-
-  // let filterRatingMessage;
-  // if (props.clickedStars !== null || props.clickedEmptyStars !== null) {
-  //   if (props.clickedStars.length) {
-  //     filterRatingMessage = <FilterRatingMessage clickedStars={props.clickedStars} filterRatingMessage={props.filterRatingMessage}/>;
-  //   } else {
-  //     filterRatingMessage = '';
-  //   }
-  // }
 
   return (
     <div>
