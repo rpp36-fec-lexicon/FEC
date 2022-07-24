@@ -12,7 +12,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 71697,
+      productId: 72287,
       productInfo: undefined,
       styleInfo: [],
       defaultStyle: undefined,
@@ -162,7 +162,7 @@ class App extends React.Component {
     if (this.state.flag) {
       return (
         <React.Fragment>
-          <h1>Atelier</h1>
+          <h1>Atelier</h1> {/* add font design and logo*/}
           <ProductOverview
             productId={this.state.productId}
             productInfo={this.state.productInfo}
@@ -183,7 +183,6 @@ class App extends React.Component {
             outfitRemover={this.outfitRemover.bind(this)}
             outfitItems={this.state.outfitItems}
           />
-
           <QuestionsAnswersMain
             productId={this.state.productId}
             productInfo={this.state.productInfo}
