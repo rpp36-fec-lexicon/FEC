@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
 import { useState, useEffect } from "react";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 class OutfitCard extends React.Component {
   constructor(props) {
@@ -63,8 +63,28 @@ class OutfitCard extends React.Component {
               </span>
             )}
           </div>
-
-          <div> star {this.props.prodRating}</div>
+          {isNaN(this.props.prodRating) ? null : (
+            <div className="starEmpty">
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <div
+                className="starFilled"
+                style={{
+                  width: `${Math.round((this.props.prodRating / 5) * 100)}%`,
+                }}
+              >
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+            </div>
+          )}
+          {/* <div className="stars"> star {this.props.prodRating}</div> */}
         </div>
       </div>
     );

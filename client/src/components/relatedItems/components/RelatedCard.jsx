@@ -1,5 +1,6 @@
 import React from "react";
 import $ from "jquery";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 class RelatedCard extends React.Component {
   constructor(props) {
@@ -68,7 +69,31 @@ class RelatedCard extends React.Component {
             )}
           </div>
 
-          <div>star: {this.props.itemData.itemRating}</div>
+          {isNaN(this.props.itemData.itemRating) ? null : (
+            <div className="starEmpty">
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <div
+                className="starFilled"
+                style={{
+                  width: `${Math.round(
+                    (this.props.itemData.itemRating / 5) * 100
+                  )}%`,
+                }}
+              >
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+            </div>
+          )}
+
+          {/* <p> {this.props.itemData.itemRating}</p> */}
         </div>
       </div>
     );

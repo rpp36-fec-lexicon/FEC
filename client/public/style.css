@@ -1,3 +1,19 @@
+.starFilled {
+  z-index: -1;
+  color:#fec84e;
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.starEmpty {
+  z-index: 1;
+  position: relative;
+  display: inline-block;
+}
+
 /****************** LOGO AND SEARCH BAR STYLING ********************/
 /****************** CSS START ********************/
 
