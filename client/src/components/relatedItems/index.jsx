@@ -258,7 +258,7 @@ class RelatedAndOutfit extends React.Component {
     // console.log("=======  RELATED&OUTFIT PROPS  ======", this.props);
     return (
       <div>
-        <h5>Related Products:</h5>
+        <span>RELATED PRODUCTS</span>
         <div
           className="relatedProductsMainClass" // mainD
         >
@@ -289,7 +289,7 @@ class RelatedAndOutfit extends React.Component {
             ></button>
           )}
         </div>
-        <h5>Your Outfit:</h5>
+        <span>YOUR OUTFIT</span>
         <Outfit
           prodID={this.props.prodID}
           prodInfo={this.props.prodInfo}

@@ -84,8 +84,8 @@ class Comparison extends React.Component {
   render() {
     // console.log("=======  Comparison PROPS  ======", this.props);
     return (
-      <div className="modal">
-        <div className="modal_content">
+      <div className="compModal">
+        <div className="compModal_content">
           <table>
             <tbody>
               <tr>

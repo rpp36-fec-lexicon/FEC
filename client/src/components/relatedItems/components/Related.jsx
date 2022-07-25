@@ -40,7 +40,7 @@ class Related extends React.Component {
         }}
       >
         <div
-          className="comp"
+          className="compClass"
           role="comparisonModalClickClosePreventer"
           onClick={this.comparisonCloser}
         >
