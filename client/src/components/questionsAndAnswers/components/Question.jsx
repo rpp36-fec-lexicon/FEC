@@ -10,15 +10,16 @@ const Question = (props) => {
 
   var answerKeys = [];
   var answers = [];
-  console.log(`props.answer: ${props.answer}`);
+  // console.log(`props.answer: ${props.answer}`);
   props.answer.map(a => {
-    if (a !== undefined) {
-      answerKeys = Object.keys(a);
-    } else {
-      answerKeys.push(a);
-    }
+    // if (a !== undefined) {
+    //   answerKeys = Object.keys(a);
+    // } else {
+    //   answerKeys.push(a);
+    // }
+    answerKeys = Object.keys(a);
   });
-  console.log(answerKeys);
+  // console.log(answerKeys);
 
 
   answerKeys.map((id) => {
@@ -64,7 +65,7 @@ const Question = (props) => {
           id={props.id} update={props.update} darkMode={props.darkMode}
         />
         <AnswerList displayAnswers={displayAnswers} update={props.update} darkMode={props.darkMode}/>
-        <div className="expandCollapseAnswers" onClick={() => setCount(sortedAnswers.length)}><small>LOAD MORE ANSWERS</small></div>
+        <div className="expand-collapse-answers" onClick={() => setCount(sortedAnswers.length)}><small>LOAD MORE ANSWERS</small></div >
       </div>
     );
   } else if ((displayAnswers.length === sortedAnswers.length) && sortedAnswers.length > 2) {
@@ -74,7 +75,7 @@ const Question = (props) => {
           id={props.id} update={props.update} darkMode={props.darkMode}
         />
         <AnswerList displayAnswers={displayAnswers} update={props.update} darkMode={props.darkMode}/>
-        <div className="expandCollapseAnswers" onClick={() => setCount(2)}><small>COLLAPSE ANSWERS</small></div>
+        <div className="expand-collapse-answers" onClick={() => setCount(2)}><small>COLLAPSE ANSWERS</small></div>
       </div>
     );
   } else {

@@ -24,7 +24,7 @@ class QuestionsAnswersMain extends React.Component {
         productInfo: this.props.productInfo,
         productId: this.props.product
       });
-      this.getQuestions(this.state.product);
+      this.getQuestions(this.state.productId);
     }
   }
 
@@ -50,11 +50,11 @@ class QuestionsAnswersMain extends React.Component {
 
   render () {
     return (
-      <div id="qa-module" className={'module_container'}>
+      <div id="qa-module" className={'qa_module_container'}>
         <div className="questions-and-answers-header">
           <h3>QUESTIONS & ANSWERS</h3>
         </div>
-        <div className="search-question">
+        <div className="questions-and-answers-search">
           <SearchQuestion searchQuestions={this.searchQuestions.bind(this)}/>
         </div>
         <div className="questions-and-answers-list">
