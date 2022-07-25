@@ -82,7 +82,7 @@ class Comparison extends React.Component {
   }
 
   render() {
-    // console.log("props in comp", this.props);
+    // console.log("=======  Comparison PROPS  ======", this.props);
     return (
       <div className="modal">
         <div className="modal_content">
@@ -136,9 +136,9 @@ const CommonFeatureMapper = (props) => {
   // console.log("ff", props);
   return (
     <tr style={{ overflowY: "auto" }}>
-      <td>&#10003;</td>
+      <td role="checkMark">&#10003;</td>
       <td>{props.feature}</td>
-      <td>&#10003;</td>
+      <td role="checkMark">&#10003;</td>
     </tr>
   );
 };
@@ -147,7 +147,7 @@ const MainFeatureMapper = (props) => {
   // console.log("MainFeatureMapper", props);
   return (
     <tr style={{ overflowY: "auto" }}>
-      <td>&#10003;</td>
+      <td role="MaincheckMark">&#10003;</td>
       <td>{props.feature}</td>
       <td></td>
     </tr>
@@ -160,7 +160,7 @@ const RelatedFeatureMapper = (props) => {
     <tr style={{ overflowY: "auto" }}>
       <td></td>
       <td>{props.feature}</td>
-      <td>&#10003;</td>
+      <td role="checkMark">&#10003;</td>
     </tr>
   );
 };
