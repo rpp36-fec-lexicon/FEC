@@ -7,6 +7,7 @@ const IMG = styled.img`
   height: 352px;
   width: 352px;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 

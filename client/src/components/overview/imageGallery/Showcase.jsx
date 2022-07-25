@@ -9,6 +9,7 @@ const IMG = styled.img`
   height: 100px;
   width: 100px;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 const Div = styled.div`  background: rgba(0,0,0,0.75);
@@ -156,17 +157,20 @@ class Showcase extends React.Component {
             alt={this.state.currPhoto.url}
           />
           <i
+            style={{cursor: 'pointer'}}
             class="fa-solid fa-xmark fa-xl"
             onClick={() => this.expand()}
           />
           {this.handleArrowClick('left') && (
             <i
+              style={{cursor: 'pointer'}}
               onClick={() => this.changePhoto(-1)}
               class='fa fa-arrow-left fa-xl'
             />
           )}
           {this.handleArrowClick('right') && (
             <i
+              style={{cursor: 'pointer'}}
               onClick={() => this.changePhoto(1)}
               className='fa fa-arrow-right fa-xl'
             />
@@ -174,12 +178,14 @@ class Showcase extends React.Component {
           {this.sliceThumbnails(this.state.min, this.state.max)}
           {this.handleArrowClick('up') && (
             <i
+              style={{cursor: 'pointer'}}
               onClick={() => this.previousThumbnails()}
               className='fa fa-angle-up fa-xl'
             />
           )}
           {this.handleArrowClick('down') && (
             <i
+              style={{cursor: 'pointer'}}
               onClick={() => this.nextThumbnails()}
               className='fa fa-angle-down fa-xl'
             />
@@ -191,12 +197,14 @@ class Showcase extends React.Component {
       <div>
         {this.handleArrowClick('left') && (
           <i
+            style={{cursor: 'pointer'}}
             onClick={() => this.changePhoto(-1)}
             class='fa fa-arrow-left fa-xl'
           />
         )}
         {this.handleArrowClick('right') && (
           <i
+            style={{cursor: 'pointer'}}
             onClick={() => this.changePhoto(1)}
             className='fa fa-arrow-right fa-xl'
           />
@@ -205,12 +213,14 @@ class Showcase extends React.Component {
         {this.sliceThumbnails(this.state.min, this.state.max)}
         {this.handleArrowClick('up') && (
           <i
+            style={{cursor: 'pointer'}}
             onClick={() => this.previousThumbnails()}
             className='fa fa-angle-up fa-xl'
           />
         )}
         {this.handleArrowClick('down') && (
           <i
+            style={{cursor: 'pointer'}}
             onClick={() => this.nextThumbnails()}
             className='fa fa-angle-down fa-xl'
           />

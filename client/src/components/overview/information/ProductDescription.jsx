@@ -16,7 +16,7 @@ class ProductDescription extends React.Component {
           <div>
             <p key={element.feature} style={{display: 'inline-block', fontWeight: '900'}}>{element.feature}</p>
             {element.value && (
-              <p key={element.feature} style={{display: 'inline-block'}}>: {element.value}</p>
+              <p key={element.value} style={{display: 'inline-block'}}>: {element.value}</p>
             )}
           </div>
         )}

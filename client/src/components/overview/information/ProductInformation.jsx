@@ -15,8 +15,8 @@ class ProductInformation extends React.Component {
         <h2> {this.props.name} </h2>
         {this.props.salePrice !== null ?
           <h4>
-            <b style={{color: 'red'}}>${this.props.salePrice}</b>
-            <b style={{textDecoration: 'line-through'}}>${this.props.price}</b>
+            <b style={{color: 'red', marginTop: '5px', paddingRight: '10px'}}>${this.props.salePrice}</b>
+            <b style={{textDecoration: 'line-through', marginTop: '5px'}}>${this.props.price}</b>
           </h4>
           :
           <h4> ${this.props.price}</h4>
