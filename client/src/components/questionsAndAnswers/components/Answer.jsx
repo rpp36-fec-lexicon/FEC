@@ -21,11 +21,11 @@ const Answer = (props) => {
       .then(() => {
         props.update();
         localStorage.setItem(`${props.id} answer`, true);
-        trackEvent({
-          time: new Date().toString(),
-          element: `Answer ${props.id} helpful`,
-          widget: 'Question and Answer'
-        });
+        // trackEvent({
+        //   time: new Date().toString(),
+        //   element: `Answer ${props.id} helpful`,
+        //   widget: 'Question and Answer'
+        // });
       })
       .catch((err) => {
         console.log('ERROR ANSWER HELPFUL NOT UPDATED', err);
@@ -40,11 +40,11 @@ const Answer = (props) => {
         var pressedReportButton = document.getElementById(`${props.id}report`);
         pressedReportButton.innerHTML = 'Reported';
         localStorage.setItem(`${props.id} report`, true);
-        trackEvent({
-          time: new Date().toString(),
-          element: `Answer ${props.id} reported`,
-          widget: 'Question and Answer'
-        });
+        // trackEvent({
+        //   time: new Date().toString(),
+        //   element: `Answer ${props.id} reported`,
+        //   widget: 'Question and Answer'
+        // });
       })
       .catch((err) => {
         console.log('ERROR REPORTING ANSWER', err);

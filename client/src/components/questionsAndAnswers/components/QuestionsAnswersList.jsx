@@ -71,9 +71,10 @@ const QuestionsAnswersList = (props) => {
   }
 
   if (displayQuestions.length === 0) {
+    console.log(props.product);
     return (
-      <div>
-        <button onClick={() => setShow(true)}>Add Questions +</button>
+      <div className="questions-answers-button-container">
+        <button className="question-button" onClick={() => setShow(true)}>Add Questions +</button>
         <QuestionModal
           show={show}
           hide={closeModal}
@@ -84,10 +85,11 @@ const QuestionsAnswersList = (props) => {
 
     );
   } else if (displayQuestions.length !== sortedQuestions.length) {
+    displayQuestions.map(qBody => console.log(`qBody.answers : ${[qBody.answers]}`));
     return (
-      <div>
-        <div>
-          {displayQuestions.map((question, answer) =>
+      <div className="question-display">
+        <div className="questions-list">
+          {displayQuestions.map((question) =>
             <Question
               key={question.question_id}
               id={question.question_id}
@@ -116,7 +118,7 @@ const QuestionsAnswersList = (props) => {
     return (
       <div>
         <div>
-          {displayQuestions.map((question, answer) =>
+          {displayQuestions.map((question) =>
             <Question
               key={question.question_id}
               id={question.question_id}

@@ -67,24 +67,24 @@ const QuestionModal = (props) => {
           <form>
             <div>
               <label>Your Question<sup>*</sup>: </label>
-              <div><textarea maxLength="1000" rows="5" cols="70" required></textarea></div>
+              <div><textarea id="question-body" maxLength="1000" rows="5" cols="70" required></textarea></div>
             </div>
             <div>
               <label>Your Username<sup>*</sup>: </label>
-              <input type="text" maxLength="60" placeholder="Example: jackson11!" required></input>
+              <input id= 'question-username' type="text" maxLength="60" placeholder="Example: jackson11!" required></input>
               <div><label>For privacy reasons, do not use your full name or email address</label></div>
             </div>
             <div>
               <label>Your Email<sup>*</sup>: </label>
-              <input maxLength="60" placeholder="sample@email.com" required></input>
+              <input id = 'question-email' maxLength="60" placeholder="sample@email.com" required></input>
               <div><label>For authentication reasons, you will not be emailed</label></div>
             </div>
           </form>
         </div>
         <div>
-          <div className="error">{error}</div>
+          <div id="question-error" className="error">{error}</div>
           <div>
-            <button onClick={() => validateForm()}>Submit Question</button>
+            <button className="modal-footer-button" onClick={() => validateForm()}>Submit Question</button>
           </div>
         </div>
       </div>
