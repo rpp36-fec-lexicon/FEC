@@ -170,6 +170,46 @@ class App extends React.Component {
   render() {
     if (this.state.flag) {
       return (
+<<<<<<< HEAD
+        <React.Fragment>
+          <h1>Atelier</h1>
+          <ProductOverview
+            productId={this.state.productId}
+            productInfo={this.state.productInfo}
+            defaultStyle={this.state.defaultStyle}
+            styleList={this.state.styleInfo}
+            rating={this.state.rating}
+            outfitAdder={this.outfitAdder.bind(this)}
+            outfitItems={this.state.outfitItems}
+            outfitItemsIDs={this.state.outfitItemsIDs}
+          />
+          <RelatedAndOutfit
+            prodID={this.state.productId}
+            prodInfo={this.state.productInfo}
+            styleInfo={this.state.styleInfo}
+            defaultStyle={this.state.defaultStyle}
+            prodIDChanger={this.prodIDChanger.bind(this)}
+            outfitAdder={this.outfitAdder.bind(this)}
+            outfitRemover={this.outfitRemover.bind(this)}
+            outfitItems={this.state.outfitItems}
+          />
+
+          <QuestionsAnswersMain
+            product={this.state.productId}
+            productInfo={this.state.productInfo}
+            key={this.state.productId}
+          />
+          <RatingsAndReviews
+            productId={this.state.productId}
+            reviewData={this.state.reviewData}
+            reviews={this.state.reviews}
+            metaData={this.state.metaData}
+            rating={this.state.rating}
+            totalNumberOfRatings={this.state.totalNumberOfRatings}
+            filterRating={this.filterRating}
+          />
+        </React.Fragment>
+=======
         <>
           <div className="mainHeader">
             <div className="mainHeader-child1">
@@ -226,6 +266,7 @@ class App extends React.Component {
             />
           </div>
         </>
+>>>>>>> 652163109c24860c2b1dd701a936d93dd2c8ee73
       );
     }
   }
