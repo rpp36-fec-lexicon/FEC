@@ -71,6 +71,7 @@ class ReviewModal extends React.Component {
     this.photoUploadedFunc = this.photoUploadedFunc.bind(this);
     this.submitReviewFunc = this.submitReviewFunc.bind(this);
     this.mandatoryFilledFunc = this.mandatoryFilledFunc.bind(this);
+    this.validateEmail = this.validateEmail.bind(this);
   }
 
   clickFillStarFunc(star) {
@@ -93,22 +94,32 @@ class ReviewModal extends React.Component {
   }
 
   photoUploadedFunc(e) {
+
     if (this.state.photos.length === 5) {
       this.setState({disableUpload: true});
       return;
     }
-    console.log('uploaded photo event', e);
     const photos = Array.from(e.target.files);
-    photos.map(photo => {
-      const reader = new FileReader();
-      reader.readAsDataURL(photo);
-      reader.addEventListener('loadend', () => {
-
-        const urls = this.state.photos.slice();
-        urls.push(reader.result);
-        this.setState({photos: urls, disableUpload: urls.length === 5});
+    if (photos[0].type === 'image/jpeg' || photos[0].type === 'image/gif' || photos[0].type === 'image/png' || photos[0].type === 'image/bmp' || photos[0].type === 'image/jpg') {
+      document.getElementById('imageMessage').innerHTML = '';
+      photos.map(photo => {
+        const reader = new FileReader();
+        reader.readAsDataURL(photo);
+        reader.addEventListener('loadend', () => {
+          const urls = this.state.photos.slice();
+          urls.push(reader.result);
+          this.setState({photos: urls, disableUpload: urls.length === 5});
+        });
       });
-    });
+    } else {
+      document.getElementById('imageMessage').innerHTML = 'Invalid image, please upload again'
+    }
+
+  }
+
+  validateEmail(email) {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
   }
 
   mandatoryFilledFunc() {
@@ -122,13 +133,18 @@ class ReviewModal extends React.Component {
     //   return false;
     // }
 
-    const recommendEle = document.getElementById('recommend');
-    const recommendChilren = recommendEle.children;
-    const recChildrenArray = Array.from(recommendChilren);
-    // console.dir(recommendEle)
-    // console.log('children', recommendChilren, typeof recommendChilren);
-    // console.log('recChilrenArray', recChildrenArray, Array.isArray(recChildrenArray));
-    // console.log(recChildrenArray[1].checked);
+    const prop1 = document.getElementById('property1').checked;
+    console.log('prop1', prop1)
+    const prop2 = document.getElementById('property2').checked;
+    const prop3 = document.getElementById('property3').checked;
+    const prop4 = document.getElementById('property4').checked;
+    const prop5 = document.getElementById('property5').checked;
+
+    if (!prop1 && !prop2 && !prop3 && !prop4 && !prop5) {
+      console.log('characterics failed')
+      return false;
+    }
+
 
     // const reviewBodyEle = document.getElementById('reviewBody');
     // if (reviewBodyEle.value.length === 0 || reviewBodyEle.value.length < 50) {
@@ -140,11 +156,12 @@ class ReviewModal extends React.Component {
     //   return false;
     // }
 
-    const sizeEle = document.getElementById('size');
-    console.dir(sizeEle)
+    // const email = document.getElementById('email').value;
+    // if (!this.validateEmail(email)) {
+    //   return false;
+    // }
 
-
-
+    return true;
   }
 
 
@@ -178,18 +195,6 @@ class ReviewModal extends React.Component {
       fontSize: '20px',
       margin: 'auto 10px'
     };
-
-    // let uploadPhotoButton;
-    // if (this.state.photos.length < 5) {
-    //   uploadPhotoButton = <UploadPhotoButton photoUploadedFunc={this.photoUploadedFunc} disabled={this.state.disableUpload}/>;
-    // } else {
-    //   uploadPhotoButton = null;
-    // }
-
-    // let uploadedPhotos;
-    // if (this.state.photos.length < 5) {
-    //   uploadedPhotos = <UploadedPhotos photos={this.state.photos}/>;
-    // }
 
     const characteristics = [];
     for (var key in this.characteristics) {
@@ -228,11 +233,11 @@ class ReviewModal extends React.Component {
                 {characteristics.map((characteristic, index) => {
                   return (<div key={index}>
                     <b>{characteristic[0]}</b>
-                    <input type="radio" id="" name="property" value="yes"></input><label htmlFor="">{characteristic[1]['1']}</label>
-                    <input type="radio" id="" name="property" value="no"></input><label htmlFor="">{characteristic[1]['2']}</label>
-                    <input type="radio" id="" name="property" value="yes"></input><label htmlFor="">{characteristic[1]['3']}</label>
-                    <input type="radio" id="" name="property" value="no"></input><label htmlFor="">{characteristic[1]['4']}</label>
-                    <input type="radio" id="" name="property" value="no"></input><label htmlFor="">{characteristic[1]['5']}</label>
+                    <input type="radio" id="property1" name="property" value="yes"></input><label htmlFor="">{characteristic[1]['1']}</label>
+                    <input type="radio" id="property2" name="property" value="no"></input><label htmlFor="">{characteristic[1]['2']}</label>
+                    <input type="radio" id="property3" name="property" value="yes"></input><label htmlFor="">{characteristic[1]['3']}</label>
+                    <input type="radio" id="property4" name="property" value="no"></input><label htmlFor="">{characteristic[1]['4']}</label>
+                    <input type="radio" id="property5" name="property" value="no"></input><label htmlFor="">{characteristic[1]['5']}</label>
                   </div>);
                 })}
               </div>
@@ -252,6 +257,7 @@ class ReviewModal extends React.Component {
             <div>
               <h3>Upload your photos</h3>
               <UploadPhotoButton photoUploadedFunc={this.photoUploadedFunc} disabled={this.state.disableUpload}/>
+              <div id="imageMessage"></div>
               <UploadedPhotos photos={this.state.photos}/>
             </div>
 
@@ -263,7 +269,7 @@ class ReviewModal extends React.Component {
 
             <div>
               <h3>Your email<sup>*</sup></h3>
-              <input type="input" maxLength="60" placeholder="Example: jackson11@email.com"></input>
+              <input id="email" type="input" maxLength="60" placeholder="Example: jackson11@email.com"></input>
               <div>For authentication reasons, you will not be emailed</div>
             </div>
 
