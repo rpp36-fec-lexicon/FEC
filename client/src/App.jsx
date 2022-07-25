@@ -190,7 +190,7 @@ class App extends React.Component {
             </div>
           </div>
           <div className="allComponents">
-            {/* <ProductOverview
+            <ProductOverview
               productId={this.state.productId}
               productInfo={this.state.productInfo}
               defaultStyle={this.state.defaultStyle}
@@ -199,7 +199,7 @@ class App extends React.Component {
               outfitAdder={this.outfitAdder.bind(this)}
               outfitItems={this.state.outfitItems}
               outfitItemsIDs={this.state.outfitItemsIDs}
-            /> */}
+            />
             <RelatedAndOutfit
               prodID={this.state.productId}
               prodInfo={this.state.productInfo}
@@ -210,7 +210,7 @@ class App extends React.Component {
               outfitRemover={this.outfitRemover.bind(this)}
               outfitItems={this.state.outfitItems}
             />
-            {/* <QuestionsAnswersMain
+            <QuestionsAnswersMain
               productId={this.state.productId}
               productInfo={this.state.productInfo}
               key={this.state.productId}
@@ -223,7 +223,7 @@ class App extends React.Component {
               rating={this.state.rating}
               totalNumberOfRatings={this.state.totalNumberOfRatings}
               filterRating={this.filterRating}
-            /> */}
+            />
           </div>
         </>
       );
