@@ -91,16 +91,14 @@ app.get('/questions', (req, res) => {
       res.send(results);
     })
     .catch((error) => {
-      console.log('Server error: get /questions', error);
       res.status(500).send(error).end();
     });
 });
 
 app.post('/addQuestion', (req, res) => {
-  console.log('Add question req', req.body);
   QA.postQuestion(req.body)
     .then(() => {
-      res.send('add question success');
+      res.send('question was added');
     })
     .catch((error) => {
       res.status(500).send(error).end();
@@ -110,7 +108,7 @@ app.post('/addQuestion', (req, res) => {
 app.post('/addAnswer', (req, res) => {
   QA.postAnswer(req.body)
     .then(() => {
-      res.send('add answer success');
+      res.send('answer was added');
     })
     .catch((error) => {
       res.status(500).send(error).end();
@@ -121,7 +119,7 @@ app.post('/addAnswer', (req, res) => {
 app.put ('/questionHelpful', (req, res) => {
   QA.questionHelpful(req.body.questionId)
     .then(() => {
-      res.send('question helpful updated');
+      res.send('helpful flag for question updated');
     })
     .catch((err) => {
       res.status(500).send(err).end();
@@ -132,7 +130,7 @@ app.put ('/questionHelpful', (req, res) => {
 app.put('/answerHelpful', (req, res) => {
   QA.answerHelpful(req.body.answerId)
     .then(() => {
-      res.send('answer helpful updated');
+      res.send('helpful flag for answer updated');
     })
     .catch((err) => {
       res.status(500).send(err).end();
@@ -142,7 +140,7 @@ app.put('/answerHelpful', (req, res) => {
 app.put('/reportAnswer', (req, res) => {
   QA.reportAnswer(req.body.answerId)
     .then(() => {
-      res.send('answer reported');
+      res.send('answer was reported');
     })
     .catch((err) => {
       res.status(500).send(err).end();

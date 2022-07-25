@@ -4,8 +4,8 @@ import Answer from './Answer.jsx';
 const AnswerList = (props) => {
 
   return (
-    <div> A:
-      <div>
+    <div className="answer"> A:
+      <div className="answer-entry">
         {props.displayAnswers.map((answer, i) =>
           <Answer
             key={i}

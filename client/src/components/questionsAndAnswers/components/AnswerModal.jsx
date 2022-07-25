@@ -49,6 +49,7 @@ const AnswerModal = (props) => {
       })
         .then(() => {
           setThumbnails([]);
+          console.log(thumbnails);
           props.hide();
           props.update();
         })
@@ -67,7 +68,6 @@ const AnswerModal = (props) => {
     form.append('upload_preset', 'lexicon');
     axios.post('https://api.cloudinary.com/v1_1/lexicon-atelier/image/upload/', form, { headers: { 'X-Requested-With': 'MLHttpRequest' } })
       .then(res => {
-        console.log(res.data.secure_url);
         let newUrl = res.data.secure_url;
         setThumbnails(thumbnails.concat(newUrl));
       })
@@ -81,18 +81,18 @@ const AnswerModal = (props) => {
   }
   if (thumbnails.length < 5) {
     return (
-      <div>
-        <div>
-          <div>
-            <div onClick={()=> props.hide()}>X</div>
-            <h3>Submit Your Answer</h3>
-            <div>{props.name}: {props.question}</div>
+      <div className="modal">
+        <div className="modal-content">
+          <div className="modal-header">
+            <div className="close-modal-button" onClick={()=> props.hide()}>X</div>
+            <h3 className="modal-title">Submit Your Answer</h3>
+            <div className="modal-subtitle">{props.name}: {props.question}</div>
           </div>
-          <div>
+          <div className="modal-body">
             <form>
-              <div>
+              <div className="add-answer-body">
                 <label>Your Answer<sup>*</sup>: </label>
-                <div><textarea id="answer-body" maxLength="1000" rows="5" cols="70" required></textarea></div>
+                <div><textarea id='answer-body' maxLength="1000" rows="5" cols="70" required></textarea></div>
               </div>
               <div>
                 <label>Your Username<sup>*</sup>: </label>
@@ -126,18 +126,18 @@ const AnswerModal = (props) => {
     );
   } else {
     return (
-      <div>
-        <div>
-          <div>
-            <div onClick={()=> props.hide()}>X</div>
-            <h4>Submit Your Answer</h4>
-            <div>{props.name}: {props.question}</div>
+      <div className="modal">
+        <div className="modal-content">
+          <div className="modal-header">
+            <div className="close-modal-button" onClick={()=> props.hide()}>X</div>
+            <h4 className="modal-title">Submit Your Answer</h4>
+            <div className="modal-subtitle">{props.name}: {props.question}</div>
           </div>
-          <div>
+          <div className="modal-body">
             <form>
-              <div>
+              <div className="add-answer-body">
                 <label>Your Answer<sup>*</sup></label>
-                <div><textarea maxLength="1000" rows="3" cols="100" required></textarea></div>
+                <div><textarea id='answer-body' maxLength="1000" rows="3" cols="100" required></textarea></div>
               </div>
               <div>
                 <label>Your Username<sup>*</sup>: </label>

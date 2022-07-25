@@ -35,15 +35,17 @@ const QuestionList = (props) => {
   let darkModeClass1 = props.darkMode ? 'dm' : '';
 
   return (
-    <div>
-      <div>
+    <div className="question-entry">
+      <div className="single-question">
         Q: {props.question}
       </div>
-      <div>
+      <div className="question-meta">
         <button onClick={() => questionHelpful()}
           id={props.id + 'helpful'}
+          className = 'question-helpful'
         >Helpful?&nbsp;<u>Yes({props.helpfulness})</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</button>
         <button
+          className= "add-answer"
           onClick={() => setModal(true)}>Add Answer</button>
         <AnswerModal show={modal} hide={hideModal} question={props.question} name ={props.name} id={props.id} update={props.update}/>
       </div>
