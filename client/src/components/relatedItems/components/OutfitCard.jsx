@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
 import { useState, useEffect } from "react";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 class OutfitCard extends React.Component {
   constructor(props) {
@@ -12,14 +12,11 @@ class OutfitCard extends React.Component {
   componentDidMount() {}
 
   render() {
+    // console.log("=======  OUTFIT CARD PROPS  ======", this.props);
     return (
       <div
-        className="RelatedCarouseOutfit"
-        style={{
-          border: "1px solid grey",
-          padding: "15px 15px 15px 15px",
-          margin: "15px 15px 15px 15px",
-        }}
+        role="productIdUpdater"
+        className="relatedCarouseOutfitCard"
         onClick={() => {
           this.props.prodIDChanger(this.props.prodInfo[0].id);
           this.props.relatedItemsUpdater(this.props.prodInfo[0].id);
@@ -32,22 +29,18 @@ class OutfitCard extends React.Component {
             marginBottom: "10px",
             backgroundImage: `url(${this.props.prodStyle[0].photos[0].url})`,
             backgroundSize: "150px 150px",
+            borderRadius: "10%",
           }}
         >
           <button
-            style={{
-              color: "red",
-              float: "right",
-              fontSize: "20px",
-              background: "black",
-              borderColor: "transparent",
-            }}
+            role="outfitRemover"
+            className="outfitRemoveBTN"
             onClick={(e) => {
               e.stopPropagation();
               this.props.outfitRemover(this.props.prodInfo[0].id);
             }}
           >
-            &times;
+            &#10006;
           </button>
         </div>
         <div>
@@ -70,8 +63,28 @@ class OutfitCard extends React.Component {
               </span>
             )}
           </div>
-
-          <div> star reviews here</div>
+          {isNaN(this.props.prodRating) ? null : (
+            <div className="starEmpty">
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <div
+                className="starFilled"
+                style={{
+                  width: `${Math.round((this.props.prodRating / 5) * 100)}%`,
+                }}
+              >
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+            </div>
+          )}
+          {/* <div className="stars"> star {this.props.prodRating}</div> */}
         </div>
       </div>
     );

@@ -81,14 +81,14 @@ const AnswerModal = (props) => {
   }
   if (thumbnails.length < 5) {
     return (
-      <div className="modal">
-        <div className="modal-content">
-          <div className="modal-header">
-            <div className="close-modal-button" onClick={()=> props.hide()}>X</div>
-            <h3 className="modal-title">Submit Your Answer</h3>
-            <div className="modal-subtitle">{props.name}: {props.question}</div>
+      <div className="modal-qa">
+        <div className="modal-qa-content">
+          <div className="modal-qa-header">
+            <div className="close-modal-qa-button" onClick={()=> props.hide()}>X</div>
+            <h3 className="modal-qa-title">Submit Your Answer</h3>
+            <div className="modal-qa-subtitle">{props.name}: {props.question}</div>
           </div>
-          <div className="modal-body">
+          <div className="modal-qa-body">
             <form>
               <div className="add-answer-body">
                 <label>Your Answer<sup>*</sup>: </label>
@@ -106,7 +106,7 @@ const AnswerModal = (props) => {
               </div>
             </form>
           </div>
-          <div className="modal-footer">
+          <div className="modal-qa-footer">
             <div>
               <label>Attach Up To Five Photos  </label>
               <input type="file" name="photos" onChange={() => photoThumbnail()} accept="image/*" multiple></input>
@@ -126,14 +126,14 @@ const AnswerModal = (props) => {
     );
   } else {
     return (
-      <div className="modal">
-        <div className="modal-content">
-          <div className="modal-header">
-            <div className="close-modal-button" onClick={()=> props.hide()}>X</div>
-            <h4 className="modal-title">Submit Your Answer</h4>
-            <div className="modal-subtitle">{props.name}: {props.question}</div>
+      <div className="modal-qa">
+        <div className="modal-qa-content">
+          <div className="modal-qa-header">
+            <div className="close-modal-qa-button" onClick={()=> props.hide()}>X</div>
+            <h4 className="modal-qa-title">Submit Your Answer</h4>
+            <div className="modal-qa-subtitle">{props.name}: {props.question}</div>
           </div>
-          <div className="modal-body">
+          <div className="modal-qa-body">
             <form>
               <div className="add-answer-body">
                 <label>Your Answer<sup>*</sup></label>
