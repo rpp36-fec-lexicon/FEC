@@ -11,6 +11,7 @@ class ReviewModal extends React.Component {
       starMessage: null,
       reviewBodyMessage: 'Minimum required characters left: 50',
       photos: [],
+      disableUpload: false
     };
     this.ratingMessage = {
       1: 'Poor',
@@ -19,6 +20,52 @@ class ReviewModal extends React.Component {
       4: 'Good',
       5: 'Great'
     };
+    this.characteristics = {
+      "Size": {
+        1: 'A size too small',
+        // 2: '1'.sup() + '/' + '2'.sub() + ' a size too small',
+        2: '1/2 a size too small',
+        3: 'Perfect',
+        // 4: '1'.sup() + '/' + '2'.sub() + ' a size too big',
+        4: '1/2 a size too big',
+        5: 'A size too wide'
+      },
+      "Width": {
+        1: 'Too narrow',
+        2: 'Slightly narrow',
+        3: 'Perfect',
+        4: 'Slightly wide',
+        5: 'Too wide'
+      },
+      "Fit": {
+        1: 'Runs tight',
+        2: 'Runs slightly tight',
+        3: 'Perfect',
+        4: 'Runs slightly long',
+        5: 'Runs long'
+      },
+      "Length": {
+        1: 'Runs short',
+        2: 'Runs slightly short',
+        3: 'Perfect',
+        4: 'Runs slightly long',
+        5: 'Runs long'
+      },
+      "Comfort": {
+        1: 'Uncomfortable',
+        2: 'Slightly uncomfortable',
+        3: 'Ok',
+        4: 'Comfortable',
+        5: 'Perfect'
+      },
+      "Quality": {
+        1: 'Poor',
+        2: 'Below average',
+        3: 'What I expected',
+        4: 'Pretty great',
+        5: 'Perfect'
+      }
+    }
     this.clickFillStarFunc = this.clickFillStarFunc.bind(this);
     this.charactersLeftFunc = this.charactersLeftFunc.bind(this);
     this.photoUploadedFunc = this.photoUploadedFunc.bind(this);
@@ -46,14 +93,20 @@ class ReviewModal extends React.Component {
   }
 
   photoUploadedFunc(e) {
+    if (this.state.photos.length === 5) {
+      this.setState({disableUpload: true});
+      return;
+    }
     console.log('uploaded photo event', e);
-    const files = e.target.files;
     const photos = Array.from(e.target.files);
-    photos.forEach(photo => {
+    photos.map(photo => {
       const reader = new FileReader();
-      reader.readAsText(photo);
+      reader.readAsDataURL(photo);
       reader.addEventListener('loadend', () => {
-        console.log('reader.result', reader.result)
+
+        const urls = this.state.photos.slice();
+        urls.push(reader.result);
+        this.setState({photos: urls, disableUpload: urls.length === 5});
       });
     });
   }
@@ -77,15 +130,45 @@ class ReviewModal extends React.Component {
     // console.log('recChilrenArray', recChildrenArray, Array.isArray(recChildrenArray));
     // console.log(recChildrenArray[1].checked);
 
+    // const reviewBodyEle = document.getElementById('reviewBody');
+    // if (reviewBodyEle.value.length === 0 || reviewBodyEle.value.length < 50) {
+    //   return false;
+    // }
+
+    // const nicknameEle = document.getElementById('nickname');
+    // if (nicknameEle.value.length === 0) {
+    //   return false;
+    // }
+
+    const sizeEle = document.getElementById('size');
+    console.dir(sizeEle)
+
 
 
   }
+
+
 
   submitReviewFunc() {
 
   }
 
   render() {
+    const ulStyle = {
+      listStyle: 'none',
+      display: 'block'
+    };
+
+    const liStyle = {
+      float: 'left',
+      display: 'block',
+      width: '85px',
+      textAlign: 'center'
+    };
+
+    const labelStyle = {
+      display: 'block'
+    };
 
     const sameLineStyle = {
       display: 'flex'
@@ -96,18 +179,21 @@ class ReviewModal extends React.Component {
       margin: 'auto 10px'
     };
 
-    let uploadPhotoButton;
-    if (this.state.photos.length < 5) {
-      uploadPhotoButton = <UploadPhotoButton photoUploadedFunc={this.photoUploadedFunc}/>;
-    } else {
-      uploadPhotoButton = null;
-    }
+    // let uploadPhotoButton;
+    // if (this.state.photos.length < 5) {
+    //   uploadPhotoButton = <UploadPhotoButton photoUploadedFunc={this.photoUploadedFunc} disabled={this.state.disableUpload}/>;
+    // } else {
+    //   uploadPhotoButton = null;
+    // }
 
-    let uploadedPhotos;
-    if (this.state.photos.length < 5) {
-      uploadedPhotos = <UploadedPhotos photos={this.state.photos}/>;
-    } else {
-      uploadedPhotos = null;
+    // let uploadedPhotos;
+    // if (this.state.photos.length < 5) {
+    //   uploadedPhotos = <UploadedPhotos photos={this.state.photos}/>;
+    // }
+
+    const characteristics = [];
+    for (var key in this.characteristics) {
+      characteristics.push([key, this.characteristics[key]]);
     }
 
     return (
@@ -136,62 +222,19 @@ class ReviewModal extends React.Component {
               <input type="radio" id="" name="recommend" value="no"></input><label htmlFor="">No</label>
             </div>
 
-            <div>
+            <div id="characteristics">
               <h3>Characteristics</h3>
               <div>
-                <div>
-                  <b>Size</b>
-                  <input type="radio" id="" name="size" value="yes"></input><label htmlFor="">A size too small</label>
-                  <input type="radio" id="" name="size" value="no"></input><label htmlFor=""><sup>1</sup>/<sub>2</sub> a size too small</label>
-                  <input type="radio" id="" name="size" value="yes"></input><label htmlFor="">Perfect</label>
-                  <input type="radio" id="" name="size" value="no"></input><label htmlFor=""><sup>1</sup>/<sub>2</sub> a size too big</label>
-                  <input type="radio" id="" name="size" value="no"></input><label htmlFor="">A size too wide</label>
-                </div>
-
-                <div>
-                  <b>Width</b>
-                  <input type="radio" id="" name="width" value="yes"></input><label htmlFor="">Too narrow</label>
-                  <input type="radio" id="" name="width" value="no"></input><label htmlFor="">Slightly narrow</label>
-                  <input type="radio" id="" name="width" value="yes"></input><label htmlFor="">Perfect</label>
-                  <input type="radio" id="" name="width" value="no"></input><label htmlFor="">Slightly wide</label>
-                  <input type="radio" id="" name="width" value="no"></input><label htmlFor="">Too wide</label>
-                </div>
-
-                <div>
-                  <b>Comfort</b>
-                  <input type="radio" id="" name="comfort" value="yes"></input><label htmlFor="">Uncomfortable</label>
-                  <input type="radio" id="" name="comfort" value="no"></input><label htmlFor="">Slightly uncomfortable</label>
-                  <input type="radio" id="" name="comfort" value="yes"></input><label htmlFor="">Ok</label>
-                  <input type="radio" id="" name="comfort" value="no"></input><label htmlFor="">Comfortable</label>
-                  <input type="radio" id="" name="comfort" value="no"></input><label htmlFor="">Perfect</label>
-                </div>
-
-                <div>
-                  <b>Quality</b>
-                  <input type="radio" id="" name="quality" value="yes"></input><label htmlFor="">Poor</label>
-                  <input type="radio" id="" name="quality" value="no"></input><label htmlFor="">Below average</label>
-                  <input type="radio" id="" name="quality" value="yes"></input><label htmlFor="">What I expected</label>
-                  <input type="radio" id="" name="quality" value="no"></input><label htmlFor="">Pretty great</label>
-                  <input type="radio" id="" name="quality" value="no"></input><label htmlFor="">Perfect</label>
-                </div>
-
-                <div>
-                  <b>Length</b>
-                  <input type="radio" id="" name="length" value="yes"></input><label htmlFor="">Runs short</label>
-                  <input type="radio" id="" name="length" value="no"></input><label htmlFor="">Runs slightly short</label>
-                  <input type="radio" id="" name="length" value="yes"></input><label htmlFor="">Perfect</label>
-                  <input type="radio" id="" name="length" value="no"></input><label htmlFor="">Runs slightly long</label>
-                  <input type="radio" id="" name="length" value="no"></input><label htmlFor="">Runs long</label>
-                </div>
-
-                <div>
-                  <b>Fit</b>
-                  <input type="radio" id="" name="fit" value="yes"></input><label htmlFor="">Runs tight</label>
-                  <input type="radio" id="" name="fit" value="no"></input><label htmlFor="">Runs slightly tight</label>
-                  <input type="radio" id="" name="fit" value="yes"></input><label htmlFor="">Perfect</label>
-                  <input type="radio" id="" name="fit" value="no"></input><label htmlFor="">Runs slightly long</label>
-                  <input type="radio" id="" name="fit" value="no"></input><label htmlFor="">Runs long</label>
-                </div>
+                {characteristics.map((characteristic, index) => {
+                  return (<div key={index}>
+                    <b>{characteristic[0]}</b>
+                    <input type="radio" id="" name="property" value="yes"></input><label htmlFor="">{characteristic[1]['1']}</label>
+                    <input type="radio" id="" name="property" value="no"></input><label htmlFor="">{characteristic[1]['2']}</label>
+                    <input type="radio" id="" name="property" value="yes"></input><label htmlFor="">{characteristic[1]['3']}</label>
+                    <input type="radio" id="" name="property" value="no"></input><label htmlFor="">{characteristic[1]['4']}</label>
+                    <input type="radio" id="" name="property" value="no"></input><label htmlFor="">{characteristic[1]['5']}</label>
+                  </div>);
+                })}
               </div>
             </div>
 
@@ -208,13 +251,13 @@ class ReviewModal extends React.Component {
 
             <div>
               <h3>Upload your photos</h3>
-              {uploadPhotoButton}
-              {uploadedPhotos}
+              <UploadPhotoButton photoUploadedFunc={this.photoUploadedFunc} disabled={this.state.disableUpload}/>
+              <UploadedPhotos photos={this.state.photos}/>
             </div>
 
             <div>
               <h3>What is your nickname?<sup>*</sup></h3>
-              <input type="input" maxLength="60" placeholder="Example: jackson11!"></input>
+              <input type="input" id="nickname" maxLength="60" placeholder="Example: jackson11!"></input>
               <div>For privacy reasons, do not use your full name or email address</div>
             </div>
 

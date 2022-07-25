@@ -7,9 +7,11 @@ const UploadedPhoto = (props) => {
     height: '108px'
   };
 
+
+
   return (
     <div>
-      <img style={thumbnailStyle} src={props.photo.url}/>&nbsp;
+      <img style={thumbnailStyle} src={props.photo}/>&nbsp;
     </div>
   );
 };

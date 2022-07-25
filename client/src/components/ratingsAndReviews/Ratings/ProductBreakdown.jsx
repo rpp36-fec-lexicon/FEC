@@ -1,135 +1,47 @@
 import React from 'react';
-import Size from './Size.jsx';
-import Width from './Width.jsx';
-import Fit from './Fit.jsx';
-import Length from './Length.jsx';
-import Comfort from './Comfort.jsx';
-import Quality from './Quality.jsx';
+import Characteristic from './Characteristic.jsx';
 
 const ProductBreakdown = (props) => {
-  const barStyle = {
-    position: 'relative',
-    width: '220px',
-    height: '10px',
-    backgroundColor: 'grey'
-  };
 
-  const firstWhiteSpaceStyle = {
-    position: 'absolute',
-    left: '70px',
-    width: '5px',
-    height: '10px',
-    backgroundColor: 'white'
-  };
+  const characteristics = [];
 
-  const secondWhiteSpaceStyle = {
-    position: 'absolute',
-    left: '145px',
-    width: '5px',
-    height: '10px',
-    backgroundColor: 'white'
-  };
+  for (var key in props.characteristics) {
+    characteristics.push([key, props.characteristics[key]]);
+  }
 
-  const leftNotationStyle = {
-    position: 'absolute',
-    top: '15px',
-    fontSize: '13px'
-  };
-
-  const rightNotationStyle = {
-    position: 'absolute',
-    right: '0px',
-    top: '15px',
-    fontSize: '13px'
-  };
-
-  let size;
-  let width;
-  let fit;
-  let length;
-  let comfort;
-  let quality;
-
-  if (Object.keys(props.characteristics)) {
-    if (props.characteristics.Size !== undefined) {
-      size = <Size
-        size={props.characteristics.Size}
-        barStyle={barStyle}
-        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
-        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
-        leftNotationStyle={leftNotationStyle}
-        rightNotationStyle={rightNotationStyle}
-      />;
+  characteristics.forEach(characteristic => {
+    if (characteristic[0] === 'Size') {
+      characteristic[2] = 'Too small';
+      characteristic[3] = 'Too large';
+    } else if (characteristic[0] === 'Width') {
+      characteristic[2] = 'Too tight';
+      characteristic[3] = 'Too loose';
+    } else if (characteristic[0] === 'Fit') {
+      characteristic[2] = 'Too small';
+      characteristic[3] = 'Too large';
+    } else if (characteristic[0] === 'Length') {
+      characteristic[2] = 'Too short';
+      characteristic[3] = 'Too long';
+    } else if (characteristic[0] === 'Comfort') {
+      characteristic[2] = 'Poor';
+      characteristic[3] = 'Perfect';
+    } else if (characteristic[0] === 'Quality') {
+      characteristic[2] = 'Poor';
+      characteristic[3] = 'Great';
     }
+  });
 
-    if (props.characteristics.Width !== undefined) {
-      width = <Width
-        width={props.characteristics.Width}
-        barStyle={barStyle}
-        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
-        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
-        leftNotationStyle={leftNotationStyle}
-        rightNotationStyle={rightNotationStyle}/>;
-    }
-
-    if (props.characteristics.Fit !== undefined) {
-      fit = <Fit
-        fit={props.characteristics.Fit}
-        barStyle={barStyle}
-        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
-        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
-        leftNotationStyle={leftNotationStyle}
-        rightNotationStyle={rightNotationStyle}/>;
-    }
-
-    if (props.characteristics.Length !== undefined) {
-      length = <Length
-        length={props.characteristics.Length}
-        barStyle={barStyle}
-        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
-        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
-        leftNotationStyle={leftNotationStyle}
-        rightNotationStyle={rightNotationStyle}/>;
-    }
-
-    if (props.characteristics.Comfort !== undefined) {
-      comfort = <Comfort
-        comfort={props.characteristics.Comfort}
-        barStyle={barStyle}
-        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
-        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
-        leftNotationStyle={leftNotationStyle}
-        rightNotationStyle={rightNotationStyle}/>;
-    }
-
-    if (props.characteristics.Quality !== undefined) {
-      quality = <Quality
-        quality={props.characteristics.Quality}
-        barStyle={barStyle}
-        firstWhiteSpaceStyle={firstWhiteSpaceStyle}
-        secondWhiteSpaceStyle={secondWhiteSpaceStyle}
-        leftNotationStyle={leftNotationStyle}
-        rightNotationStyle={rightNotationStyle}/>;
-    }
-
+  if (characteristics.length) {
     return (
       <div>
-        {size}
-
-        {width}
-
-        {fit}
-
-        {length}
-
-        {comfort}
-
-        {quality}
-
+        {characteristics.map(characteristic => {
+          return <Characteristic characteristic={characteristic} key={characteristic[1].id}/>;
+        })}
       </div>
     );
   }
-
 };
 
 export default ProductBreakdown;
+
+

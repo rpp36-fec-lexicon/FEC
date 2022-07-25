@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from './Modal.jsx';
+import PhotoModal from './PhotoModal.jsx';
 
 class ReviewPhoto extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class ReviewPhoto extends React.Component {
     let modalComponent;
 
     if (this.state.showModal) {
-      modalComponent = <Modal showModal={this.state.showModal} photo={this.props.photo} closeModalFunc={this.closeModalFunc}/>;
+      modalComponent = <PhotoModal showModal={this.state.showModal} photo={this.props.photo} closeModalFunc={this.closeModalFunc}/>;
     }
 
     if (!this.state.showModal) {

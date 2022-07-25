@@ -1,5 +1,4 @@
 import React from 'react';
-
 import RatingDetails from './RatingDetails.jsx';
 import ProductBreakdown from './ProductBreakdown.jsx';
 

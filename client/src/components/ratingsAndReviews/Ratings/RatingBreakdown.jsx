@@ -1,65 +1,27 @@
 import React from 'react';
 
-class RatingBreakdown extends React.Component {
+const RatingBreakdown = (props) => {
 
-  constructor(props) {
-    super(props);
-    this.state = {
+  const underlineStyle = {
+    textDecoration: 'underline'
+  };
 
-    };
-  }
+  return (
+    <div>
+      {
+        [5, 4, 3, 2, 1].map((starNumber) => {
+          return (<div key={starNumber} id={starNumber} onClick={(e) => {
+            e.preventDefault();
+            props.filterRatingFunc(starNumber); }}>
+            <label style={underlineStyle} htmlFor={starNumber + 'stars'}>{starNumber} stars</label>
+            <progress data-testid={starNumber + 'stars'} id={starNumber + 'stars'} value={props.ratings[starNumber]} max={props.totalNumberOfRatings}></progress>
+            ({props.ratings[starNumber]})
+          </div>);
+        })
+      }
 
-  render() {
-    const underlineStyle = {
-      textDecoration: 'underline'
-    };
-
-    return (
-      <div>
-        <div id="5" onClick={(e) => {
-          e.preventDefault();
-          this.props.filterRatingFunc(5); }}>
-          <label style={underlineStyle} htmlFor="5stars">5 stars</label>
-          <progress data-testid="5stars" id="5stars" value={this.props.ratings['5']} max={this.props.totalNumberOfRatings}></progress>
-          ({this.props.ratings['5']})
-        </div>
-
-        <div id="4" onClick={(e) => {
-          e.preventDefault();
-          this.props.filterRatingFunc(4); }}>
-          <label style={underlineStyle} htmlFor="4stars">4 stars</label>
-          <progress data-testid="4stars" id="4stars" value={this.props.ratings['4']} max={this.props.totalNumberOfRatings}></progress>
-          ({this.props.ratings['4']})
-        </div>
-
-        <div id="3" onClick={(e) => {
-          e.preventDefault();
-          this.props.filterRatingFunc(3); }}>
-          <label style={underlineStyle} htmlFor="3stars">3 stars</label>
-          <progress data-testid="3stars" id="3stars" value={this.props.ratings['3']} max={this.props.totalNumberOfRatings}></progress>
-          ({this.props.ratings['3']})
-        </div>
-
-        <div id="2" onClick={(e) => {
-          e.preventDefault();
-          this.props.filterRatingFunc(2); }}>
-          <label style={underlineStyle} htmlFor="2stars">2 stars</label>
-          <progress data-testid="2stars" id="2stars" value={this.props.ratings['2']} max={this.props.totalNumberOfRatings}></progress>
-          ({this.props.ratings['2']})
-        </div>
-
-        <div id="1" onClick={(e) => {
-          e.preventDefault();
-          this.props.filterRatingFunc(1); }}>
-          <label style={underlineStyle} htmlFor="1stars">1 stars</label>
-          <progress data-testid="1stars" id="1stars" value={this.props.ratings['1']} max={this.props.totalNumberOfRatings}></progress>
-          ({this.props.ratings['1']})
-        </div>
-
-      </div>
-    );
-  }
-
-}
+    </div>
+  );``
+};
 
 export default RatingBreakdown;
