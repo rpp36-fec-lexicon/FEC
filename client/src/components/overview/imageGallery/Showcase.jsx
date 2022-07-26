@@ -1,14 +1,24 @@
 import React from 'react';
 import PrimaryImage from './PrimaryImage.jsx';
 import styled from 'styled-components';
-import Modal from 'react-bootstrap/Modal';
 
 const IMG = styled.img`
   margin: 5px;
   border-radius: 35%;
-  height: 100px;
-  width: 100px;
+  height: 70px;
+  width: 70px;
   object-fit: cover;
+  cursor: pointer;
+`;
+
+const MainIMG = styled.img`
+  border: 1px solid;
+  border-radius: 15%;
+  height: 720px;
+  width: 620px;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
   cursor: pointer;
 `;
 
@@ -34,6 +44,10 @@ const Big = styled.img`
 
 const Thumbnails = styled.div`
   position: absolute;
+  display: flex;
+  flexDirection: column;
+  top: 70px;
+  left: 30px;
   z-index: 2;
   padding-left: 20px;
 `;
@@ -136,7 +150,7 @@ class Showcase extends React.Component {
     const {photos} = this.state;
     var setOfPhotos = photos.slice(min, max);
     console.log('this is set of photos', setOfPhotos);
-    return setOfPhotos.map((pic) => {
+    return setOfPhotos.map((pic, i) => {
       return (
         <IMG
           key={pic.url}
@@ -204,36 +218,40 @@ class Showcase extends React.Component {
       <div style={{position: 'relative'}}>
         {this.handleArrowClick('left') && (
           <i
-            style={{cursor: 'pointer'}}
+            style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', left: '50px', display: 'flex'}}
             onClick={() => this.changePhoto(-1)}
             class='fa fa-arrow-left fa-xl'
           />
         )}
         {this.handleArrowClick('right') && (
           <i
-            style={{cursor: 'pointer'}}
+            style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', right: '50px', display: 'flex'}}
             onClick={() => this.changePhoto(1)}
             className='fa fa-arrow-right fa-xl'
           />
         )}
-        <PrimaryImage pic={this.state.currPhoto.url} expand={this.expand}/>
-        <Thumbnails style={{display: 'flex', flexDirection: 'column', position: 'absolute', top: '20px'}}>
+        <MainIMG
+          src={this.state.currPhoto.url}
+          alt={this.state.currPhoto.url}
+          onClick={() => this.expand()}
+        />
+        <Thumbnails style={{flexDirection: 'column'}}>
+          {this.handleArrowClick('up') && (
+            <i
+              style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
+              onClick={() => this.previousThumbnails()}
+              className='fa fa-angle-up fa-xl'
+            />
+          )}
           {this.sliceThumbnails(this.state.min, this.state.max)}
+          {this.handleArrowClick('down') && (
+            <i
+              style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
+              onClick={() => this.nextThumbnails()}
+              className='fa fa-angle-down fa-xl'
+            />
+          )}
         </Thumbnails>
-        {this.handleArrowClick('up') && (
-          <i
-            style={{cursor: 'pointer'}}
-            onClick={() => this.previousThumbnails()}
-            className='fa fa-angle-up fa-xl'
-          />
-        )}
-        {this.handleArrowClick('down') && (
-          <i
-            style={{cursor: 'pointer'}}
-            onClick={() => this.nextThumbnails()}
-            className='fa fa-angle-down fa-xl'
-          />
-        )}
       </div>
     );
   }
