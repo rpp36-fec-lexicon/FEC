@@ -1,3 +1,7 @@
+
+/****************** REVIEW STARs STYLING ********************/
+/****************** CSS START ********************/
+
 .starFilled {
   z-index: -1;
   color: #fec84e;
@@ -13,6 +17,10 @@
   position: relative;
   display: inline-block;
 }
+
+/****************** CSS END ********************/
+/****************** REVIEW STARs STYLING ********************/
+
 
 /****************** LOGO AND SEARCH BAR STYLING ********************/
 /****************** CSS START ********************/
@@ -540,165 +548,3 @@ progress {
   border: none;
   padding-bottom: 25px;
 }
-<<<<<<< HEAD
-
-.answer-meta {
-  display: flex;
-  font-size: 13px;
-  border: none;
-}
-
-.seller {
-  font-weight: bold;
-}
-
-.expandCollapseAnswers {
-  border: none;
-  font-weight: bold;
-  margin-left: 28px;
-  padding-bottom: 20px;
-  cursor: pointer;
-}
-
-.modal {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background-color:rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-}
-
-.modal-content {
-  font-size: 15px;
-  width: 700px;
-  height: 700px;
-  background-color: white;
-}
-
-.modal-header {
-  flex-direction: row;
-  padding: 10px;
-  text-align: left;
-}
-
-.modal-footer {
-  padding: 10px;
-  text-align: left;
-}
-
-.modal-footer-button {
-  font-family: 'Nanum Gothic', sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-  width: 50%;
-  height: 100px;
-  background-color: white;
-  color: black;
-  padding: 0px;
-}
-
-.modal-footer-button:hover {
-  background-color: var(--mustard);
-}
-
-.submit-button {
-  padding-top: 20px;
-}
-
-.answer-thumbnail {
-  height: 50px;
-}
-
-.question-error {
-  padding-top: 0px;
-}
-
-.error {
-  color: red;
-  padding-top: 20px;
-}
-
-.modal-title {
-  margin: 0;
-}
-
-.modal-subtitle {
-  margin: 0;
-  font-weight: bold;
-}
-
-.close-modal-button {
-  margin-left: 650px;
-  display: flex;
-  background-color: white;
-  font-weight: bolder;
-  text-align: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
-.modal-body {
-  padding: 10px;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-}
-
-textarea {
-  font-family: 'Nanum Gothic', sans-serif;
-  resize: none;
-  overflow: auto;
-}
-
-.add-question-body {
-  font-weight: bold;
-  border: none;
-  padding-bottom: 10px;
-  text-align: left;
-}
-
-.add-question-nickname {
-  font-weight: bold;
-  text-align: left;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.add-question-email {
-  font-weight: bold;
-  text-align: left;
-  padding-top: 10px;
-}
-
-.add-answer-body {
-  padding-bottom: 10px;
-  text-align: left;
-}
-
-.add-answer-nickname {
-  text-align: left;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.add-answer-email {
-  text-align: left;
-  padding-bottom: 10px;
-}
-
-.disclaimer {
-  font-size: 13px;
-  border: none;
-}
-
-.thumbnails {
-  display: flex;
-}
-=======
->>>>>>> 652163109c24860c2b1dd701a936d93dd2c8ee73
