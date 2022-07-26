@@ -432,7 +432,7 @@ progress {
   margin-top: 0px;
   width: 150px;
   cursor: pointer;
-
+  text-decoration: underline;
 }
 
 .answer-meta-helpful {
