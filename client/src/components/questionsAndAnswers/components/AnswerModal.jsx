@@ -81,44 +81,44 @@ const AnswerModal = (props) => {
   }
   if (thumbnails.length < 5) {
     return (
-      <div className="modal-qa">
-        <div className="modal-qa-content">
-          <div className="modal-qa-header">
-            <div className="close-modal-qa-button" onClick={()=> props.hide()}>X</div>
-            <h3 className="modal-qa-title">Submit Your Answer</h3>
-            <div className="modal-qa-subtitle">{props.name}: {props.question}</div>
+      <div className="questions-and-answers-modal">
+        <div className="questions-and-answers-modal-content ">
+          <div className="questions-and-answers-modal-header">
+            <div className="questions-and-answers-close-modal-button" onClick={()=> props.hide()}>X</div>
+            <h3 className="questions-and-answers-modal-title">Submit Your Answer</h3>
+            <div className="questions-and-answers-modal-subtitle">{props.name}: {props.question}</div>
           </div>
-          <div className="modal-qa-body">
+          <div className="questions-and-answers-modal-body">
             <form>
               <div className="add-answer-body">
                 <label>Your Answer<sup>*</sup>: </label>
-                <div><textarea id='answer-body' maxLength="1000" rows="5" cols="70" required></textarea></div>
+                <div ><textarea id='answer-body' maxLength="1000" rows="5" cols="70" required></textarea></div>
               </div>
               <div>
                 <label>Your Username<sup>*</sup>: </label>
                 <input id="answer-username" maxLength="60" placeholder="Example: jack543!" required></input>
-                <div><label>For privacy reasons, do not use your full name or email address</label></div>
+                <div className="disclaimer"><label>For privacy reasons, do not use your full name or email address</label></div>
               </div>
               <div>
                 <label>Your Email<sup>*</sup>: </label>
                 <input id="answer-email" maxLength="60" placeholder="jack@email.com" required></input>
-                <div><label>For authentication reasons, you will not be emailed</label></div>
+                <div className="disclaimer"><label>For authentication reasons, you will not be emailed</label></div>
               </div>
             </form>
           </div>
-          <div className="modal-qa-footer">
+          <div className="modal-footer">
             <div>
               <label>Attach Up To Five Photos  </label>
               <input type="file" name="photos" onChange={() => photoThumbnail()} accept="image/*" multiple></input>
             </div>
-            <div>
+            <div className="thumbnails">
               {thumbnails.map((src, i) =>
                 <AnswerModalThumbnail key={i} src={src} />
               )}
             </div>
             <div id="error" className="error">{error}</div>
-            <div>
-              <button onClick={() => validateForm()}>Submit Answer</button>
+            <div className="answer-submit-button">
+              <button className="question-modal-footer-button" onClick={() => validateForm()}>Submit Answer</button>
             </div>
           </div>
         </div>
@@ -126,39 +126,39 @@ const AnswerModal = (props) => {
     );
   } else {
     return (
-      <div className="modal-qa">
-        <div className="modal-qa-content">
-          <div className="modal-qa-header">
-            <div className="close-modal-qa-button" onClick={()=> props.hide()}>X</div>
-            <h4 className="modal-qa-title">Submit Your Answer</h4>
-            <div className="modal-qa-subtitle">{props.name}: {props.question}</div>
+      <div className="questions-and-answers-modal">
+        <div className="questions-and-answers-modal-content ">
+          <div className="questions-and-answers-modal-header">
+            <div className="questions-and-answers-close-modal-button" onClick={()=> props.hide()}>X</div>
+            <h4 className="questions-and-answers-modal-title">Submit Your Answer</h4>
+            <div className="questions-and-answers-modal-subtitle">{props.name}: {props.question}</div>
           </div>
-          <div className="modal-qa-body">
+          <div className="questions-and-answers-modal-body">
             <form>
               <div className="add-answer-body">
                 <label>Your Answer<sup>*</sup></label>
                 <div><textarea id='answer-body' maxLength="1000" rows="3" cols="100" required></textarea></div>
               </div>
-              <div>
+              <div className="add-answer-nickname">
                 <label>Your Username<sup>*</sup>: </label>
                 <input type="text" maxLength="60" placeholder="Example: jack543!" required></input>
-                <div><label>For privacy reasons, do not use your full name or email address</label></div>
+                <div className="disclaimer"><label>For privacy reasons, do not use your full name or email address</label></div>
               </div>
-              <div>
+              <div className="add-answer-email">
                 <label>Your Email<sup>*</sup>: </label>
-                <input maxLength="60" placeholder="jack@email.com" required></input>
-                <div><label>For authentication reasons, you will not be emailed</label></div>
+                <input id="answer-email" maxLength="60" placeholder="jack@email.com" required></input>
+                <div className="disclaimer"><label>For authentication reasons, you will not be emailed</label></div>
               </div>
-              <div>
+              <div className="thumbnails">
                 {thumbnails.map((src, i) =>
                   <AnswerModalThumbnail key={i} src={src} />
                 )}
               </div>
             </form>
           </div>
-          <div>
-            <div>{error}</div>
-            <button onClick={() => validateForm()}>Submit Answer</button>
+          <div className="modal-footer">
+            <div id="error" className="error">{error}</div>
+            <button className="question-modal-footer-button" onClick={() => validateForm()}>Submit Answer</button>
           </div>
         </div>
       </div>

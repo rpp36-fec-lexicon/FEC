@@ -211,7 +211,7 @@ class App extends React.Component {
               outfitItems={this.state.outfitItems}
             />
             <QuestionsAnswersMain
-              productId={this.state.productId}
+              product={this.state.productId}
               productInfo={this.state.productInfo}
               key={this.state.productId}
             />

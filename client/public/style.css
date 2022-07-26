@@ -1,4 +1,12 @@
 
+html {
+  scroll-behavior: smooth;
+}
+
+#app {
+  font-family: "Optima", sans-serif
+}
+
 /****************** REVIEW STARs STYLING ********************/
 /****************** CSS START ********************/
 
@@ -29,7 +37,7 @@
   margin: 0;
 }
 .allComponents {
-  margin: 5px 5px 5px 5px;
+  margin: 25px 25px 25px 25px;
 }
 
 .mainHeader {
@@ -61,6 +69,7 @@
   border-left: rgb(48, 122, 250);
   border-right: rgb(48, 122, 250);
   border-bottom-color: white;
+  color: white;
 }
 .searchInput:focus {
   outline: none;
@@ -80,8 +89,7 @@
 }
 
 .searchInput,
-select,
-textarea {
+select {
   color: white;
 }
 /****************** CSS END ********************/
@@ -391,15 +399,6 @@ progress {
 }
 /* END OF RATINGS AND REVIEWS CSS */
 
-.qbutton {
-  display: flex;
-  position: relative;
-  margin-left: 30em;
-  height: 3vh;
-  margin-bottom: 4em;
-  color: white;
-}
-
 /* QnA */
 .questions-and-answers-header {
   width: 100%;
@@ -407,7 +406,7 @@ progress {
   font-size: 18px;
 }
 
-.search-question {
+.questions-and-answers-search {
   width: 100%;
   margin-left: 0px;
 }
@@ -418,10 +417,16 @@ progress {
   margin-left: 0px;
 }
 
-.search {
+.search-question {
   margin-left: 0px;
   height: 50px;
   width: 100%;
+
+}
+
+.questionsAndAnswers {
+  width: 100%;
+  border: none;
 }
 
 .questions-answers-button-container {
@@ -438,10 +443,11 @@ progress {
   background-color: white;
   padding: 0px;
   cursor: pointer;
+  margin-right: 25px;
 }
 
 .question-button:hover {
-  background-color: var(--mustard);
+  background-color: rgb(48, 122, 250);
 }
 
 .question-display {
@@ -477,6 +483,7 @@ progress {
   font-size: 13px;
   margin-left: 10px;
   padding-top: 10px;
+
 }
 
 .question-helpful {
@@ -489,10 +496,11 @@ progress {
   margin-top: 0px;
   width: 150px;
   cursor: pointer;
+  margin-left: 390px
 }
 
-.answer {
-  font-family: serif;;
+.add-answer {
+  font-family: 'Nanum Gothic', sans-serif;
   display: flex;
   flex: auto;
   border: none;
@@ -501,6 +509,7 @@ progress {
   margin-top: 0px;
   width: 150px;
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .answer-meta-helpful {
@@ -523,14 +532,14 @@ progress {
   width: 50px;
   cursor: pointer;
 }
-/*
+
 .answer {
   display: flex;
   width: 100%;
   font-weight: bold;
   font-size: 20px;
   border: none;
-} */
+}
 
 .answer-entry {
   margin-left: 3px;
@@ -540,11 +549,174 @@ progress {
   border: none;
 }
 
-.singleAnswer {
+.single-answer {
   margin-left: 3px;
   width: 95%;
   font-weight: normal;
   font-size: 18px;
   border: none;
   padding-bottom: 25px;
+}
+
+.answer-meta {
+  display: flex;
+  font-size: 13px;
+  border: none;
+}
+
+.seller {
+  font-weight: bold;
+}
+
+.expand-collapse-answers {
+  border: none;
+  font-weight: bold;
+  margin-left: 28px;
+  padding-bottom: 20px;
+  cursor: pointer;
+}
+
+.questions-and-answers-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color:rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.questions-and-answers-modal-content {
+  font-size: 15px;
+  width: 700px;
+  height: 700px;
+  background-color: white;
+}
+
+.questions-and-answers-modal-header {
+  flex-direction: row;
+  padding: 10px;
+  text-align: left;
+}
+
+.modal-footer {
+  padding: 10px;
+  text-align: left;
+}
+
+.question-modal-footer-button {
+  font-family: 'Nanum Gothic', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  width: 50%;
+  height: 100px;
+  background-color: white;
+  color: black;
+  padding: 0px;
+}
+
+.question-modal-footer-button:hover {
+  background-color: rgb(48, 122, 250);
+}
+
+.answer-submit-button {
+  padding-top: 20px;
+}
+
+.answer-thumbnail {
+  height: 50px;
+}
+
+.question-error {
+  padding-top: 0px;
+}
+
+.error {
+  color: red;
+  padding-top: 20px;
+}
+
+.questions-and-answers-modal-title {
+  margin: 0;
+}
+
+.questions-and-answers-modal-subtitle {
+  margin: 0;
+  font-weight: bold;
+}
+
+.questions-and-answers-close-modal-button {
+  margin-left: 650px;
+  display: flex;
+  background-color: white;
+  font-weight: bolder;
+  text-align: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.questions-and-answers-modal-body {
+  padding: 10px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+
+.add-question-body {
+  font-weight: bold;
+  border: none;
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+.add-question-nickname {
+  font-weight: bold;
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.add-question-email {
+  font-weight: bold;
+  text-align: left;
+  padding-top: 10px;
+}
+
+.add-answer-body {
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+.add-answer-nickname {
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.add-answer-email {
+  text-align: left;
+  padding-bottom: 10px;
+}
+
+.qa-disclaimer {
+  font-size: 13px;
+  border: none;
+}
+
+.thumbnails {
+  display: flex;
+}
+
+.qa_module_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
 }

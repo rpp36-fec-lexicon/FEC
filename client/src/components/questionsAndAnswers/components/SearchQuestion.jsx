@@ -8,7 +8,7 @@ const SearchQuestion = (props) => {
 
 
   return (
-    <div className="search">
+    <div className="search-question">
       <textarea
         onChange={(e) => search(e)}
         type="text"

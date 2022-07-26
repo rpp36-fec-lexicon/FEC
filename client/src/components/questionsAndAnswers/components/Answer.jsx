@@ -75,38 +75,38 @@ const Answer = (props) => {
 
   if (props.name === 'Seller') {
     return (
-      <div>
+      <div className="singleAnswer">
         <div>{props.answer}
-          <div>
+          <div className="thumbnails">
             {props.photos.map((photo, i) =>
               <AnswerModalThumbnail key={i} src={photo}/>
             )}
           </div>
-          <div> by
-            <div>&nbsp;{props.name}</div>
+          <div className="answer-meta"> by
+            <div className="seller"> &nbsp;{props.name}</div>
             <div>,&nbsp;{convertDate(props.date)} |&nbsp;</div>
             <button onClick={() => answerHelpful()} id={props.id + 'answer'}
-            >&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
+              className='answer-meta-helpful'>&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
             <button onClick={() => reportAnswer()} id={props.id + 'report'}
-            >&nbsp;<u>Report</u></button>
+              className='answer-meta-report'>&nbsp;<u>Report</u></button>
           </div>
         </div>
       </div>
     );
   } else {
     return (
-      <div>
+      <div className="single-answer">
         <div>{props.answer}
-          <div>
+          <div className="thumbnails">
             {props.photos.map((photo, i) =>
               <AnswerModalThumbnail key={i} src={photo}/>
             )}
           </div>
-          <div>by
+          <div className="answer-meta">by
             <div>&nbsp;{props.name}</div>
             <div>,&nbsp;{convertDate(props.date)} |&nbsp;</div>
             <button onClick={() => answerHelpful()} id={props.id + 'answer'}
-            >&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
+              className='answer-meta-helpful'>&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
             <button onClick={() => reportAnswer()} id={props.id + 'report'}
             >&nbsp;<u>Report</u></button>
           </div>
