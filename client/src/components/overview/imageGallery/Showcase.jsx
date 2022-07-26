@@ -12,15 +12,16 @@ const IMG = styled.img`
   cursor: pointer;
 `;
 
-const Div = styled.div`  background: rgba(0,0,0,0.75);
-margin: -96px -8px;
-height: 100%;
-width: 100%;
-position: fixed;
-z-index: 10;
-display: flex;
-justify-content: center;
-backdrop-filter: blur(8px) contrast(70%);
+const Div = styled.div`
+  background: rgba(0,0,0,0.75);
+  margin: -96px -8px;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(8px) contrast(70%);
 `;
 
 const Big = styled.img`
@@ -29,6 +30,12 @@ const Big = styled.img`
   height: 752px;
   width: 752px;
   object-fit: cover;
+`;
+
+const Thumbnails = styled.div`
+  position: absolute;
+  z-index: 2;
+  padding-left: 20px;
 `;
 
 class Showcase extends React.Component {
@@ -194,7 +201,7 @@ class Showcase extends React.Component {
       );
     }
     return (
-      <div>
+      <div style={{position: 'relative'}}>
         {this.handleArrowClick('left') && (
           <i
             style={{cursor: 'pointer'}}
@@ -210,7 +217,9 @@ class Showcase extends React.Component {
           />
         )}
         <PrimaryImage pic={this.state.currPhoto.url} expand={this.expand}/>
-        {this.sliceThumbnails(this.state.min, this.state.max)}
+        <Thumbnails style={{display: 'flex', flexDirection: 'column', position: 'absolute', top: '20px'}}>
+          {this.sliceThumbnails(this.state.min, this.state.max)}
+        </Thumbnails>
         {this.handleArrowClick('up') && (
           <i
             style={{cursor: 'pointer'}}

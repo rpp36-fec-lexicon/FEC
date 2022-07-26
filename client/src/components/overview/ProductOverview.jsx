@@ -75,10 +75,10 @@ class ProductOverview extends React.Component {
           <Pictures>
             <Showcase id={this.state.selectedStyle.style_id} photos={this.state.selectedStyle.photos} currentPhoto={this.changePhoto}/>
             <Div>
-              <Checkout id={this.state.selectedStyle.style_id} skus={this.state.selectedStyle.skus} outfitAdder={this.props.outfitAdder} outfitItems={this.props.outfitItems} outfitItemsIDs={this.props.outfitItemsIDs}/>
               <ProductInformation category={this.props.productInfo.category} name={this.props.productInfo.name}
                 price={this.state.selectedStyle.original_price} salePrice={this.state.selectedStyle.sale_price} rating={this.props.rating}/>
               <SelectStyle styles={this.props.styleList} changeStyle={this.changeStyle} selectedStyle={this.state.selectedStyle}/>
+              <Checkout id={this.state.selectedStyle.style_id} skus={this.state.selectedStyle.skus} outfitAdder={this.props.outfitAdder} outfitItems={this.props.outfitItems} outfitItemsIDs={this.props.outfitItemsIDs}/>
               <ProductDescription slogan={this.props.productInfo.slogan} description={this.props.productInfo.description} features={this.props.productInfo.features}/>
             </Div>
           </Pictures>

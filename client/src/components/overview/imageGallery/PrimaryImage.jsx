@@ -4,12 +4,13 @@ import styled from 'styled-components';
 const IMG = styled.img`
   border: 1px solid;
   border-radius: 15%;
-  height: 352px;
-  width: 352px;
+  height: 720px;
+  width: 620px;
   object-fit: cover;
+  object-position: center;
+  z-index: 1;
   cursor: pointer;
 `;
-
 
 class PrimaryImage extends React.Component {
   constructor(props) {
@@ -20,13 +21,11 @@ class PrimaryImage extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <IMG
-            src={this.props.pic}
-            alt={this.props.pic}
-            onClick={() => this.props.expand()}
-          />
-        </div>
+        <IMG
+          src={this.props.pic}
+          alt={this.props.pic}
+          onClick={() => this.props.expand()}
+        />
       </div>
     );
   }

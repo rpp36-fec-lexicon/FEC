@@ -17,15 +17,15 @@ const StyledCheckmark = styled(IoMdCheckmarkCircleOutline)`
   position: absolute;
   top: 5px;
   right: 5px;
-  color: black;
+  color: green;
   width: 30px;
   height: 30px;
+  filter: drop-shadow(0 0 0.2rem black);
 `;
 
 const FlexDiv = styled.div`
-`;
-
-const Test = styled.div`
+  display: grid;
+  grid-template-columns: min-content min-content min-content min-content;
 `;
 
 class SelectStyle extends React.Component {
@@ -43,16 +43,14 @@ class SelectStyle extends React.Component {
     console.log('current id', this.props.selectedStyle.style_id);
     return (
       <div>
-        <Test>
-          <h3 style={{display: 'inline-block'}}> {'Selected Style  ~  '}</h3>
-          {/* <BsArrowRightShort size={24}/> */}
-          <p style={{display: 'inline-block', paddingLeft: '5px'}}> {this.props.selectedStyle.name} </p>
-        </Test>
+        <h3 style={{display: 'inline-block'}}> {'Selected Style  ~  '}</h3>
+        {/* <BsArrowRightShort size={24}/> */}
+        <p style={{display: 'inline-block', paddingLeft: '5px'}}> {this.props.selectedStyle.name} </p>
         <FlexDiv>
           {this.props.styles.map((style, i) => {
             if (style.style_id === this.props.selectedStyle.style_id) {
               return (
-                <>
+                <div style={{position: 'relative', display: 'inline-block'}}>
                   <Img
                     key={style.style_id}
                     src={style.photos[0].thumbnail_url}
@@ -61,20 +59,11 @@ class SelectStyle extends React.Component {
                     a=""
                   />
                   <StyledCheckmark />
-                </>
+                </div>
               );
             }
             return (
-              i % 4 === 0 ?
-                <>
-                  <br/>
-                  <Img
-                    key={style.style_id}
-                    src={style.photos[0].thumbnail_url}
-                    name={style.name}
-                    onClick={() => this.handleClick(style.style_id)}
-                    a=""
-                  /></> :
+              <div style={{position: 'relative', display: 'inline-block'}}>
                 <Img
                   key={style.style_id}
                   src={style.photos[0].thumbnail_url}
@@ -82,6 +71,7 @@ class SelectStyle extends React.Component {
                   onClick={() => this.handleClick(style.style_id)}
                   a=""
                 />
+              </div>
             );
           })}
         </FlexDiv>
