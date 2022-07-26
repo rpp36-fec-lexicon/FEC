@@ -105,13 +105,16 @@ class ReviewModal extends React.Component {
     if (photos[0].type === 'image/jpeg' || photos[0].type === 'image/gif' || photos[0].type === 'image/png' || photos[0].type === 'image/bmp' || photos[0].type === 'image/jpg') {
       document.getElementById('imageMessage').innerHTML = '';
       photos.map(photo => {
-        const reader = new FileReader();
-        reader.readAsDataURL(photo);
-        reader.addEventListener('loadend', () => {
-          const urls = this.state.photos.slice();
-          urls.push(reader.result);
-          this.setState({photos: urls, disableUpload: urls.length === 5});
-        });
+        // const reader = new FileReader();
+        // reader.readAsDataURL(photo);
+        // reader.addEventListener('loadend', () => {
+        //   const urls = this.state.photos.slice();
+        //   urls.push(reader.result);
+        //   this.setState({photos: urls, disableUpload: urls.length === 5});
+        // });
+
+
+
       });
     } else {
       document.getElementById('imageMessage').innerHTML = 'Invalid image, please upload again';

@@ -18,17 +18,6 @@ const QuestionsAnswersList = (props) => {
   const closeModal = () => {
     setShow(false);
   };
-  // const { Track, trackEvent } = useTracking({},
-  //   { dispatch: data => {
-  //     axios.post('/interactions', {
-  //       time: data.time,
-  //       element: data.element,
-  //       widget: data.widget
-  //     })
-  //       .catch((error) => {
-  //         console.log('Client unable to post interaction: ', error);
-  //       });
-  //   }});
 
   var checkFilter = (sortedQuestions) => {
     var splitFilter = [];
@@ -82,43 +71,46 @@ const QuestionsAnswersList = (props) => {
   }
 
   if (displayQuestions.length === 0) {
+    console.log(props.product);
     return (
-      <div>
-        <button onClick={() => setShow(true)}>Add Questions +</button>
+      <div className="questions-answers-button-container">
+        <button className="question-button" onClick={() => setShow(true)}>Add Questions +</button>
         <QuestionModal
+          key={props.product}
           show={show}
           hide={closeModal}
-          // name={props.productInfo.name}
+          name={props.productInfo.name}
           productId={props.product}
           update={props.update}/>
       </div>
 
     );
   } else if (displayQuestions.length !== sortedQuestions.length) {
+    displayQuestions.map(qBody => console.log(`qBody.answers : ${[qBody.answers]}`));
     return (
-      <div>
-        <div>
-          {displayQuestions.map((question, answer) =>
-            console.log([question.answers])
-            // <Question
-            //   // key={question.question_id}
-            //   id={question.question_id}
-            //   helpfulness={question.question_helpfulness}
-            //   question={question.question_body}
-            //   answer={[question.answers]}
-            //   // name={props.productInfo.name}
-            //   update={props.update}
-            //   darkMode={props.darkMode}
-            // />
+      <div className="question-display">
+        <div className="questions-list">
+          {displayQuestions.map((question) =>
+            <Question
+              key={question.question_id}
+              id={question.question_id}
+              helpfulness={question.question_helpfulness}
+              question={question.question_body}
+              answer={[question.answers]}
+              name={props.productInfo.name}
+              update={props.update}
+              darkMode={props.darkMode}
+            />
           )}
         </div>
-        <div>
-          <button onClick={() => setCount(count + 2)}>More Questions</button>
-          <button onClick={() => setShow(true)}>Add Questions +</button>
+        <div className="questions-answers-button-container">
+          <button className ="question-button" onClick={() => setCount(count + 2)}>More Questions</button>
+          <button className = "question-button" onClick={() => setShow(true)}>Add Questions +</button>
           <QuestionModal
+            key={props.product}
             show={show}
             hide={closeModal}
-            // name={props.productInfo.name}
+            name={props.productInfo.name}
             productId={props.product}
             update={props.update}/>
         </div>
@@ -126,27 +118,28 @@ const QuestionsAnswersList = (props) => {
     );
   } else {
     return (
-      <div>
-        <div>
-          {displayQuestions.map((question, answer) =>
+      <div className="question-display">
+        <div className="questions-list ">
+          {displayQuestions.map((question) =>
             <Question
-              // key={question.question_id}
+              key={question.question_id}
               id={question.question_id}
               helpfulness={question.question_helpfulness}
               question={question.question_body}
               answer={[question.answers]}
-              // name={props.productInfo.name}
+              name={props.productInfo.name}
               update={props.update}
               darkMode={props.darkMode}
             />
           )}
         </div>
-        <div>
-          <button onClick={() => setShow(true)}>Add Questions +</button>
+        <div className="questions-answers-button-container">
+          <button className ="question-button" onClick={() => setShow(true)}>Add Questions +</button>
           <QuestionModal
+            key={props.product}
             show={show}
             hide={closeModal}
-            // name={props.productInfo.name}
+            name={props.productInfo.name}
             productId={props.product}
             update={props.update}/>
         </div>

@@ -5,7 +5,7 @@ const AnswerList = (props) => {
 
   return (
     <div className="answer"> A:
-      <div className="answerEntry">
+      <div className="answer-entry">
         {props.displayAnswers.map((answer, i) =>
           <Answer
             key={i}

@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 
 const SearchQuestion = (props) => {
 
-  const performSearch = (e) => {
+  const search = (e) => {
     props.searchQuestions(e.target.value);
   };
 
 
   return (
-    <div className="search">
+    <div className="search-question">
       <textarea
-        onChange={(e) => performSearch(e)}
+        onChange={(e) => search(e)}
         type="text"
         cols="144"
         maxLength="200"

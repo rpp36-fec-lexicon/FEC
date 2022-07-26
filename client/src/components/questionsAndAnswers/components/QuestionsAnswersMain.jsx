@@ -24,7 +24,7 @@ class QuestionsAnswersMain extends React.Component {
         productInfo: this.props.productInfo,
         productId: this.props.product
       });
-      this.getQuestions(this.props.product);
+      this.getQuestions(this.state.productId);
     }
   }
 
@@ -39,33 +39,30 @@ class QuestionsAnswersMain extends React.Component {
       params: {
         productId: id
       }
-    })
-      .then((result) => {
-        this.setState({
-          questions: result.data
-        });
-      })
-      .catch((error) => {
-        console.log('Error Getting Questions:', error);
+    }).then((result) => {
+      this.setState({
+        questions: result.data
       });
+    }).catch((error) => {
+      console.log('Error Getting Questions:', error);
+    });
   }
 
   render () {
     return (
-      <div id="qa-module" className={'module_container'}>
-        <div className="qa-title">
+      <div id="qa-module" className={'qa_module_container'}>
+        <div className="questions-and-answers-header">
           <h3>QUESTIONS & ANSWERS</h3>
         </div>
-        <div className="qa-search">
+        <div className="questions-and-answers-search">
           <SearchQuestion searchQuestions={this.searchQuestions.bind(this)}/>
         </div>
-        <div className="qa-list">
+        <div className="questions-and-answers-list">
           <QuestionsAnswersList
             product={this.state.productId}
             questions={this.state.questions}
             productInfo={this.state.productInfo}
             filter={this.state.search}
-            darkMode={this.props.darkMode}
             update={this.componentDidMount.bind(this)}
           />
         </div>

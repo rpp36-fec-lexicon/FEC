@@ -1,6 +1,6 @@
 import React from "react";
 import $ from "jquery";
-import Flickity from "react-flickity-component";
+// import Flickity from "react-flickity-component";
 import RelatedCard from "./RelatedCard.jsx";
 import Comparison from "./Comparison.jsx";
 
@@ -14,8 +14,6 @@ class Related extends React.Component {
       relatedProdName: "",
     };
   }
-
-  componentDidMount() {}
 
   comparison(relatedProdFeat, relatedProdName) {
     this.setState({
@@ -32,13 +30,20 @@ class Related extends React.Component {
   }
 
   render() {
+    // console.log("=======  RELATED PROPS  ======", this.props);
     return (
       <div
+        // aria-hidden="true"
+        role="comparisonModalToggler"
         onClick={() => {
           this.setState({ modalSeen: false });
         }}
       >
-        <div className="comp" onClick={this.comparisonCloser}>
+        <div
+          className="compClass"
+          role="comparisonModalClickClosePreventer"
+          onClick={this.comparisonCloser}
+        >
           {this.state.modalSeen ? (
             <Comparison
               mainProdName={this.props.prodInfo.name}
