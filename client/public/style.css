@@ -1,10 +1,18 @@
+
 html {
   scroll-behavior: smooth;
 }
 
+#app {
+  font-family: "Optima", sans-serif
+}
+
+/****************** REVIEW STARs STYLING ********************/
+/****************** CSS START ********************/
+
 .starFilled {
   z-index: -1;
-  color:#fec84e;
+  color: #fec84e;
   position: absolute;
   top: 0;
   left: 0;
@@ -18,6 +26,10 @@ html {
   display: inline-block;
 }
 
+/****************** CSS END ********************/
+/****************** REVIEW STARs STYLING ********************/
+
+
 /****************** LOGO AND SEARCH BAR STYLING ********************/
 /****************** CSS START ********************/
 
@@ -25,7 +37,7 @@ html {
   margin: 0;
 }
 .allComponents {
-  margin: 5px 5px 5px 5px;
+  margin: 25px 25px 25px 25px;
 }
 
 .mainHeader {
@@ -56,44 +68,42 @@ html {
   border-top: rgb(48, 122, 250);
   border-left: rgb(48, 122, 250);
   border-right: rgb(48, 122, 250);
-  border-bottom-color: white
+  border-bottom-color: white;
+  color: white;
 }
 .searchInput:focus {
-outline: none;
+  outline: none;
 }
 .searchContainer {
   padding: 50px 50px 0px 0px;
 }
 .fa-magnifying-glass {
- padding-left: 5px;
- color: white;
- transition: all .2s ease-in-out;
+  padding-left: 5px;
+  color: white;
+  transition: all 0.2s ease-in-out;
 }
 
 .fa-magnifying-glass:hover {
   padding-left: 5px;
   transform: scale(2);
- }
+}
 
-.searchInput, select, textarea{
-  background-color: white;
-  color: black;
+.searchInput,
+select {
+  color: white;
 }
 /****************** CSS END ********************/
 /****************** LOGO AND SEARCH BAR STYLING ********************/
 
-
-
-
 /****************** RELATED AND OUTFIT STYLING ********************/
 /****************** CSS START ********************/
 
-.modal {
+.compModal {
   position: relative;
   z-index: 1;
 }
 
-.modal_content {
+.compModal_content {
   background-color: white;
   position: absolute;
   top: 20%;
@@ -104,7 +114,7 @@ outline: none;
   /* overflow-y: scroll; */
 }
 
-.comp {
+.compClass {
   position: absolute;
   left: 30%;
 }
@@ -121,18 +131,18 @@ td {
 
 .flex-container {
   display: flex;
-  padding: 15px 15px 15px 15px;
+  padding: 0px 15px 0px 15px;
   margin-right: 50px;
   margin-left: 40px;
 }
 
 .flex-child {
   flex: 1;
-  margin: 15px 15px 15px 15px;
+  margin: 0px 0px 0px 5px;
 }
 
 .flex-child:first-child {
-  margin-right: 20px;
+  margin-right: 5px;
   flex-basis: 100px;
   flex-grow: 0;
   flex-shrink: 0;
@@ -151,12 +161,12 @@ td {
   height: 8px;
 }
 .relatedCarouselOutfit::-webkit-scrollbar-thumb {
-  background-color: black;
+  /* background-color: black; */
 }
 
 .relatedProductsMainClass {
-  padding: 15px 15px 15px 15px;
-  margin: 15px 15px 15px 15px;
+  padding: 0px 15px 0px 15px;
+  margin: 0px 15px 0px 15px;
   position: relative;
 }
 
@@ -167,18 +177,75 @@ td {
   border-radius: 10%;
 }
 
-.outfitAdderBTN {
+/* .outfitAdderBTN {
+  background-color:  rgb(132, 175, 250);
   height: 270px;
   width: 80px;
   font-size: 15px;
   margin-top: 15px;
   border-radius: 10%;
+  transition: all .2s ease-in-out;
+}
+
+ .outfitAdderBTN:hover {
+   padding-left: 5px;
+   transform: scale(1.1);
+  } */
+
+.outfitAdderBTN {
+  height: 270px;
+  width: 80px;
+  background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  outline: 0;
+  margin-top: 20px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.outfitAdderBTN:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  width: 92%;
+}
+
+.outfitAdderBTN:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+    rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
+  transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+  .outfitAdderBTN {
+    padding: 10px 15px;
+  }
 }
 
 .outfitRemoveBTN {
   padding: 0px 0px 0px 0px;
   margin: 0;
-  color:  rgb(48, 122, 250);
+  color: rgb(48, 122, 250);
   float: right;
   font-size: 20px;
   background: white;
@@ -189,8 +256,14 @@ td {
   /* text-shadow: #e2f605; */
 }
 
+.outfitRemoveBTN:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+    rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
+  transform: scale(1.1);
+}
+
 .outfitList {
-  padding: 15px 15px 15px 15px;
+  padding: 0px 15px 0px 15px;
   position: relative;
   overflow: auto;
 }
@@ -217,6 +290,10 @@ td {
   border-color: transparent;
 }
 
+.comparisonBtn:hover {
+  transform: scale(1.5);
+}
+
 .arrow {
   border: solid black;
   border-width: 0 3px 3px 0;
@@ -240,8 +317,8 @@ td {
 }
 
 .carouselContainer {
-  padding: 15px 15px 15px 15px;
-  margin: 15px 15px 15px 15px;
+  padding: 0px 15px 0px 15px;
+  margin: 0px 15px 0px 15px;
   overflow-x: scroll;
 }
 
@@ -251,7 +328,7 @@ td {
 }
 
 .carouselContainer::-webkit-scrollbar-thumb {
-  background-color: black;
+  /* background-color: black; */
 }
 
 /****************** RELATED AND OUTFIT STYLING ********************/
