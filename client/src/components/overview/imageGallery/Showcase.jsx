@@ -1,5 +1,4 @@
 import React from 'react';
-import PrimaryImage from './PrimaryImage.jsx';
 import styled from 'styled-components';
 
 const IMG = styled.img`
@@ -37,17 +36,26 @@ const Div = styled.div`
 const Big = styled.img`
   border: 1px solid;
   border-radius: 15%;
-  height: 752px;
-  width: 752px;
+  height: 852px;
+  width: 852px;
   object-fit: cover;
+  margin-top: 20px;
 `;
 
 const Thumbnails = styled.div`
   position: absolute;
   display: flex;
-  flexDirection: column;
   top: 70px;
   left: 30px;
+  z-index: 2;
+  padding-left: 20px;
+`;
+
+const EnlargedThumbnails = styled.div`
+  position: absolute;
+  display: flex;
+  top: 70px;
+  left: 400px;
   z-index: 2;
   padding-left: 20px;
 `;
@@ -83,7 +91,10 @@ class Showcase extends React.Component {
     if (this.state.photos !== this.props.photos) {
       this.setState({
         photos: this.props.photos,
-        currPhoto: this.props.photos[0]
+        currPhoto: this.props.photos[0],
+        count: 0,
+        min: 0,
+        max: 7
       });
     }
   }
@@ -149,10 +160,16 @@ class Showcase extends React.Component {
   sliceThumbnails(min, max) {
     const {photos} = this.state;
     var setOfPhotos = photos.slice(min, max);
-    console.log('this is set of photos', setOfPhotos);
+    var style;
     return setOfPhotos.map((pic, i) => {
+      if (pic.thumbnail_url === this.state.currPhoto.thumbnail_url) {
+        style = {border: '3px solid rgba(39, 200, 210, 0.9)'};
+      } else {
+        style = {border: 'none'};
+      }
       return (
         <IMG
+          style={style}
           key={pic.url}
           src={pic.thumbnail_url}
           onClick={() => this.handleClick(pic.url)}
@@ -168,8 +185,6 @@ class Showcase extends React.Component {
   }
 
   render() {
-    console.log('Photos props in showcase', this.props.photos.length);
-    console.log('current count', this.state.count);
     if (this.state.modalSeen) {
       return (
         <Div>
@@ -178,39 +193,41 @@ class Showcase extends React.Component {
             alt={this.state.currPhoto.url}
           />
           <i
-            style={{cursor: 'pointer'}}
-            class="fa-solid fa-xmark fa-xl"
+            style={{cursor: 'pointer', position: 'absolute', color: 'white', top: '70px', right: '400px'}}
+            className="fa-solid fa-xmark fa-xl"
             onClick={() => this.expand()}
           />
           {this.handleArrowClick('left') && (
             <i
-              style={{cursor: 'pointer'}}
+              style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', left: '400px'}}
               onClick={() => this.changePhoto(-1)}
-              class='fa fa-arrow-left fa-xl'
+              className='fa fa-arrow-left fa-xl'
             />
           )}
           {this.handleArrowClick('right') && (
             <i
-              style={{cursor: 'pointer'}}
+              style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', right: '400px'}}
               onClick={() => this.changePhoto(1)}
               className='fa fa-arrow-right fa-xl'
             />
           )}
-          {this.sliceThumbnails(this.state.min, this.state.max)}
-          {this.handleArrowClick('up') && (
-            <i
-              style={{cursor: 'pointer'}}
-              onClick={() => this.previousThumbnails()}
-              className='fa fa-angle-up fa-xl'
-            />
-          )}
-          {this.handleArrowClick('down') && (
-            <i
-              style={{cursor: 'pointer'}}
-              onClick={() => this.nextThumbnails()}
-              className='fa fa-angle-down fa-xl'
-            />
-          )}
+          <EnlargedThumbnails style={{flexDirection: 'column'}}>
+            {this.handleArrowClick('up') && (
+              <i
+                style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
+                onClick={() => this.previousThumbnails()}
+                className='fa fa-angle-up fa-xl'
+              />
+            )}
+            {this.sliceThumbnails(this.state.min, this.state.max)}
+            {this.handleArrowClick('down') && (
+              <i
+                style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
+                onClick={() => this.nextThumbnails()}
+                className='fa fa-angle-down fa-xl'
+              />
+            )}
+          </EnlargedThumbnails>
         </Div>
       );
     }
@@ -218,14 +235,14 @@ class Showcase extends React.Component {
       <div style={{position: 'relative'}}>
         {this.handleArrowClick('left') && (
           <i
-            style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', left: '50px', display: 'flex'}}
+            style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', left: '50px'}}
             onClick={() => this.changePhoto(-1)}
-            class='fa fa-arrow-left fa-xl'
+            className='fa fa-arrow-left fa-xl'
           />
         )}
         {this.handleArrowClick('right') && (
           <i
-            style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', right: '50px', display: 'flex'}}
+            style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', right: '50px'}}
             onClick={() => this.changePhoto(1)}
             className='fa fa-arrow-right fa-xl'
           />

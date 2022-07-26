@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import PrimaryImage from './imageGallery/PrimaryImage.jsx';
 import Showcase from './imageGallery/Showcase.jsx';
-import ExpandedView from './imageGallery/ExpandedView.jsx';
 import Checkout from './checkout/Checkout.jsx';
 import ProductDescription from './information/ProductDescription.jsx';
 import ProductInformation from './information/ProductInformation.jsx';
@@ -15,7 +13,7 @@ const Pictures = styled.div`
   justify-content: center;
   display: flex;
   flex-direction: row;
-  min-height: 800px;
+  height: 800px;
 `;
 
 const Div = styled.div`

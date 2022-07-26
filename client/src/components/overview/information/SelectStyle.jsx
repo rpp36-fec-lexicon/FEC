@@ -43,7 +43,7 @@ class SelectStyle extends React.Component {
     console.log('current id', this.props.selectedStyle.style_id);
     return (
       <div>
-        <h3 style={{display: 'inline-block'}}> {'Selected Style  ~  '}</h3>
+        <h3 style={{display: 'inline-block'}}> Selected Style  ~ </h3>
         {/* <BsArrowRightShort size={24}/> */}
         <p style={{display: 'inline-block', paddingLeft: '5px'}}> {this.props.selectedStyle.name} </p>
         <FlexDiv>
