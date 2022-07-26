@@ -184,6 +184,7 @@ class ReviewList extends React.Component {
   }
 
   render() {
+    console.log('this.props in reviewlist', this.props)
     const sameLineStyle = {
       display: 'inline-block'
     };
@@ -194,7 +195,7 @@ class ReviewList extends React.Component {
     let reviewModalComponent;
 
     if (this.state.showReviewModal) {
-      reviewModalComponent = <ReviewModal showReviewModal={this.state.showReviewModal} productInfo={this.props.productInfo} closeReviewModalFunc={this.closeReviewModalFunc} />;
+      reviewModalComponent = <ReviewModal showReviewModal={this.state.showReviewModal} productInfo={this.props.productInfo} closeReviewModalFunc={this.closeReviewModalFunc} productInfo={this.props.productInfo} metaData={this.props.metaData}/>;
     } else {
       reviewModalComponent = null;
     }

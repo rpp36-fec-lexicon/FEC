@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import RatingBreakdown from './RatingBreakdown.jsx';
+import Characteristic from './Characteristic.jsx';
 import userEvent from '@testing-library/user-event';
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-describe('RatingBreakdown', () => {
+describe('Characteristic', () => {
   let temporarySandBox;
   beforeEach(() => {
     temporarySandBox = document.createElement('div');
@@ -16,15 +16,12 @@ describe('RatingBreakdown', () => {
     temporarySandBox = null;
   });
 
-  describe('RatingBreakdown', () => {
-    const ratings = {
-      "1": "1",
-      "2": "1",
-      "3": "1",
-      "4": "1",
-      "5": "1"
-    };
-
-
+  describe('Characteristic Component', () => {
+    const characteristic = ['Fit', {id: 240661, value: 2.5}, 'Too small', 'Too large'];
+    it('should render characteristic title', async() => {
+      render(<Characteristic characteristic={characteristic}/>);
+      const title = screen.getByText('Fit');
+      expect(title).toBeInTheDocument();
+    });
   })
 })

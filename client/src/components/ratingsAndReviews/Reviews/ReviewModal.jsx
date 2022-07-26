@@ -2,6 +2,7 @@ import React from 'react';
 import StarReviewIcon from './StarReviewIcon.jsx';
 import UploadedPhotos from './UploadedPhotos.jsx';
 import UploadPhotoButton from './UploadPhotoButton.jsx';
+import SubmitReviewAlert from './SubmitReviewAlert.jsx';
 
 class ReviewModal extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class ReviewModal extends React.Component {
       starMessage: null,
       reviewBodyMessage: 'Minimum required characters left: 50',
       photos: [],
-      disableUpload: false
+      disableUpload: false,
+      errors: []
     };
     this.ratingMessage = {
       1: 'Poor',
@@ -112,7 +114,7 @@ class ReviewModal extends React.Component {
         });
       });
     } else {
-      document.getElementById('imageMessage').innerHTML = 'Invalid image, please upload again'
+      document.getElementById('imageMessage').innerHTML = 'Invalid image, please upload again';
     }
 
   }
@@ -123,51 +125,90 @@ class ReviewModal extends React.Component {
   }
 
   mandatoryFilledFunc() {
-    // if (!this.state.clickedStar) {
-    //   return false;
-    // }
-
-    // const recommendYesEle = document.getElementById('recommendYes');
-    // const recommendNoEle = document.getElementById('recommendNo');
-    // if (!recommendYesEle.checked && !recommendNo.checked) {
-    //   return false;
-    // }
-
-    const prop1 = document.getElementById('property1').checked;
-    console.log('prop1', prop1)
-    const prop2 = document.getElementById('property2').checked;
-    const prop3 = document.getElementById('property3').checked;
-    const prop4 = document.getElementById('property4').checked;
-    const prop5 = document.getElementById('property5').checked;
-
-    if (!prop1 && !prop2 && !prop3 && !prop4 && !prop5) {
-      console.log('characterics failed')
-      return false;
+    let errors = [];
+    // STAR RATINGS
+    if (!this.state.clickedStar) {
+      errors.push('star rating');
     }
 
+    //RECOMMENDATION
+    const recommendYesEle = document.getElementById('recommendYes');
+    const recommendNoEle = document.getElementById('recommendNo');
+    console.dir(recommendYesEle)
+    if (!recommendYesEle.checked && !recommendNo.checked) {
 
-    // const reviewBodyEle = document.getElementById('reviewBody');
-    // if (reviewBodyEle.value.length === 0 || reviewBodyEle.value.length < 50) {
-    //   return false;
-    // }
+      errors.push('recommendation');
+    }
 
-    // const nicknameEle = document.getElementById('nickname');
-    // if (nicknameEle.value.length === 0) {
-    //   return false;
-    // }
+    //CHARACTERISTICS
+    let charProp1;
+    let charProp2;
+    let charProp3;
+    let charProp4;
+    let charProp5;
 
-    // const email = document.getElementById('email').value;
-    // if (!this.validateEmail(email)) {
-    //   return false;
-    // }
+    ['Size', 'Width', 'Comfort', 'Quality', 'Length', 'Fit'].map(char => {
+      charProp1 = document.getElementById(char + 'Property1').checked;
+      charProp2 = document.getElementById(char + 'Property2').checked;
+      charProp3 = document.getElementById(char + 'Property3').checked;
+      charProp4 = document.getElementById(char + 'Property4').checked;
+      charProp5 = document.getElementById(char + 'Property5').checked;
+
+      if (!charProp1 && !charProp2 && !charProp3 && !charProp4 && !charProp5 ) {
+        errors.push(`characteristic: ${char.toLowerCase()}`);
+      }
+    });
+
+    //REVIEW BODY
+    const reviewBodyEle = document.getElementById('reviewBody');
+    if (reviewBodyEle.value.length === 0 || reviewBodyEle.value.length < 50) {
+      errors.push('review body');
+    }
+
+    //NICKNAME
+    const nicknameEle = document.getElementById('nickname');
+    if (nicknameEle.value.length === 0) {
+      errors.push('nickname');
+    }
+
+    // EMAIL
+    const email = document.getElementById('email').value;
+    if (!this.validateEmail(email)) {
+      errors.push('email');
+    }
+
+    if (errors.length) {
+      this.setState({errors});
+      return false;
+    }
 
     return true;
   }
 
-
-
   submitReviewFunc() {
+    let recommend;
+    let nickname;
+    let reviewInfo = {};
+    const productId = this.props.productInfo.id;
+    const characteristicsId = {};
+    const characteristics = this.props.metaData.characteristics;
+    for (var key in characteristics) {
+      characteristicsId[key] = characteristics[key].id;
+    }
 
+    if (!this.mandatoryFilledFunc()) {
+      const summary = document.getElementById('summary').value;
+      const body = document.getElementById('reviewBody').value;
+      document.getElementById('recommendYes').checked ? recommend = true : recommend = false;
+      nickname = document.getElementById('nickname').value;
+      email = document.getElementById('email').value;
+
+
+
+      reviewInfo['product_id'] = this.props.metaData['product_id'];
+      reviewInfo.rating = this.state.clickedStar;
+
+    }
   }
 
   render() {
@@ -201,6 +242,13 @@ class ReviewModal extends React.Component {
       characteristics.push([key, this.characteristics[key]]);
     }
 
+    let submitReviewAlert;
+    if (this.state.errors.length) {
+      submitReviewAlert = <SubmitReviewAlert errors={this.state.errors}/>;
+    }
+
+
+
     return (
       <div className="reviewModal ">
         <div className="reviewModal-content reviewScrollable">
@@ -223,21 +271,21 @@ class ReviewModal extends React.Component {
 
             <div id="recommend">
               <h3>Do you recommend this product?<sup>*</sup></h3>
-              <input type="radio" id="" name="recommend" value="yes"></input><label htmlFor="">Yes</label>
-              <input type="radio" id="" name="recommend" value="no"></input><label htmlFor="">No</label>
+              <input type="radio" id="recommendYes" name="recommend" value="yes"></input><label htmlFor="">Yes</label>
+              <input type="radio" id="recommendNo" name="recommend" value="no"></input><label htmlFor="">No</label>
             </div>
 
             <div id="characteristics">
-              <h3>Characteristics</h3>
+              <h3>Characteristics<sup>*</sup></h3>
               <div>
                 {characteristics.map((characteristic, index) => {
                   return (<div key={index}>
                     <b>{characteristic[0]}</b>
-                    <input type="radio" id="property1" name="property" value="yes"></input><label htmlFor="">{characteristic[1]['1']}</label>
-                    <input type="radio" id="property2" name="property" value="no"></input><label htmlFor="">{characteristic[1]['2']}</label>
-                    <input type="radio" id="property3" name="property" value="yes"></input><label htmlFor="">{characteristic[1]['3']}</label>
-                    <input type="radio" id="property4" name="property" value="no"></input><label htmlFor="">{characteristic[1]['4']}</label>
-                    <input type="radio" id="property5" name="property" value="no"></input><label htmlFor="">{characteristic[1]['5']}</label>
+                    <input type="radio" id={characteristic[0] + 'Property1'} name={characteristic[0]} value="yes"></input><label htmlFor="">{characteristic[1]['1']}</label>
+                    <input type="radio" id={characteristic[0] + 'Property2'} name={characteristic[0]} value="no"></input><label htmlFor="">{characteristic[1]['2']}</label>
+                    <input type="radio" id={characteristic[0] + 'Property3'} name={characteristic[0]} value="yes"></input><label htmlFor="">{characteristic[1]['3']}</label>
+                    <input type="radio" id={characteristic[0] + 'Property4'} name={characteristic[0]} value="no"></input><label htmlFor="">{characteristic[1]['4']}</label>
+                    <input type="radio" id={characteristic[0] + 'Property5'} name={characteristic[0]} value="no"></input><label htmlFor="">{characteristic[1]['5']}</label>
                   </div>);
                 })}
               </div>
@@ -245,7 +293,7 @@ class ReviewModal extends React.Component {
 
             <div>
               <h3>Review summary</h3>
-              <textarea type="input" className="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!"></textarea>
+              <textarea id="summary" type="input" className="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!"></textarea>
             </div>
 
             <div>
@@ -273,8 +321,10 @@ class ReviewModal extends React.Component {
               <div>For authentication reasons, you will not be emailed</div>
             </div>
 
+            {submitReviewAlert}
+
             <div>
-              <button onClick={() => { this.mandatoryFilledFunc(); }}>Submit review</button>
+              <button onClick={() => { this.submitReviewFunc(); }}>Submit review</button>
             </div>
 
           </div>

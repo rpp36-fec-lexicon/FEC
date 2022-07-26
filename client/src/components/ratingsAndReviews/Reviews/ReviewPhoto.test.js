@@ -17,16 +17,22 @@ describe('ReviewPhoto', ()=>{
   });
 
   describe('ReviewPhoto Component', ()=>{
+    const photo =  {
+      "id": 2454046,
+      "url": "https://images.unsplash.com/photo-1517278322228-3fe7a86cf6f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
+    };
 
     it('should render image as thumbnail style', async () => {
-      const photo =  {
-        "id": 2454046,
-        "url": "https://images.unsplash.com/photo-1517278322228-3fe7a86cf6f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
-      };
-
       render(<ReviewPhoto photo={photo}/>);
-      const buttonEle = screen.getByRole('button', {name: 'ADD A REVIEW  +'});
-      expect(buttonEle).toBeInTheDocument();
+      const image = document.querySelector("img");
+      expect(image.src).toContain("https://images.unsplash.com/photo-1517278322228-3fe7a86cf6f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80");
     });
+
+    it('should invoke showModalFunc when image is clicked', async() => {
+      const mockFunc = jest.fn();
+      render(<ReviewPhoto />);
+    });
+
+
   })
 })

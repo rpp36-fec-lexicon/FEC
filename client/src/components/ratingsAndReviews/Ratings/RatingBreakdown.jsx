@@ -21,7 +21,7 @@ const RatingBreakdown = (props) => {
       }
 
     </div>
-  );``
+  );
 };
 
 export default RatingBreakdown;

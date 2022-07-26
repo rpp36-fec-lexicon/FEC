@@ -45,7 +45,6 @@ const Characteristic = (props) => {
     top: '-2px'
   };
 
-
   return (
     <div>
       {props.characteristic[0]}

@@ -56,12 +56,12 @@ class RatingsAndReviews extends React.Component {
 
       if (clickedEmptyStars.indexOf(star) < 0) {
         clickedEmptyStars.push(star);
-        this.setState({clickedEmptyStars}, () => { document.getElementById('filterRatingEmptyMessage').innerHTML = `There are no reviews with ${star} stars`; })
+        this.setState({clickedEmptyStars}, () => { document.getElementById('filterRatingEmptyMessage').innerHTML = `There are no reviews with ${star} stars`; });
 
       } else {
         const indexOfStar = clickedEmptyStars.indexOf(star);
         clickedEmptyStars.splice(indexOfStar, 1);
-        this.setState({clickedEmptyStars}, () => { document.getElementById('filterRatingEmptyMessage').innerHTML = ''; })
+        this.setState({clickedEmptyStars}, () => { document.getElementById('filterRatingEmptyMessage').innerHTML = ''; });
 
       }
       return;
@@ -136,7 +136,7 @@ class RatingsAndReviews extends React.Component {
                 {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/> */}
               </div>
               <div className="right-panel">
-                <ReviewList reviewData={this.state.reviewData} reviews={this.state.reviews} productInfo={this.props.productInfo}/>
+                <ReviewList reviewData={this.state.reviewData} reviews={this.state.reviews} productInfo={this.props.productInfo} metaData={this.props.metaData}/>
                 {/* <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} /> */}
               </div>
             </div>

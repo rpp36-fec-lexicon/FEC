@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import RatingBreakdown from './RatingBreakdown.jsx';
-import userEvent from '@testing-library/user-event';
+import UploadPhotoButton from './UploadPhotoButton.jsx';
 import {render, screen} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 
-describe('RatingBreakdown', () => {
+describe('UploadPhotoButton', ()=>{
   let temporarySandBox;
   beforeEach(() => {
     temporarySandBox = document.createElement('div');
@@ -16,15 +16,11 @@ describe('RatingBreakdown', () => {
     temporarySandBox = null;
   });
 
-  describe('RatingBreakdown', () => {
-    const ratings = {
-      "1": "1",
-      "2": "1",
-      "3": "1",
-      "4": "1",
-      "5": "1"
-    };
+  describe('UploadPhotoButton Component', () => {
 
 
-  })
-})
+
+  });
+});
+
+
