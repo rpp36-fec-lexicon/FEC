@@ -56,35 +56,35 @@ const QuestionModal = (props) => {
     return null;
   }
   return (
-    <div>
-      <div>
-        <div>
-          <div onClick={()=> props.hide()}>X</div>
-          <h3>Ask Your Question</h3>
-          <div>About the {props.name}</div>
+    <div className = "questions-and-answers-modal">
+      <div className = "questions-and-answers-modal-content">
+        <div className = "questions-and-answers-modal-header">
+          <div className= "questions-and-answers-close-modal-button" onClick={()=> props.hide()}>X</div>
+          <h3 className ="questions-and-answers-modal-title">Ask Your Question</h3>
+          <div className ="questions-and-answers-modal-subtitle">About the {props.name}</div>
         </div>
-        <div>
+        <div className ="questions-and-answers-modal-body">
           <form>
-            <div>
+            <div className="add-question-body">
               <label>Your Question<sup>*</sup>: </label>
               <div><textarea id="question-body" maxLength="1000" rows="5" cols="70" required></textarea></div>
             </div>
-            <div>
+            <div className="add-question-nickname">
               <label>Your Username<sup>*</sup>: </label>
               <input id= 'question-username' type="text" maxLength="60" placeholder="Example: jackson11!" required></input>
-              <div><label>For privacy reasons, do not use your full name or email address</label></div>
+              <div className="qa-disclaimer"><label>For privacy reasons, do not use your full name or email address</label></div>
             </div>
-            <div>
+            <div className="add-question-email">
               <label>Your Email<sup>*</sup>: </label>
               <input id = 'question-email' maxLength="60" placeholder="sample@email.com" required></input>
-              <div><label>For authentication reasons, you will not be emailed</label></div>
+              <div className="qa-disclaimer"><label>For authentication reasons, you will not be emailed</label></div>
             </div>
           </form>
         </div>
         <div>
           <div id="question-error" className="error">{error}</div>
-          <div>
-            <button className="modal-footer-button" onClick={() => validateForm()}>Submit Question</button>
+          <div className="question-submit-button">
+            <button className="question-modal-footer-button" onClick={() => validateForm()}>Submit Question</button>
           </div>
         </div>
       </div>

@@ -76,6 +76,7 @@ const QuestionsAnswersList = (props) => {
       <div className="questions-answers-button-container">
         <button className="question-button" onClick={() => setShow(true)}>Add Questions +</button>
         <QuestionModal
+          key={props.product}
           show={show}
           hide={closeModal}
           name={props.productInfo.name}
@@ -102,10 +103,11 @@ const QuestionsAnswersList = (props) => {
             />
           )}
         </div>
-        <div>
-          <button onClick={() => setCount(count + 2)}>More Questions</button>
-          <button onClick={() => setShow(true)}>Add Questions +</button>
+        <div className="questions-answers-button-container">
+          <button className ="question-button" onClick={() => setCount(count + 2)}>More Questions</button>
+          <button className = "question-button" onClick={() => setShow(true)}>Add Questions +</button>
           <QuestionModal
+            key={props.product}
             show={show}
             hide={closeModal}
             name={props.productInfo.name}
@@ -116,8 +118,8 @@ const QuestionsAnswersList = (props) => {
     );
   } else {
     return (
-      <div>
-        <div>
+      <div className="question-display">
+        <div className="questions-list ">
           {displayQuestions.map((question) =>
             <Question
               key={question.question_id}
@@ -131,9 +133,10 @@ const QuestionsAnswersList = (props) => {
             />
           )}
         </div>
-        <div>
-          <button onClick={() => setShow(true)}>Add Questions +</button>
+        <div className="questions-answers-button-container">
+          <button className ="question-button" onClick={() => setShow(true)}>Add Questions +</button>
           <QuestionModal
+            key={props.product}
             show={show}
             hide={closeModal}
             name={props.productInfo.name}
