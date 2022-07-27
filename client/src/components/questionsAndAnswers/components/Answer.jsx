@@ -13,7 +13,6 @@ const Answer = (props) => {
     return updatedDate.join(' ');
   };
 
-  // const { trackEvent } = useTracking();
   const answerHelpful = () => {
     axios.put('/answerHelpful', {
       answerId: props.id
@@ -21,11 +20,6 @@ const Answer = (props) => {
       .then(() => {
         props.update();
         localStorage.setItem(`${props.id} answer`, true);
-        // trackEvent({
-        //   time: new Date().toString(),
-        //   element: `Answer ${props.id} helpful`,
-        //   widget: 'Question and Answer'
-        // });
       })
       .catch((err) => {
         console.log('ERROR ANSWER HELPFUL NOT UPDATED', err);
@@ -40,11 +34,6 @@ const Answer = (props) => {
         var pressedReportButton = document.getElementById(`${props.id}report`);
         pressedReportButton.innerHTML = 'Reported';
         localStorage.setItem(`${props.id} report`, true);
-        // trackEvent({
-        //   time: new Date().toString(),
-        //   element: `Answer ${props.id} reported`,
-        //   widget: 'Question and Answer'
-        // });
       })
       .catch((err) => {
         console.log('ERROR REPORTING ANSWER', err);
@@ -67,11 +56,6 @@ const Answer = (props) => {
       reportButton.style.pointerEvents = 'auto';
     }
   });
-
-
-
-
-  let darkModeClass1 = props.darkMode ? 'dm' : '';
 
   if (props.name === 'Seller') {
     return (
@@ -107,7 +91,7 @@ const Answer = (props) => {
             <div>,&nbsp;{convertDate(props.date)} |&nbsp;</div>
             <button onClick={() => answerHelpful()} id={props.id + 'answer'}
               className='answer-meta-helpful'>&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;</button>
-            <button className='report-meta-helpful' onClick={() => reportAnswer()} id={props.id + 'report'}
+            <button className='answer-meta-report' onClick={() => reportAnswer()} id={props.id + 'report'}
             >&nbsp;<u>Report</u></button>
           </div>
         </div>

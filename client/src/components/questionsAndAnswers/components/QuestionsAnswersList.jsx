@@ -82,7 +82,6 @@ const QuestionsAnswersList = (props) => {
           productId={props.product}
           update={props.update}/>
       </div>
-
     );
   } else if (displayQuestions.length !== sortedQuestions.length) {
     return (
