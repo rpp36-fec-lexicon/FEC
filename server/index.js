@@ -218,7 +218,7 @@ app.post("/interaction", (req, res) => {
       },
     })
     .then((res) => {
-      // console.log('interaction successful', res.status, res.data);
+      // console.log('interaction successful', res.sta tus, res.data);
       res.send(res.status).json({ dat: res.data });
     })
     .catch((err) => {
