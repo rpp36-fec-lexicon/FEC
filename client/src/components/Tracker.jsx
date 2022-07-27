@@ -11,7 +11,7 @@ const Tracker = (WrappedComponent, nameOfWidget) => {
 
 
     wrapperClickTracker (e) {
-      let element = `${e.target.nodeName} ${e.target.className}`;
+      let element = `${e.target.className}`;
       let time = new Date().toLocaleString('en-US', {hour12: false});
       let widget = nameOfWidget;
       let data = {
