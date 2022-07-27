@@ -1,19 +1,19 @@
-const logInteractions = (data) => {
-  const params = {
-    element: data.element,
-    widget: data.widget,
-    time: data.time,
-  };
-  axios.post(`${baseAPI}interactions`, params, {
+// const axios = require('axios');
+// const baseAPI = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
+// const myAPIKey = process.env.myAPIKey;
+
+const logInteractions = (userEventData) => {
+
+  axios.post(`${baseAPI}/interactions`, userEventData, {
     headers: {
       Authorization: myAPIKey,
     },
   })
-    .then(() => {
-      console.log('interaction successful');
+    .then((res) => {
+      console.log('interaction successful', res.status);
     })
-    .catch(() => {
-      console.log('interaction failed');
+    .catch((err) => {
+      console.log('interaction failed', err);
     });
 };
 

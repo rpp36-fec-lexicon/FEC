@@ -84,7 +84,16 @@ class Comparison extends React.Component {
   render() {
     // console.log("=======  Comparison PROPS  ======", this.props);
     return (
-      <div className="compModal">
+      <div
+        className="compModal"
+        onClick={(e) => {
+          let timeOfClick = new Date().toLocaleString("en-US", {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, "Related Widget", timeOfClick);
+        }}
+      >
         <div className="compModal_content">
           <table>
             <tbody>

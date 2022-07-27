@@ -35,8 +35,13 @@ class Related extends React.Component {
       <div
         // aria-hidden="true"
         role="comparisonModalToggler"
-        onClick={() => {
+        onClick={(e) => {
           this.setState({ modalSeen: false });
+          let timeOfClick = new Date().toLocaleString("en-US", {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, "Related Widget", timeOfClick);
         }}
       >
         <div
@@ -51,6 +56,7 @@ class Related extends React.Component {
               toggle={this.comparison.bind(this)}
               mainProdFeat={this.props.prodInfo.features}
               relatedProdFeat={this.state.relatedProdFeat}
+              userTracker={this.props.userTracker}
             />
           ) : null}{" "}
         </div>
@@ -62,6 +68,7 @@ class Related extends React.Component {
               prodIDChanger={this.props.prodIDChanger}
               comparison={this.comparison.bind(this)}
               relatedItemsUpdater={this.props.relatedItemsUpdater}
+              userTracker={this.props.userTracker}
               key={index}
             />
           ))}

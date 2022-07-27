@@ -113,7 +113,7 @@ class RelatedAndOutfit extends React.Component {
   }
   carouselSizeOnMount() {
     var screenWidth = document.body.clientWidth;
-    var outfitsWidth = this.props.outfitItems.length * 184 + 600;
+    var outfitsWidth = this.props.outfitItems.length * 184 + 600; // RIGHT ARROW NOT DISAPPEARING ON END: bug
     if (screenWidth < outfitsWidth) {
       this.setState({
         xOutfitRightFrame: 1,
@@ -130,7 +130,7 @@ class RelatedAndOutfit extends React.Component {
         prevOutfitItemsLength: this.props.outfitItems.length,
       });
       var screenWidth = document.body.clientWidth;
-      var outfitsWidth = this.props.outfitItems.length * 184 + 600;
+      var outfitsWidth = this.props.outfitItems.length * 184 + 600; // RIGHT ARROW NOT DISAPPEARING ON END: bug
 
       if (screenWidth < outfitsWidth) {
         this.setState({
@@ -156,7 +156,7 @@ class RelatedAndOutfit extends React.Component {
           var sWid = document.querySelector(targetClass).scrollWidth;
           var ofWid = document.querySelector(targetClass).offsetWidth;
           if (Math.round(xLeftFrame) + ofWid !== sWid) {
-            this.setState({ xRightFrame: 1 });
+            this.setState({ xRightFrame: 1 }); // RIGHT ARROW NOT DISAPPEARING ON END: bug <==============
           }
         });
     } else if (targetClass === ".relatedCarouselOutfit") {
@@ -170,7 +170,7 @@ class RelatedAndOutfit extends React.Component {
           var sWid = document.querySelector(targetClass).scrollWidth;
           var ofWid = document.querySelector(targetClass).offsetWidth;
           if (Math.round(xOutfitLeftFrame) + ofWid !== sWid) {
-            this.setState({ xOutfitRightFrame: 1 });
+            this.setState({ xOutfitRightFrame: 1 }); // RIGHT ARROW NOT DISAPPEARING ON END: bug <==============
           }
         });
     }
@@ -188,7 +188,7 @@ class RelatedAndOutfit extends React.Component {
           var sWid = document.querySelector(targetClass).scrollWidth;
           var ofWid = document.querySelector(targetClass).offsetWidth;
           if (Math.round(xLeftFrame) + ofWid === sWid + 1) {
-            this.setState({ xRightFrame: 0 });
+            this.setState({ xRightFrame: 0 }); // RIGHT ARROW NOT DISAPPEARING ON END: bug <==============
           }
         });
     } else if (targetClass === ".relatedCarouselOutfit") {
@@ -202,7 +202,7 @@ class RelatedAndOutfit extends React.Component {
           var sWid = document.querySelector(targetClass).scrollWidth;
           var ofWid = document.querySelector(targetClass).offsetWidth;
           if (Math.round(xOutfitLeftFrame) + ofWid === sWid + 1) {
-            this.setState({ xOutfitRightFrame: 0 });
+            this.setState({ xOutfitRightFrame: 0 }); // RIGHT ARROW NOT DISAPPEARING ON END: bug <==============
           }
         });
     }
@@ -257,7 +257,16 @@ class RelatedAndOutfit extends React.Component {
   render() {
     // console.log("=======  RELATED&OUTFIT PROPS  ======", this.props);
     return (
-      <div>
+      <div
+        className="relatedProductsAndOutfitMainComponent"
+        onClick={(e) => {
+          let timeOfClick = new Date().toLocaleString("en-US", {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, "Related Widget", timeOfClick);
+        }}
+      >
         <span>RELATED PRODUCTS</span>
         <div
           className="relatedProductsMainClass" // mainD
@@ -278,6 +287,7 @@ class RelatedAndOutfit extends React.Component {
               prodIDChanger={this.props.prodIDChanger}
               itemInfoAndStyle={this.state.itemInfoAndStyle}
               relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
+              userTracker={this.props.userTracker}
             />
           </div>{" "}
           {this.state.xRightFrame === 0 ? null : (
@@ -304,6 +314,7 @@ class RelatedAndOutfit extends React.Component {
           rightScroll={this.rightScroll.bind(this)}
           xOutfitRightFrame={this.state.xOutfitRightFrame}
           xOutfitLeftFrame={this.state.xOutfitLeftFrame}
+          userTracker={this.props.userTracker}
         />
       </div>
     );

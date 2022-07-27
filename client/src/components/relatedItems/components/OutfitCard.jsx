@@ -17,9 +17,14 @@ class OutfitCard extends React.Component {
       <div
         role="productIdUpdater"
         className="relatedCarouseOutfitCard"
-        onClick={() => {
+        onClick={(e) => {
           this.props.prodIDChanger(this.props.prodInfo[0].id);
           this.props.relatedItemsUpdater(this.props.prodInfo[0].id);
+          let timeOfClick = new Date().toLocaleString("en-US", {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, "Related-outfit Widget", timeOfClick);
         }}
       >
         <div
@@ -37,6 +42,15 @@ class OutfitCard extends React.Component {
             className="outfitRemoveBTN"
             onClick={(e) => {
               e.stopPropagation();
+              let timeOfClick = new Date().toLocaleString("en-US", {
+                hour12: false,
+              });
+              let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+              this.props.userTracker(
+                element,
+                "Related-outfit Widget",
+                timeOfClick
+              );
               this.props.outfitRemover(this.props.prodInfo[0].id);
             }}
           >

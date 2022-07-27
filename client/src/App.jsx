@@ -25,7 +25,7 @@ class App extends React.Component {
       flag: false,
       outfitItems: [],
       outfitItemsIDs: [],
-      userInputInfo: null,
+      userInputInfo: 72287,
     };
   }
 
@@ -41,6 +41,22 @@ class App extends React.Component {
       outfitItems: pulledItems,
       outfitItemsIDs: existingIDs,
     });
+  }
+
+  userTracker(element, widget, time) {
+    axios
+      .post("/interaction", { element, widget, time })
+      .then((res) => {
+        console.log(
+          "user event successfully sent to interactions api: ",
+          res.status,
+          "event detail: ",
+          { element, widget, time }
+        );
+      })
+      .catch((err) => {
+        console.log("interaction failed", err);
+      });
   }
 
   outfitAdder() {
@@ -162,16 +178,31 @@ class App extends React.Component {
   }
 
   userInputID(userInput) {
-    this.setState({
-      userInputInfo: userInput,
-    });
+    if (userInput.length === 5 && typeof parseInt(userInput) === "number") {
+      this.setState({
+        userInputInfo: userInput,
+      });
+    } else {
+      this.setState({
+        userInputInfo: 72287,
+      });
+    }
   }
 
   render() {
     if (this.state.flag) {
       return (
         <>
-          <div className="mainHeader">
+          <div
+            className="mainHeader"
+            onClick={(e) => {
+              let timeOfClick = new Date().toLocaleString("en-US", {
+                hour12: false,
+              });
+              let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+              this.userTracker(element, "Overview Widget", timeOfClick);
+            }}
+          >
             <div className="mainHeader-child1">
               <img src={logo} className="logo" alt="Atelier company logo" />
             </div>
@@ -209,6 +240,7 @@ class App extends React.Component {
               outfitAdder={this.outfitAdder.bind(this)}
               outfitRemover={this.outfitRemover.bind(this)}
               outfitItems={this.state.outfitItems}
+              userTracker={this.userTracker.bind(this)}
             />
             <QuestionsAnswersMain
               product={this.state.productId}
