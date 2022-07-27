@@ -923,7 +923,7 @@ textarea.reviewBody {
   height: 700px;
   background-color: white;
   /* background-color: rgba(40, 198, 209, 0.9) */
-  border-radius: 10%;
+  border-radius: 7%;
 }
 
 .questions-and-answers-modal-header {

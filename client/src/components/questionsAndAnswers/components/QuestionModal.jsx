@@ -59,7 +59,7 @@ const QuestionModal = (props) => {
     <div className = "questions-and-answers-modal">
       <div className = "questions-and-answers-modal-content">
         <div className = "questions-and-answers-modal-header">
-          <div className= "questions-and-answers-close-modal-button" onClick={()=> props.hide()}>X</div>
+          <div aria-label="XButton" className="attach-photo-close" onClick={()=> props.hide()}>&times;</div>
           <h3 className ="questions-and-answers-modal-title">Ask Your Question</h3>
           <div className ="questions-and-answers-modal-subtitle">About the {props.name}</div>
         </div>
