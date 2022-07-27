@@ -397,6 +397,41 @@ progress {
   text-decoration: none;
   cursor: pointer;
 }
+
+.reviewModal {
+  position: relative;
+  z-index: 1;
+}
+
+.reviewModal-content {
+  background-color: #fefefe;
+  width: 700px;
+  height: 800px;
+  position: absolute;
+  top: 10%;
+  left: 0%;
+  padding: 20px;
+  border: 2px solid black;
+  /* width: 80%; */
+}
+
+.reviewScrollable {
+  height: 800px;
+  overflow: auto;
+  margin: 20px;
+  text-align: justify;
+  padding: 20px;
+}
+
+textarea.reviewSummary {
+  width: 600px;
+  height: 40px;
+}
+
+textarea.reviewBody {
+  width: 600px;
+  height: 400px;
+}
 /* END OF RATINGS AND REVIEWS CSS */
 
 /* QnA */

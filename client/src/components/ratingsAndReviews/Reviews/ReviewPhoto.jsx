@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from './Modal.jsx';
+import PhotoModal from './PhotoModal.jsx';
 
 class ReviewPhoto extends React.Component {
   constructor(props) {
@@ -12,7 +12,6 @@ class ReviewPhoto extends React.Component {
   }
 
   showModalFunc() {
-    console.log('show clicked');
     this.setState({showModal: true});
   }
 
@@ -29,7 +28,7 @@ class ReviewPhoto extends React.Component {
     let modalComponent;
 
     if (this.state.showModal) {
-      modalComponent = <Modal showModal={this.state.showModal} photo={this.props.photo} closeModalFunc={this.closeModalFunc}/>;
+      modalComponent = <PhotoModal showModal={this.state.showModal} photo={this.props.photo} closeModalFunc={this.closeModalFunc}/>;
     }
 
     if (!this.state.showModal) {
@@ -38,8 +37,8 @@ class ReviewPhoto extends React.Component {
 
     return (
       <div>
-        <img onClick={() => { this.showModalFunc(); }} style={thumbnailStyle} src={this.props.photo.url}/>
         {modalComponent}
+        <img onClick={() => { this.showModalFunc(); }} style={thumbnailStyle} src={this.props.photo.url}/>&nbsp;
       </div>
     );
   }
