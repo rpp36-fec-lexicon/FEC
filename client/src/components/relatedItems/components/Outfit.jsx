@@ -85,7 +85,6 @@ class Outfit extends React.Component {
 }
 
 export const Persister = (props) => {
-  // console.log("=======  Persister PROPS  ======", props);
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(props.outfits));
   }, [props]);

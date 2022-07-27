@@ -8,7 +8,6 @@ class Related extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // itemInfoAndStyle: [],
       modalSeen: false,
       relatedProdFeat: [],
       relatedProdName: "",
@@ -30,7 +29,6 @@ class Related extends React.Component {
   }
 
   render() {
-    // console.log("=======  RELATED PROPS  ======", this.props);
     return (
       <div
         // aria-hidden="true"

@@ -11,7 +11,6 @@ class RelatedCard extends React.Component {
   componentDidMount() {}
 
   render() {
-    // console.log("ITEMD PROPS====", this.props);
     return (
       <div
         className="RelatedCarouselItem"

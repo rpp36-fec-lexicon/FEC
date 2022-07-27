@@ -56,7 +56,7 @@ class App extends React.Component {
         // );
       })
       .catch((err) => {
-        console.log("interaction failed", err);
+        throw new Error("Tracking failed: ", err);
       });
   }
 
@@ -180,12 +180,12 @@ class App extends React.Component {
         });
       })
       .catch((err) => {
-        console.log(err);
+        throw new Error("Updating product failed: ", err);
       });
   }
 
   userInputID(userInput) {
-    if (userInput.length === 5 && typeof parseInt(userInput) === "number") {
+    if (userInput.length === 5) {
       this.setState({
         userInputInfo: userInput,
       });
@@ -217,7 +217,7 @@ class App extends React.Component {
               <div className="searchContainer">
                 <input
                   className="searchInput"
-                  type="text"
+                  type="number"
                   onChange={(e) => this.userInputID(e.target.value)}
                 ></input>
                 <i

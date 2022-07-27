@@ -12,7 +12,6 @@ class OutfitCard extends React.Component {
   componentDidMount() {}
 
   render() {
-    // console.log("=======  OUTFIT CARD PROPS  ======", this.props);
     return (
       <div
         role="productIdUpdater"

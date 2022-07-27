@@ -25,7 +25,6 @@ app.get("/products/:proID", (req, res) => {
     headers: { Authorization: myAPIKey },
   })
     .then((prodInfo) => {
-      // console.log('RESSS', req.url)
       res.send(prodInfo.data);
     })
     .catch((err) => res.status(400));
@@ -50,7 +49,6 @@ app.get("/products/:proID/styles", (req, res) => {
     headers: { Authorization: myAPIKey },
   })
     .then((relatedProdIDStyles) => {
-      // console.log('relatedProdIDStyles', relatedProdIDStyles);
       res.send(relatedProdIDStyles.data);
     })
     .catch((err) => res.status(400));

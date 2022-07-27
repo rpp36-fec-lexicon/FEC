@@ -94,23 +94,32 @@ class RelatedAndOutfit extends React.Component {
                       });
                     },
                     error: (err) => {
-                      console.log(err);
+                      throw new Error(
+                        "Retrieving metadata for related product failed (in relatedDataRequest function): ",
+                        err
+                      );
                     },
                   });
                 },
                 error: (err) => {
-                  console.log(err);
+                  throw new Error(
+                    "Retrieving style data for related product failed (in relatedDataRequest function): ",
+                    err
+                  );
                 },
               });
             },
             error: (err) => {
-              console.log(err);
+              throw new Error(
+                "Retrieving product data for related product failed (in relatedDataRequest function): ",
+                err
+              );
             },
           });
         });
       },
       error: (err) => {
-        console.log(err);
+        throw new Error("Retrieving ids of related products failed: ", err);
       },
     });
   }
@@ -122,19 +131,16 @@ class RelatedAndOutfit extends React.Component {
     var outfitsWidth = this.props.outfitItems.length * 182.67 + 110 + 280;
 
     if (screenWidth < outfitsWidth) {
-      // console.log("if");
       this.setState({
         xOutfitRightFrame: 1,
       });
     } else {
-      // console.log("else");
       this.setState({
         xOutfitRightFrame: 0,
       });
     }
   }
   carouselSizeOnUpdate() {
-    // console.log("firign");
     if (this.props.outfitItems.length !== this.state.prevOutfitItemsLength) {
       this.setState({
         prevOutfitItemsLength: this.props.outfitItems.length,
@@ -157,7 +163,6 @@ class RelatedAndOutfit extends React.Component {
 
   leftScroll(targetClass) {
     if (targetClass === ".carouselContainer") {
-      // console.log("left related");
       document.querySelector(targetClass).scrollBy(-200, 0);
       document
         .querySelector(targetClass)
@@ -171,7 +176,6 @@ class RelatedAndOutfit extends React.Component {
           }
         });
     } else if (targetClass === ".relatedCarouselOutfit") {
-      // console.log("left outfit");
       document.querySelector(targetClass).scrollBy(-200, 0);
       document
         .querySelector(targetClass)
@@ -256,23 +260,31 @@ class RelatedAndOutfit extends React.Component {
                   });
                 },
                 error: (err) => {
-                  console.log(err);
+                  throw new Error(
+                    "Retrieving style data for related product failed (in relatedItemsUpdater function): ",
+                    err
+                  );
                 },
               });
             },
             error: (err) => {
-              console.log(err);
+              throw new Error(
+                "Retrieving product data for related product failed (in relatedItemsUpdater function): ",
+                err
+              );
             },
           });
         });
       },
       error: (err) => {
-        console.log(err);
+        throw new Error(
+          "Retrieving ids of related products failed (in relatedItemsUpdater function): ",
+          err
+        );
       },
     });
   }
   render() {
-    // console.log("=======  RELATED&OUTFIT PROPS  ======", this.props);
     return (
       <div
         className="relatedProductsAndOutfitMainComponent"
