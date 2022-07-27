@@ -49,7 +49,6 @@ const AnswerModal = (props) => {
       })
         .then(() => {
           setThumbnails([]);
-          console.log(thumbnails);
           props.hide();
           props.update();
         })

@@ -195,14 +195,25 @@ app.post('/products/:product_id/styles', (req, res) => {
   });
 });
 
-app.get('/interaction', (req, res) => {
-  res.send('interaction was success');
-});
-
-app.post('/interaction', (req, res) => {
-  const data = req.body;
-  interaction.logInteractions(data);
-  res.send('interaction was success');
+app.post('/interactions', (req, res) => {
+  // eslint-disable-next-line quotes
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions`;
+  console.log(req.body);
+  axios({
+    method: 'post',
+    url: url,
+    data: req.body,
+    headers: {
+      Authorization: myAPIKey
+    }
+  })
+    .then(() => {
+      return res.status(200).end();
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).send('server failed to send clicks data');
+    });
 });
 
 app.listen(port, () => {

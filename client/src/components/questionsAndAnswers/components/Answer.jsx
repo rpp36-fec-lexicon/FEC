@@ -86,7 +86,7 @@ const Answer = (props) => {
             <div className="seller"> &nbsp;{props.name}</div>
             <div>,&nbsp;{convertDate(props.date)} |&nbsp;</div>
             <button onClick={() => answerHelpful()} id={props.id + 'answer'}
-              className='answer-meta-helpful'>&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
+              className='answer-meta-helpful'>&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;</button>
             <button onClick={() => reportAnswer()} id={props.id + 'report'}
               className='answer-meta-report'>&nbsp;<u>Report</u></button>
           </div>
@@ -106,8 +106,8 @@ const Answer = (props) => {
             <div>&nbsp;{props.name}</div>
             <div>,&nbsp;{convertDate(props.date)} |&nbsp;</div>
             <button onClick={() => answerHelpful()} id={props.id + 'answer'}
-              className='answer-meta-helpful'>&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
-            <button onClick={() => reportAnswer()} id={props.id + 'report'}
+              className='answer-meta-helpful'>&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;</button>
+            <button className='report-meta-helpful' onClick={() => reportAnswer()} id={props.id + 'report'}
             >&nbsp;<u>Report</u></button>
           </div>
         </div>
