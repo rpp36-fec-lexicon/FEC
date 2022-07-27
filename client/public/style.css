@@ -243,6 +243,7 @@ td {
 }
 
 .outfitRemoveBTN {
+  cursor: pointer;
   padding: 0px 0px 0px 0px;
   margin: 0;
   color: rgb(48, 122, 250);
@@ -286,6 +287,7 @@ td {
 }
 
 .comparisonBtn {
+  cursor: pointer;
   float: right;
   background: transparent;
   border-color: transparent;

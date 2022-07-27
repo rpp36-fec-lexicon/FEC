@@ -15,6 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../client/public"));
 
+// related product api request below //
+// ========== api call start ========//
+
 app.get("/products/:proID", (req, res) => {
   axios({
     method: "GET",
@@ -22,6 +25,7 @@ app.get("/products/:proID", (req, res) => {
     headers: { Authorization: myAPIKey },
   })
     .then((prodInfo) => {
+      // console.log('RESSS', req.url)
       res.send(prodInfo.data);
     })
     .catch((err) => res.status(400));
@@ -51,6 +55,7 @@ app.get("/products/:proID/styles", (req, res) => {
     })
     .catch((err) => res.status(400));
 });
+// ========== api calls end ========//
 
 // API CALLS FOR RATINGS AND REVIEWS
 app.get("/reviews", (req, res) => {
@@ -167,6 +172,7 @@ app.get("/products", (req, res) => {
       res.send(err);
     } else {
       // console.log(data);
+
       res.status(200);
       res.send(data);
     }
@@ -174,15 +180,14 @@ app.get("/products", (req, res) => {
 });
 
 app.post("/products/:product_id", (req, res) => {
-  // console.log(req.body.params);
-  // res.render('products' + req.body.productId);
+
   data.getProductInfo(req.body.params.productId, (err, data) => {
     if (err) {
       console.log(err);
       res.status(400);
       res.send(err);
     } else {
-      // console.log(data);
+
       res.status(200);
       res.send(data);
     }

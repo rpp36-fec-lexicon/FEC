@@ -31,6 +31,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.prodIDChanger(this.state.productId);
+
     // eslint-disable-next-line no-use-before-define
     var pulledItems = storageGetter();
     var existingIDs = [];
@@ -125,6 +126,12 @@ class App extends React.Component {
 
   updateProduct(proId) {
     this.setState({ flag: false });
+
+    // adds id to url
+    const url = new URL(window.location);
+    url.searchParams.set("id", proId);
+    window.history.pushState({}, "", url);
+
     Promise.all([
       this.getProductInfo(),
       this.getProductStyles(),

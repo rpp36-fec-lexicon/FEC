@@ -120,14 +120,7 @@ class RelatedAndOutfit extends React.Component {
     // add btn: 110px
     // padd/marg: 15+15 +40+40 +50+40 +15+15 +25+25= 280
     var outfitsWidth = this.props.outfitItems.length * 182.67 + 110 + 280;
-    console.log(
-      "sreW",
-      screenWidth,
-      "outW",
-      outfitsWidth,
-      "itms",
-      this.props.outfitItems.length
-    );
+
     if (screenWidth < outfitsWidth) {
       // console.log("if");
       this.setState({
@@ -221,7 +214,7 @@ class RelatedAndOutfit extends React.Component {
           this.setState({ xOutfitLeftFrame });
           var sWid = document.querySelector(targetClass).scrollWidth;
           var ofWid = document.querySelector(targetClass).offsetWidth;
-          console.log(sWid, ofWid, Math.round(xOutfitLeftFrame));
+          // console.log(sWid, ofWid, Math.round(xOutfitLeftFrame));
           if (
             Math.round(xOutfitLeftFrame) + ofWid === sWid ||
             Math.round(xOutfitLeftFrame) + ofWid === sWid - 1
