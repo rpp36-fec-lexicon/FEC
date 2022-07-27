@@ -12,50 +12,132 @@ class RatingsAndReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: 71697,
-      reviews: [],
-      filterRatingClickCount: 0,
-      star5: false,
-      star4: false,
-      star3: false,
-      star2: false,
-      star1: false
+      // productId: 71697,
+      reviewData: null,
+      reviews: null,
+      metaData: null,
+      rating: null,
+      totalNumberOfRatings: null,
+      clickedStars: [],
+      clickedEmptyStars: [],
+      ratedStars: null,
     };
-    this.filterRating = this.filterRating.bind(this);
+    this.filterRatingFunc = this.filterRatingFunc.bind(this);
   }
 
-  filterRating(starRating) {
+  componentDidMount() {
+    const reviews = this.props.reviews;
+    const reviewData = this.props.reviewData;
+    const metaData = this.props.metaData;
+    const rating = this.props.rating;
+    const totalNumberOfRatings = this.props.totalNumberOfRatings;
+    this.setState({reviews, reviewData, metaData, rating, totalNumberOfRatings});
+  }
+
+  filterRatingFunc(star) {
+    // const star = parseInt(starRating);
     let filteredReviews = [];
-    this.getAllReviewsFunc
-      .then((response) => {
-        const allReviews = response.data.results;
-        allReviews.forEach((review) => {
-          if (review.rating === starRating) {
+    const reviews = this.props.reviews;
+    let currentStars;
+    let clickedEmptyStars;
+    let ratedStars = {};
+
+    reviews.forEach(review => {
+      if (ratedStars[review.rating] === undefined) {
+        ratedStars[review.rating] = 1;
+      } else {
+        ratedStars[review.rating]++;
+      }
+    })
+
+    if (ratedStars[star] === undefined) {
+      console.log(`There are no reviews with ${star} stars`)
+      clickedEmptyStars = this.state.clickedEmptyStars.slice();
+
+      if (clickedEmptyStars.indexOf(star) < 0) {
+        clickedEmptyStars.push(star);
+        this.setState({clickedEmptyStars}, () => { document.getElementById('filterRatingEmptyMessage').innerHTML = `There are no reviews with ${star} stars`; });
+
+      } else {
+        const indexOfStar = clickedEmptyStars.indexOf(star);
+        clickedEmptyStars.splice(indexOfStar, 1);
+        this.setState({clickedEmptyStars}, () => { document.getElementById('filterRatingEmptyMessage').innerHTML = ''; });
+
+      }
+      return;
+    }
+
+    if (this.state.clickedStars.length) {
+      currentStars = this.state.clickedStars.slice();
+
+      if (currentStars.indexOf(star) < 0) {
+        currentStars.push(star);
+        filteredReviews = this.state.reviews.slice();
+        reviews.forEach(review => {
+          if (review.rating === star) {
             filteredReviews.push(review);
           }
         });
-        this.setState({ reviews: filteredReviews });
-      })
-      .catch((err) => {
-        console.log('error fetching reviews in filterRating', err);
+
+        document.getElementById('filterRatingMessage').innerHTML = `Current star rating filters: ${currentStars.join(', ')}`;
+
+      } else {
+        // currentStars = this.state.clickedStars.slice();
+        const indexOfStar = currentStars.indexOf(star);
+        currentStars.splice(indexOfStar, 1);
+        filteredReviews = this.state.reviews.slice();
+        for (var i = filteredReviews.length - 1; i > -1; i--) {
+          if (filteredReviews[i].rating === star) {
+            filteredReviews.splice(i, 1);
+          }
+        }
+        if (!currentStars.length) {
+          document.getElementById('filterRatingMessage').innerHTML = '';
+        } else {
+
+          document.getElementById('filterRatingMessage').innerHTML = `Current star rating filters: ${currentStars.join(', ')}`;
+        }
+
+      }
+
+      if (!filteredReviews.length) {
+
+        this.setState(
+          {reviews: null, clickedStars: null},
+          () => { this.setState({reviews: this.props.reviews, clickedStars: currentStars})}
+        );
+      }
+      this.setState({reviews: filteredReviews, clickedStars: currentStars});
+
+    } else if (!this.state.clickedStars.length) {
+      currentStars = [];
+      currentStars.push(star);
+      reviews.forEach(review => {
+        if (review.rating === star) {
+          filteredReviews.push(review);
+        }
       });
+      document.getElementById('filterRatingMessage').innerHTML = `Current star rating filters: ${currentStars.join(', ')}`;
+      this.setState({reviews: filteredReviews, clickedStars: currentStars, filterRatingMessage: `Current star rating filters: ${currentStars.join(', ')}`});
+    }
+
   }
 
   render() {
-    // console.log('props in ratingsreviews', this.props);
-    if (this.props.reviews !== null) {
+    console.log('productinfo', this.props.productInfo)
+    if (this.state.reviews !== null) {
       return (
         <div>
           <h3>RATINGS & REVIEWS</h3>
           <div className="content-container">
             <div className="row">
               <div className="left-panel">
-                {/* <RatingSummary metaData={this.props.metaData} rating={this.props.rating} totalNumberOfRatings={this.props.totalNumberOfRatings} filterRating={this.filterRating}/> */}
-                <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/>
+                <RatingSummary metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} filterRatingFunc={this.filterRatingFunc} clickedStars={this.state.clickedStars} filterRatingMessage={this.state.filterRatingMessage}/>
+                {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/> */}
               </div>
               <div className="right-panel">
-                {/* <ReviewList reviewData={this.props.reviewData} reviews={this.props.reviews} /> */}
-                <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} />
+                <ReviewList reviewData={this.state.reviewData} reviews={this.state.reviews} productInfo={this.props.productInfo} metaData={this.props.metaData}/>
+                {/* <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} /> */}
               </div>
             </div>
           </div>

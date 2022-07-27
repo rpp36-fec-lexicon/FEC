@@ -1,16 +1,25 @@
 import React from 'react';
 
 const ReviewsHeading = (props) => {
+
+  const sortFunc = (value) => {
+    if (value === 'helpful') {
+      props.sortByHelpfulnessFunc();
+    } else if (value === 'relevance') {
+      props.sortByRelevanceFunc();
+    } else if (value === 'newest') {
+      props.sortByNewestFunc();
+    }
+  };
+
   return (
     <div>
       {props.reviews.length} reviews, sorted by
-      <select>
-        <option id="relevance" onClick={() => { props.sortByRelevanceFunc(); }}>Relevance</option>
-        <option id="helpful" onClick={() => { props.sortByHelpfulnessFunc(); }}>Helpful</option>
-
-        <option id="newest" onClick={() => { props.sortByNewestFunc(); }}>Newest</option>
+      <select id="sort" onChange={(e) => { sortFunc(e.target.value); }}>
+        <option value="relevance">Relevance</option>
+        <option value="helpful">Helpful</option>
+        <option value="newest">Newest</option>
       </select>
-      <button id="helpful" onClick={() => { props.sortByHelpfulnessFunc(); }}>helpful sort</button>
     </div>
   );
 };

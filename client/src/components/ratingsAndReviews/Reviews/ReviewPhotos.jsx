@@ -3,12 +3,12 @@ import ReviewPhoto from './ReviewPhoto.jsx';
 
 const ReviewPhotos = (props) => {
   const sameLineStyle = {
-    display: 'inline-block'
+    display: 'flex'
   };
 
   return (
-    <div>
-      <br></br>
+    <div style={sameLineStyle}>
+
       {props.photos.map(photo => {
         return <ReviewPhoto photo={photo} key={photo.id} />;
       })}

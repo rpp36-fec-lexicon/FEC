@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import RatingSummary from '../Ratings/RatingSummary.jsx';
+import RatingSummary from './RatingSummary.jsx';
 import userEvent from '@testing-library/user-event';
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';

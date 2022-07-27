@@ -12,7 +12,7 @@ const SellerResponse = (props) => {
   return (
     <div style={responseStyle}>
       <br></br>
-      <div style={boldStyle}>Response:</div>
+      <div style={boldStyle}>Response from Seller:</div>
       <br></br>
       <div>{props.response}</div>
     </div>

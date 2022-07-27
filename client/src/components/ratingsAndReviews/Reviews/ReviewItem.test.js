@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import ReviewItem from '../Reviews/ReviewItem.jsx';
+import ReviewItem from './ReviewItem.jsx';
 import userEvent from '@testing-library/user-event';
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
