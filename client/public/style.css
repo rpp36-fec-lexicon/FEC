@@ -266,6 +266,7 @@ td {
   padding: 0px 15px 0px 15px;
   position: relative;
   overflow: auto;
+  z-index: 2;
 }
 .outfitList::-webkit-scrollbar {
   display: none;
@@ -302,6 +303,7 @@ td {
   cursor: pointer;
 }
 .left {
+  margin-left: 5px;
   position: absolute;
   left: 0;
   top: 50%;
@@ -309,6 +311,7 @@ td {
   -webkit-transform: rotate(135deg);
 }
 .right {
+  margin-right: 1px;
   position: absolute;
   right: 0;
   top: 50%;

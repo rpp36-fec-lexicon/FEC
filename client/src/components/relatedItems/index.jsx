@@ -30,7 +30,10 @@ class RelatedAndOutfit extends React.Component {
       success: (arrayOfProdIDs) => {
         // FOR SCREEN WIDTH CALCULATION
         var screenWidth = document.body.clientWidth;
-        var relatedProdsWidth = arrayOfProdIDs.length * 184 + 120;
+        // card width (including padd/margin): 182.67 px
+        // container pad/wid: 60px
+        var relatedProdsWidth = arrayOfProdIDs.length * 182.67 + 60;
+
         if (screenWidth < relatedProdsWidth) {
           this.setState({
             xRightFrame: 1,
@@ -113,24 +116,39 @@ class RelatedAndOutfit extends React.Component {
   }
   carouselSizeOnMount() {
     var screenWidth = document.body.clientWidth;
-    var outfitsWidth = this.props.outfitItems.length * 184 + 600; // RIGHT ARROW NOT DISAPPEARING ON END: bug
+    // card width: 182.67px
+    // add btn: 110px
+    // padd/marg: 15+15 +40+40 +50+40 +15+15 +25+25= 280
+    var outfitsWidth = this.props.outfitItems.length * 182.67 + 110 + 280;
+    console.log(
+      "sreW",
+      screenWidth,
+      "outW",
+      outfitsWidth,
+      "itms",
+      this.props.outfitItems.length
+    );
     if (screenWidth < outfitsWidth) {
+      // console.log("if");
       this.setState({
         xOutfitRightFrame: 1,
       });
     } else {
+      // console.log("else");
       this.setState({
         xOutfitRightFrame: 0,
       });
     }
   }
   carouselSizeOnUpdate() {
+    // console.log("firign");
     if (this.props.outfitItems.length !== this.state.prevOutfitItemsLength) {
       this.setState({
         prevOutfitItemsLength: this.props.outfitItems.length,
       });
+
       var screenWidth = document.body.clientWidth;
-      var outfitsWidth = this.props.outfitItems.length * 184 + 600; // RIGHT ARROW NOT DISAPPEARING ON END: bug
+      var outfitsWidth = this.props.outfitItems.length * 182.67 + 100 + 280;
 
       if (screenWidth < outfitsWidth) {
         this.setState({
@@ -147,7 +165,7 @@ class RelatedAndOutfit extends React.Component {
   leftScroll(targetClass) {
     if (targetClass === ".carouselContainer") {
       // console.log("left related");
-      document.querySelector(targetClass).scrollBy(-250, 0);
+      document.querySelector(targetClass).scrollBy(-200, 0);
       document
         .querySelector(targetClass)
         .addEventListener("scroll", (event) => {
@@ -156,12 +174,12 @@ class RelatedAndOutfit extends React.Component {
           var sWid = document.querySelector(targetClass).scrollWidth;
           var ofWid = document.querySelector(targetClass).offsetWidth;
           if (Math.round(xLeftFrame) + ofWid !== sWid) {
-            this.setState({ xRightFrame: 1 }); // RIGHT ARROW NOT DISAPPEARING ON END: bug <==============
+            this.setState({ xRightFrame: 1 });
           }
         });
     } else if (targetClass === ".relatedCarouselOutfit") {
       // console.log("left outfit");
-      document.querySelector(targetClass).scrollBy(-250, 0);
+      document.querySelector(targetClass).scrollBy(-200, 0);
       document
         .querySelector(targetClass)
         .addEventListener("scroll", (event) => {
@@ -170,7 +188,7 @@ class RelatedAndOutfit extends React.Component {
           var sWid = document.querySelector(targetClass).scrollWidth;
           var ofWid = document.querySelector(targetClass).offsetWidth;
           if (Math.round(xOutfitLeftFrame) + ofWid !== sWid) {
-            this.setState({ xOutfitRightFrame: 1 }); // RIGHT ARROW NOT DISAPPEARING ON END: bug <==============
+            this.setState({ xOutfitRightFrame: 1 });
           }
         });
     }
@@ -178,8 +196,7 @@ class RelatedAndOutfit extends React.Component {
 
   rightScroll(targetClass) {
     if (targetClass === ".carouselContainer") {
-      // console.log("right related");
-      document.querySelector(targetClass).scrollBy(250, 0);
+      document.querySelector(targetClass).scrollBy(200, 0);
       document
         .querySelector(targetClass)
         .addEventListener("scroll", (event) => {
@@ -187,13 +204,16 @@ class RelatedAndOutfit extends React.Component {
           this.setState({ xLeftFrame });
           var sWid = document.querySelector(targetClass).scrollWidth;
           var ofWid = document.querySelector(targetClass).offsetWidth;
-          if (Math.round(xLeftFrame) + ofWid === sWid + 1) {
-            this.setState({ xRightFrame: 0 }); // RIGHT ARROW NOT DISAPPEARING ON END: bug <==============
+          // console.log("sw", sWid, "ow", ofWid, "xLF", Math.round(xLeftFrame));
+          if (
+            Math.round(xLeftFrame) + ofWid === sWid ||
+            Math.round(xLeftFrame) + ofWid === sWid - 1
+          ) {
+            this.setState({ xRightFrame: 0 });
           }
         });
     } else if (targetClass === ".relatedCarouselOutfit") {
-      // console.log("right outfit");
-      document.querySelector(targetClass).scrollBy(250, 0);
+      document.querySelector(targetClass).scrollBy(200, 0);
       document
         .querySelector(targetClass)
         .addEventListener("scroll", (event) => {
@@ -201,8 +221,12 @@ class RelatedAndOutfit extends React.Component {
           this.setState({ xOutfitLeftFrame });
           var sWid = document.querySelector(targetClass).scrollWidth;
           var ofWid = document.querySelector(targetClass).offsetWidth;
-          if (Math.round(xOutfitLeftFrame) + ofWid === sWid + 1) {
-            this.setState({ xOutfitRightFrame: 0 }); // RIGHT ARROW NOT DISAPPEARING ON END: bug <==============
+          console.log(sWid, ofWid, Math.round(xOutfitLeftFrame));
+          if (
+            Math.round(xOutfitLeftFrame) + ofWid === sWid ||
+            Math.round(xOutfitLeftFrame) + ofWid === sWid - 1
+          ) {
+            this.setState({ xOutfitRightFrame: 0 });
           }
         });
     }

@@ -47,12 +47,12 @@ class App extends React.Component {
     axios
       .post("/interaction", { element, widget, time })
       .then((res) => {
-        console.log(
-          "user event successfully sent to interactions api: ",
-          res.status,
-          "event detail: ",
-          { element, widget, time }
-        );
+        // console.log(
+        //   "user event successfully sent to interactions api: ",
+        //   res.status,
+        //   "event detail: ",
+        //   { element, widget, time }
+        // );
       })
       .catch((err) => {
         console.log("interaction failed", err);
