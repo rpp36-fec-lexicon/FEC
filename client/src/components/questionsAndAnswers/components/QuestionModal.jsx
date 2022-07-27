@@ -84,7 +84,7 @@ const QuestionModal = (props) => {
         <div>
           <div id="question-error" className="error">{error}</div>
           <div className="question-submit-button">
-            <button className="question-modal-footer-button" onClick={() => validateForm()}>Submit Question</button>
+            <button className="answer-button" onClick={() => validateForm()}>Submit Question</button>
           </div>
         </div>
       </div>
