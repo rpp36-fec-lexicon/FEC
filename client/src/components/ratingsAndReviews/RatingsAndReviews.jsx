@@ -1,12 +1,14 @@
-import React from 'react';
-import ReviewList from './Reviews/ReviewList.jsx';
-import RatingSummary from './Ratings/RatingSummary.jsx';
-const sampleReviewData = require('./sampleData/sampleReviews.js').sampleReviews;
-const sampleReviews = require('./sampleData/sampleReviews.js').sampleReviews.results;
-const sampleMeta = require('./sampleData/sampleMeta.js').sampleMeta;
-const sampleRating = require('./sampleData/sampleMeta.js').rating;
-const sampleTotalNumberOfRatings = require('./sampleData/sampleMeta.js').totalNumberOfRatings;
-const axios = require('axios');
+import React from "react";
+import ReviewList from "./Reviews/ReviewList.jsx";
+import RatingSummary from "./Ratings/RatingSummary.jsx";
+const sampleReviewData = require("./sampleData/sampleReviews.js").sampleReviews;
+const sampleReviews = require("./sampleData/sampleReviews.js").sampleReviews
+  .results;
+const sampleMeta = require("./sampleData/sampleMeta.js").sampleMeta;
+const sampleRating = require("./sampleData/sampleMeta.js").rating;
+const sampleTotalNumberOfRatings =
+  require("./sampleData/sampleMeta.js").totalNumberOfRatings;
+const axios = require("axios");
 
 class RatingsAndReviews extends React.Component {
   constructor(props) {
@@ -31,7 +33,13 @@ class RatingsAndReviews extends React.Component {
     const metaData = this.props.metaData;
     const rating = this.props.rating;
     const totalNumberOfRatings = this.props.totalNumberOfRatings;
-    this.setState({reviews, reviewData, metaData, rating, totalNumberOfRatings});
+    this.setState({
+      reviews,
+      reviewData,
+      metaData,
+      rating,
+      totalNumberOfRatings,
+    });
   }
 
   filterRatingFunc(star) {
@@ -42,27 +50,31 @@ class RatingsAndReviews extends React.Component {
     let clickedEmptyStars;
     let ratedStars = {};
 
-    reviews.forEach(review => {
+    reviews.forEach((review) => {
       if (ratedStars[review.rating] === undefined) {
         ratedStars[review.rating] = 1;
       } else {
         ratedStars[review.rating]++;
       }
-    })
+    });
 
     if (ratedStars[star] === undefined) {
-      console.log(`There are no reviews with ${star} stars`)
+      console.log(`There are no reviews with ${star} stars`);
       clickedEmptyStars = this.state.clickedEmptyStars.slice();
 
       if (clickedEmptyStars.indexOf(star) < 0) {
         clickedEmptyStars.push(star);
-        this.setState({clickedEmptyStars}, () => { document.getElementById('filterRatingEmptyMessage').innerHTML = `There are no reviews with ${star} stars`; });
-
+        this.setState({ clickedEmptyStars }, () => {
+          document.getElementById(
+            "filterRatingEmptyMessage"
+          ).innerHTML = `There are no reviews with ${star} stars`;
+        });
       } else {
         const indexOfStar = clickedEmptyStars.indexOf(star);
         clickedEmptyStars.splice(indexOfStar, 1);
-        this.setState({clickedEmptyStars}, () => { document.getElementById('filterRatingEmptyMessage').innerHTML = ''; });
-
+        this.setState({ clickedEmptyStars }, () => {
+          document.getElementById("filterRatingEmptyMessage").innerHTML = "";
+        });
       }
       return;
     }
@@ -73,14 +85,15 @@ class RatingsAndReviews extends React.Component {
       if (currentStars.indexOf(star) < 0) {
         currentStars.push(star);
         filteredReviews = this.state.reviews.slice();
-        reviews.forEach(review => {
+        reviews.forEach((review) => {
           if (review.rating === star) {
             filteredReviews.push(review);
           }
         });
 
-        document.getElementById('filterRatingMessage').innerHTML = `Current star rating filters: ${currentStars.join(', ')}`;
-
+        document.getElementById(
+          "filterRatingMessage"
+        ).innerHTML = `Current star rating filters: ${currentStars.join(", ")}`;
       } else {
         // currentStars = this.state.clickedStars.slice();
         const indexOfStar = currentStars.indexOf(star);
@@ -92,39 +105,48 @@ class RatingsAndReviews extends React.Component {
           }
         }
         if (!currentStars.length) {
-          document.getElementById('filterRatingMessage').innerHTML = '';
+          document.getElementById("filterRatingMessage").innerHTML = "";
         } else {
-
-          document.getElementById('filterRatingMessage').innerHTML = `Current star rating filters: ${currentStars.join(', ')}`;
+          document.getElementById(
+            "filterRatingMessage"
+          ).innerHTML = `Current star rating filters: ${currentStars.join(
+            ", "
+          )}`;
         }
-
       }
 
       if (!filteredReviews.length) {
-
-        this.setState(
-          {reviews: null, clickedStars: null},
-          () => { this.setState({reviews: this.props.reviews, clickedStars: currentStars})}
-        );
+        this.setState({ reviews: null, clickedStars: null }, () => {
+          this.setState({
+            reviews: this.props.reviews,
+            clickedStars: currentStars,
+          });
+        });
       }
-      this.setState({reviews: filteredReviews, clickedStars: currentStars});
-
+      this.setState({ reviews: filteredReviews, clickedStars: currentStars });
     } else if (!this.state.clickedStars.length) {
       currentStars = [];
       currentStars.push(star);
-      reviews.forEach(review => {
+      reviews.forEach((review) => {
         if (review.rating === star) {
           filteredReviews.push(review);
         }
       });
-      document.getElementById('filterRatingMessage').innerHTML = `Current star rating filters: ${currentStars.join(', ')}`;
-      this.setState({reviews: filteredReviews, clickedStars: currentStars, filterRatingMessage: `Current star rating filters: ${currentStars.join(', ')}`});
+      document.getElementById(
+        "filterRatingMessage"
+      ).innerHTML = `Current star rating filters: ${currentStars.join(", ")}`;
+      this.setState({
+        reviews: filteredReviews,
+        clickedStars: currentStars,
+        filterRatingMessage: `Current star rating filters: ${currentStars.join(
+          ", "
+        )}`,
+      });
     }
-
   }
 
   render() {
-    console.log('productinfo', this.props.productInfo)
+    // console.log('productinfo', this.props.productInfo)
     if (this.state.reviews !== null) {
       return (
         <div>
@@ -132,21 +154,31 @@ class RatingsAndReviews extends React.Component {
           <div className="content-container">
             <div className="row">
               <div className="left-panel">
-                <RatingSummary metaData={this.state.metaData} rating={this.state.rating} totalNumberOfRatings={this.state.totalNumberOfRatings} filterRatingFunc={this.filterRatingFunc} clickedStars={this.state.clickedStars} filterRatingMessage={this.state.filterRatingMessage}/>
+                <RatingSummary
+                  metaData={this.state.metaData}
+                  rating={this.state.rating}
+                  totalNumberOfRatings={this.state.totalNumberOfRatings}
+                  filterRatingFunc={this.filterRatingFunc}
+                  clickedStars={this.state.clickedStars}
+                  filterRatingMessage={this.state.filterRatingMessage}
+                />
                 {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/> */}
               </div>
               <div className="right-panel">
-                <ReviewList reviewData={this.state.reviewData} reviews={this.state.reviews} productInfo={this.props.productInfo} metaData={this.props.metaData}/>
+                <ReviewList
+                  reviewData={this.state.reviewData}
+                  reviews={this.state.reviews}
+                  productInfo={this.props.productInfo}
+                  metaData={this.props.metaData}
+                />
                 {/* <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} /> */}
               </div>
             </div>
           </div>
         </div>
-
       );
     }
   }
 }
 
 export default RatingsAndReviews;
-

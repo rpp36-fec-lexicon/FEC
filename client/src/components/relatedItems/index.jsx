@@ -30,7 +30,10 @@ class RelatedAndOutfit extends React.Component {
       success: (arrayOfProdIDs) => {
         // FOR SCREEN WIDTH CALCULATION
         var screenWidth = document.body.clientWidth;
-        var relatedProdsWidth = arrayOfProdIDs.length * 184 + 120;
+        // card width (including padd/margin): 182.67 px
+        // container pad/wid: 60px
+        var relatedProdsWidth = arrayOfProdIDs.length * 182.67 + 60;
+
         if (screenWidth < relatedProdsWidth) {
           this.setState({
             xRightFrame: 1,
@@ -91,29 +94,42 @@ class RelatedAndOutfit extends React.Component {
                       });
                     },
                     error: (err) => {
-                      console.log(err);
+                      throw new Error(
+                        "Retrieving metadata for related product failed (in relatedDataRequest function): ",
+                        err
+                      );
                     },
                   });
                 },
                 error: (err) => {
-                  console.log(err);
+                  throw new Error(
+                    "Retrieving style data for related product failed (in relatedDataRequest function): ",
+                    err
+                  );
                 },
               });
             },
             error: (err) => {
-              console.log(err);
+              throw new Error(
+                "Retrieving product data for related product failed (in relatedDataRequest function): ",
+                err
+              );
             },
           });
         });
       },
       error: (err) => {
-        console.log(err);
+        throw new Error("Retrieving ids of related products failed: ", err);
       },
     });
   }
   carouselSizeOnMount() {
     var screenWidth = document.body.clientWidth;
-    var outfitsWidth = this.props.outfitItems.length * 184 + 600;
+    // card width: 182.67px
+    // add btn: 110px
+    // padd/marg: 15+15 +40+40 +50+40 +15+15 +25+25= 280
+    var outfitsWidth = this.props.outfitItems.length * 182.67 + 110 + 280;
+
     if (screenWidth < outfitsWidth) {
       this.setState({
         xOutfitRightFrame: 1,
@@ -129,8 +145,9 @@ class RelatedAndOutfit extends React.Component {
       this.setState({
         prevOutfitItemsLength: this.props.outfitItems.length,
       });
+
       var screenWidth = document.body.clientWidth;
-      var outfitsWidth = this.props.outfitItems.length * 184 + 600;
+      var outfitsWidth = this.props.outfitItems.length * 182.67 + 100 + 280;
 
       if (screenWidth < outfitsWidth) {
         this.setState({
@@ -146,8 +163,7 @@ class RelatedAndOutfit extends React.Component {
 
   leftScroll(targetClass) {
     if (targetClass === ".carouselContainer") {
-      // console.log("left related");
-      document.querySelector(targetClass).scrollBy(-250, 0);
+      document.querySelector(targetClass).scrollBy(-200, 0);
       document
         .querySelector(targetClass)
         .addEventListener("scroll", (event) => {
@@ -160,8 +176,7 @@ class RelatedAndOutfit extends React.Component {
           }
         });
     } else if (targetClass === ".relatedCarouselOutfit") {
-      // console.log("left outfit");
-      document.querySelector(targetClass).scrollBy(-250, 0);
+      document.querySelector(targetClass).scrollBy(-200, 0);
       document
         .querySelector(targetClass)
         .addEventListener("scroll", (event) => {
@@ -178,8 +193,7 @@ class RelatedAndOutfit extends React.Component {
 
   rightScroll(targetClass) {
     if (targetClass === ".carouselContainer") {
-      // console.log("right related");
-      document.querySelector(targetClass).scrollBy(250, 0);
+      document.querySelector(targetClass).scrollBy(200, 0);
       document
         .querySelector(targetClass)
         .addEventListener("scroll", (event) => {
@@ -187,13 +201,16 @@ class RelatedAndOutfit extends React.Component {
           this.setState({ xLeftFrame });
           var sWid = document.querySelector(targetClass).scrollWidth;
           var ofWid = document.querySelector(targetClass).offsetWidth;
-          if (Math.round(xLeftFrame) + ofWid === sWid + 1) {
+          // console.log("sw", sWid, "ow", ofWid, "xLF", Math.round(xLeftFrame));
+          if (
+            Math.round(xLeftFrame) + ofWid === sWid ||
+            Math.round(xLeftFrame) + ofWid === sWid - 1
+          ) {
             this.setState({ xRightFrame: 0 });
           }
         });
     } else if (targetClass === ".relatedCarouselOutfit") {
-      // console.log("right outfit");
-      document.querySelector(targetClass).scrollBy(250, 0);
+      document.querySelector(targetClass).scrollBy(200, 0);
       document
         .querySelector(targetClass)
         .addEventListener("scroll", (event) => {
@@ -201,7 +218,11 @@ class RelatedAndOutfit extends React.Component {
           this.setState({ xOutfitLeftFrame });
           var sWid = document.querySelector(targetClass).scrollWidth;
           var ofWid = document.querySelector(targetClass).offsetWidth;
-          if (Math.round(xOutfitLeftFrame) + ofWid === sWid + 1) {
+          // console.log(sWid, ofWid, Math.round(xOutfitLeftFrame));
+          if (
+            Math.round(xOutfitLeftFrame) + ofWid === sWid ||
+            Math.round(xOutfitLeftFrame) + ofWid === sWid - 1
+          ) {
             this.setState({ xOutfitRightFrame: 0 });
           }
         });
@@ -239,25 +260,42 @@ class RelatedAndOutfit extends React.Component {
                   });
                 },
                 error: (err) => {
-                  console.log(err);
+                  throw new Error(
+                    "Retrieving style data for related product failed (in relatedItemsUpdater function): ",
+                    err
+                  );
                 },
               });
             },
             error: (err) => {
-              console.log(err);
+              throw new Error(
+                "Retrieving product data for related product failed (in relatedItemsUpdater function): ",
+                err
+              );
             },
           });
         });
       },
       error: (err) => {
-        console.log(err);
+        throw new Error(
+          "Retrieving ids of related products failed (in relatedItemsUpdater function): ",
+          err
+        );
       },
     });
   }
   render() {
-    // console.log("=======  RELATED&OUTFIT PROPS  ======", this.props);
     return (
-      <div>
+      <div
+        className="relatedProductsAndOutfitMainComponent"
+        onClick={(e) => {
+          let timeOfClick = new Date().toLocaleString("en-US", {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, "Related Widget", timeOfClick);
+        }}
+      >
         <span>RELATED PRODUCTS</span>
         <div
           className="relatedProductsMainClass" // mainD
@@ -278,6 +316,7 @@ class RelatedAndOutfit extends React.Component {
               prodIDChanger={this.props.prodIDChanger}
               itemInfoAndStyle={this.state.itemInfoAndStyle}
               relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
+              userTracker={this.props.userTracker}
             />
           </div>{" "}
           {this.state.xRightFrame === 0 ? null : (
@@ -304,6 +343,7 @@ class RelatedAndOutfit extends React.Component {
           rightScroll={this.rightScroll.bind(this)}
           xOutfitRightFrame={this.state.xOutfitRightFrame}
           xOutfitLeftFrame={this.state.xOutfitLeftFrame}
+          userTracker={this.props.userTracker}
         />
       </div>
     );

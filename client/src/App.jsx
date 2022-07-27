@@ -25,12 +25,13 @@ class App extends React.Component {
       flag: false,
       outfitItems: [],
       outfitItemsIDs: [],
-      userInputInfo: null,
+      userInputInfo: 72287,
     };
   }
 
   componentDidMount() {
     this.prodIDChanger(this.state.productId);
+
     // eslint-disable-next-line no-use-before-define
     var pulledItems = storageGetter();
     var existingIDs = [];
@@ -41,6 +42,22 @@ class App extends React.Component {
       outfitItems: pulledItems,
       outfitItemsIDs: existingIDs,
     });
+  }
+
+  userTracker(element, widget, time) {
+    axios
+      .post("/interaction", { element, widget, time })
+      .then((res) => {
+        // console.log(
+        //   "user event successfully sent to interactions api: ",
+        //   res.status,
+        //   "event detail: ",
+        //   { element, widget, time }
+        // );
+      })
+      .catch((err) => {
+        throw new Error("Tracking failed: ", err);
+      });
   }
 
   outfitAdder() {
@@ -109,6 +126,12 @@ class App extends React.Component {
 
   updateProduct(proId) {
     this.setState({ flag: false });
+
+    // adds id to url
+    const url = new URL(window.location);
+    url.searchParams.set("id", proId);
+    window.history.pushState({}, "", url);
+
     Promise.all([
       this.getProductInfo(),
       this.getProductStyles(),
@@ -157,21 +180,36 @@ class App extends React.Component {
         });
       })
       .catch((err) => {
-        console.log(err);
+        throw new Error("Updating product failed: ", err);
       });
   }
 
   userInputID(userInput) {
-    this.setState({
-      userInputInfo: userInput,
-    });
+    if (userInput.length === 5) {
+      this.setState({
+        userInputInfo: userInput,
+      });
+    } else {
+      this.setState({
+        userInputInfo: 72287,
+      });
+    }
   }
 
   render() {
     if (this.state.flag) {
       return (
         <>
-          <div className="mainHeader">
+          <div
+            className="mainHeader"
+            onClick={(e) => {
+              let timeOfClick = new Date().toLocaleString("en-US", {
+                hour12: false,
+              });
+              let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+              this.userTracker(element, "Overview Widget", timeOfClick);
+            }}
+          >
             <div className="mainHeader-child1">
               <img src={logo} className="logo" alt="Atelier company logo" />
             </div>
@@ -179,7 +217,7 @@ class App extends React.Component {
               <div className="searchContainer">
                 <input
                   className="searchInput"
-                  type="text"
+                  type="number"
                   onChange={(e) => this.userInputID(e.target.value)}
                 ></input>
                 <i
@@ -209,6 +247,7 @@ class App extends React.Component {
               outfitAdder={this.outfitAdder.bind(this)}
               outfitRemover={this.outfitRemover.bind(this)}
               outfitItems={this.state.outfitItems}
+              userTracker={this.userTracker.bind(this)}
             />
             <QuestionsAnswersMain
               product={this.state.productId}

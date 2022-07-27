@@ -11,9 +11,19 @@ class RelatedCard extends React.Component {
   componentDidMount() {}
 
   render() {
-    // console.log("ITEMD PROPS====", this.props);
     return (
-      <div className="RelatedCarouselItem">
+      <div
+        className="RelatedCarouselItem"
+        onClick={(e) => {
+          this.props.prodIDChanger(this.props.itemData.itemInfo.id);
+          this.props.relatedItemsUpdater(this.props.itemData.itemInfo.id);
+          let timeOfClick = new Date().toLocaleString("en-US", {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, "Related Widget", timeOfClick);
+        }}
+      >
         <div
           role="productIdUpdaterInRelated"
           style={{
@@ -24,10 +34,6 @@ class RelatedCard extends React.Component {
             backgroundSize: "150px 150px",
             borderRadius: "10%",
           }}
-          onClick={() => {
-            this.props.prodIDChanger(this.props.itemData.itemInfo.id);
-            this.props.relatedItemsUpdater(this.props.itemData.itemInfo.id);
-          }}
         >
           <div>
             <button
@@ -35,6 +41,15 @@ class RelatedCard extends React.Component {
               role="featureComparer"
               onClick={(e) => {
                 e.stopPropagation();
+                let timeOfClick = new Date().toLocaleString("en-US", {
+                  hour12: false,
+                });
+                let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+                this.props.userTracker(
+                  element,
+                  "Related-outfit Widget",
+                  timeOfClick
+                );
                 this.props.comparison(
                   this.props.itemData.itemInfo.features,
                   this.props.itemData.itemInfo.name
@@ -47,8 +62,10 @@ class RelatedCard extends React.Component {
         </div>
 
         <div>
-          <div>{this.props.itemData.itemInfo.category}</div>
-          <div>
+          <div className="itemCategory">
+            {this.props.itemData.itemInfo.category}
+          </div>
+          <div className="itemName">
             {" "}
             <b>{this.props.itemData.itemInfo.name}</b>
           </div>
