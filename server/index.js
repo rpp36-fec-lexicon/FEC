@@ -178,14 +178,12 @@ app.get("/products", (req, res) => {
 });
 
 app.post("/products/:product_id", (req, res) => {
-
   data.getProductInfo(req.body.params.productId, (err, data) => {
     if (err) {
       console.log(err);
       res.status(400);
       res.send(err);
     } else {
-
       res.status(200);
       res.send(data);
     }
@@ -225,6 +223,29 @@ app.post("/interaction", (req, res) => {
       res.send(err.status);
     });
 });
+
+/*
+app.post('/interactions', (req, res) => {
+  // eslint-disable-next-line quotes
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/interactions`;
+  console.log(req.body);
+  axios({
+    method: 'post',
+    url: url,
+    data: req.body,
+    headers: {
+      Authorization: myAPIKey
+    }
+  })
+    .then(() => {
+      return res.status(200).end();
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).send('server failed to send clicks data');
+    });
+});
+*/
 
 app.listen(port, () => {
   console.log(`listening on ${port}`);
