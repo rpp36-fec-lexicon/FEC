@@ -71,7 +71,6 @@ const QuestionsAnswersList = (props) => {
   }
 
   if (displayQuestions.length === 0) {
-    console.log(props.product);
     return (
       <div className="questions-answers-button-container">
         <button className="question-button" onClick={() => setShow(true)}>Add Questions +</button>
@@ -83,10 +82,8 @@ const QuestionsAnswersList = (props) => {
           productId={props.product}
           update={props.update}/>
       </div>
-
     );
   } else if (displayQuestions.length !== sortedQuestions.length) {
-    displayQuestions.map(qBody => console.log(`qBody.answers : ${[qBody.answers]}`));
     return (
       <div className="question-display">
         <div className="questions-list">

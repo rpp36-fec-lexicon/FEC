@@ -452,6 +452,42 @@ textarea.reviewBody {
   margin-left: 0px;
 }
 
+.answers-zoomed-photo-modal-header {
+  flex-direction: row;
+  padding: 10px;
+  text-align: left;
+  border-radius: 10%;
+}
+
+.answers-zoomed-photo-close-modal-button {
+  margin-left: 635px;
+  display: flex;
+  /* background-color: white; */
+  background-color: white;
+  font-weight: bolder;
+  text-align: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.attach-photo-close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  margin-right: 15px;
+  margin-bottom: 5px;
+}
+
+.attach-photo-close:hover,
+.attach-photo-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .search-question {
   margin-left: 0px;
   height: 50px;
@@ -470,19 +506,93 @@ textarea.reviewBody {
 }
 
 .question-button {
-  font-family: 'Nanum Gothic', sans-serif;
-  font-size: 18px;
-  font-weight: bold;
-  width: 50%;
+  width: 25%;
   height: 50px;
-  background-color: white;
-  padding: 0px;
+  background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
   cursor: pointer;
+  display: inline-block;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  outline: 0;
+  margin-top: 20px;
   margin-right: 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-bottom: 20px;
+}
+.question-button:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  width: 92%;
 }
 
 .question-button:hover {
-  background-color: rgb(48, 122, 250);
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+  rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
+  transform: scale(1.05);
+}
+
+.answer-button {
+  width: 25%;
+  height: 50px;
+  background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  outline: 0;
+  margin-top: 20px;
+  margin-right: 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-bottom: 20px;
+}
+.answer-button:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  width: 92%;
+}
+
+.answer-button:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+  rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
+  transform: scale(1.05);
 }
 
 .question-display {
@@ -522,50 +632,228 @@ textarea.reviewBody {
 }
 
 .question-helpful {
-  font-family: 'Nanum Gothic', sans-serif;
-  display: flex;
-  flex: auto;
-  border: none;
-  background-color: white;
-  text-align: right;
-  margin-top: 0px;
-  width: 150px;
+  width: 45%;
+  height: 25px;
+  background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
   cursor: pointer;
-  margin-left: 390px
+  display: inline-block;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  outline: 0;
+  margin-right: 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.question-helpful:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  width: 92%;
+}
+
+.question-helpful:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+  rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
+  transform: scale(1.05);
 }
 
 .add-answer {
-  font-family: 'Nanum Gothic', sans-serif;
-  display: flex;
-  flex: auto;
-  border: none;
-  background-color: white;
-  text-align: left;
-  margin-top: 0px;
-  width: 150px;
+  width: 35%;
+  height: 25px;
+  background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
   cursor: pointer;
-  text-decoration: underline;
+  display: inline-block;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  outline: 0;
+  margin-right: 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.add-answer:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  width: 92%;
+}
+
+.add-answer:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+  rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
+  transform: scale(1.05);
 }
 
 .answer-meta-helpful {
-  font-family: 'Nanum Gothic', sans-serif;
-  border: none;
-  background-color: white;
-  text-align: left;
-  margin-top: 0px;
-  padding: 0px;
-  width: 113px;
+  width: 12%;
+  height: 20px;
+  background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
   cursor: pointer;
+  display: inline-block;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  outline: 0;
+  margin-right: 25px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
-.answer-meta-report {
-  font-family: 'Nanum Gothic', sans-serif;
-  border: none;
-  background-color: white;
-  text-align: left;
-  margin-top: 0px;
-  padding: 0px;
-  width: 50px;
+
+.answer-meta-helpful:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  width: 92%;
+}
+
+.answer-meta-helpful:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+  rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
+  transform: scale(1.05);
+}
+.report-meta-helpful {
+  width: 5%;
+  height: 20px;
+  background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
   cursor: pointer;
+  display: inline-block;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  outline: 0;
+  margin-right: 25px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.report-meta-helpful:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  width: 92%;
+}
+
+.report-meta-helpful:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+  rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
+  transform: scale(1.05);
+}
+
+.answer-meta-report {
+  width: 10%;
+  height: 20px;
+  background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  outline: 0;
+  margin-right: 25px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.answer-meta-report:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  width: 92%;
+}
+
+.answer-meta-report:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+  rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
+  transform: scale(1.05);
 }
 
 .answer {
@@ -617,7 +905,7 @@ textarea.reviewBody {
   top: 0;
   right: 0;
   bottom: 0;
-  background-color:rgba(0, 0, 0, 0.5);
+  background-color:rgba(23, 131, 209, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -629,6 +917,8 @@ textarea.reviewBody {
   width: 700px;
   height: 700px;
   background-color: white;
+  /* background-color: rgba(40, 198, 209, 0.9) */
+  border-radius: 10%;
 }
 
 .questions-and-answers-modal-header {
@@ -640,21 +930,53 @@ textarea.reviewBody {
 .modal-footer {
   padding: 10px;
   text-align: left;
+  /* border-radius: 10%; */
 }
 
 .question-modal-footer-button {
-  font-family: 'Nanum Gothic', sans-serif;
-  font-size: 15px;
-  font-weight: bold;
-  width: 50%;
-  height: 100px;
-  background-color: white;
-  color: black;
-  padding: 0px;
+  width: 25%;
+  height: 50px;
+  background-color: #0078d0;
+  border: 0;
+  border-radius: 56px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  outline: 0;
+  margin-top: 20px;
+  margin-right: 25px;
+  margin-left: 250px;
+  position: center;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-bottom: 20px;
+}
+
+.question-modal-footer-button:before {
+  background-color: initial;
+  background-image: linear-gradient(#fff 0, rgba(255, 255, 255, 0) 100%);
+  border-radius: 125px;
+  content: "";
+  height: 50%;
+  left: 4%;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  transition: all 0.3s;
+  width: 92%;
 }
 
 .question-modal-footer-button:hover {
-  background-color: rgb(48, 122, 250);
+  /* background-color: rgb(48, 122, 250); */
+  background-color: #0078d0;
 }
 
 .answer-submit-button {
@@ -662,7 +984,21 @@ textarea.reviewBody {
 }
 
 .answer-thumbnail {
-  height: 50px;
+  width: '160px';
+  height: '108px'
+}
+
+.answer-thumbnail-modal-content {
+  font-size: 15px;
+  font-weight: bold;
+  position: absolute;
+  width: 760px;
+  height: 540px;
+  /* width: 700px;
+  height: 490px; */
+  background-color: white;
+  /* background-color: rgba(40, 198, 209, 0.9) */
+  border-radius: 7%;
 }
 
 .question-error {
@@ -684,8 +1020,9 @@ textarea.reviewBody {
 }
 
 .questions-and-answers-close-modal-button {
-  margin-left: 650px;
+  margin-left: 635px;
   display: flex;
+  /* background-color: white; */
   background-color: white;
   font-weight: bolder;
   text-align: center;
@@ -697,8 +1034,10 @@ textarea.reviewBody {
 
 .questions-and-answers-modal-body {
   padding: 10px;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  /* border-top: 1px solid white; */
+  border-top: 1px solid #0078d0;
+  border-bottom: 1px solid #0078d0;
+  /* border-bottom: 1px solid white; */
 }
 
 

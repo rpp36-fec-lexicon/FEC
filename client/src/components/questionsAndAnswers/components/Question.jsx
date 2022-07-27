@@ -10,17 +10,9 @@ const Question = (props) => {
 
   var answerKeys = [];
   var answers = [];
-  // console.log(`props.answer: ${props.answer}`);
   props.answer.map(a => {
-    // if (a !== undefined) {
-    //   answerKeys = Object.keys(a);
-    // } else {
-    //   answerKeys.push(a);
-    // }
     answerKeys = Object.keys(a);
   });
-  // console.log(answerKeys);
-
 
   answerKeys.map((id) => {
     answers.push(props.answer[0][id]);
