@@ -5,7 +5,8 @@ node_modules/
 babel.config.js
 .env
 bundle.js.map
-
+*.cer
+*.pem
 # Ignore test-related files
 /coverage.data
 /coverage/
