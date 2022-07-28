@@ -63,6 +63,7 @@
     "@babel/preset-react": "^7.17.12",
     "@testing-library/jest-dom": "^5.16.4",
     "babel-loader": "^8.2.5",
+    "compression-webpack-plugin": "^10.0.0",
     "eslint-config-hackreactor": "github:reactorcore/eslint-config-hackreactor",
     "jest-fetch-mock": "^3.0.3",
     "style-loader": "^3.3.1",
