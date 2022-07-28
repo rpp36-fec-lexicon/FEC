@@ -1,11 +1,11 @@
-var path = require('path');
-var SRC_DIR = path.join(__dirname, '/client/src');
-var DIST_DIR = path.join(__dirname, '/client/public');
+var path = require("path");
+var SRC_DIR = path.join(__dirname, "/client/src");
+var DIST_DIR = path.join(__dirname, "/client/public");
 module.exports = {
   entry: `${SRC_DIR}/App.jsx`,
   output: {
-    filename: 'bundle.js',
-    path: DIST_DIR
+    filename: "bundle.js",
+    path: DIST_DIR,
   },
   module: {
     rules: [
@@ -13,12 +13,18 @@ module.exports = {
         test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-react', '@babel/preset-env']
-          }
-        }
-      }
-    ]
-  }
+            presets: ["@babel/preset-react", "@babel/preset-env"],
+          },
+        },
+      },
+      {
+        test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+        use: {
+          loader: "url-loader?limit=100000",
+        },
+      },
+    ],
+  },
 };

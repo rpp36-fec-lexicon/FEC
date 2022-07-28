@@ -1,5 +1,6 @@
 import React from "react";
 import $ from "jquery";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 class RelatedCard extends React.Component {
   constructor(props) {
@@ -10,41 +11,45 @@ class RelatedCard extends React.Component {
   componentDidMount() {}
 
   render() {
-    // console.log("sty:", this.props.itemData.itemStyles);
     return (
       <div
         className="RelatedCarouselItem"
-        // className="flex-child"
-        style={{
-          border: "1px solid grey",
-          padding: "15px 15px 15px 15px",
-          margin: "15px 15px 15px 15px",
-          // width: "50px",
+        onClick={(e) => {
+          this.props.prodIDChanger(this.props.itemData.itemInfo.id);
+          this.props.relatedItemsUpdater(this.props.itemData.itemInfo.id);
+          let timeOfClick = new Date().toLocaleString("en-US", {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, "Related Widget", timeOfClick);
         }}
       >
         <div
+          role="productIdUpdaterInRelated"
           style={{
             height: "150px",
             width: "150px",
             marginBottom: "10px",
             backgroundImage: `url(${this.props.itemData.itemStyles.results[0].photos[0].url})`,
             backgroundSize: "150px 150px",
-          }}
-          onClick={() => {
-            this.props.prodIDChanger(this.props.itemData.itemInfo.id);
-            this.props.relatedItemsUpdater(this.props.itemData.itemInfo.id);
+            borderRadius: "10%",
           }}
         >
           <div>
             <button
               className="comparisonBtn"
-              style={{
-                float: "right",
-                background: "transparent",
-                borderColor: "transparent",
-              }}
+              role="featureComparer"
               onClick={(e) => {
                 e.stopPropagation();
+                let timeOfClick = new Date().toLocaleString("en-US", {
+                  hour12: false,
+                });
+                let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+                this.props.userTracker(
+                  element,
+                  "Related-outfit Widget",
+                  timeOfClick
+                );
                 this.props.comparison(
                   this.props.itemData.itemInfo.features,
                   this.props.itemData.itemInfo.name
@@ -57,8 +62,10 @@ class RelatedCard extends React.Component {
         </div>
 
         <div>
-          <div>{this.props.itemData.itemInfo.category}</div>
-          <div>
+          <div className="itemCategory">
+            {this.props.itemData.itemInfo.category}
+          </div>
+          <div className="itemName">
             {" "}
             <b>{this.props.itemData.itemInfo.name}</b>
           </div>
@@ -79,7 +86,31 @@ class RelatedCard extends React.Component {
             )}
           </div>
 
-          <div>star reviews here</div>
+          {isNaN(this.props.itemData.itemRating) ? null : (
+            <div className="starEmpty">
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <div
+                className="starFilled"
+                style={{
+                  width: `${Math.round(
+                    (this.props.itemData.itemRating / 5) * 100
+                  )}%`,
+                }}
+              >
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+            </div>
+          )}
+
+          {/* <p> {this.props.itemData.itemRating}</p> */}
         </div>
       </div>
     );

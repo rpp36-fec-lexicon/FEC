@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import $ from 'jquery';
 
 const Button = styled.button`
   margin-right: 30px;
@@ -34,6 +35,7 @@ const SelectDiv = styled.div`
     padding: 0 5px;
     margin: 0 5px;
     border: 1px solid rgba(39, 200, 210, 0.9);
+    color: black;
   }
 `;
 
@@ -52,6 +54,19 @@ class Checkout extends React.Component {
       currentSkuQuantity: -1,
     };
     this.userSelect = this.userSelect.bind(this);
+  }
+
+  componentDidMount() {
+    // eslint-disable-next-line no-use-before-define
+    var pulledItems = storageGetter();
+    var existingIDs = [];
+    for (let i = 0; i < pulledItems.length; i++) {
+      existingIDs.push(pulledItems[i][0][0].id);
+    }
+    if (existingIDs.includes(this.props.productId)) {
+      $('.MainOutfitAdderBTN').text('Item Added to Outfit');
+      $('.MainOutfitAdderBTN').addClass('disabledBTN');
+    }
   }
 
   getSizes() {
@@ -140,7 +155,7 @@ class Checkout extends React.Component {
               }}
             >
               Add to Outfits
-              <Presistor outfits={this.props.outfitItems} />
+              <Persister outfits={this.props.outfitItems} />
             </Button>
           )}
         </ButtonDiv>
@@ -149,10 +164,16 @@ class Checkout extends React.Component {
   }
 }
 
-const Presistor = (props) => {
+const Persister = (props) => {
   useEffect(() => {
     localStorage.setItem('items', JSON.stringify(props.outfits));
   }, [props]);
+};
+
+export const storageGetter = (key = 'items') => {
+  const savedItems = localStorage.getItem(key);
+  const storeageResult = savedItems !== null ? JSON.parse(savedItems) : [];
+  return storeageResult;
 };
 
 export default Checkout;

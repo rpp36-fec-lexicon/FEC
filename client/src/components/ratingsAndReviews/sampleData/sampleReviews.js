@@ -39,7 +39,7 @@ const sampleReviews = {
       "recommend": true,
       "response": null,
       "body": "the quality is good, might need some more colors, great",
-      "date": "2022-06-09T00:00:00.000Z",
+      "date": "2022-09-09T00:00:00.000Z",
       "reviewer_name": "ssss",
       "helpfulness": 12,
       "photos": []
@@ -76,7 +76,7 @@ const sampleReviews = {
       "recommend": true,
       "response": null,
       "body": "Here is another review that is longer than 250 characters. I love this product, I totally would recommend this   product to all of my friends and family and in-laws and I would even buy it in all of the other colors and wear it on every   day of the week. I would also buy it as gifts for my mom and aunties and sisters and I will buy it for my girlfriends'   birthdays as well.",
-      "date": "2022-06-10T00:00:00.000Z",
+      "date": "2022-10-10T00:00:00.000Z",
       "reviewer_name": "asdf",
       "helpfulness": 9,
       "photos": []
@@ -125,7 +125,7 @@ const sampleReviews = {
       "recommend": false,
       "response": null,
       "body": "Deleniti itaque omnis placeat dolore sunt qui quos sit. Labore qui eum itaque. Nesciunt veniam nulla amet sit possimus. Ullam repellat quibusdam debitis harum mollitia ducimus. Sit dolor rem corrupti deleniti quasi optio facere fugit quaerat. Molestiae repellendus pariatur voluptatem sint sapiente repudiandae.",
-      "date": "2021-08-29T00:00:00.000Z",
+      "date": "2021-11-29T00:00:00.000Z",
       "reviewer_name": "Gilberto_Heathcote",
       "helpfulness": 1,
       "photos": [
@@ -146,7 +146,7 @@ const sampleReviews = {
       "recommend": true,
       "response": null,
       "body": "sjsjkgskjhslvhslhsljhsjkvhsjvhsljvhsljvhsjkvhsjvhvfv",
-      "date": "2022-06-13T00:00:00.000Z",
+      "date": "2022-02-13T00:00:00.000Z",
       "reviewer_name": "test",
       "helpfulness": 1,
       "photos": []

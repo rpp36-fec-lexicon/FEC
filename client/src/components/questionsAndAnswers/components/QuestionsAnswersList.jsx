@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 // import { useTracking } from 'react-tracking';
-import Question from './Question.jsx';
-import QuestionModal from './QuestionModal.jsx';
-import _ from 'underscore';
-import axios from 'axios';
+import Question from "./Question.jsx";
+import QuestionModal from "./QuestionModal.jsx";
+import _ from "underscore";
+import axios from "axios";
 
 const QuestionsAnswersList = (props) => {
-
-  var unsortedQuestions = _.sortBy(props.questions, 'question_helpfulness');
+  var unsortedQuestions = _.sortBy(props.questions, "question_helpfulness");
   var sortedQuestions = unsortedQuestions.reverse();
   var displayQuestions = [];
 
@@ -22,14 +21,14 @@ const QuestionsAnswersList = (props) => {
   var checkFilter = (sortedQuestions) => {
     var splitFilter = [];
     var filteredQuestions = [];
-    if (filter.length > 2 && !filter.includes(' ')) {
+    if (filter.length > 2 && !filter.includes(" ")) {
       splitFilter = filter.split();
     }
-    if (filter.includes(' ')) {
-      splitFilter = filter.split(' ');
+    if (filter.includes(" ")) {
+      splitFilter = filter.split(" ");
     }
-    if (_.contains(splitFilter, '')) {
-      splitFilter = _.without(splitFilter, '');
+    if (_.contains(splitFilter, "")) {
+      splitFilter = _.without(splitFilter, "");
     }
 
     for (let i = 0; i < sortedQuestions.length; i++) {
@@ -72,22 +71,25 @@ const QuestionsAnswersList = (props) => {
 
   if (displayQuestions.length === 0) {
     return (
-      <div>
-        <button onClick={() => setShow(true)}>Add Questions +</button>
+      <div className="questions-answers-button-container">
+        <button className="question-button" onClick={() => setShow(true)}>
+          Add Questions +
+        </button>
         <QuestionModal
+          key={props.product}
           show={show}
           hide={closeModal}
           name={props.productInfo.name}
           productId={props.product}
-          update={props.update}/>
+          update={props.update}
+        />
       </div>
-
     );
   } else if (displayQuestions.length !== sortedQuestions.length) {
     return (
-      <div>
-        <div>
-          {displayQuestions.map((question, answer) =>
+      <div className="question-display">
+        <div className="questions-list">
+          {displayQuestions.map((question) => (
             <Question
               key={question.question_id}
               id={question.question_id}
@@ -98,25 +100,34 @@ const QuestionsAnswersList = (props) => {
               update={props.update}
               darkMode={props.darkMode}
             />
-          )}
+          ))}
         </div>
-        <div>
-          <button onClick={() => setCount(count + 2)}>More Questions</button>
-          <button onClick={() => setShow(true)}>Add Questions +</button>
+        <div className="questions-answers-button-container">
+          <button
+            className="question-button"
+            onClick={() => setCount(count + 2)}
+          >
+            More Questions
+          </button>
+          <button className="question-button" onClick={() => setShow(true)}>
+            Add Questions +
+          </button>
           <QuestionModal
+            key={props.product}
             show={show}
             hide={closeModal}
             name={props.productInfo.name}
             productId={props.product}
-            update={props.update}/>
+            update={props.update}
+          />
         </div>
       </div>
     );
   } else {
     return (
-      <div>
-        <div>
-          {displayQuestions.map((question, answer) =>
+      <div className="question-display">
+        <div className="questions-list ">
+          {displayQuestions.map((question) => (
             <Question
               key={question.question_id}
               id={question.question_id}
@@ -127,19 +138,22 @@ const QuestionsAnswersList = (props) => {
               update={props.update}
               darkMode={props.darkMode}
             />
-          )}
+          ))}
         </div>
-        <div>
-          <button onClick={() => setShow(true)}>Add Questions +</button>
+        <div className="questions-answers-button-container">
+          <button className="question-button" onClick={() => setShow(true)}>
+            Add Questions +
+          </button>
           <QuestionModal
+            key={props.product}
             show={show}
             hide={closeModal}
             name={props.productInfo.name}
             productId={props.product}
-            update={props.update}/>
+            update={props.update}
+          />
         </div>
       </div>
-
     );
   }
 };

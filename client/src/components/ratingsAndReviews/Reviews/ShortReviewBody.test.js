@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { act } from 'react-dom/test-utils';
 
-import ShortReviewBody from '../Reviews/ShortReviewBody.jsx';
+import ShortReviewBody from './ShortReviewBody.jsx';
 
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom'

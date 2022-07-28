@@ -13,7 +13,6 @@ const Answer = (props) => {
     return updatedDate.join(' ');
   };
 
-  // const { trackEvent } = useTracking();
   const answerHelpful = () => {
     axios.put('/answerHelpful', {
       answerId: props.id
@@ -21,11 +20,6 @@ const Answer = (props) => {
       .then(() => {
         props.update();
         localStorage.setItem(`${props.id} answer`, true);
-        trackEvent({
-          time: new Date().toString(),
-          element: `Answer ${props.id} helpful`,
-          widget: 'Question and Answer'
-        });
       })
       .catch((err) => {
         console.log('ERROR ANSWER HELPFUL NOT UPDATED', err);
@@ -40,11 +34,6 @@ const Answer = (props) => {
         var pressedReportButton = document.getElementById(`${props.id}report`);
         pressedReportButton.innerHTML = 'Reported';
         localStorage.setItem(`${props.id} report`, true);
-        trackEvent({
-          time: new Date().toString(),
-          element: `Answer ${props.id} reported`,
-          widget: 'Question and Answer'
-        });
       })
       .catch((err) => {
         console.log('ERROR REPORTING ANSWER', err);
@@ -68,46 +57,41 @@ const Answer = (props) => {
     }
   });
 
-
-
-
-  let darkModeClass1 = props.darkMode ? 'dm' : '';
-
   if (props.name === 'Seller') {
     return (
-      <div>
+      <div className="singleAnswer">
         <div>{props.answer}
-          <div>
+          <div className="thumbnails">
             {props.photos.map((photo, i) =>
               <AnswerModalThumbnail key={i} src={photo}/>
             )}
           </div>
-          <div> by
-            <div>&nbsp;{props.name}</div>
+          <div className="answer-meta"> by
+            <div className="seller"> &nbsp;{props.name}</div>
             <div>,&nbsp;{convertDate(props.date)} |&nbsp;</div>
             <button onClick={() => answerHelpful()} id={props.id + 'answer'}
-            >&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
+              className='answer-meta-helpful'>&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;</button>
             <button onClick={() => reportAnswer()} id={props.id + 'report'}
-            >&nbsp;<u>Report</u></button>
+              className='answer-meta-report'>&nbsp;<u>Report</u></button>
           </div>
         </div>
       </div>
     );
   } else {
     return (
-      <div>
+      <div className="single-answer">
         <div>{props.answer}
-          <div>
+          <div className="thumbnails">
             {props.photos.map((photo, i) =>
               <AnswerModalThumbnail key={i} src={photo}/>
             )}
           </div>
-          <div>by
+          <div className="answer-meta">by
             <div>&nbsp;{props.name}</div>
             <div>,&nbsp;{convertDate(props.date)} |&nbsp;</div>
             <button onClick={() => answerHelpful()} id={props.id + 'answer'}
-            >&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;|</button>
-            <button onClick={() => reportAnswer()} id={props.id + 'report'}
+              className='answer-meta-helpful'>&nbsp;Helpful? <u>Yes({props.helpfulness})</u>&nbsp;&nbsp;</button>
+            <button className='answer-meta-report' onClick={() => reportAnswer()} id={props.id + 'report'}
             >&nbsp;<u>Report</u></button>
           </div>
         </div>

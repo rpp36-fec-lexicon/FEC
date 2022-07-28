@@ -105,44 +105,56 @@ class Showcase extends React.Component {
   }
 
   changePhoto(num) {
-    const {photos} = this.state;
-    this.setState({
-      currPhoto: photos[(photos.indexOf(this.state.currPhoto) + num + photos.length) % photos.length]
-    }, () =>
-      this.updateCount());
+    const { photos } = this.state;
+    this.setState(
+      {
+        currPhoto:
+          photos[
+            (photos.indexOf(this.state.currPhoto) + num + photos.length) %
+              photos.length
+          ],
+      },
+      () => this.updateCount()
+    );
   }
 
   updateCount() {
-    const {photos} = this.state;
-    this.setState({
-      count: photos.indexOf(this.state.currPhoto)
-    }, () => {
-      if (this.state.count === this.state.max) {
-        this.nextThumbnails();
+    const { photos } = this.state;
+    this.setState(
+      {
+        count: photos.indexOf(this.state.currPhoto),
+      },
+      () => {
+        if (this.state.count === this.state.max) {
+          this.nextThumbnails();
+        }
+        if (this.state.count === this.state.min - 1) {
+          this.previousThumbnails();
+        }
       }
-      if (this.state.count === this.state.min - 1) {
-        this.previousThumbnails();
-      }
-    });
+    );
   }
 
   nextThumbnails() {
     this.setState({
       min: this.state.min + 7,
-      max: this.state.max + 7
+      max: this.state.max + 7,
     });
   }
 
   previousThumbnails() {
     this.setState({
       min: this.state.min - 7,
-      max: this.state.max - 7
+      max: this.state.max - 7,
     });
   }
 
   handleArrowClick(direction) {
     if (direction === 'right') {
-      return this.state.currPhoto.url !== this.state.photos[this.state.photos.length - 1].url;
+      return (
+        this.state.currPhoto.url !==
+        this.state.photos[this.state.photos.length - 1].url
+      );
     }
     if (direction === 'left') {
       return this.state.currPhoto.url !== this.state.photos[0].url;
@@ -158,12 +170,12 @@ class Showcase extends React.Component {
 
   handleClick(link) {
     this.setState({
-      currPhoto: this.state.photos.find((pic) => pic.url === link)
+      currPhoto: this.state.photos.find((pic) => pic.url === link),
     });
   }
 
   sliceThumbnails(min, max) {
-    const {photos} = this.state;
+    const { photos } = this.state;
     var setOfPhotos = photos.slice(min, max);
     var style;
     return setOfPhotos.map((pic, i) => {

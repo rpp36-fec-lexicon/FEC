@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import MoreReviews from '../Reviews/MoreReviews.jsx';
+import AddFirstReview from './AddFirstReview.jsx';
 import userEvent from '@testing-library/user-event';
 
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-describe('MoreReviews', ()=>{
+describe('AddFirstReview', ()=>{
   let temporarySandBox;
   beforeEach(() => {
     temporarySandBox = document.createElement('div');
@@ -17,21 +17,20 @@ describe('MoreReviews', ()=>{
     temporarySandBox = null;
   });
 
-  describe('MoreReviews Component', ()=>{
+  describe('AddFirstReview Component', ()=>{
 
-    it('should have a "More Review" button', async() => {
-      render(<MoreReviews />);
-      const buttonEle = screen.getByRole('button', {name: 'MORE REVIEWS'});
+    it('should have a "BE THE FIRST TO ADD A REVIEW!" button', async() => {
+      render(<AddFirstReview />);
+      const buttonEle = screen.getByRole('button', {name: 'BE THE FIRST TO ADD A REVIEW!'});
       expect(buttonEle).toBeInTheDocument();
     });
 
-    it('should invoke "showMoreReviewsFunc" function when clicked', async () => {
+    it('should invoke "showReviewModalFunc" function when clicked', async () => {
       const mockFunc = jest.fn();
-      render(<MoreReviews showMoreReviewsFunc={mockFunc}/>);
-      const buttonEle = screen.getByRole('button', {name: 'MORE REVIEWS'});
+      render(<AddFirstReview showReviewModalFunc={mockFunc}/>);
+      const buttonEle = screen.getByRole('button', {name: 'BE THE FIRST TO ADD A REVIEW!'});
       await userEvent.click(buttonEle);
       expect(mockFunc).toHaveBeenCalled();
     });
   })
 })
-

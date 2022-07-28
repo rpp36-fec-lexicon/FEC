@@ -82,10 +82,18 @@ class Comparison extends React.Component {
   }
 
   render() {
-    // console.log("props in comp", this.props);
     return (
-      <div className="modal">
-        <div className="modal_content">
+      <div
+        className="compModal"
+        onClick={(e) => {
+          let timeOfClick = new Date().toLocaleString("en-US", {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, "Related Widget", timeOfClick);
+        }}
+      >
+        <div className="compModal_content">
           <table>
             <tbody>
               <tr>
@@ -133,21 +141,19 @@ class Comparison extends React.Component {
 }
 
 const CommonFeatureMapper = (props) => {
-  // console.log("ff", props);
   return (
     <tr style={{ overflowY: "auto" }}>
-      <td>&#10003;</td>
+      <td role="checkMark">&#10003;</td>
       <td>{props.feature}</td>
-      <td>&#10003;</td>
+      <td role="checkMark">&#10003;</td>
     </tr>
   );
 };
 
 const MainFeatureMapper = (props) => {
-  // console.log("MainFeatureMapper", props);
   return (
     <tr style={{ overflowY: "auto" }}>
-      <td>&#10003;</td>
+      <td role="MaincheckMark">&#10003;</td>
       <td>{props.feature}</td>
       <td></td>
     </tr>
@@ -155,12 +161,11 @@ const MainFeatureMapper = (props) => {
 };
 
 const RelatedFeatureMapper = (props) => {
-  // console.log("ff", props);
   return (
     <tr style={{ overflowY: "auto" }}>
       <td></td>
       <td>{props.feature}</td>
-      <td>&#10003;</td>
+      <td role="checkMark">&#10003;</td>
     </tr>
   );
 };

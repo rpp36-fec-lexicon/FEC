@@ -2,12 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import SearchQuestion from './SearchQuestion.jsx';
 import QuestionsAnswersList from './QuestionsAnswersList.jsx';
+import Tracker from '../../Tracker.jsx';
 
 class QuestionsAnswersMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: this.props.productId,
+      productId: this.props.product,
       productInfo: this.props.productInfo,
       questions: [],
       search: ''
@@ -50,20 +51,19 @@ class QuestionsAnswersMain extends React.Component {
 
   render () {
     return (
-      <div>
-        <div>
+      <div id="qa-module" className={'qa_module_container'}>
+        <div className="questions-and-answers-header">
           <h3>QUESTIONS & ANSWERS</h3>
         </div>
-        <div>
+        <div className="questions-and-answers-search">
           <SearchQuestion searchQuestions={this.searchQuestions.bind(this)}/>
         </div>
-        <div>
+        <div className="questions-and-answers-list">
           <QuestionsAnswersList
             product={this.state.productId}
             questions={this.state.questions}
             productInfo={this.state.productInfo}
             filter={this.state.search}
-            darkMode={this.props.darkMode}
             update={this.componentDidMount.bind(this)}
           />
         </div>
