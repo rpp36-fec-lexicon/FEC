@@ -67,6 +67,21 @@ app.get('/reviews', (req, res) => {
     });
 });
 
+app.post('/reviews', (req, res) => {
+  axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews`, req.body,
+    { headers: {
+      'Authorization': myAPIKey
+    }})
+    .then(response => {
+      console.log('succeeded???')
+      res.status(201).send(response.data);
+    })
+    .catch(err => {
+      console.log('err', err)
+      res.status(404).send('error posting reviews from server');
+    });
+});
+
 app.get('/reviews/meta', (req, res) => {
   const productId = req.query.productId;
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${productId}`,
@@ -80,6 +95,20 @@ app.get('/reviews/meta', (req, res) => {
       res.status(404).send('error getting meta');
     });
 });
+
+app.put('/reviews/:review_id/helpful', (req, res) => {
+  console.log('req', req)
+  axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/${req.params.review_id}/helpful`, {},
+    { headers: {
+      'Authorization': myAPIKey
+    }})
+    .then(response => {
+      res.status(201).send(response.body);
+    })
+    .catch(err => {
+      res.status(404).send(err);
+    });
+})
 
 /*
 Routes for Questions API

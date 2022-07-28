@@ -3,6 +3,7 @@ import StarReviewIcon from './StarReviewIcon.jsx';
 import UploadedPhotos from './UploadedPhotos.jsx';
 import UploadPhotoButton from './UploadPhotoButton.jsx';
 import SubmitReviewAlert from './SubmitReviewAlert.jsx';
+const axios = require('axios');
 
 class ReviewModal extends React.Component {
   constructor(props) {
@@ -13,7 +14,9 @@ class ReviewModal extends React.Component {
       reviewBodyMessage: 'Minimum required characters left: 50',
       photos: [],
       disableUpload: false,
-      errors: []
+      errors: [],
+      // characteristicReviews: {}
+
     };
     this.ratingMessage = {
       1: 'Poor',
@@ -67,7 +70,7 @@ class ReviewModal extends React.Component {
         4: 'Pretty great',
         5: 'Perfect'
       }
-    }
+    };
     this.clickFillStarFunc = this.clickFillStarFunc.bind(this);
     this.charactersLeftFunc = this.charactersLeftFunc.bind(this);
     this.photoUploadedFunc = this.photoUploadedFunc.bind(this);
@@ -101,21 +104,24 @@ class ReviewModal extends React.Component {
       this.setState({disableUpload: true});
       return;
     }
-    const photos = Array.from(e.target.files);
-    if (photos[0].type === 'image/jpeg' || photos[0].type === 'image/gif' || photos[0].type === 'image/png' || photos[0].type === 'image/bmp' || photos[0].type === 'image/jpg') {
+    const files = Array.from(e.target.files);
+    const file = files[0];
+    if (file.type === 'image/jpeg' || file.type === 'image/gif' || file.type === 'image/png' || file.type === 'image/bmp' || file.type === 'image/jpg') {
       document.getElementById('imageMessage').innerHTML = '';
-      photos.map(photo => {
-        // const reader = new FileReader();
-        // reader.readAsDataURL(photo);
-        // reader.addEventListener('loadend', () => {
-        //   const urls = this.state.photos.slice();
-        //   urls.push(reader.result);
-        //   this.setState({photos: urls, disableUpload: urls.length === 5});
-        // });
+      const form = new FormData();
+      form.append('file', file);
+      form.append('upload_preset', 'lexicon');
+      axios.post('https://api.cloudinary.com/v1_1/lexicon-atelier/image/upload/', form, { headers: { 'X-Requested-With': 'MLHttpRequest' } })
+        .then(res => {
+          let url = res.data.secure_url;
+          const urls = this.state.photos.slice();
+          urls.push(url);
+          this.setState({photos: urls, disableUpload: urls.length === 5});
+        })
+        .catch(err => {
+          console.log('error', err);
+        });
 
-
-
-      });
     } else {
       document.getElementById('imageMessage').innerHTML = 'Invalid image, please upload again';
     }
@@ -137,9 +143,7 @@ class ReviewModal extends React.Component {
     //RECOMMENDATION
     const recommendYesEle = document.getElementById('recommendYes');
     const recommendNoEle = document.getElementById('recommendNo');
-    console.dir(recommendYesEle)
-    if (!recommendYesEle.checked && !recommendNo.checked) {
-
+    if (!recommendYesEle.checked && !recommendNoEle.checked) {
       errors.push('recommendation');
     }
 
@@ -150,7 +154,9 @@ class ReviewModal extends React.Component {
     let charProp4;
     let charProp5;
 
-    ['Size', 'Width', 'Comfort', 'Quality', 'Length', 'Fit'].map(char => {
+    const characteristicTitles = Object.keys(this.props.metaData.characteristics);
+
+    characteristicTitles.map(char => {
       charProp1 = document.getElementById(char + 'Property1').checked;
       charProp2 = document.getElementById(char + 'Property2').checked;
       charProp3 = document.getElementById(char + 'Property3').checked;
@@ -189,30 +195,66 @@ class ReviewModal extends React.Component {
   }
 
   submitReviewFunc() {
-    let recommend;
-    let nickname;
-    let reviewInfo = {};
+    var recommend;
+    var nickname;
+    var reviewInfo = {};
+    var viewCharacteristics = {};
     const productId = this.props.productInfo.id;
-    const characteristicsId = {};
+    const characteristicIds = {};
     const characteristics = this.props.metaData.characteristics;
-    for (var key in characteristics) {
-      characteristicsId[key] = characteristics[key].id;
-    }
+    const characteristicTitles = Object.keys(this.props.metaData.characteristics);
+    characteristicTitles.forEach(title => {
+      characteristicIds[title] = this.props.metaData.characteristics[title].id;
+    });
 
-    if (!this.mandatoryFilledFunc()) {
+    if (this.mandatoryFilledFunc()) {
+      console.log('in madatory filled if');
       const summary = document.getElementById('summary').value;
       const body = document.getElementById('reviewBody').value;
       document.getElementById('recommendYes').checked ? recommend = true : recommend = false;
       nickname = document.getElementById('nickname').value;
-      email = document.getElementById('email').value;
+      const email = document.getElementById('email').value;
+      const photos = this.state.photos.slice();
 
+      const reviewCharacteristicBody = {};
+      for (let c of characteristicTitles) {
+        const cElements = document.getElementsByClassName(c);
 
+        const checkedElement = Array.from(cElements).find((cElement) => {
+          return cElement.checked;
+        });
 
-      reviewInfo['product_id'] = this.props.metaData['product_id'];
+        if (!checkedElement) {
+          console.log(`${c} has no checked element`);
+          return;
+        }
+
+        reviewCharacteristicBody[`${characteristicIds[c]}`] = parseInt(checkedElement.value);
+      }
+
+      reviewInfo['product_id'] = parseInt(this.props.metaData['product_id']);
       reviewInfo.rating = this.state.clickedStar;
+      reviewInfo.summary = summary;
+      reviewInfo.body = body;
+      reviewInfo.recommend = recommend;
+      reviewInfo.name = nickname;
+      reviewInfo.email = email;
+      reviewInfo.photos = photos;
+      reviewInfo.characteristics = reviewCharacteristicBody;
 
+      console.log('reviewinfo', reviewInfo);
+      axios.post('/reviews', reviewInfo)
+        .then((response) => {
+          console.log('post review success');
+          this.props.closeReviewModalFunc();
+          // this.props.getAllNewReviewsFunc();
+        })
+        .catch(error => {
+          console.log('error posting review', error);
+        });
     }
   }
+
 
   render() {
     const ulStyle = {
@@ -241,7 +283,7 @@ class ReviewModal extends React.Component {
     };
 
     const characteristics = [];
-    for (var key in this.characteristics) {
+    for (var key in this.props.metaData.characteristics) {
       characteristics.push([key, this.characteristics[key]]);
     }
 
@@ -250,15 +292,14 @@ class ReviewModal extends React.Component {
       submitReviewAlert = <SubmitReviewAlert errors={this.state.errors}/>;
     }
 
-
-
     return (
+
       <div className="reviewModal ">
         <div className="reviewModal-content reviewScrollable">
-          <span className="close" onClick={() => { this.props.closeReviewModalFunc(); }}>&times;</span>
+          <span data-testid="XButton" className="close" onClick={() => { this.props.closeReviewModalFunc(); }}>&times;</span>
           <div>
             <h2>Write Your Review</h2>
-            <h3>About the {this.props.productInfo.name}</h3>
+            <h3>About the {this.props.productName}</h3>
 
             <div>
               <h3>Overall Rating<sup>*</sup></h3>
@@ -284,11 +325,11 @@ class ReviewModal extends React.Component {
                 {characteristics.map((characteristic, index) => {
                   return (<div key={index}>
                     <b>{characteristic[0]}</b>
-                    <input type="radio" id={characteristic[0] + 'Property1'} name={characteristic[0]} value="yes"></input><label htmlFor="">{characteristic[1]['1']}</label>
-                    <input type="radio" id={characteristic[0] + 'Property2'} name={characteristic[0]} value="no"></input><label htmlFor="">{characteristic[1]['2']}</label>
-                    <input type="radio" id={characteristic[0] + 'Property3'} name={characteristic[0]} value="yes"></input><label htmlFor="">{characteristic[1]['3']}</label>
-                    <input type="radio" id={characteristic[0] + 'Property4'} name={characteristic[0]} value="no"></input><label htmlFor="">{characteristic[1]['4']}</label>
-                    <input type="radio" id={characteristic[0] + 'Property5'} name={characteristic[0]} value="no"></input><label htmlFor="">{characteristic[1]['5']}</label>
+                    <input type="radio" id={characteristic[0] + 'Property1'} className={`property ${characteristic[0]}`} name={characteristic[0]} value="1"></input><label htmlFor="">{characteristic[1]['1']}</label>
+                    <input type="radio" id={characteristic[0] + 'Property2'} className={`property ${characteristic[0]}`} name={characteristic[0]} value="2"></input><label htmlFor="">{characteristic[1]['2']}</label>
+                    <input type="radio" id={characteristic[0] + 'Property3'} className={`property ${characteristic[0]}`} name={characteristic[0]} value="3"></input><label htmlFor="">{characteristic[1]['3']}</label>
+                    <input type="radio" id={characteristic[0] + 'Property4'} className={`property ${characteristic[0]}`} name={characteristic[0]} value="4"></input><label htmlFor="">{characteristic[1]['4']}</label>
+                    <input type="radio" id={characteristic[0] + 'Property5'} className={`property ${characteristic[0]}`} name={characteristic[0]} value="5"></input><label htmlFor="">{characteristic[1]['5']}</label>
                   </div>);
                 })}
               </div>

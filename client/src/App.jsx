@@ -6,7 +6,7 @@ import RatingsAndReviews from "./components/ratingsAndReviews/RatingsAndReviews.
 import RelatedAndOutfit from "./components/relatedItems/index.jsx";
 import QuestionsAnswersMain from "./components/questionsAndAnswers/components/QuestionsAnswersMain.jsx";
 import $ from "jquery";
-import logo from "./../public/logo.png";
+// import logo from "./../public/logo.png";
 import axios from "axios";
 
 class App extends React.Component {
@@ -140,6 +140,7 @@ class App extends React.Component {
         var defaultStyle = styles.find(
           (product) => product["default?"] === true
         );
+
         if (defaultStyle === undefined) {
           defaultStyle = styles[0];
         }
@@ -173,7 +174,7 @@ class App extends React.Component {
         <>
           <div className="mainHeader">
             <div className="mainHeader-child1">
-              <img src={logo} className="logo" alt="Atelier company logo" />
+              {/* <img src={logo} className="logo" alt="Atelier company logo" /> */}
             </div>
             <div className="mainHeader-child2">
               <div className="searchContainer">
@@ -216,6 +217,7 @@ class App extends React.Component {
               key={this.state.productId}
             />
             <RatingsAndReviews
+              productInfo={this.state.productInfo}
               productId={this.state.productId}
               reviewData={this.state.reviewData}
               reviews={this.state.reviews}
@@ -223,6 +225,7 @@ class App extends React.Component {
               rating={this.state.rating}
               totalNumberOfRatings={this.state.totalNumberOfRatings}
               filterRating={this.filterRating}
+
             />
           </div>
         </>
@@ -239,3 +242,5 @@ export const storageGetter = (key = "items") => {
 
 ReactDOM.createRoot(document.getElementById("app")).render(<App />);
 export default App;
+
+

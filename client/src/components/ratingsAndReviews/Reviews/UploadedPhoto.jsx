@@ -1,7 +1,6 @@
 import React from 'react';
 
 const UploadedPhoto = (props) => {
-  console.log('props in upload photo', props)
   const thumbnailStyle = {
     width: '160px',
     height: '108px'

@@ -6,20 +6,37 @@ import Recommend from './Recommend.jsx';
 import ReviewPhotos from './ReviewPhotos.jsx';
 import SellerResponse from './SellerResponse.jsx';
 import ReviewsHeading from './ReviewsHeading.jsx';
+const axios = require('axios');
 
 class ReviewItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       helpfulClick: 0,
-      helpfulness: this.props.review.helpfulness
+      helpfulness: 0
     };
   }
 
+  componentDidMount() {
+    this.setState({helpfulness: this.props.review.helpfulness});
+  }
+
   increaseHelpfulnessFunc() {
+
     if (!this.state.helpfulClick) {
-      this.setState({helpfulness: this.state.helpfulness + 1});
-      this.state.helpfulClick += 1;
+      this.setState({helpfulness: this.state.helpfulness + 1, helpfulClick: this.state.helpfulClick + 1}, () => {
+        const reviewId = this.props.review['review_id'];
+        console.log('reviewid', reviewId)
+        axios.put(`/reviews/${reviewId}/helpful`)
+          .then(response => {
+            console.log('helpfulness increased');
+          })
+          .catch(err => {
+            console.log('cannot update helpfulness', err);
+          });
+      });
+
+
     }
   }
 

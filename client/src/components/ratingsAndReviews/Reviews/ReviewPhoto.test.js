@@ -29,8 +29,13 @@ describe('ReviewPhoto', ()=>{
     });
 
     it('should invoke showModalFunc when image is clicked', async() => {
-      const mockFunc = jest.fn();
-      render(<ReviewPhoto />);
+      const ReviewPhotoComponent = render(<ReviewPhoto photo={photo}/>);
+      const photoModalFalse = ReviewPhotoComponent.queryByTestId('photoModal');
+      expect(photoModalFalse).toBeNull();
+      const image = document.querySelector("img");
+      await userEvent.click(image);
+      const photoModalTrue = ReviewPhotoComponent.queryByTestId('photoModal');
+      expect(photoModalTrue).toBeTruthy();
     });
 
 

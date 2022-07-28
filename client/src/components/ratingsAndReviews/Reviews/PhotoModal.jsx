@@ -9,7 +9,7 @@ const PhotoModal = (props) => {
   return (
     <div className="modalPhoto">
       <div className="modalPhoto-content">
-        <span aria-label="XButton" className="close" onClick={() => { props.closeModalFunc(); }}>&times;</span>
+        <span data-testid="XButton" className="close" onClick={() => { props.closeModalFunc(); }}>&times;</span>
         <img style={expandStyle} src={props.photo.url}/>
       </div>
     </div>
