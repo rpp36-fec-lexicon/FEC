@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import RenderZoom from './RenderZoom.jsx';
 
 const IMG = styled.img`
   margin: 5px;
@@ -40,6 +41,7 @@ const Big = styled.img`
   width: 852px;
   object-fit: cover;
   margin-top: 20px;
+  cursor: zoom-in;
 `;
 
 const Thumbnails = styled.div`
@@ -71,7 +73,8 @@ class Showcase extends React.Component {
       modalSeen: false,
       count: 0,
       min: 0,
-      max: 7
+      max: 7,
+      zoomIn: false
     };
     this.handleClick = this.handleClick.bind(this);
     this.changePhoto = this.changePhoto.bind(this);
@@ -81,6 +84,8 @@ class Showcase extends React.Component {
     this.nextThumbnails = this.nextThumbnails.bind(this);
     this.previousThumbnails = this.previousThumbnails.bind(this);
     this.expand = this.expand.bind(this);
+    this.renderZoom = this.renderZoom.bind(this);
+    this.handleZoom = this.handleZoom.bind(this);
   }
 
   componentDidMount() {
@@ -184,13 +189,43 @@ class Showcase extends React.Component {
     console.log('WE EXPANDERINO!');
   }
 
+  handleZoom() {
+    this.setState({ zoomIn: !this.state.zoomIn });
+  }
+
+  renderZoom() {
+    if (this.state.zoomIn) {
+      console.log('we are trying to zoomin');
+      var container = document.getElementById('bigImageContainer');
+      var picture = document.getElementById('bigImage');
+      return (
+        <RenderZoom
+          picture={picture}
+          container={container}
+          zoomOut={this.handleZoom}
+        />
+      );
+      return null;
+    }
+  }
+
   render() {
+    if (this.state.zoomIn) {
+      return (
+        <Div id='bigImageContainer'>
+          {this.renderZoom()}
+        </Div>
+      );
+    }
     if (this.state.modalSeen) {
       return (
-        <Div>
+        <Div id='bigImageContainer'>
+          {this.renderZoom()}
           <Big
+            id='bigImage'
             src={this.state.currPhoto.url}
             alt={this.state.currPhoto.url}
+            onClick={() => this.handleZoom()}
           />
           <i
             style={{cursor: 'pointer', position: 'absolute', color: 'white', top: '70px', right: '400px'}}
