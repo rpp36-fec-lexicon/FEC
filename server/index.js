@@ -15,6 +15,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/../client/public"));
 
+
+
+
+// app.get('/*.js', (req, res) => {
+//   req.url = req.url + '.gz';
+//   res.set('content-encoding', 'gzip');
+// });
+
+
+
+
+
 // related product api request below //
 // ========== api call start ========//
 

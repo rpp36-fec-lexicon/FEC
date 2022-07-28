@@ -6,7 +6,7 @@ const CompressionPlugin = require("compression-webpack-plugin");
 module.exports = {
   entry: `${SRC_DIR}/App.jsx`,
   output: {
-    filename: "bundle.js",
+    filename: "bundle.js.gz",
     path: DIST_DIR,
   },
   module: {
