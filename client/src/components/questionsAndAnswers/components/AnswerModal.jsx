@@ -49,7 +49,6 @@ const AnswerModal = (props) => {
       })
         .then(() => {
           setThumbnails([]);
-          console.log(thumbnails);
           props.hide();
           props.update();
         })
@@ -82,13 +81,13 @@ const AnswerModal = (props) => {
   if (thumbnails.length < 5) {
     return (
       <div className="questions-and-answers-modal">
-        <div className="questions-and-answers-modal-content ">
-          <div className="questions-and-answers-modal-header">
-            <div className="questions-and-answers-close-modal-button" onClick={()=> props.hide()}>X</div>
+        <div className="answer-thumbnail-modal-content">
+          <div className="answers-zoomed-photo-modal-header">
+            <div aria-label="XButton" className="attach-photo-close" onClick={()=> props.hide()}>&times;</div>
             <h3 className="questions-and-answers-modal-title">Submit Your Answer</h3>
             <div className="questions-and-answers-modal-subtitle">{props.name}: {props.question}</div>
           </div>
-          <div className="questions-and-answers-modal-body">
+          <div>
             <form>
               <div className="add-answer-body">
                 <label>Your Answer<sup>*</sup>: </label>
@@ -118,7 +117,7 @@ const AnswerModal = (props) => {
             </div>
             <div id="error" className="error">{error}</div>
             <div className="answer-submit-button">
-              <button className="question-modal-footer-button" onClick={() => validateForm()}>Submit Answer</button>
+              <button className="answer-button" onClick={() => validateForm()}>Submit Answer</button>
             </div>
           </div>
         </div>
@@ -129,7 +128,7 @@ const AnswerModal = (props) => {
       <div className="questions-and-answers-modal">
         <div className="questions-and-answers-modal-content ">
           <div className="questions-and-answers-modal-header">
-            <div className="questions-and-answers-close-modal-button" onClick={()=> props.hide()}>X</div>
+            <div aria-label="XButton" className="attach-photo-close" onClick={()=> props.hide()}>&times;</div>
             <h4 className="questions-and-answers-modal-title">Submit Your Answer</h4>
             <div className="questions-and-answers-modal-subtitle">{props.name}: {props.question}</div>
           </div>
@@ -158,7 +157,7 @@ const AnswerModal = (props) => {
           </div>
           <div className="modal-footer">
             <div id="error" className="error">{error}</div>
-            <button className="question-modal-footer-button" onClick={() => validateForm()}>Submit Answer</button>
+            <button className="answer-button" onClick={() => validateForm()}>Submit Answer</button>
           </div>
         </div>
       </div>

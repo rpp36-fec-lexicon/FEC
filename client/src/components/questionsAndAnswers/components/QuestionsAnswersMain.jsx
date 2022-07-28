@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import SearchQuestion from './SearchQuestion.jsx';
 import QuestionsAnswersList from './QuestionsAnswersList.jsx';
+import Tracker from '../../Tracker.jsx';
 
 class QuestionsAnswersMain extends React.Component {
   constructor(props) {

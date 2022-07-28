@@ -1,6 +1,53 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import $ from "jquery";
+import React from 'react';
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import $ from 'jquery';
+
+const Button = styled.button`
+  margin-right: 30px;
+  height: 50px;
+  width: auto;
+  min-width: 100px;
+  text-align: center;
+  font-family: Optima, sans-serif;
+  padding: 10px;
+  border-radius: 30px;
+  border: 2px solid rgba(39, 200, 210, 0.9);
+  color: rgba(39, 200, 210, 0.9);
+  background-color: transparent;
+  transition: all 0.5s;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: rgba(39, 200, 210, 0.9);
+    box-shadow: 0px 5px 10px rgba(39, 200, 210, 0.4);
+  }
+  &:active {
+    box-shadow: 10px 10px 9px 4px rgba(37, 125, 255, 0.7);
+  }
+`;
+
+const SelectDiv = styled.div`
+  margin: 8px 0;
+  > * {
+    font-family: Optima, sans-serif;
+    background-color: white;
+    height: 25px;
+    border-radius: 20px;
+    padding: 0 5px;
+    margin: 0 5px;
+    border: 1px solid rgba(39, 200, 210, 0.9);
+    color: black;
+  }
+`;
+
+const ButtonDiv = styled.div`
+  margin-top: 10px;
+  > * {
+    vertical-align: middle;
+    margin: 0 5px;
+  }
+`;
 
 class Checkout extends React.Component {
   constructor(props) {
@@ -12,14 +59,15 @@ class Checkout extends React.Component {
   }
 
   componentDidMount() {
+    // eslint-disable-next-line no-use-before-define
     var pulledItems = storageGetter();
     var existingIDs = [];
     for (let i = 0; i < pulledItems.length; i++) {
       existingIDs.push(pulledItems[i][0][0].id);
     }
     if (existingIDs.includes(this.props.productId)) {
-      $(".MainOutfitAdderBTN").text("Item Added to Outfit");
-      $(".MainOutfitAdderBTN").addClass("disabledBTN");
+      $('.MainOutfitAdderBTN').text('Item Added to Outfit');
+      $('.MainOutfitAdderBTN').addClass('disabledBTN');
     }
   }
 
@@ -38,11 +86,10 @@ class Checkout extends React.Component {
 
   userSelect(e) {
     var num;
-    if (e.target.value === "Select Size" || e.target.value === "OUT OF STOCK") {
+    if (e.target.value === 'Select Size' || e.target.value === 'OUT OF STOCK') {
       this.setState({ currentSkuQuantity: -1 });
     } else {
       Object.entries(this.props.skus).find((product) => {
-        // console.log('product?', product[1].size);
         if (product[1].size === e.target.value) {
           num = product[1].quantity;
           this.setState({
@@ -56,39 +103,41 @@ class Checkout extends React.Component {
   render() {
     return (
       <div>
-        <select name="size" id="size" onChange={this.userSelect}>
-          {this.getSizes().length > 0 ? (
-            <>
-              <option>Select Size</option>
-              {this.getSizes().map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
+        <SelectDiv>
+          <select name="size" id="size" onChange={this.userSelect}>
+            {this.getSizes().length > 0 ? (
+              <>
+                <option>Select Size</option>
+                {this.getSizes().map((size, i) => (
+                  <option key={i} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </>
+            ) : (
+              <option>OUT OF STOCK</option>
+            )}
+          </select>
+          <select
+            name="quant"
+            id="quant"
+            disabled={this.state.currentSkuQuantity === -1}
+          >
+            {this.state.currentSkuQuantity === -1 && <option>-</option>}
+            {this.state.currentSkuQuantity === 0 && <option>OUT OF STOCK</option>}
+            {this.state.currentSkuQuantity > 0 &&
+              this.range(this.state.currentSkuQuantity, 15).map((num) => (
+                <option key={num + 1}>{num + 1}</option>
               ))}
-            </>
-          ) : (
-            <option>OUT OF STOCK</option>
-          )}
-        </select>
-        <select
-          name="quant"
-          id="quant"
-          disabled={this.state.currentSkuQuantity === -1}
-        >
-          {this.state.currentSkuQuantity === -1 && <option>-</option>}
-          {this.state.currentSkuQuantity === 0 && <option>OUT OF STOCK</option>}
-          {this.state.currentSkuQuantity > 0 &&
-            this.range(this.state.currentSkuQuantity, 15).map((num) => (
-              <option key={num + 1}>{num + 1}</option>
-            ))}
-        </select>
-        <div>
-          <button type="checkout" value="checkout">
-            Check Out
-          </button>
+          </select>
+        </SelectDiv>
+        <ButtonDiv>
+          <Button type="checkout" value="checkout">
+            Add to Cart
+          </Button>
 
           {this.props.outfitItemsIDs.includes(this.props.productId) ? (
-            <button
+            <Button
               className="MainOutfitAdderBTN"
               type="fav"
               value="fav"
@@ -97,9 +146,9 @@ class Checkout extends React.Component {
               }}
             >
               Item Added to Outfit
-            </button>
+            </Button>
           ) : (
-            <button
+            <Button
               className="MainOutfitAdderBTN"
               type="fav"
               value="fav"
@@ -109,9 +158,9 @@ class Checkout extends React.Component {
             >
               Add to Outfits
               <Persister outfits={this.props.outfitItems} />
-            </button>
+            </Button>
           )}
-        </div>
+        </ButtonDiv>
       </div>
     );
   }
@@ -119,11 +168,11 @@ class Checkout extends React.Component {
 
 const Persister = (props) => {
   useEffect(() => {
-    localStorage.setItem("items", JSON.stringify(props.outfits));
+    localStorage.setItem('items', JSON.stringify(props.outfits));
   }, [props]);
 };
 
-export const storageGetter = (key = "items") => {
+export const storageGetter = (key = 'items') => {
   const savedItems = localStorage.getItem(key);
   const storeageResult = savedItems !== null ? JSON.parse(savedItems) : [];
   return storeageResult;
