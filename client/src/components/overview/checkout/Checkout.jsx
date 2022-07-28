@@ -9,6 +9,7 @@ const Button = styled.button`
   width: auto;
   min-width: 100px;
   text-align: center;
+  font-family: Optima, sans-serif;
   padding: 10px;
   border-radius: 30px;
   border: 2px solid rgba(39, 200, 210, 0.9);
@@ -29,6 +30,7 @@ const Button = styled.button`
 const SelectDiv = styled.div`
   margin: 8px 0;
   > * {
+    font-family: Optima, sans-serif;
     background-color: white;
     height: 25px;
     border-radius: 20px;
@@ -106,8 +108,8 @@ class Checkout extends React.Component {
             {this.getSizes().length > 0 ? (
               <>
                 <option>Select Size</option>
-                {this.getSizes().map((size) => (
-                  <option key={size} value={size}>
+                {this.getSizes().map((size, i) => (
+                  <option key={i} value={size}>
                     {size}
                   </option>
                 ))}

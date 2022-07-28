@@ -18,7 +18,9 @@ const StyledCheckmark = styled(IoMdCheckmarkCircleOutline)`
   position: absolute;
   top: 5px;
   right: 5px;
-  color: green;
+  color: rgba(39, 200, 210, 0.9);
+  background-color: mintcream;
+  border-radius: 100%;
   width: 30px;
   height: 30px;
   filter: drop-shadow(0 0 0.2rem black);
@@ -51,7 +53,7 @@ class SelectStyle extends React.Component {
             }
             if (style.style_id === this.props.selectedStyle.style_id) {
               return (
-                <div style={{position: 'relative', display: 'inline-block'}}>
+                <div style={{position: 'relative', display: 'inline-block'}} key={i}>
                   <Img
                     key={style.style_id}
                     src={style.photos[0].thumbnail_url}
@@ -64,7 +66,7 @@ class SelectStyle extends React.Component {
               );
             }
             return (
-              <div style={{position: 'relative', display: 'inline-block'}}>
+              <div style={{position: 'relative', display: 'inline-block'}} key={i}>
                 <Img
                   key={style.style_id}
                   src={style.photos[0].thumbnail_url}

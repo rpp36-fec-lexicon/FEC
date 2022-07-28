@@ -236,7 +236,6 @@ class Showcase extends React.Component {
     } else {
       mainPhoto = this.state.currPhoto.url;
     }
-    console.log(this.state.currPhoto);
     if (this.state.zoomIn) {
       return (
         <Div id='bigImageContainer'>
