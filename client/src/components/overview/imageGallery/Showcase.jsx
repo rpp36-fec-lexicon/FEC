@@ -1,13 +1,67 @@
-import React from "react";
-import PrimaryImage from "./PrimaryImage.jsx";
-import styled from "styled-components";
+/* eslint-disable camelcase */
+import React from 'react';
+import styled from 'styled-components';
+import RenderZoom from './RenderZoom.jsx';
+import placeholder from '../../../../public/placeholder.png';
 
 const IMG = styled.img`
   margin: 5px;
   border-radius: 35%;
-  height: 100px;
-  width: 100px;
+  height: 70px;
+  width: 70px;
   object-fit: cover;
+  cursor: pointer;
+`;
+
+const MainIMG = styled.img`
+  border: 1px solid;
+  border-radius: 15%;
+  height: 720px;
+  width: 620px;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+  cursor: pointer;
+`;
+
+const Div = styled.div`
+  background: rgba(0,0,0,0.75);
+  margin: -25px -8px;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  backdrop-filter: blur(5px) contrast(70%);
+`;
+
+const Big = styled.img`
+  border: 1px solid;
+  border-radius: 15%;
+  height: 852px;
+  width: 852px;
+  object-fit: cover;
+  margin-top: 20px;
+  cursor: zoom-in;
+`;
+
+const Thumbnails = styled.div`
+  position: absolute;
+  display: flex;
+  top: 70px;
+  left: 30px;
+  z-index: 2;
+  padding-left: 20px;
+`;
+
+const EnlargedThumbnails = styled.div`
+  position: absolute;
+  display: flex;
+  top: 70px;
+  left: 400px;
+  z-index: 2;
+  padding-left: 20px;
 `;
 
 class Showcase extends React.Component {
@@ -17,10 +71,11 @@ class Showcase extends React.Component {
     this.state = {
       photos,
       currPhoto: photos[0],
-      picList: [],
+      modalSeen: false,
       count: 0,
       min: 0,
       max: 7,
+      zoomIn: false
     };
     this.handleClick = this.handleClick.bind(this);
     this.changePhoto = this.changePhoto.bind(this);
@@ -29,6 +84,9 @@ class Showcase extends React.Component {
     this.updateCount = this.updateCount.bind(this);
     this.nextThumbnails = this.nextThumbnails.bind(this);
     this.previousThumbnails = this.previousThumbnails.bind(this);
+    this.expand = this.expand.bind(this);
+    this.renderZoom = this.renderZoom.bind(this);
+    this.handleZoom = this.handleZoom.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +98,9 @@ class Showcase extends React.Component {
       this.setState({
         photos: this.props.photos,
         currPhoto: this.props.photos[0],
+        count: 0,
+        min: 0,
+        max: 7
       });
     }
   }
@@ -90,19 +151,19 @@ class Showcase extends React.Component {
   }
 
   handleArrowClick(direction) {
-    if (direction === "right") {
+    if (direction === 'right') {
       return (
         this.state.currPhoto.url !==
         this.state.photos[this.state.photos.length - 1].url
       );
     }
-    if (direction === "left") {
+    if (direction === 'left') {
       return this.state.currPhoto.url !== this.state.photos[0].url;
     }
-    if (direction === "up") {
+    if (direction === 'up') {
       return this.state.min !== 0;
     }
-    if (direction === "down") {
+    if (direction === 'down') {
       return this.state.max < this.state.photos.length;
     }
     return false;
@@ -117,12 +178,27 @@ class Showcase extends React.Component {
   sliceThumbnails(min, max) {
     const { photos } = this.state;
     var setOfPhotos = photos.slice(min, max);
-    // console.log("this is set of photos", setOfPhotos);
-    return setOfPhotos.map((pic) => {
+    var style;
+    var thumbnail;
+    return setOfPhotos.map((pic, i) => {
+      if (pic.thumbnail_url === this.state.currPhoto.thumbnail_url) {
+        style = {border: '3px solid rgba(39, 200, 210, 0.9)'};
+      } else {
+        style = {border: 'none'};
+      }
+      if (pic.thumbnail_url[0] !== 'h') {
+        thumbnail = pic.thumbnail_url.substring(1);
+      } else {
+        thumbnail = pic.thumbnail_url;
+      }
+      if (pic.thumbnail_url === null || !pic.thumbnail_url.startsWith('http')) {
+        thumbnail = placeholder;
+      }
       return (
         <IMG
+          style={style}
           key={pic.url}
-          src={pic.thumbnail_url}
+          src={thumbnail}
           onClick={() => this.handleClick(pic.url)}
           alt={pic.url}
         />
@@ -130,49 +206,130 @@ class Showcase extends React.Component {
     });
   }
 
+  expand() {
+    this.setState({ modalSeen: !this.state.modalSeen });
+  }
+
+  handleZoom() {
+    this.setState({ zoomIn: !this.state.zoomIn });
+  }
+
+  renderZoom() {
+    if (this.state.zoomIn) {
+      var container = document.getElementById('bigImageContainer');
+      var picture = document.getElementById('bigImage');
+      return (
+        <RenderZoom
+          picture={picture}
+          container={container}
+          zoomOut={this.handleZoom}
+        />
+      );
+      return null;
+    }
+  }
+
   render() {
-    // console.log('Photos props in showcase', this.props.photos.length);
-    // console.log("current count", this.state.count);
+    var mainPhoto;
+    if (this.state.currPhoto.url === null) {
+      mainPhoto = placeholder;
+    } else {
+      mainPhoto = this.state.currPhoto.url;
+    }
+    if (this.state.zoomIn) {
+      return (
+        <Div id='bigImageContainer'>
+          {this.renderZoom()}
+        </Div>
+      );
+    }
+    if (this.state.modalSeen) {
+      return (
+        <Div id='bigImageContainer'>
+          {this.renderZoom()}
+          <Big
+            id='bigImage'
+            src={mainPhoto}
+            alt={this.state.currPhoto.url}
+            onClick={() => this.handleZoom()}
+          />
+          <i
+            style={{cursor: 'pointer', position: 'absolute', color: 'white', top: '70px', right: '400px'}}
+            className="fa-solid fa-xmark fa-xl"
+            onClick={() => this.expand()}
+          />
+          {this.handleArrowClick('left') && (
+            <i
+              style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', left: '400px'}}
+              onClick={() => this.changePhoto(-1)}
+              className='fa fa-arrow-left fa-xl'
+            />
+          )}
+          {this.handleArrowClick('right') && (
+            <i
+              style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', right: '400px'}}
+              onClick={() => this.changePhoto(1)}
+              className='fa fa-arrow-right fa-xl'
+            />
+          )}
+          <EnlargedThumbnails style={{flexDirection: 'column'}}>
+            {this.handleArrowClick('up') && (
+              <i
+                style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
+                onClick={() => this.previousThumbnails()}
+                className='fa fa-angle-up fa-xl'
+              />
+            )}
+            {this.sliceThumbnails(this.state.min, this.state.max)}
+            {this.handleArrowClick('down') && (
+              <i
+                style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
+                onClick={() => this.nextThumbnails()}
+                className='fa fa-angle-down fa-xl'
+              />
+            )}
+          </EnlargedThumbnails>
+        </Div>
+      );
+    }
     return (
-      <div>
-        {this.handleArrowClick("left") && (
-          <button
-            style={{ margin: "40px" }}
+      <div style={{position: 'relative'}}>
+        {this.handleArrowClick('left') && (
+          <i
+            style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', left: '50px'}}
             onClick={() => this.changePhoto(-1)}
-            className="fa fa-arrow-left"
+            className='fa fa-arrow-left fa-xl'
           />
         )}
-        {this.handleArrowClick("right") && (
-          <button
-            style={{ margin: "40px" }}
+        {this.handleArrowClick('right') && (
+          <i
+            style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', right: '50px'}}
             onClick={() => this.changePhoto(1)}
-            className="fa fa-arrow-right"
+            className='fa fa-arrow-right fa-xl'
           />
         )}
-        <PrimaryImage pic={this.state.currPhoto.url} />
-        {this.sliceThumbnails(this.state.min, this.state.max)}
-        {this.handleArrowClick("up") && (
-          <button
-            style={{ margin: "40px" }}
-            onClick={() => this.previousThumbnails()}
-            className="fa fa-angle-up"
-          />
-        )}
-        {this.handleArrowClick("down") && (
-          <button
-            style={{ margin: "40px" }}
-            onClick={() => this.nextThumbnails()}
-            className="fa fa-angle-down"
-          />
-        )}
-        {/* {this.props.photos.map((pic) => (
-          <IMG
-            key={pic.url}
-            src={pic.thumbnail_url}
-            onClick={() => this.handleClick(pic.url)}
-            alt={pic.url}
-          />
-        ))} */}
+        <MainIMG
+          src={mainPhoto}
+          alt={this.state.currPhoto.url}
+          onClick={() => this.expand()}
+        />
+        <Thumbnails style={{flexDirection: 'column'}}>
+          {this.handleArrowClick('up') && (
+            <i
+              style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
+              onClick={() => this.previousThumbnails()}
+              className='fa fa-angle-up fa-xl'
+            />
+          )}
+          {this.sliceThumbnails(this.state.min, this.state.max)}
+          {this.handleArrowClick('down') && (
+            <i
+              style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
+              onClick={() => this.nextThumbnails()}
+              className='fa fa-angle-down fa-xl'
+            />
+          )}
+        </Thumbnails>
       </div>
     );
   }

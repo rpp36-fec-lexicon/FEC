@@ -4,7 +4,8 @@ html {
 }
 
 #app {
-  font-family: "Optima", sans-serif
+  font-family: "Optima", sans-serif;
+  background-color: rgba(229, 228, 228, 0.8);
 }
 
 /****************** REVIEW STARs STYLING ********************/
