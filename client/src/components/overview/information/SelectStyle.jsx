@@ -1,6 +1,8 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import styled from 'styled-components';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
+import placeholder from '../../../../public/placeholder.png';
 
 const Img = styled.img`
   margin: 5px;
@@ -38,15 +40,15 @@ class SelectStyle extends React.Component {
   }
 
   render() {
-    // console.log('Props in Styles ', this.props);
-    // console.log("current id", this.props.selectedStyle.style_id);
     return (
       <div>
         <h3 style={{display: 'inline-block'}}> Selected Style  ~ </h3>
-        {/* <BsArrowRightShort size={24}/> */}
         <p style={{display: 'inline-block', paddingLeft: '5px'}}> {this.props.selectedStyle.name} </p>
         <FlexDiv>
           {this.props.styles.map((style, i) => {
+            if (style.photos[0].thumbnail_url === null) {
+              style.photos[0].thumbnail_url = placeholder;
+            }
             if (style.style_id === this.props.selectedStyle.style_id) {
               return (
                 <div style={{position: 'relative', display: 'inline-block'}}>

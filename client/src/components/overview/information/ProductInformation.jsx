@@ -1,5 +1,11 @@
 import React from 'react';
+import styled from 'styled-components';
+import { FaStar, FaRegStar } from 'react-icons/fa';
 
+const Div = styled.div`
+  padding-top: 20px;
+  padding-bottom: 20px;
+`;
 
 class ProductInformation extends React.Component {
   constructor(props) {
@@ -9,8 +15,33 @@ class ProductInformation extends React.Component {
 
   render() {
     return (
-      <div>
-        <h4> STARS: {this.props.rating} </h4>
+      <Div>
+        {isNaN(this.props.rating) ? null : (
+          <>
+            <div className="starEmpty">
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <div
+                className="starFilled"
+                style={{
+                  width: `${Math.round(
+                    (this.props.rating / 5) * 100
+                  )}%`,
+                }}
+              >
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+            </div>
+            <p style={{display: 'inline-block'}}><a href='#listOfReviews'>Read All Reviews</a></p>
+          </>
+        )}
         <h3> {this.props.category} </h3>
         <h2> {this.props.name} </h2>
         {this.props.salePrice !== null ?
@@ -21,7 +52,7 @@ class ProductInformation extends React.Component {
           :
           <h4> ${this.props.price}</h4>
         }
-      </div>
+      </Div>
     );
   }
 }

@@ -151,7 +151,7 @@ class RatingsAndReviews extends React.Component {
       return (
         <div>
           <h3>RATINGS & REVIEWS</h3>
-          <div className="content-container">
+          <div className="content-container" id='listOfReviews'>
             <div className="row">
               <div className="left-panel">
                 <RatingSummary

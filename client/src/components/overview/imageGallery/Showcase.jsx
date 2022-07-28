@@ -1,6 +1,8 @@
+/* eslint-disable camelcase */
 import React from 'react';
 import styled from 'styled-components';
 import RenderZoom from './RenderZoom.jsx';
+import placeholder from '../../../../public/placeholder.png';
 
 const IMG = styled.img`
   margin: 5px;
@@ -24,14 +26,14 @@ const MainIMG = styled.img`
 
 const Div = styled.div`
   background: rgba(0,0,0,0.75);
-  margin: -96px -8px;
+  margin: -25px -8px;
   height: 100%;
   width: 100%;
   position: fixed;
   z-index: 10;
   display: flex;
   justify-content: center;
-  backdrop-filter: blur(8px) contrast(70%);
+  backdrop-filter: blur(5px) contrast(70%);
 `;
 
 const Big = styled.img`
@@ -69,7 +71,6 @@ class Showcase extends React.Component {
     this.state = {
       photos,
       currPhoto: photos[0],
-      picList: [],
       modalSeen: false,
       count: 0,
       min: 0,
@@ -178,17 +179,26 @@ class Showcase extends React.Component {
     const { photos } = this.state;
     var setOfPhotos = photos.slice(min, max);
     var style;
+    var thumbnail;
     return setOfPhotos.map((pic, i) => {
       if (pic.thumbnail_url === this.state.currPhoto.thumbnail_url) {
         style = {border: '3px solid rgba(39, 200, 210, 0.9)'};
       } else {
         style = {border: 'none'};
       }
+      if (pic.thumbnail_url[0] !== 'h') {
+        thumbnail = pic.thumbnail_url.substring(1);
+      } else {
+        thumbnail = pic.thumbnail_url;
+      }
+      if (pic.thumbnail_url === null || !pic.thumbnail_url.startsWith('http')) {
+        thumbnail = placeholder;
+      }
       return (
         <IMG
           style={style}
           key={pic.url}
-          src={pic.thumbnail_url}
+          src={thumbnail}
           onClick={() => this.handleClick(pic.url)}
           alt={pic.url}
         />
@@ -198,7 +208,6 @@ class Showcase extends React.Component {
 
   expand() {
     this.setState({ modalSeen: !this.state.modalSeen });
-    console.log('WE EXPANDERINO!');
   }
 
   handleZoom() {
@@ -207,7 +216,6 @@ class Showcase extends React.Component {
 
   renderZoom() {
     if (this.state.zoomIn) {
-      console.log('we are trying to zoomin');
       var container = document.getElementById('bigImageContainer');
       var picture = document.getElementById('bigImage');
       return (
@@ -222,6 +230,13 @@ class Showcase extends React.Component {
   }
 
   render() {
+    var mainPhoto;
+    if (this.state.currPhoto.url === null) {
+      mainPhoto = placeholder;
+    } else {
+      mainPhoto = this.state.currPhoto.url;
+    }
+    console.log(this.state.currPhoto);
     if (this.state.zoomIn) {
       return (
         <Div id='bigImageContainer'>
@@ -235,7 +250,7 @@ class Showcase extends React.Component {
           {this.renderZoom()}
           <Big
             id='bigImage'
-            src={this.state.currPhoto.url}
+            src={mainPhoto}
             alt={this.state.currPhoto.url}
             onClick={() => this.handleZoom()}
           />
@@ -295,7 +310,7 @@ class Showcase extends React.Component {
           />
         )}
         <MainIMG
-          src={this.state.currPhoto.url}
+          src={mainPhoto}
           alt={this.state.currPhoto.url}
           onClick={() => this.expand()}
         />

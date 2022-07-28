@@ -5,6 +5,7 @@ import Checkout from './checkout/Checkout.jsx';
 import ProductDescription from './information/ProductDescription.jsx';
 import ProductInformation from './information/ProductInformation.jsx';
 import SelectStyle from './information/SelectStyle.jsx';
+import placeholder from '../../.././public/placeholder.png';
 
 const Pictures = styled.div`
   width: 100%;
@@ -65,11 +66,9 @@ class ProductOverview extends React.Component {
   }
 
   render() {
-    // console.log('this is the current style ', this.state.selectedStyle);
     if (
       this.state.productInfo &&
-      this.state.selectedStyle &&
-      this.props.rating
+      this.state.selectedStyle
     ) {
       return (
         <>

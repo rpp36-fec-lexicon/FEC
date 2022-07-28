@@ -61,7 +61,6 @@ class App extends React.Component {
   }
 
   outfitAdder() {
-    // console.log("outfitItems", this.state.outfitItems);
     var outfitContainer = this.state.outfitItems;
     var existingIDs = [];
     for (let i = 0; i < this.state.outfitItems.length; i++) {
