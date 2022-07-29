@@ -1,10 +1,11 @@
-import React from "react";
-import ReviewItem from "./ReviewItem.jsx";
-import MoreReviews from "./MoreReviews.jsx";
-import AddFirstReview from "./AddFirstReview.jsx";
-import AddAnotherReview from "./AddAnotherReview.jsx";
-import ReviewsHeading from "./ReviewsHeading.jsx";
-import ReviewModal from "./ReviewModal.jsx";
+import React from 'react';
+import ReviewItem from './ReviewItem.jsx';
+import MoreReviews from './MoreReviews.jsx';
+import AddFirstReview from './AddFirstReview.jsx';
+import AddAnotherReview from './AddAnotherReview.jsx';
+import ReviewsHeading from './ReviewsHeading.jsx';
+import ReviewModal from './ReviewModal.jsx';
+const axios = require('axios');
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class ReviewList extends React.Component {
     this.sortByRelevanceFunc = this.sortByRelevanceFunc.bind(this);
     this.showReviewModalFunc = this.showReviewModalFunc.bind(this);
     this.closeReviewModalFunc = this.closeReviewModalFunc.bind(this);
+    // this.getAllNewReviewsFunc = this.getAllNewReviewsFunc.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +57,18 @@ class ReviewList extends React.Component {
       });
     }
   }
+
+  // getAllNewReviewsFunc() {
+  //   return axios.get("/reviews", {
+  //     params: { productId: this.props.productInfo.id },
+  //   })
+  //     .then(response => {
+  //       console.log('response.data.results', response.data.results)
+  //       this.setState({reviews: response.data.results},
+  //         () => { console.log('this.state.reviews', this.state.reviews); }
+  //       );
+  //     });
+  // }
 
   showMoreReviewsFunc() {
     var reviewsShowing;
@@ -201,15 +215,7 @@ class ReviewList extends React.Component {
     let reviewModalComponent;
 
     if (this.state.showReviewModal) {
-      reviewModalComponent = (
-        <ReviewModal
-          showReviewModal={this.state.showReviewModal}
-          productInfo={this.props.productInfo}
-          closeReviewModalFunc={this.closeReviewModalFunc}
-          productInfo={this.props.productInfo}
-          metaData={this.props.metaData}
-        />
-      );
+      reviewModalComponent = <ReviewModal showReviewModal={this.state.showReviewModal} productInfo={this.props.productInfo} closeReviewModalFunc={this.closeReviewModalFunc} productInfo={this.props.productInfo} metaData={this.props.metaData} getAllNewReviewsFunc={this.getAllNewReviewsFunc} productName={this.props.productName}/>;
     } else {
       reviewModalComponent = null;
     }

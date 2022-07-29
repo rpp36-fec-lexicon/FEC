@@ -28,7 +28,10 @@ class ReviewPhoto extends React.Component {
     let modalComponent;
 
     if (this.state.showModal) {
-      modalComponent = <PhotoModal showModal={this.state.showModal} photo={this.props.photo} closeModalFunc={this.closeModalFunc}/>;
+      modalComponent = <div data-testid="photoModal">
+        <PhotoModal showModal={this.state.showModal} photo={this.props.photo} closeModalFunc={this.closeModalFunc}/>
+      </div>;
+
     }
 
     if (!this.state.showModal) {
@@ -38,6 +41,7 @@ class ReviewPhoto extends React.Component {
     return (
       <div>
         {modalComponent}
+
         <img onClick={() => { this.showModalFunc(); }} style={thumbnailStyle} src={this.props.photo.url}/>&nbsp;
       </div>
     );

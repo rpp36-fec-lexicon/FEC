@@ -18,8 +18,19 @@ describe('UploadPhotoButton', ()=>{
 
   describe('UploadPhotoButton Component', () => {
 
+    it('should render the ChooseFile button', async() => {
+      render(<UploadPhotoButton />);
+      const chooseFileButton = screen.getByTestId('chooseFileButton');
+      expect(chooseFileButton).toBeInTheDocument();
+    })
 
-
+    it('should invoke "photoUploadedFunc" when an image is selected', async() => {
+      const mockFunc = jest.fn();
+      render(<UploadPhotoButton photoUploadedFunc={mockFunc}/>);
+      const chooseFileButton = screen.getByTestId('chooseFileButton');
+      await userEvent.change(chooseFileButton);
+      expect(mockFunc).toHaveBeenCalled();
+    })
   });
 });
 

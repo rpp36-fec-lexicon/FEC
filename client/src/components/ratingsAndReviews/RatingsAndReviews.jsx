@@ -149,7 +149,13 @@ class RatingsAndReviews extends React.Component {
     // console.log('productinfo', this.props.productInfo)
     if (this.state.reviews !== null) {
       return (
-        <div>
+        <div onClick={(e) => {
+          let timeOfClick = new Date().toLocaleString('en-US', {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, 'Overview Widget', timeOfClick);
+        }}>
           <h3>RATINGS & REVIEWS</h3>
           <div className="content-container" id='listOfReviews'>
             <div className="row">
@@ -165,12 +171,7 @@ class RatingsAndReviews extends React.Component {
                 {/* <RatingSummary metaData={sampleMeta} rating={sampleRating} totalNumberOfRatings={sampleTotalNumberOfRatings} filterRating={this.filterRating}/> */}
               </div>
               <div className="right-panel">
-                <ReviewList
-                  reviewData={this.state.reviewData}
-                  reviews={this.state.reviews}
-                  productInfo={this.props.productInfo}
-                  metaData={this.props.metaData}
-                />
+                <ReviewList reviewData={this.state.reviewData} reviews={this.state.reviews} productInfo={this.props.productInfo} productName={this.props.productInfo.name} productId={this.props.productInfo.id} metaData={this.props.metaData}/>
                 {/* <ReviewList reviewData={sampleReviewData} reviews={sampleReviews} /> */}
               </div>
             </div>

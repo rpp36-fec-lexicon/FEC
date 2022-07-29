@@ -48,12 +48,12 @@ class App extends React.Component {
     axios
       .post('/interaction', { element, widget, time })
       .then((res) => {
-        // console.log(
-        //   "user event successfully sent to interactions api: ",
-        //   res.status,
-        //   "event detail: ",
-        //   { element, widget, time }
-        // );
+        console.log(
+          "user event successfully sent to interactions api: ",
+          res.status,
+          "event detail: ",
+          { element, widget, time }
+        );
       })
       .catch((err) => {
         throw new Error('Tracking failed: ', err);
@@ -162,6 +162,7 @@ class App extends React.Component {
         var defaultStyle = styles.find(
           (product) => product['default?'] === true
         );
+
         if (defaultStyle === undefined) {
           defaultStyle = styles[0];
         }
@@ -228,6 +229,7 @@ class App extends React.Component {
           </div>
           <div className="allComponents">
             <ProductOverview
+              userTracker={this.userTracker.bind(this)}
               productId={this.state.productId}
               productInfo={this.state.productInfo}
               defaultStyle={this.state.defaultStyle}
@@ -254,6 +256,7 @@ class App extends React.Component {
               key={this.state.productId}
             />
             <RatingsAndReviews
+              productInfo={this.state.productInfo}
               productId={this.state.productId}
               reviewData={this.state.reviewData}
               reviews={this.state.reviews}
@@ -261,6 +264,8 @@ class App extends React.Component {
               rating={this.state.rating}
               totalNumberOfRatings={this.state.totalNumberOfRatings}
               filterRating={this.filterRating}
+              userTracker={this.userTracker.bind(this)}
+
             />
           </div>
         </>
@@ -277,3 +282,5 @@ export const storageGetter = (key = 'items') => {
 
 ReactDOM.createRoot(document.getElementById('app')).render(<App />);
 export default App;
+
+

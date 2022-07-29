@@ -1,6 +1,7 @@
 import React from 'react';
-import Stars from 'react-stars-display';
 import RatingBreakdown from './RatingBreakdown.jsx';
+import { FaStar, FaRegStar } from "react-icons/fa";
+
 
 
 const RatingDetails = (props) => {
@@ -15,7 +16,30 @@ const RatingDetails = (props) => {
   return (
     <div>
       <h1 style={sameLineStyle}>{props.rating}</h1>
-      <Stars style={sameLineStyle} stars={props.rating}/>
+      {/* <Stars style={sameLineStyle} stars={props.rating}/> */}
+      {isNaN(props.rating) ? null : (
+        <div className="starEmpty">
+          <FaRegStar />
+          <FaRegStar />
+          <FaRegStar />
+          <FaRegStar />
+          <FaRegStar />
+          <div
+            className="starFilled"
+            style={{
+              width: `${Math.round(
+                (props.rating / 5) * 100
+              )}%`,
+            }}
+          >
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaStar />
+          </div>
+        </div>
+      )}
       <div>{props.recommendedPercent}% of reviews recommend this product</div>
       <RatingBreakdown ratings={props.ratings} totalNumberOfRatings={props.totalNumberOfRatings} filterRatingFunc={props.filterRatingFunc}/>
       <div id="filterRatingMessage"></div>
