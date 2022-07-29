@@ -4,7 +4,8 @@ html {
 }
 
 #app {
-  font-family: "Optima", sans-serif
+  font-family: "Optima", sans-serif;
+  background-color: rgba(229, 228, 228, 0.8);
 }
 
 /****************** REVIEW STARs STYLING ********************/
@@ -906,7 +907,7 @@ textarea.reviewBody {
   height: 700px;
   background-color: white;
   /* background-color: rgba(40, 198, 209, 0.9) */
-  border-radius: 10%;
+  border-radius: 7%;
 }
 
 .questions-and-answers-modal-header {

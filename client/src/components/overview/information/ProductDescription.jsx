@@ -8,14 +8,18 @@ class ProductDescription extends React.Component {
   }
 
   render() {
-    // console.log(this.props.features[0].value);
     return (
-      <div>
-        <h4>{this.props.slogan}</h4>
-        <p>{this.props.description}</p>
-        <div>
-          {this.props.features.map((element) => element.value !== null ? <h4 key={element.feature}>{element.feature} : {element.value} </h4> : <h4 key={element.feature}>{element.feature} </h4>)}
-        </div>
+      <div style={{paddingTop: '30px'}}>
+        <h2>{this.props.slogan}</h2>
+        <p style={{borderBottom: '2px solid rgba(169,169,169,.5)', paddingBottom: '10px'}}>{this.props.description}</p>
+        {this.props.features.map((element, i) =>
+          <div key={i} style={{paddingTop: '10px'}}>
+            <p style={{display: 'inline-block', fontWeight: '900'}}>{element.feature}</p>
+            {element.value && (
+              <p style={{display: 'inline-block'}}>: {element.value}</p>
+            )}
+          </div>
+        )}
       </div>
     );
   }
