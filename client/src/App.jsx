@@ -48,12 +48,12 @@ class App extends React.Component {
     axios
       .post('/interaction', { element, widget, time })
       .then((res) => {
-        // console.log(
-        //   "user event successfully sent to interactions api: ",
-        //   res.status,
-        //   "event detail: ",
-        //   { element, widget, time }
-        // );
+        console.log(
+          "user event successfully sent to interactions api: ",
+          res.status,
+          "event detail: ",
+          { element, widget, time }
+        );
       })
       .catch((err) => {
         throw new Error('Tracking failed: ', err);
@@ -211,7 +211,7 @@ class App extends React.Component {
             }}
           >
             <div className="mainHeader-child1">
-              {/* <img src={logo} className="logo" alt="Atelier company logo" /> */}
+              <img src={logo} className="logo" alt="Atelier company logo" />
             </div>
             <div className="mainHeader-child2">
               <div className="searchContainer">
@@ -229,6 +229,7 @@ class App extends React.Component {
           </div>
           <div className="allComponents">
             <ProductOverview
+              userTracker={this.userTracker.bind(this)}
               productId={this.state.productId}
               productInfo={this.state.productInfo}
               defaultStyle={this.state.defaultStyle}
@@ -263,6 +264,7 @@ class App extends React.Component {
               rating={this.state.rating}
               totalNumberOfRatings={this.state.totalNumberOfRatings}
               filterRating={this.filterRating}
+              userTracker={this.userTracker.bind(this)}
 
             />
           </div>

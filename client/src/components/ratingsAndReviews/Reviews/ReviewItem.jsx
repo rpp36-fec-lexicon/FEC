@@ -1,11 +1,11 @@
 import React from 'react';
-import Stars from 'react-stars-display';
 import ShortReviewBody from './ShortReviewBody.jsx';
 import LongReviewBody from './LongReviewBody.jsx';
 import Recommend from './Recommend.jsx';
 import ReviewPhotos from './ReviewPhotos.jsx';
 import SellerResponse from './SellerResponse.jsx';
 import ReviewsHeading from './ReviewsHeading.jsx';
+import { FaStar, FaRegStar } from "react-icons/fa";
 const axios = require('axios');
 
 class ReviewItem extends React.Component {
@@ -88,7 +88,29 @@ class ReviewItem extends React.Component {
       <div>
         <br></br>
         <div style={flexStyle}>
-          <Stars stars={review.rating}/>
+          {isNaN(review.rating) ? null : (
+            <div className="starEmpty">
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <div
+                className="starFilled"
+                style={{
+                  width: `${Math.round(
+                    (review.rating / 5) * 100
+                  )}%`,
+                }}
+              >
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+            </div>
+          )}
           <div>{review['reviewer_name']}, {month[monthIndex]} {date}, {year}</div>
         </div>
 

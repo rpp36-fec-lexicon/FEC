@@ -149,7 +149,13 @@ class RatingsAndReviews extends React.Component {
     // console.log('productinfo', this.props.productInfo)
     if (this.state.reviews !== null) {
       return (
-        <div>
+        <div onClick={(e) => {
+          let timeOfClick = new Date().toLocaleString('en-US', {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, 'Overview Widget', timeOfClick);
+        }}>
           <h3>RATINGS & REVIEWS</h3>
           <div className="content-container" id='listOfReviews'>
             <div className="row">
