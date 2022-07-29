@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { useState, useEffect } from 'react';
-import ProductOverview from './components/overview/ProductOverview.jsx';
-import RatingsAndReviews from './components/ratingsAndReviews/RatingsAndReviews.jsx';
-import RelatedAndOutfit from './components/relatedItems/index.jsx';
-import QuestionsAnswersMain from './components/questionsAndAnswers/components/QuestionsAnswersMain.jsx';
-import $ from 'jquery';
-import logo from './../public/logo.png';
-import axios from 'axios';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { useState, useEffect } from "react";
+import ProductOverview from "./components/overview/ProductOverview.jsx";
+import RatingsAndReviews from "./components/ratingsAndReviews/RatingsAndReviews.jsx";
+import RelatedAndOutfit from "./components/relatedItems/index.jsx";
+import QuestionsAnswersMain from "./components/questionsAndAnswers/components/QuestionsAnswersMain.jsx";
+import $ from "jquery";
+import logo from "./../public/logo.png";
+import axios from "axios";
 
 class App extends React.Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class App extends React.Component {
 
   userTracker(element, widget, time) {
     axios
-      .post('/interaction', { element, widget, time })
+      .post("/interaction", { element, widget, time })
       .then((res) => {
         // console.log(
         //   "user event successfully sent to interactions api: ",
@@ -56,7 +56,7 @@ class App extends React.Component {
         // );
       })
       .catch((err) => {
-        throw new Error('Tracking failed: ', err);
+        throw new Error("Tracking failed: ", err);
       });
   }
 
@@ -73,8 +73,8 @@ class App extends React.Component {
         [this.state.rating],
       ]);
     }
-    $('.MainOutfitAdderBTN').text('Item Added to Outfit');
-    $('.MainOutfitAdderBTN').addClass('disabledBTN');
+    $(".MainOutfitAdderBTN").text("Item Added to Outfit");
+    $(".MainOutfitAdderBTN").addClass("disabledBTN");
     this.setState({
       outfitItems: outfitContainer,
     });
@@ -86,33 +86,33 @@ class App extends React.Component {
         this.state.outfitItems.splice([i], 1);
       }
     }
-    $('.MainOutfitAdderBTN').text(' Add to Outfits');
-    $('.MainOutfitAdderBTN').removeClass('disabledBTN');
+    $(".MainOutfitAdderBTN").text(" Add to Outfits");
+    $(".MainOutfitAdderBTN").removeClass("disabledBTN");
     this.setState({
       outfitItems: this.state.outfitItems,
     });
   }
 
   getAllReviewsFunc() {
-    return axios.get('/reviews', {
+    return axios.get("/reviews", {
       params: { productId: this.state.productId },
     });
   }
 
   getAllMetaFunc() {
-    return axios.get('/reviews/meta', {
+    return axios.get("/reviews/meta", {
       params: { productId: this.state.productId },
     });
   }
 
   getProductInfo() {
-    return axios.post('/products/:product_id', {
+    return axios.post("/products/:product_id", {
       params: { productId: this.state.productId },
     });
   }
 
   getProductStyles() {
-    return axios.post('/products/:product_id/styles', {
+    return axios.post("/products/:product_id/styles", {
       params: { productId: this.state.productId },
     });
   }
@@ -127,9 +127,9 @@ class App extends React.Component {
     this.setState({ flag: false });
 
     // adds id to url
-    const url = new URL(window.location);
-    url.searchParams.set('id', proId);
-    window.history.pushState({}, '', url);
+    // const url = new URL(window.location);
+    // url.searchParams.set('id', proId);
+    // window.history.pushState({}, '', url);
 
     Promise.all([
       this.getProductInfo(),
@@ -160,7 +160,7 @@ class App extends React.Component {
 
         var styles = values[1].data.results;
         var defaultStyle = styles.find(
-          (product) => product['default?'] === true
+          (product) => product["default?"] === true
         );
         if (defaultStyle === undefined) {
           defaultStyle = styles[0];
@@ -179,7 +179,7 @@ class App extends React.Component {
         });
       })
       .catch((err) => {
-        throw new Error('Updating product failed: ', err);
+        throw new Error("Updating product failed: ", err);
       });
   }
 
@@ -202,11 +202,11 @@ class App extends React.Component {
           <div
             className="mainHeader"
             onClick={(e) => {
-              let timeOfClick = new Date().toLocaleString('en-US', {
+              let timeOfClick = new Date().toLocaleString("en-US", {
                 hour12: false,
               });
               let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
-              this.userTracker(element, 'Overview Widget', timeOfClick);
+              this.userTracker(element, "Overview Widget", timeOfClick);
             }}
           >
             <div className="mainHeader-child1">
@@ -269,11 +269,11 @@ class App extends React.Component {
   }
 }
 
-export const storageGetter = (key = 'items') => {
+export const storageGetter = (key = "items") => {
   const savedItems = localStorage.getItem(key);
   const storeageResult = savedItems !== null ? JSON.parse(savedItems) : [];
   return storeageResult;
 };
 
-ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+ReactDOM.createRoot(document.getElementById("app")).render(<App />);
 export default App;

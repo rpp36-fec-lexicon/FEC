@@ -12,13 +12,11 @@ const myAPIKey = process.env.myAPIKey;
 const data = require("./product.js");
 const port = 3000;
 const baseAPI = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp";
-
-app.use("/", expressStaticGzip(__dirname + "/../client/public"));
-
+app.use(expressStaticGzip(__dirname + "/../client/public"));
+// app.use(express.static(__dirname + "/../client/public")); // KEEP
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use(express.static(__dirname + "/../client/public"));
 
 
 
