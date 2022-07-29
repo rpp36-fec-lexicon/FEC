@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "webpack": "webpack --mode production --watch",
+    "webpack": "webpack --mode development --watch",
     "test": "jest --coverage",
     "lint": "eslint ./"
   },
