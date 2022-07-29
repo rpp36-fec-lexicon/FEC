@@ -1,7 +1,7 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import $ from 'jquery';
+import React from "react";
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import $ from "jquery";
 
 const Button = styled.button`
   margin-right: 30px;
@@ -66,8 +66,8 @@ class Checkout extends React.Component {
       existingIDs.push(pulledItems[i][0][0].id);
     }
     if (existingIDs.includes(this.props.productId)) {
-      $('.MainOutfitAdderBTN').text('Item Added to Outfit');
-      $('.MainOutfitAdderBTN').addClass('disabledBTN');
+      $(".MainOutfitAdderBTN").text("Item Added to Outfit");
+      $(".MainOutfitAdderBTN").addClass("disabledBTN");
     }
   }
 
@@ -86,7 +86,7 @@ class Checkout extends React.Component {
 
   userSelect(e) {
     var num;
-    if (e.target.value === 'Select Size' || e.target.value === 'OUT OF STOCK') {
+    if (e.target.value === "Select Size" || e.target.value === "OUT OF STOCK") {
       this.setState({ currentSkuQuantity: -1 });
     } else {
       Object.entries(this.props.skus).find((product) => {
@@ -124,7 +124,9 @@ class Checkout extends React.Component {
             disabled={this.state.currentSkuQuantity === -1}
           >
             {this.state.currentSkuQuantity === -1 && <option>-</option>}
-            {this.state.currentSkuQuantity === 0 && <option>OUT OF STOCK</option>}
+            {this.state.currentSkuQuantity === 0 && (
+              <option>OUT OF STOCK</option>
+            )}
             {this.state.currentSkuQuantity > 0 &&
               this.range(this.state.currentSkuQuantity, 15).map((num) => (
                 <option key={num + 1}>{num + 1}</option>
@@ -168,11 +170,11 @@ class Checkout extends React.Component {
 
 const Persister = (props) => {
   useEffect(() => {
-    localStorage.setItem('items', JSON.stringify(props.outfits));
+    localStorage.setItem("items", JSON.stringify(props.outfits));
   }, [props]);
 };
 
-export const storageGetter = (key = 'items') => {
+export const storageGetter = (key = "items") => {
   const savedItems = localStorage.getItem(key);
   const storeageResult = savedItems !== null ? JSON.parse(savedItems) : [];
   return storeageResult;

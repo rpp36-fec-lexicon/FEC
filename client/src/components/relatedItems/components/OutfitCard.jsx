@@ -35,6 +35,7 @@ class OutfitCard extends React.Component {
             height: "150px",
             width: "150px",
             marginBottom: "10px",
+            objectFit: "cover",
             backgroundImage: `url(${selectedPhoto})`,
             backgroundSize: "150px 150px",
             borderRadius: "10%",

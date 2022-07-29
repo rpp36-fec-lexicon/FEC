@@ -5,15 +5,17 @@ html {
 
 #app {
   font-family: "Optima", sans-serif;
-  background-color: rgba(229, 228, 228, 0.8);
+  /* background-color: rgba(229, 228, 228, 0.8); */
+  background-color: rgb(253, 237, 208)
 }
 
 /****************** REVIEW STARs STYLING ********************/
 /****************** CSS START ********************/
 
 .starFilled {
+
   z-index: -1;
-  color: yellow;
+  color:rgba(40, 198, 209, 0.9);
   position: absolute;
   top: 0;
   left: 0;
@@ -22,6 +24,7 @@ html {
 }
 
 .starEmpty {
+
   z-index: 1;
   position: relative;
   display: inline-block;
@@ -37,9 +40,9 @@ html {
 * {
   margin: 0;
 }
-.allComponents {
+/* .allComponents {
   margin: 25px 25px 25px 25px;
-}
+} */
 
 .mainHeader {
   width: 100%;
@@ -132,7 +135,7 @@ td {
 
 .flex-container {
   display: flex;
-  padding: 0px 15px 0px 15px;
+  padding: 0px 15px 20px 15px;
   margin-right: 50px;
   margin-left: 40px;
 }
@@ -166,9 +169,11 @@ td {
 }
 
 .relatedProductsMainClass {
-  padding: 0px 15px 0px 15px;
-  margin: 0px 15px 0px 15px;
+  padding: 15px 15px 0px 15px;
+  /* margin: 0px 15px 0px 15px; right & left margins affect arrows */
+  margin: 0;
   position: relative;
+  background-color:  rgba(216, 252, 254, 0.9)
 }
 
 .relatedCarouseOutfitCard {
@@ -306,7 +311,7 @@ td {
 }
 
 .carouselContainer {
-  padding: 0px 15px 0px 15px;
+  padding: 0px 15px 20px 15px;
   margin: 0px 15px 0px 15px;
   overflow-x: scroll;
 }
@@ -431,7 +436,7 @@ textarea.reviewBody {
 }
 
 .questions-and-answers-search {
-  width: 100%;
+  width: 60%;
   margin-left: 0px;
 }
 
@@ -492,6 +497,8 @@ textarea.reviewBody {
 .questions-answers-button-container {
   display: flex;
   width: 50%;
+  float:right;
+  margin-right: 200px;
 }
 
 .question-button {
@@ -587,13 +594,23 @@ textarea.reviewBody {
 .question-display {
   width: 100%;
 }
+.questions-list::-webkit-scrollbar {
+  background-color:   rgba(180, 237, 241, 0.9)
+  /* display: none; */
+}
+.questions-list::-webkit-scrollbar-thumb {
+  background-color:  rgba(127, 151, 151, 0.9)
+  /* display: none; */
+}
 
 .questions-list {
-  width: 100%;
+  /* width: 100%; */
   height: 400px;
   overflow-y: scroll;
   border: none;
   padding-bottom: 15px;
+  padding-left: 50px;
+  /* padding-right: 50px; */
 }
 
 .single-question {
@@ -608,8 +625,8 @@ textarea.reviewBody {
   flex: auto;
   font-weight: bold;
   font-size: 20px;
-  border-top: solid;
-  width: 100%;
+  border-top: 1px solid rgb(120, 120, 120);
+  width: 95%;
 }
 
 .question-meta {
@@ -717,8 +734,8 @@ textarea.reviewBody {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
-    "Helvetica Neue", sans-serif;
+  /* font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif; */
   font-size: 15px;
   font-weight: 400;
   outline: 0;
@@ -762,8 +779,8 @@ textarea.reviewBody {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
-    "Helvetica Neue", sans-serif;
+  /* font-family: system-ui, -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    "Helvetica Neue", sans-serif; */
   font-size: 15px;
   font-weight: 400;
   outline: 0;
@@ -906,6 +923,8 @@ textarea.reviewBody {
   width: 700px;
   height: 700px;
   background-color: white;
+  /* opacity: 0; */
+  /* z-index: 30; */
   /* background-color: rgba(40, 198, 209, 0.9) */
   border-radius: 7%;
 }
@@ -1081,5 +1100,8 @@ textarea.reviewBody {
   align-items: center;
   justify-content: center;
 
-  width: 100%;
+  /* width: 100%; */
+  /* margin-left: 50px; */
+  /* margin-right: 50px; */
+  background-color: rgba(180, 237, 241, 0.9)
 }
