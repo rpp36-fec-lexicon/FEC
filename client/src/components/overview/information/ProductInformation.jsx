@@ -18,7 +18,7 @@ class ProductInformation extends React.Component {
       <Div>
         {isNaN(this.props.rating) ? null : (
           <>
-            <div className="starEmpty">
+            <div className="starEmpty" id="StarEmpty">
               <FaRegStar />
               <FaRegStar />
               <FaRegStar />

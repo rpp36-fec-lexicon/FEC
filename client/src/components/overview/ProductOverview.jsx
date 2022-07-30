@@ -72,7 +72,7 @@ class ProductOverview extends React.Component {
     ) {
       return (
         <>
-          <Pictures>
+          <Pictures id='overviewWidget'>
             <Showcase
               id={this.state.selectedStyle.style_id}
               photos={this.state.selectedStyle.photos}
