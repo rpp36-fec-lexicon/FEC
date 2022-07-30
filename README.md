@@ -32,7 +32,20 @@ Front End Capstone (FEC) project requested by HackReactor, developed and designe
 
 ### Questions and Answers
 
+> The Questions & Answers part allows a user to search for a question, to add answers and questions about the product selected. This part consists of four subparts and each subpart has its own unique functionality.
+ * View questions
+ * Search for a question
+ * Asking a question
+ * Answering a question
+
+
 ![qna](https://user-images.githubusercontent.com/97697504/181936240-6ab7479c-2439-4ecf-a93a-8dfaff5fbf80.gif)
+ * Questions and Answers subcomponent shows list of questions that have been asked about the given product.
+ * The list of questions and answers can be expanded and collapsed per user's choice. By default, two questions are displayed. The questions are sorted based on their helpfulness rating and user can load more questions by clicking "More Questions" button.
+ * The list will instantly be changed to search result list based on a key word that user types in search bar. The search result list is generated after third keystoke.
+
+
+
 
 ### Ratings and Reviews
 
