@@ -46,8 +46,24 @@ describe("Related Products", () => {
         defaultStyle={mockIndex.defaultStyle}
         outfitItems={mockIndex.outfitItems}
         />);
-      expect(screen.getByText("Related Products:")).toBeInTheDocument();
-      expect(screen.getByText("Your Outfit:")).toBeInTheDocument();
+      expect(screen.getByText("RELATED PRODUCTS")).toBeInTheDocument();
+      expect(screen.getByText("YOUR OUTFIT")).toBeInTheDocument();
+    });
+
+    it('should invoke "user tracker" function when clicked', async () => {
+      const mockFunc = jest.fn();
+      render(<RelatedAndOutfit
+        prodID={mockIndex.productId}
+        prodInfo={mockIndex.productInfo}
+        styleInfo={mockIndex.styleInfo}
+        defaultStyle={mockIndex.defaultStyle}
+        outfitItems={mockIndex.outfitItems}
+        outfitAdder={mockFunc}
+        userTracker={mockFunc}
+        />);
+      const btn = screen.getByRole('button', {name: '[+] Add to Outfit'});
+      await userEvent.click(btn);
+      expect(mockFunc).toHaveBeenCalled();
     });
 
     it('counts the number of divs created by RelatedAndOutfit class component', async () => {
@@ -61,7 +77,7 @@ describe("Related Products", () => {
         />);
       });
       let renderedChildren = temporarySandBox.querySelector('div');
-      expect(renderedChildren.childNodes.length).toBe(4);
+      expect(renderedChildren.childNodes.length).toBe(2);
     });
 
     // it("should check outfitItems length state has changed by checking weather componentDidUpdate has been invoked", () => {
@@ -161,7 +177,7 @@ describe("Related Products", () => {
 
       const btn = screen.getAllByRole('featureComparer');
       await userEvent.click(btn[0]);
-      expect(btn[0]).toBeInTheDocument();
+      // expect(btn[0]).toBeInTheDocument();
       // expect(mockFunc).toHaveBeenCalled(); // currently failing
     });
   })
@@ -266,7 +282,7 @@ describe("Related Products", () => {
       });
       let renderedBTN = temporarySandBox.querySelector("button");
       expect(renderedBTN.className).toBe("outfitRemoveBTN");
-      expect(renderedBTN.innerHTML).toBe("×");
+      expect(renderedBTN.innerHTML).toBe("✖");
     });
 
     it('should invoke remove-an-outfit function when clicked', async () => {

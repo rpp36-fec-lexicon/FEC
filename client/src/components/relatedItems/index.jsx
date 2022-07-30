@@ -119,7 +119,8 @@ class RelatedAndOutfit extends React.Component {
         });
       },
       error: (err) => {
-        throw new Error("Retrieving ids of related products failed: ", err);
+        // throw new Error("Retrieving ids of related products failed: ", err);
+        // console.log()
       },
     });
   }
@@ -303,6 +304,7 @@ class RelatedAndOutfit extends React.Component {
           {this.state.xLeftFrame === 0 ? null : (
             <button
               className="arrow left"
+              aria-label="move left"
               onClick={(e) => {
                 this.leftScroll(".carouselContainer");
               }}
@@ -322,6 +324,7 @@ class RelatedAndOutfit extends React.Component {
           {this.state.xRightFrame === 0 ? null : (
             <button
               className="arrow right"
+              aria-label="move right"
               onClick={(e) => {
                 this.rightScroll(".carouselContainer");
               }}
