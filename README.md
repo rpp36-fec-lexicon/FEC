@@ -13,10 +13,14 @@ Front End Capstone (FEC) project requested by HackReactor, developed and designe
 4. Ratings and Reviews
 
 ### Product Overview
+
 The product overview is the main hub of the page and the first thing that loads and catches the consumer's eyes. Like any shopping site, the use will be able to sift through different products, change styles, select sizes and quantities (if available), and explore the various images associated with the product. The user will also be able to add to cart and even 'favorite' an item to add to their wishlist, or their outfit that they are creating.
 
 ![screen_recording_2022-07-30_at_1_48_47_pm_adobeexpress](https://user-images.githubusercontent.com/97697504/181935752-7398ab98-5258-4984-936b-dffd62b37711.gif)
+
 ### Related Products
+
+![qna](https://user-images.githubusercontent.com/97697504/181936240-6ab7479c-2439-4ecf-a93a-8dfaff5fbf80.gif)
 
 ### Questions and Answers
 
