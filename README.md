@@ -41,6 +41,9 @@ The ratings and reviews section gives the users an overview of how the product i
  * Reviews: highly detailed review items which include personal opinions, review date, helpfulness votes, recommendation, etc. Users can sort the list by order of relevance, helpfulness, and newest. Users can also submit a review on the product.
  * Product characteristics: this section displays how the produc performs in terms of quality, comfort, fit, etc. 
 
+![ReviewsGif](https://user-images.githubusercontent.com/88561551/181996410-a04512b7-0af2-490a-9d50-8ac84f8e6409.gif)
+
+
 ## Installation
 
 1. Fork and/or clone the project.
