@@ -1,25 +1,42 @@
 import React from 'react';
-import Stars from 'react-stars-display';
 import ShortReviewBody from './ShortReviewBody.jsx';
 import LongReviewBody from './LongReviewBody.jsx';
 import Recommend from './Recommend.jsx';
 import ReviewPhotos from './ReviewPhotos.jsx';
 import SellerResponse from './SellerResponse.jsx';
 import ReviewsHeading from './ReviewsHeading.jsx';
+import { FaStar, FaRegStar } from "react-icons/fa";
+const axios = require('axios');
 
 class ReviewItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       helpfulClick: 0,
-      helpfulness: this.props.review.helpfulness
+      helpfulness: 0
     };
   }
 
+  componentDidMount() {
+    this.setState({helpfulness: this.props.review.helpfulness});
+  }
+
   increaseHelpfulnessFunc() {
+
     if (!this.state.helpfulClick) {
-      this.setState({helpfulness: this.state.helpfulness + 1});
-      this.state.helpfulClick += 1;
+      this.setState({helpfulness: this.state.helpfulness + 1, helpfulClick: this.state.helpfulClick + 1}, () => {
+        const reviewId = this.props.review['review_id'];
+        console.log('reviewid', reviewId)
+        axios.put(`/reviews/${reviewId}/helpful`)
+          .then(response => {
+            console.log('helpfulness increased');
+          })
+          .catch(err => {
+            console.log('cannot update helpfulness', err);
+          });
+      });
+
+
     }
   }
 
@@ -59,7 +76,8 @@ class ReviewItem extends React.Component {
 
     const sameLineAndUnderlineStyle = {
       display: 'inline-block',
-      textDecoration: 'underline'
+      textDecoration: 'underline',
+      cursor: 'pointer'
     };
 
     const flexStyle = {
@@ -71,7 +89,29 @@ class ReviewItem extends React.Component {
       <div>
         <br></br>
         <div style={flexStyle}>
-          <Stars stars={review.rating}/>
+          {isNaN(review.rating) ? null : (
+            <div className="starEmpty">
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <FaRegStar />
+              <div
+                className="starFilled"
+                style={{
+                  width: `${Math.round(
+                    (review.rating / 5) * 100
+                  )}%`,
+                }}
+              >
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+                <FaStar />
+              </div>
+            </div>
+          )}
           <div>{review['reviewer_name']}, {month[monthIndex]} {date}, {year}</div>
         </div>
 
@@ -83,10 +123,10 @@ class ReviewItem extends React.Component {
         {recommend}
         {sellerResponse}
         <br></br>
-        <div style={sameLineStyle}>Helpful?</div>
-        <div style={sameLineAndUnderlineStyle} onClick={() => { this.increaseHelpfulnessFunc(); }}>Yes</div>
-        <div style={sameLineStyle}>({this.state.helpfulness})</div>
-        <div style={sameLineStyle}>|</div>
+        <div style={sameLineStyle}>Helpful?</div>&nbsp;
+        <div style={sameLineAndUnderlineStyle} onClick={() => { this.increaseHelpfulnessFunc(); }}>Yes</div>&nbsp;
+        <div style={sameLineStyle}>({this.state.helpfulness})</div>&nbsp;
+        <div style={sameLineStyle}>|</div>&nbsp;
         <div style={sameLineStyle}>Report</div>
         <br></br>
         <br></br>

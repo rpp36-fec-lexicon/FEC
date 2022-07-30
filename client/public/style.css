@@ -266,16 +266,21 @@ td {
   cursor: pointer;
   padding: 0px 0px 0px 0px;
   margin: 0;
+  /* margin-left: -5px; */
   color: rgba(40, 198, 209, 0.9);
   float: right;
-  font-size: 20px;
-  background: white;
+  font-size: 12px;
+  /* background: white; */
   border-color: transparent;
   /* background: transparent; */
-  border-bottom-left-radius: 0%;
-  border-top-right-radius: 30%;
-  /* text-shadow: #e2f605; */
+  border-radius: 100%;
+  box-shadow:
+    0 0 5px 5px #fff,
+    0 0 5px 5px rgb(255, 132, 255),
+    0 0 5px 5px #0ff;
+
 }
+
 
 .outfitRemoveBTN:hover {
   box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
@@ -395,7 +400,7 @@ progress {
 
 .modalPhoto {
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 .modalPhoto-content {
@@ -426,7 +431,7 @@ progress {
 
 .reviewModal {
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 .reviewModal-content {
@@ -515,9 +520,10 @@ textarea.reviewBody {
 }
 
 .search-question {
-  margin-left: 0px;
+  align-content: center;
+  /* margin-left: 0px;
   height: 50px;
-  width: 100%;
+  width: 100%; */
 
 }
 
@@ -756,13 +762,13 @@ textarea.reviewBody {
   color: black;
   margin-right: 10px;
   margin-bottom: 15px;
-  width: 25%;
+  width: 40%;
   height: 30px;
   min-width: 100px;
   text-align: center;
   font-family: Optima, sans-serif;
   /* padding: 10px; */
-  padding-right: 2px;
+  padding-right: 10px;
   border-radius: 30px;
   border: 2px solid rgba(39, 200, 210, 0.9);
   /* color: rgba(39, 200, 210, 0.9); */
@@ -1399,4 +1405,10 @@ textarea.reviewBody {
   /* margin-left: 50px; */
   /* margin-right: 50px; */
   background-color: rgba(217, 245, 247, 0.9)
+}
+
+/*  Review component */
+#listOfReviews {
+  padding-left: 30px;
+  padding-right: 20px;
 }

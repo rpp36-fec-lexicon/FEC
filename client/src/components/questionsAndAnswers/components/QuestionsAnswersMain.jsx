@@ -57,7 +57,17 @@ class QuestionsAnswersMain extends React.Component {
 
   render() {
     return (
-      <div id="qa-module" className={"qa_module_container"}>
+      <div
+        id="qa-module"
+        className={"qa_module_container"}
+        onClick={(e) => {
+          let timeOfClick = new Date().toLocaleString("en-US", {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, "Overview Widget", timeOfClick);
+        }}
+      >
         {/* <div className="questions-and-answers-header">
           <h3>QUESTIONS & ANSWERS</h3>
         </div> */}

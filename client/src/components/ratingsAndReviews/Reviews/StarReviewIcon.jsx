@@ -13,7 +13,7 @@ const StarReviewIcon = (props) => {
 
   return (
     <div>
-      <svg onClick={() => { props.clickFillStarFunc(props.starNumber); }}
+      <svg data-testid="starIcon" onClick={() => { props.clickFillStarFunc(props.starNumber); }}
         xmlns="http://www.w3.org/2000/svg"
         style={starIconStyle}
         className="starReviewIcon"

@@ -2,6 +2,20 @@ import React from 'react';
 
 const ReviewsHeading = (props) => {
 
+  const sameLineStyle = {
+    display: 'flex'
+  };
+
+  const headingStyle = {
+    fontSize: '18px',
+    fontWeight: 'bold'
+  };
+
+  const textStyle = {
+    color: 'black',
+    cursor: 'pointer'
+  };
+
   const sortFunc = (value) => {
     if (value === 'helpful') {
       props.sortByHelpfulnessFunc();
@@ -13,9 +27,9 @@ const ReviewsHeading = (props) => {
   };
 
   return (
-    <div>
-      {props.reviews.length} reviews, sorted by
-      <select id="sort" onChange={(e) => { sortFunc(e.target.value); }}>
+    <div style={sameLineStyle}>
+      <div style={headingStyle}>{props.reviews.length} reviews, sorted by</div>
+      <select style={textStyle} id="sort" onChange={(e) => { sortFunc(e.target.value); }}>
         <option value="relevance">Relevance</option>
         <option value="helpful">Helpful</option>
         <option value="newest">Newest</option>

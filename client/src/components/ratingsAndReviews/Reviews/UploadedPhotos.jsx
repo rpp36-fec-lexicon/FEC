@@ -2,7 +2,6 @@ import React from 'react';
 import UploadedPhoto from './UploadedPhoto.jsx';
 
 const UploadedPhotos = (props) => {
-  console.log('props in uploadedphotosss', props)
   const sameLineStyle = {
     display: 'flex'
   };
