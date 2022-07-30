@@ -18,13 +18,13 @@ class Outfit extends React.Component {
     return (
       <div
         className="flex-container"
-        onClick={(e) => {
-          let timeOfClick = new Date().toLocaleString("en-US", {
-            hour12: false,
-          });
-          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
-          this.props.userTracker(element, "Related-outfit Widget", timeOfClick);
-        }}
+        // onClick={(e) => {
+        //   let timeOfClick = new Date().toLocaleString("en-US", {
+        //     hour12: false,
+        //   });
+        //   let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+        //   this.props.userTracker(element, "Related-outfit Widget", timeOfClick);
+        // }}
       >
         <div className="flex-child">
           <button

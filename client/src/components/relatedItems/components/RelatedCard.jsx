@@ -21,11 +21,11 @@ class RelatedCard extends React.Component {
         onClick={(e) => {
           this.props.prodIDChanger(this.props.itemData.itemInfo.id);
           this.props.relatedItemsUpdater(this.props.itemData.itemInfo.id);
-          let timeOfClick = new Date().toLocaleString("en-US", {
-            hour12: false,
-          });
-          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
-          this.props.userTracker(element, "Related Widget", timeOfClick);
+          // let timeOfClick = new Date().toLocaleString("en-US", {
+          //   hour12: false,
+          // });
+          // let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          // this.props.userTracker(element, "Related Widget", timeOfClick);
         }}
       >
         <div

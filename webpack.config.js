@@ -30,6 +30,11 @@ module.exports = {
     ],
   },
   plugins: [
-    new CompressionPlugin(),
+    new CompressionPlugin(
+      {
+        deleteOriginalAssets: true,
+      }
+
+    ),
   ],
 };
