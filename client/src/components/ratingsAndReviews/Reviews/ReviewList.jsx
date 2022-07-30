@@ -58,18 +58,6 @@ class ReviewList extends React.Component {
     }
   }
 
-  // getAllNewReviewsFunc() {
-  //   return axios.get("/reviews", {
-  //     params: { productId: this.props.productInfo.id },
-  //   })
-  //     .then(response => {
-  //       console.log('response.data.results', response.data.results)
-  //       this.setState({reviews: response.data.results},
-  //         () => { console.log('this.state.reviews', this.state.reviews); }
-  //       );
-  //     });
-  // }
-
   showMoreReviewsFunc() {
     var reviewsShowing;
     if (this.state.endReviewIndex >= this.state.reviews.length) {
@@ -215,7 +203,7 @@ class ReviewList extends React.Component {
     let reviewModalComponent;
 
     if (this.state.showReviewModal) {
-      reviewModalComponent = <ReviewModal showReviewModal={this.state.showReviewModal} productInfo={this.props.productInfo} closeReviewModalFunc={this.closeReviewModalFunc} productInfo={this.props.productInfo} metaData={this.props.metaData} getAllNewReviewsFunc={this.getAllNewReviewsFunc} productName={this.props.productName}/>;
+      reviewModalComponent = <ReviewModal showReviewModal={this.state.showReviewModal} productInfo={this.props.productInfo} closeReviewModalFunc={this.closeReviewModalFunc} productInfo={this.props.productInfo} metaData={this.props.metaData} getAllReviewsFunc={this.props.getAllReviewsFunc} productName={this.props.productName}/>;
     } else {
       reviewModalComponent = null;
     }
@@ -256,6 +244,7 @@ class ReviewList extends React.Component {
 
       return (
         <div>
+          Search for reviews: <input type="text" onChange={(e) => { this.props.searchReviewFunc(e.target.value); }}></input>
           {reviewsHeading}
           {addFirstReviewButton}
           {reviewModalComponent}

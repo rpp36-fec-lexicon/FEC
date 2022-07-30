@@ -76,7 +76,8 @@ class ReviewItem extends React.Component {
 
     const sameLineAndUnderlineStyle = {
       display: 'inline-block',
-      textDecoration: 'underline'
+      textDecoration: 'underline',
+      cursor: 'pointer'
     };
 
     const flexStyle = {
@@ -122,10 +123,10 @@ class ReviewItem extends React.Component {
         {recommend}
         {sellerResponse}
         <br></br>
-        <div style={sameLineStyle}>Helpful?</div>
-        <div style={sameLineAndUnderlineStyle} onClick={() => { this.increaseHelpfulnessFunc(); }}>Yes</div>
-        <div style={sameLineStyle}>({this.state.helpfulness})</div>
-        <div style={sameLineStyle}>|</div>
+        <div style={sameLineStyle}>Helpful?</div>&nbsp;
+        <div style={sameLineAndUnderlineStyle} onClick={() => { this.increaseHelpfulnessFunc(); }}>Yes</div>&nbsp;
+        <div style={sameLineStyle}>({this.state.helpfulness})</div>&nbsp;
+        <div style={sameLineStyle}>|</div>&nbsp;
         <div style={sameLineStyle}>Report</div>
         <br></br>
         <br></br>

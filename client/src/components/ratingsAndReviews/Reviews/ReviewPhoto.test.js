@@ -22,7 +22,7 @@ describe('ReviewPhoto', ()=>{
       "url": "https://images.unsplash.com/photo-1517278322228-3fe7a86cf6f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
     };
 
-    it('should render image as thumbnail style', async () => {
+    it('should render image as thumbnail style', async() => {
       render(<ReviewPhoto photo={photo}/>);
       const image = document.querySelector("img");
       expect(image.src).toContain("https://images.unsplash.com/photo-1517278322228-3fe7a86cf6f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80");
