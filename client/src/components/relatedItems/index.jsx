@@ -330,7 +330,7 @@ class RelatedAndOutfit extends React.Component {
         </div>
 
         <div style={{ paddingTop: "15px" }}>
-          <span style={{ paddingLeft: "30px" }}>YOUR OUTFIT</span>
+          <span style={{ paddingLeft: "15px" }}>YOUR OUTFIT</span>
 
           <Outfit
             prodID={this.props.prodID}

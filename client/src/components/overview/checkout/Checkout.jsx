@@ -13,7 +13,7 @@ const Button = styled.button`
   padding: 10px;
   border-radius: 30px;
   border: 2px solid rgba(39, 200, 210, 0.9);
-  color: rgba(39, 200, 210, 0.9);
+  color: black;
   background-color: transparent;
   transition: all 0.5s;
   &:hover {

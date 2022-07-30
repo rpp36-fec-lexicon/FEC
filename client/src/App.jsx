@@ -227,7 +227,7 @@ class App extends React.Component {
             </div>
           </div>
           <div className="allComponents">
-            {/* <ProductOverview
+            <ProductOverview
               productId={this.state.productId}
               productInfo={this.state.productInfo}
               defaultStyle={this.state.defaultStyle}
@@ -247,13 +247,13 @@ class App extends React.Component {
               outfitRemover={this.outfitRemover.bind(this)}
               outfitItems={this.state.outfitItems}
               userTracker={this.userTracker.bind(this)}
-            /> */}
+            />
             <QuestionsAnswersMain
               product={this.state.productId}
               productInfo={this.state.productInfo}
               key={this.state.productId}
             />
-            {/* <RatingsAndReviews
+            <RatingsAndReviews
               productId={this.state.productId}
               reviewData={this.state.reviewData}
               reviews={this.state.reviews}
@@ -261,7 +261,7 @@ class App extends React.Component {
               rating={this.state.rating}
               totalNumberOfRatings={this.state.totalNumberOfRatings}
               filterRating={this.filterRating}
-            /> */}
+            />
           </div>
         </>
       );
