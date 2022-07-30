@@ -36,6 +36,11 @@ Front End Capstone (FEC) project requested by HackReactor, developed and designe
 
 ### Ratings and Reviews
 
+The ratings and reviews section gives the users an overview of how the product is liked by customers. The section is divided into three parts:
+ * Ratings: allows users to have a statistics of how the product is generally rated by previous buyers. This section is filterable by the star rating to only show reviews of those specific star types.
+ * Reviews: highly detailed review items which include personal opinions, review date, helpfulness votes, recommendation, etc. Users can sort the list by order of relevance, helpfulness, and newest. Users can also submit a review on the product.
+ * Product characteristics: this section displays how the produc performs in terms of quality, comfort, fit, etc. 
+
 ## Installation
 
 1. Fork and/or clone the project.
