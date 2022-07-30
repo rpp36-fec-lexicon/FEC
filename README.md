@@ -28,11 +28,20 @@ The product overview is the main hub of the page and the first thing that loads 
 
 ## Installation
 
-1. Fork and/or clone the project
-2. Install dependencies required to run the project
+1. Fork and/or clone the project.
+2. Install dependencies required to run the project:
 ```jsx
 npm install
 ```
+3. Initialize Webpack (with Bundle):
+```jsx
+npm run webpack
+```
+4. Launch the local server:
+```jsx
+npm start
+```
+
 ## Tech Stack
 
 * [React](https://reactjs.org/)
