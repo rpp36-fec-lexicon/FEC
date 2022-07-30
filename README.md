@@ -7,10 +7,10 @@ Project Atelier (Front-End Capstone)
 Front End Capstone (FEC) project requested by HackReactor, developed and designed by team Lexicon, which composes of Ai Lam, Filimon Kiros, Jason Novacovici, and Miras Adilov. A new sleek retail portal created to be easily adaptable by any interested companies to update their own out-dated ecommerce websites.
 
 ## Table of Contents
-1. Product Overview
-2. Related Products
-3. Questions and Answers
-4. Ratings and Reviews
+1. [Product Overview](#product-overview)
+2. [Related Products](#related-products)
+3. [Questions and Answers](#questions-and-answers)
+4. [Ratings and Reviews](#ratings-and-reviews)
 
 ### Product Overview
 
