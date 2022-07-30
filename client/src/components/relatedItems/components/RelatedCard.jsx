@@ -1,6 +1,7 @@
 import React from "react";
 import $ from "jquery";
 import { FaStar, FaRegStar } from "react-icons/fa";
+import placeholder from "./../../../../public/placeholder.png";
 
 class RelatedCard extends React.Component {
   constructor(props) {
@@ -11,6 +12,9 @@ class RelatedCard extends React.Component {
   componentDidMount() {}
 
   render() {
+    var selectedPhoto = this.props.itemData.itemStyles.results[0].photos[0].url;
+    if (!selectedPhoto) selectedPhoto = placeholder;
+
     return (
       <div
         className="RelatedCarouselItem"
@@ -30,7 +34,8 @@ class RelatedCard extends React.Component {
             height: "150px",
             width: "150px",
             marginBottom: "10px",
-            backgroundImage: `url(${this.props.itemData.itemStyles.results[0].photos[0].url})`,
+            objectFit: "cover",
+            backgroundImage: `url(${selectedPhoto})`,
             backgroundSize: "150px 150px",
             borderRadius: "10%",
           }}

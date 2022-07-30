@@ -254,6 +254,7 @@ class App extends React.Component {
               product={this.state.productId}
               productInfo={this.state.productInfo}
               key={this.state.productId}
+              userTracker={this.userTracker.bind(this)}
             />
             <RatingsAndReviews
               productInfo={this.state.productInfo}
@@ -266,7 +267,6 @@ class App extends React.Component {
               filterRating={this.filterRating}
               getAllReviewsFunc={this.getAllReviewsFunc.bind(this)}
               userTracker={this.userTracker.bind(this)}
-
             />
           </div>
         </>
@@ -283,5 +283,3 @@ export const storageGetter = (key = 'items') => {
 
 ReactDOM.createRoot(document.getElementById('app')).render(<App />);
 export default App;
-
-

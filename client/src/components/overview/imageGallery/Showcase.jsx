@@ -316,6 +316,8 @@ class Showcase extends React.Component {
           />
         )}
         <MainIMG
+          fetchpriority="high"
+          rel='preload'
           src={mainPhoto}
           id='bigImage'
           alt='Main Image of currently selected photo'
