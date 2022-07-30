@@ -1,19 +1,24 @@
+// const AWS = require("aws-sdk");
+// const s3 = new AWS.S3({apiVersion: '2006-03-01'});
+// const multiparty = require('multiparty');
+// const interaction = require('./interaction.js');
 require("dotenv").config();
 const express = require("express");
 const axios = require("axios");
 const QA = require("./QuestionsAnswers.js");
-// const interaction = require('./interaction.js');
+var expressStaticGzip = require("express-static-gzip");
 const app = express();
 const myAPIKey = process.env.myAPIKey;
-// const AWS = require("aws-sdk");
-// const s3 = new AWS.S3({apiVersion: '2006-03-01'});
-// const multiparty = require('multiparty');
 const data = require("./product.js");
 const port = 3000;
 const baseAPI = "https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp";
+app.use(expressStaticGzip(__dirname + "/../client/public"));
+// app.use(express.static(__dirname + "/../client/public")); // KEEP
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(__dirname + "/../client/public"));
+
+
+
 
 // related product api request below //
 // ========== api call start ========//

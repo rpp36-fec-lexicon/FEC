@@ -1,16 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
-import Showcase from './imageGallery/Showcase.jsx';
-import Checkout from './checkout/Checkout.jsx';
-import ProductDescription from './information/ProductDescription.jsx';
-import ProductInformation from './information/ProductInformation.jsx';
-import SelectStyle from './information/SelectStyle.jsx';
-import placeholder from '../../.././public/placeholder.png';
+import React from "react";
+import styled from "styled-components";
+import Showcase from "./imageGallery/Showcase.jsx";
+import Checkout from "./checkout/Checkout.jsx";
+import ProductDescription from "./information/ProductDescription.jsx";
+import ProductInformation from "./information/ProductInformation.jsx";
+import SelectStyle from "./information/SelectStyle.jsx";
+import placeholder from "../../.././public/placeholder.png";
 
 const Pictures = styled.div`
   width: 100%;
   position: relative;
-  margin: 20px auto;
+  margin-top: 20px;
+  // margin-bottom: -20px;
   justify-content: center;
   display: flex;
   flex-direction: row;
@@ -23,7 +24,7 @@ const Div = styled.div`
   width: 40%;
   vertical-align: middle;
   height: 100%;
-  overflow: 'auto';
+  overflow: "auto";
 `;
 
 class ProductOverview extends React.Component {
@@ -31,7 +32,7 @@ class ProductOverview extends React.Component {
     super(props);
     this.state = {
       selectedStyle: undefined,
-      selectedPhoto: '',
+      selectedPhoto: "",
       productInfo: undefined,
     };
     this.changeStyle = this.changeStyle.bind(this);
@@ -66,10 +67,7 @@ class ProductOverview extends React.Component {
   }
 
   render() {
-    if (
-      this.state.productInfo &&
-      this.state.selectedStyle
-    ) {
+    if (this.state.productInfo && this.state.selectedStyle) {
       return (
         <div onClick={(e) => {
           let timeOfClick = new Date().toLocaleString('en-US', {
@@ -90,22 +88,26 @@ class ProductOverview extends React.Component {
                 name={this.props.productInfo.name}
                 price={this.state.selectedStyle.original_price}
                 salePrice={this.state.selectedStyle.sale_price}
-                rating={this.props.rating}/>
+                rating={this.props.rating}
+              />
               <SelectStyle
                 styles={this.props.styleList}
                 changeStyle={this.changeStyle}
-                selectedStyle={this.state.selectedStyle}/>
+                selectedStyle={this.state.selectedStyle}
+              />
               <Checkout
                 id={this.state.selectedStyle.style_id}
                 skus={this.state.selectedStyle.skus}
                 outfitAdder={this.props.outfitAdder}
                 outfitItems={this.props.outfitItems}
                 outfitItemsIDs={this.props.outfitItemsIDs}
-                productId={this.props.productId}/>
+                productId={this.props.productId}
+              />
               <ProductDescription
                 slogan={this.props.productInfo.slogan}
                 description={this.props.productInfo.description}
-                features={this.props.productInfo.features}/>
+                features={this.props.productInfo.features}
+              />
             </Div>
           </Pictures>
         </div>

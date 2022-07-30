@@ -296,10 +296,10 @@ class RelatedAndOutfit extends React.Component {
           this.props.userTracker(element, "Related Widget", timeOfClick);
         }}
       >
-        <span>RELATED PRODUCTS</span>
         <div
           className="relatedProductsMainClass" // mainD
         >
+          <span>RELATED PRODUCTS</span>
           {this.state.xLeftFrame === 0 ? null : (
             <button
               className="arrow left"
@@ -328,23 +328,27 @@ class RelatedAndOutfit extends React.Component {
             ></button>
           )}
         </div>
-        <span>YOUR OUTFIT</span>
-        <Outfit
-          prodID={this.props.prodID}
-          prodInfo={this.props.prodInfo}
-          styleInfo={this.props.styleInfo}
-          defaultStyle={this.props.defaultStyle}
-          prodIDChanger={this.props.prodIDChanger}
-          relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
-          outfitAdder={this.props.outfitAdder}
-          outfitRemover={this.props.outfitRemover}
-          outfitItems={this.props.outfitItems}
-          leftScroll={this.leftScroll.bind(this)}
-          rightScroll={this.rightScroll.bind(this)}
-          xOutfitRightFrame={this.state.xOutfitRightFrame}
-          xOutfitLeftFrame={this.state.xOutfitLeftFrame}
-          userTracker={this.props.userTracker}
-        />
+
+        <div style={{ paddingTop: "15px" }}>
+          <span style={{ paddingLeft: "15px" }}>YOUR OUTFIT</span>
+
+          <Outfit
+            prodID={this.props.prodID}
+            prodInfo={this.props.prodInfo}
+            styleInfo={this.props.styleInfo}
+            defaultStyle={this.props.defaultStyle}
+            prodIDChanger={this.props.prodIDChanger}
+            relatedItemsUpdater={this.relatedItemsUpdater.bind(this)}
+            outfitAdder={this.props.outfitAdder}
+            outfitRemover={this.props.outfitRemover}
+            outfitItems={this.props.outfitItems}
+            leftScroll={this.leftScroll.bind(this)}
+            rightScroll={this.rightScroll.bind(this)}
+            xOutfitRightFrame={this.state.xOutfitRightFrame}
+            xOutfitLeftFrame={this.state.xOutfitLeftFrame}
+            userTracker={this.props.userTracker}
+          />
+        </div>
       </div>
     );
   }
