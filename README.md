@@ -20,9 +20,9 @@ The product overview is the main hub of the page and the first thing that loads 
 
 ### Related Products
 
-![qna](https://user-images.githubusercontent.com/97697504/181936240-6ab7479c-2439-4ecf-a93a-8dfaff5fbf80.gif)
-
 ### Questions and Answers
+
+![qna](https://user-images.githubusercontent.com/97697504/181936240-6ab7479c-2439-4ecf-a93a-8dfaff5fbf80.gif)
 
 ### Ratings and Reviews
 
