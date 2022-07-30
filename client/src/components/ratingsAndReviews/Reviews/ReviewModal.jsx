@@ -3,7 +3,34 @@ import StarReviewIcon from './StarReviewIcon.jsx';
 import UploadedPhotos from './UploadedPhotos.jsx';
 import UploadPhotoButton from './UploadPhotoButton.jsx';
 import SubmitReviewAlert from './SubmitReviewAlert.jsx';
+import styled from 'styled-components';
+
 const axios = require('axios');
+
+const Button = styled.button`
+  margin-right: 30px;
+  height: 50px;
+  width: auto;
+  min-width: 100px;
+  text-align: center;
+  font-family: Optima, sans-serif;
+  padding: 10px;
+  border-radius: 30px;
+  border: 2px solid rgba(39, 200, 210, 0.9);
+  color: rgba(39, 200, 210, 0.9);
+  background-color: transparent;
+  transition: all 0.5s;
+  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: rgba(39, 200, 210, 0.9);
+    box-shadow: 0px 5px 10px rgba(39, 200, 210, 0.4);
+  }
+  &:active {
+    box-shadow: 10px 10px 9px 4px rgba(37, 125, 255, 0.7);
+  }
+`;
 
 class ReviewModal extends React.Component {
   constructor(props) {
@@ -70,6 +97,9 @@ class ReviewModal extends React.Component {
         4: 'Pretty great',
         5: 'Perfect'
       }
+    };
+    this.centerStyle = {
+      textAlign: 'center'
     };
     this.clickFillStarFunc = this.clickFillStarFunc.bind(this);
     this.charactersLeftFunc = this.charactersLeftFunc.bind(this);
@@ -245,16 +275,16 @@ class ReviewModal extends React.Component {
       console.log('reviewinfo', reviewInfo);
       axios.post('/reviews', reviewInfo)
         .then((response) => {
-          console.log('post review success');
+          console.log('post review success', response);
           this.props.closeReviewModalFunc();
-          // this.props.getAllNewReviewsFunc();
+          // this.props.getAllReviewsFunc()
+          //   .then(response => { console.log(response) });
         })
         .catch(error => {
           console.log('error posting review', error);
         });
     }
   }
-
 
   render() {
     const ulStyle = {
@@ -298,8 +328,8 @@ class ReviewModal extends React.Component {
         <div className="reviewModal-content reviewScrollable">
           <span data-testid="XButton" className="close" onClick={() => { this.props.closeReviewModalFunc(); }}>&times;</span>
           <div>
-            <h2>Write Your Review</h2>
-            <h3>About the {this.props.productName}</h3>
+            <h2 style={this.centerStyle}>Write Your Review</h2>
+            <h3 style={this.centerStyle}>About the {this.props.productName}</h3>
 
             <div>
               <h3>Overall Rating<sup>*</sup></h3>
@@ -312,63 +342,73 @@ class ReviewModal extends React.Component {
                 <div style={messageStyle}>{this.state.starMessage}</div>
               </div>
             </div>
-
+            <br></br>
             <div id="recommend">
               <h3>Do you recommend this product?<sup>*</sup></h3>
               <input type="radio" id="recommendYes" name="recommend" value="yes"></input><label htmlFor="">Yes</label>
+              &nbsp;
               <input type="radio" id="recommendNo" name="recommend" value="no"></input><label htmlFor="">No</label>
             </div>
-
+            <br></br>
             <div id="characteristics">
               <h3>Characteristics<sup>*</sup></h3>
               <div>
                 {characteristics.map((characteristic, index) => {
                   return (<div key={index}>
                     <b>{characteristic[0]}</b>
+                    <br></br>
                     <input type="radio" id={characteristic[0] + 'Property1'} className={`property ${characteristic[0]}`} name={characteristic[0]} value="1"></input><label htmlFor="">{characteristic[1]['1']}</label>
+                    <br></br>
+
                     <input type="radio" id={characteristic[0] + 'Property2'} className={`property ${characteristic[0]}`} name={characteristic[0]} value="2"></input><label htmlFor="">{characteristic[1]['2']}</label>
+                    <br></br>
+
                     <input type="radio" id={characteristic[0] + 'Property3'} className={`property ${characteristic[0]}`} name={characteristic[0]} value="3"></input><label htmlFor="">{characteristic[1]['3']}</label>
+                    <br></br>
+
                     <input type="radio" id={characteristic[0] + 'Property4'} className={`property ${characteristic[0]}`} name={characteristic[0]} value="4"></input><label htmlFor="">{characteristic[1]['4']}</label>
+                    <br></br>
+
                     <input type="radio" id={characteristic[0] + 'Property5'} className={`property ${characteristic[0]}`} name={characteristic[0]} value="5"></input><label htmlFor="">{characteristic[1]['5']}</label>
                   </div>);
                 })}
               </div>
             </div>
-
+            <br></br>
             <div>
               <h3>Review summary</h3>
               <textarea id="summary" type="input" className="reviewSummary" maxLength="60" placeholder="Example: Best purchase ever!"></textarea>
             </div>
-
+            <br></br>
             <div>
               <h3>Review body<sup>*</sup></h3>
               <textarea type="input" id="reviewBody" className="reviewBody" minLength="50" maxLength="1000" placeholder="Why did you like the product or not?" onChange={() => { this.charactersLeftFunc(); }}></textarea>
               <div>{this.state.reviewBodyMessage}</div>
             </div>
-
+            <br></br>
             <div>
               <h3>Upload your photos</h3>
               <UploadPhotoButton photoUploadedFunc={this.photoUploadedFunc} disabled={this.state.disableUpload}/>
               <div id="imageMessage"></div>
               <UploadedPhotos photos={this.state.photos}/>
             </div>
-
+            <br></br>
             <div>
               <h3>What is your nickname?<sup>*</sup></h3>
               <input type="input" id="nickname" maxLength="60" placeholder="Example: jackson11!"></input>
               <div>For privacy reasons, do not use your full name or email address</div>
             </div>
-
+            <br></br>
             <div>
               <h3>Your email<sup>*</sup></h3>
               <input id="email" type="input" maxLength="60" placeholder="Example: jackson11@email.com"></input>
               <div>For authentication reasons, you will not be emailed</div>
             </div>
-
+            <br></br>
             {submitReviewAlert}
 
             <div>
-              <button onClick={() => { this.submitReviewFunc(); }}>Submit review</button>
+              <Button onClick={() => { this.submitReviewFunc(); }}>Submit review</Button>
             </div>
 
           </div>

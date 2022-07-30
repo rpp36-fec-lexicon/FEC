@@ -22,7 +22,10 @@ class ReviewPhoto extends React.Component {
   render() {
     const thumbnailStyle = {
       width: '160px',
-      height: '108px'
+      height: '108px',
+      borderRadius: '15%',
+      objectFit: 'cover',
+      border: '1px solid'
     };
 
     let modalComponent;

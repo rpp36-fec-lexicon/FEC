@@ -1,9 +1,35 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Button = styled.button`
+  margin-right: 30px;
+  height: 50px;
+  width: auto;
+  min-width: 100px;
+  text-align: center;
+  font-family: Optima, sans-serif;
+  padding: 10px;
+  border-radius: 30px;
+  border: 2px solid rgba(39, 200, 210, 0.9);
+  color: rgba(39, 200, 210, 0.9);
+  background-color: transparent;
+  transition: all 0.5s;
+  cursor: pointer;
+  &:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: rgba(39, 200, 210, 0.9);
+    box-shadow: 0px 5px 10px rgba(39, 200, 210, 0.4);
+  }
+  &:active {
+    box-shadow: 10px 10px 9px 4px rgba(37, 125, 255, 0.7);
+  }
+`;
 
 const MoreReviews = (props) => {
   return (
     <div>
-      <button onClick={() => { props.showMoreReviewsFunc(); }}>MORE REVIEWS</button>
+      <Button onClick={() => { props.showMoreReviewsFunc(); }}>MORE REVIEWS</Button>
     </div>
   );
 };

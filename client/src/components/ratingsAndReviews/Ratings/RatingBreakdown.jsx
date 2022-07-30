@@ -3,7 +3,12 @@ import React from 'react';
 const RatingBreakdown = (props) => {
 
   const underlineStyle = {
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    cursor: 'pointer'
+  };
+
+  const pointerStyle = {
+    cursor: 'pointer'
   };
 
   return (
@@ -14,7 +19,7 @@ const RatingBreakdown = (props) => {
             e.preventDefault();
             props.filterRatingFunc(starNumber); }}>
             <label style={underlineStyle} htmlFor={starNumber + 'stars'}>{starNumber} stars</label>
-            <progress data-testid={starNumber + 'stars'} id={starNumber + 'stars'} value={props.ratings[starNumber]} max={props.totalNumberOfRatings}></progress>
+            <progress style={pointerStyle} data-testid={starNumber + 'stars'} id={starNumber + 'stars'} value={props.ratings[starNumber]} max={props.totalNumberOfRatings}></progress>
             ({props.ratings[starNumber]})
           </div>);
         })

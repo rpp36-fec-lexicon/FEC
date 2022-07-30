@@ -375,7 +375,7 @@ progress {
 
 .modalPhoto {
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 .modalPhoto-content {
@@ -406,7 +406,7 @@ progress {
 
 .reviewModal {
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 .reviewModal-content {

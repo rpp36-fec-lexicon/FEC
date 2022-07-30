@@ -45,19 +45,19 @@ class App extends React.Component {
   }
 
   userTracker(element, widget, time) {
-    axios
-      .post('/interaction', { element, widget, time })
-      .then((res) => {
-        console.log(
-          "user event successfully sent to interactions api: ",
-          res.status,
-          "event detail: ",
-          { element, widget, time }
-        );
-      })
-      .catch((err) => {
-        throw new Error('Tracking failed: ', err);
-      });
+    // axios
+    //   .post('/interaction', { element, widget, time })
+    //   .then((res) => {
+    //     console.log(
+    //       "user event successfully sent to interactions api: ",
+    //       res.status,
+    //       "event detail: ",
+    //       { element, widget, time }
+    //     );
+    //   })
+    //   .catch((err) => {
+    //     throw new Error('Tracking failed: ', err);
+    //   });
   }
 
   outfitAdder() {
@@ -264,6 +264,7 @@ class App extends React.Component {
               rating={this.state.rating}
               totalNumberOfRatings={this.state.totalNumberOfRatings}
               filterRating={this.filterRating}
+              getAllReviewsFunc={this.getAllReviewsFunc.bind(this)}
               userTracker={this.userTracker.bind(this)}
 
             />
