@@ -20,6 +20,11 @@ The product overview is the main hub of the page and the first thing that loads 
 
 ### Ratings and Reviews
 
-### Installation
+## Installation
 
+1. Fork and/or clone the project
+2. Install dependencies required to run the project
+```jsx
+npm install
+```
 ### Tech Stack
