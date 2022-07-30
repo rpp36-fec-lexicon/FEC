@@ -45,7 +45,7 @@ class ReviewPhoto extends React.Component {
       <div>
         {modalComponent}
 
-        <img onClick={() => { this.showModalFunc(); }} style={thumbnailStyle} src={this.props.photo.url}/>&nbsp;
+        <img onClick={() => { this.showModalFunc(); }} style={thumbnailStyle} src={this.props.photo.url} alt='image sent by reviewer'/>&nbsp;
       </div>
     );
   }

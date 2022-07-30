@@ -48,7 +48,7 @@ class SelectStyle extends React.Component {
         <p style={{display: 'inline-block', paddingLeft: '5px'}}> {this.props.selectedStyle.name} </p>
         <FlexDiv>
           {this.props.styles.map((style, i) => {
-            if (style.photos[0].thumbnail_url === null) {
+            if (style.photos[0].thumbnail_url === null || !style.photos[0].thumbnail_url.startsWith('http')) {
               style.photos[0].thumbnail_url = placeholder;
             }
             if (style.style_id === this.props.selectedStyle.style_id) {
@@ -59,7 +59,7 @@ class SelectStyle extends React.Component {
                     src={style.photos[0].thumbnail_url}
                     name={style.name}
                     onClick={() => this.handleClick(style.style_id)}
-                    a=""
+                    alt={style.name}
                   />
                   <StyledCheckmark />
                 </div>
@@ -72,7 +72,7 @@ class SelectStyle extends React.Component {
                   src={style.photos[0].thumbnail_url}
                   name={style.name}
                   onClick={() => this.handleClick(style.style_id)}
-                  a=""
+                  alt={style.name}
                 />
               </div>
             );

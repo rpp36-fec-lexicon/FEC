@@ -200,7 +200,7 @@ class Showcase extends React.Component {
           key={pic.url}
           src={thumbnail}
           onClick={() => this.handleClick(pic.url)}
-          alt={pic.url}
+          alt='thumbnail for main image'
         />
       );
     });
@@ -250,12 +250,13 @@ class Showcase extends React.Component {
           <Big
             id='bigImage'
             src={mainPhoto}
-            alt={this.state.currPhoto.url}
+            alt='Main Image of currently selected photo'
             onClick={() => this.handleZoom()}
           />
           <i
             style={{cursor: 'pointer', position: 'absolute', color: 'white', top: '70px', right: '400px'}}
-            className="fa-solid fa-xmark fa-xl"
+            className='fa-solid fa-xmark fa-xl'
+            data-testid='overviewX'
             onClick={() => this.expand()}
           />
           {this.handleArrowClick('left') && (
@@ -263,6 +264,7 @@ class Showcase extends React.Component {
               style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', left: '400px'}}
               onClick={() => this.changePhoto(-1)}
               className='fa fa-arrow-left fa-xl'
+              data-testid='overviewLeftArrow'
             />
           )}
           {this.handleArrowClick('right') && (
@@ -270,6 +272,7 @@ class Showcase extends React.Component {
               style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', right: '400px'}}
               onClick={() => this.changePhoto(1)}
               className='fa fa-arrow-right fa-xl'
+              data-testid='overviewRightArrow'
             />
           )}
           <EnlargedThumbnails style={{flexDirection: 'column'}}>
@@ -278,6 +281,7 @@ class Showcase extends React.Component {
                 style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
                 onClick={() => this.previousThumbnails()}
                 className='fa fa-angle-up fa-xl'
+                data-testid='overviewUpArrow'
               />
             )}
             {this.sliceThumbnails(this.state.min, this.state.max)}
@@ -286,6 +290,7 @@ class Showcase extends React.Component {
                 style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
                 onClick={() => this.nextThumbnails()}
                 className='fa fa-angle-down fa-xl'
+                data-testid='overviewDownArrow'
               />
             )}
           </EnlargedThumbnails>
@@ -299,6 +304,7 @@ class Showcase extends React.Component {
             style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', left: '50px'}}
             onClick={() => this.changePhoto(-1)}
             className='fa fa-arrow-left fa-xl'
+            id='overviewLeftArrow'
           />
         )}
         {this.handleArrowClick('right') && (
@@ -306,11 +312,15 @@ class Showcase extends React.Component {
             style={{cursor: 'pointer', position: 'absolute', color: 'rgba(39, 200, 210, 0.9)', bottom: '15%', right: '50px'}}
             onClick={() => this.changePhoto(1)}
             className='fa fa-arrow-right fa-xl'
+            id='overviewRightArrow'
           />
         )}
         <MainIMG
+          fetchpriority="high"
+          rel='preload'
           src={mainPhoto}
-          alt={this.state.currPhoto.url}
+          id='bigImage'
+          alt='Main Image of currently selected photo'
           onClick={() => this.expand()}
         />
         <Thumbnails style={{flexDirection: 'column'}}>
@@ -319,6 +329,7 @@ class Showcase extends React.Component {
               style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
               onClick={() => this.previousThumbnails()}
               className='fa fa-angle-up fa-xl'
+              id='overviewUpArrow'
             />
           )}
           {this.sliceThumbnails(this.state.min, this.state.max)}
@@ -327,6 +338,7 @@ class Showcase extends React.Component {
               style={{cursor: 'pointer', color: 'white', filter: 'drop-shadow(0 0 0.4rem black)'}}
               onClick={() => this.nextThumbnails()}
               className='fa fa-angle-down fa-xl'
+              id='overviewDownArrow'
             />
           )}
         </Thumbnails>

@@ -76,7 +76,7 @@ class ProductOverview extends React.Component {
           let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
           this.props.userTracker(element, 'Overview Widget', timeOfClick);
         }}>
-          <Pictures>
+          <Pictures id='overviewWidget'>
             <Showcase
               id={this.state.selectedStyle.style_id}
               photos={this.state.selectedStyle.photos}

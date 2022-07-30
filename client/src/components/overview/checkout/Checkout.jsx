@@ -174,10 +174,11 @@ const Persister = (props) => {
   }, [props]);
 };
 
-export const storageGetter = (key = "items") => {
-  const savedItems = localStorage.getItem(key);
-  const storeageResult = savedItems !== null ? JSON.parse(savedItems) : [];
-  return storeageResult;
+export const storageGetter = (key = 'items') => {
+  let savedItems = localStorage.getItem(key);
+  const storageResult = savedItems !== null ? JSON.parse(savedItems) : [];
+  // const storageResult = [];
+  return storageResult;
 };
 
 export default Checkout;

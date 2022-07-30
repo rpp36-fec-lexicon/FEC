@@ -144,7 +144,151 @@ const styleList = {
   ]
 };
 
+const badDataset = {
+  'product_id': '71698',
+  'results': [
+    {
+      'style_id': 444224,
+      'name': 'Black Lenses & Black Frame',
+      'original_price': '69.00',
+      'sale_price': null,
+      'default?': false,
+      'photos': [
+        {
+          'thumbnail_url': null,
+          'url': null
+        }
+      ],
+      'skus': {
+        'null': {
+          'quantity': null,
+          'size': null
+        }
+      }
+    },
+    {
+      'style_id': 444225,
+      'name': 'Black Lenses & Gold Frame',
+      'original_price': '69.00',
+      'sale_price': null,
+      'default?': true,
+      'photos': [
+        {
+          'thumbnail_url': null,
+          'url': null
+        }
+      ],
+      'skus': {
+        'null': {
+          'quantity': null,
+          'size': null
+        }
+      }
+    },
+    {
+      'style_id': 444226,
+      'name': 'Gold Lenses & Black Frame',
+      'original_price': '69.00',
+      'sale_price': null,
+      'default?': false,
+      'photos': [
+        {
+          'thumbnail_url': null,
+          'url': null
+        }
+      ],
+      'skus': {
+        'null': {
+          'quantity': null,
+          'size': null
+        }
+      }
+    },
+    {
+      'style_id': 444227,
+      'name': 'Gold Lenses & Gold Frame',
+      'original_price': '69.00',
+      'sale_price': null,
+      'default?': false,
+      'photos': [
+        {
+          'thumbnail_url': null,
+          'url': null
+        }
+      ],
+      'skus': {
+        'null': {
+          'quantity': null,
+          'size': null
+        }
+      }
+    }
+  ]
+};
+
+const largeStyleList = {
+  'product_id': '71704',
+  'results': [
+    {
+      'style_id': 444254,
+      'name': 'Zebra Stripe',
+      'original_price': '900.00',
+      'sale_price': null,
+      'default?': true,
+      'photos': [
+        {
+          'thumbnail_url': 'https://images.unsplash.com/photo-1551489186-cf8726f514f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+          'url': 'https://images.unsplash.com/photo-1551489186-cf8726f514f8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
+        },
+        {
+          'thumbnail_url': 'https://images.unsplash.com/photo-1507920676663-3b72429774ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
+          'url': 'https://images.unsplash.com/photo-1507920676663-3b72429774ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80'
+        },
+        {
+          'thumbnail_url': 'https://images.unsplash.com/photo-1544376664-80b17f09d399?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+          'url': 'https://images.unsplash.com/photo-1544376664-80b17f09d399?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1525&q=80'
+        },
+        {
+          'thumbnail_url': 'https://images.unsplash.com/photo-1513531926349-466f15ec8cc7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+          'url': 'https://images.unsplash.com/photo-1513531926349-466f15ec8cc7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
+        },
+        {
+          'thumbnail_url': 'https://images.unsplash.com/photo-1517278322228-3fe7a86cf6f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80',
+          'url': 'https://images.unsplash.com/photo-1517278322228-3fe7a86cf6f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80'
+        },
+        {
+          'thumbnail_url': 'https://images.unsplash.com/photo-1517720359744-6d12f8a09b10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+          'url': 'https://images.unsplash.com/photo-1517720359744-6d12f8a09b10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80'
+        },
+        {
+          'thumbnail_url': 'https://images.unsplash.com/photo-1530821875964-91927b611bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+          'url': 'https://images.unsplash.com/photo-1530821875964-91927b611bad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
+        },
+        {
+          'thumbnail_url': 'https://images.unsplash.com/photo-1519862170344-6cd5e49cb996?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+          'url': 'https://images.unsplash.com/photo-1519862170344-6cd5e49cb996?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
+        },
+        {
+          'thumbnail_url': 'https://images.unsplash.com/photo-1558014356-f7c41bc744f7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+          'url': 'https://images.unsplash.com/photo-1558014356-f7c41bc744f7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'
+        },
+        {
+          'thumbnail_url': 'https://images.unsplash.com/photo-1542818212-9899bafcb9db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+          'url': 'https://images.unsplash.com/photo-1542818212-9899bafcb9db?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1526&q=80'
+        },
+        {
+          'thumbnail_url': 'https://images.unsplash.com/photo-1515110371136-7e393289662c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+          'url': 'https://images.unsplash.com/photo-1515110371136-7e393289662c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1656&q=80'
+        }
+      ],
+    },
+  ]
+};
+
+
 module.exports = {
   productInfo,
-  styleList
+  styleList,
+  badDataset,
+  largeStyleList
 };
