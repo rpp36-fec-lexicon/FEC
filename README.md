@@ -18,6 +18,14 @@ The product overview is the main hub of the page and the first thing that loads 
 
 ![screen_recording_2022-07-30_at_1_48_47_pm_adobeexpress](https://user-images.githubusercontent.com/97697504/181935752-7398ab98-5258-4984-936b-dffd62b37711.gif)
 
+<details>
+  * When a product has multiple styles, there will be rows (up to 4) of the styles and their thumbnail icon. a checkmark will be overlayed on the current selected style being shown on the main image.
+  * The quantity selector will be disabled until a size is chosen for the current selected style, allowing you to choose how much to add to car (if purchasing).
+  * Stars update upon swapping products, with an available hyperlink taking you down to the review sections.
+  * Selected style will have the associated images as thumbnails overlaid on the left of the current main, enlarged image. There are arrows to navigate the images, as well as selecting to skip ahead, and a highlighted border for what image it currently being shown.
+  * Upon clicking the main image, it will bring up a larger version of the image with the thumbnail and arrow functionalities with it. Clicking the image again acts as zooming in or out depending on the current state of the layout, tracking the users mouse movement as well while zoomed in.
+</details>
+  
 ### Related Products
 
 ### Questions and Answers
