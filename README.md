@@ -30,3 +30,13 @@ The product overview is the main hub of the page and the first thing that loads 
 npm install
 ```
 ### Tech Stack
+
+* [React](https://reactjs.org/)
+* [Node](https://nodejs.org/en/)
+* [Amazon AWS](https://aws.amazon.com/)
+* [Babel](https://babeljs.io/)
+* [Webpack](https://webpack.js.org/)
+* [JEST](https://jestjs.io/)
+* [React Testing Library](https://testing-library.com/docs/react-testing-library/setup)
+* [Express](http://expressjs.com/)
+* [Underscore](https://underscorejs.org/)
