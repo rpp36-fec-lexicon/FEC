@@ -41,7 +41,11 @@ npm run webpack
 ```jsx
 npm start
 ```
-
+## Contributors
+* [Ai Lam](https://github.com/ai-lam) - Ratings and Reviews
+* [Filimon Kiros](https://github.com/FilimonK-Git) - Related Products
+* [Jason Novacovici](https://github.com/JNovacovici) - Main Overview
+* [Miras Adilov](https://github.com/AdilovM) - Questions and Answers
 ## Tech Stack
 
 * [React](https://reactjs.org/)
