@@ -22,13 +22,19 @@ class ReviewPhoto extends React.Component {
   render() {
     const thumbnailStyle = {
       width: '160px',
-      height: '108px'
+      height: '108px',
+      borderRadius: '15%',
+      objectFit: 'cover',
+      border: '1px solid'
     };
 
     let modalComponent;
 
     if (this.state.showModal) {
-      modalComponent = <PhotoModal showModal={this.state.showModal} photo={this.props.photo} closeModalFunc={this.closeModalFunc}/>;
+      modalComponent = <div data-testid="photoModal">
+        <PhotoModal showModal={this.state.showModal} photo={this.props.photo} closeModalFunc={this.closeModalFunc}/>
+      </div>;
+
     }
 
     if (!this.state.showModal) {
@@ -38,6 +44,7 @@ class ReviewPhoto extends React.Component {
     return (
       <div>
         {modalComponent}
+
         <img onClick={() => { this.showModalFunc(); }} style={thumbnailStyle} src={this.props.photo.url}/>&nbsp;
       </div>
     );

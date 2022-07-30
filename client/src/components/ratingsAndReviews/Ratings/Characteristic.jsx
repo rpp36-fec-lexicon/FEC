@@ -14,7 +14,7 @@ const Characteristic = (props) => {
     left: '70px',
     width: '5px',
     height: '10px',
-    backgroundColor: 'white'
+    backgroundColor: 'rgba(229, 228, 228, 0.8)'
   };
 
   const secondWhiteSpaceStyle = {
@@ -22,7 +22,7 @@ const Characteristic = (props) => {
     left: '145px',
     width: '5px',
     height: '10px',
-    backgroundColor: 'white'
+    backgroundColor: 'rgba(229, 228, 228, 0.8)'
   };
 
   const leftNotationStyle = {

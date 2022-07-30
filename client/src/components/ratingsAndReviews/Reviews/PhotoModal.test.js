@@ -18,13 +18,12 @@ describe('PhotoModal', ()=>{
   });
 
   describe('PhotoModal Component', ()=>{
+    const photo = {
+      "id": 2454046,
+      "url": "https://images.unsplash.com/photo-1517278322228-3fe7a86cf6f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
+    };
 
     it('should render the expanded image', async() => {
-      const photo = {
-        "id": 2454046,
-        "url": "https://images.unsplash.com/photo-1517278322228-3fe7a86cf6f0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
-      };
-
       render(<PhotoModal photo={photo} />);
       const imageEle = screen.getByRole('img');
       expect(imageEle).toBeInTheDocument();
@@ -32,8 +31,8 @@ describe('PhotoModal', ()=>{
 
     it('should invoke "closeModalFunc" when the X button is clicked', async() => {
       const mockFunc = jest.fn();
-      render(<PhotoModal closeModalFunc={mockFunc}/>);
-      const XButton = screen.getByAltText('XButton');
+      render(<PhotoModal closeModalFunc={mockFunc} photo={photo}/>);
+      const XButton = screen.getByTestId('XButton');
       expect(XButton).toBeInTheDocument();
       await userEvent.click(XButton);
       expect(mockFunc).toHaveBeenCalled();

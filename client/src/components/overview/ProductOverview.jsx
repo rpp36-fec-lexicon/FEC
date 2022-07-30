@@ -71,7 +71,13 @@ class ProductOverview extends React.Component {
       this.state.selectedStyle
     ) {
       return (
-        <>
+        <div onClick={(e) => {
+          let timeOfClick = new Date().toLocaleString('en-US', {
+            hour12: false,
+          });
+          let element = `Selectors: {LocalName: ${e.target.localName}, ClassName: ${e.target.className}, innerHTML: ${e.target.innerHTML}}`;
+          this.props.userTracker(element, 'Overview Widget', timeOfClick);
+        }}>
           <Pictures id='overviewWidget'>
             <Showcase
               id={this.state.selectedStyle.style_id}
@@ -102,7 +108,7 @@ class ProductOverview extends React.Component {
                 features={this.props.productInfo.features}/>
             </Div>
           </Pictures>
-        </>
+        </div>
       );
     }
   }

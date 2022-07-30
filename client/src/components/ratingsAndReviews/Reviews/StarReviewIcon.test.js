@@ -17,7 +17,19 @@ describe('StarReviewIcon', ()=>{
   });
 
   describe('StarReviewIcon Component', ()=>{
+    it('should render a star icon', async() => {
+      render(<StarReviewIcon />);
+      const star = screen.getByTestId('starIcon');
+      expect(star).toBeInTheDocument();
+    })
 
+    it('should invoke "clickFillStarFunc" when user clicks on a star', async() => {
+      const mockFunc = jest.fn();
+      render(<StarReviewIcon clickFillStarFunc={mockFunc}/>);
+      const star = screen.getByTestId('starIcon');
+      await userEvent.click(star);
+      expect(mockFunc).toHaveBeenCalled();
+    })
 
   })
 })
