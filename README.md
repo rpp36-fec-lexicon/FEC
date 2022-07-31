@@ -54,9 +54,11 @@ Front End Capstone (FEC) project requested by HackReactor, developed and designe
 ![qna](https://user-images.githubusercontent.com/97697504/181936240-6ab7479c-2439-4ecf-a93a-8dfaff5fbf80.gif)
 
 <details>
+  
  * Questions and Answers subcomponent shows list of questions that have been asked about the given product.
  * The list of questions and answers can be expanded and collapsed per user's choice. By default, two questions are displayed. The questions are sorted based on their helpfulness rating and user can load more questions by clicking "More Questions" button.
  * The list will instantly be changed to search result list based on a key word that user types in search bar. The search result list is generated after third keystoke.
+  
 </details>
 
 ### Ratings and Reviews
