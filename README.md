@@ -16,7 +16,6 @@ Front End Capstone (FEC) project requested by HackReactor, developed and designe
 
 > The product overview is the main hub of the page and the first thing that loads and catches the consumer's eyes. Like any shopping site, the use will be able to sift through different products, showcasing the description, price, images, and interactable features.
 
-![screen_recording_2022-07-30_at_1_48_47_pm_adobeexpress](https://user-images.githubusercontent.com/97697504/181935752-7398ab98-5258-4984-936b-dffd62b37711.gif)
 
 <details>
   
