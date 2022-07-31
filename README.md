@@ -16,7 +16,6 @@ Front End Capstone (FEC) project requested by HackReactor, developed and designe
 
 > The product overview is the main hub of the page and the first thing that loads and catches the consumer's eyes. Like any shopping site, the use will be able to sift through different products, showcasing the description, price, images, and interactable features.
 
-
 <details>
   
   * When a product has multiple styles, there will be rows (up to 4) of the styles and their thumbnail icon. a checkmark will be overlayed on the current selected style being shown on the main image.
@@ -26,6 +25,9 @@ Front End Capstone (FEC) project requested by HackReactor, developed and designe
  * Upon clicking the main image, it will bring up a larger version of the image with the thumbnail and arrow functionalities with it. Clicking the image again acts as zooming in or out depending on the current state of the layout, tracking the users mouse movement as well while zoomed in.
   
 </details>
+
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/81248975/182035200-8780bdd4-bbe0-4668-a536-cccba8a5e3b6.gif)
+
   
 ### Related Products
 
