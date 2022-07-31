@@ -31,6 +31,9 @@ Front End Capstone (FEC) project requested by HackReactor, developed and designe
   
 ### Related Products
 
+
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/81248975/182035560-6bd42bf3-ae35-436e-bb7f-33b6b8f96e0a.gif)
+
 ### Questions and Answers
 
 > The Questions & Answers part allows a user to search for a question, to add answers and questions about the product selected. This part consists of four subparts and each subpart has its own unique functionality.
