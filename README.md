@@ -31,6 +31,15 @@ Front End Capstone (FEC) project requested by HackReactor, developed and designe
   
 ### Related Products
 
+> The related products section has awesome features that allow the user to navigate a list of items that are related to the main product being viewed, with options to see feature comparison and also have the ability to add to an outfit list 
+
+<details>
+ 
+ * A star button found on the top right of a related card display helps the user make direct comparison between two products.
+ * When a product is related to many items which won't fit on the user's viewport, the user will have access to carousel that can be navigated using arrow buttons (which remain invisible if all related items fit on users' screen display).
+ * A persistent outfit carousel presents the user with an option of adding/removing products which may be bought together  
+  
+</details>
 
 ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/81248975/182035560-6bd42bf3-ae35-436e-bb7f-33b6b8f96e0a.gif)
 
